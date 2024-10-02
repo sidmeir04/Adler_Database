@@ -14,7 +14,23 @@ set(wxWidgets_USE_STATIC 1)
 
 find_package(wxWidgets REQUIRED COMPONENTS core base xml)
 
-set(SRCS main.cpp)
+# MySQL Connector C++: Specify the MySQL include and library directories
+set(MYSQL_CONNECTOR_DIR "C:/libraries/MySQL/MySQL_Connector_C++_9.0")
+set(MYSQL_INCLUDE_DIR ${MYSQL_CONNECTOR_DIR}/include)
+set(MYSQL_LIB_DIR ${MYSQL_CONNECTOR_DIR}/lib64)
+
+# Add MySQL include directories
+include_directories(${MYSQL_INCLUDE_DIR})
+
+# Add MySQL libraries for linking
+link_directories(${MYSQL_LIB_DIR})
+
+include_directories("C:/Adler_Database/src")
+
+# Specify your MySQL libraries (adjust names based on your platform)
+set(MYSQL_LIBRARIES mysqlcppconn mysqlclient)
+
+set(SRCS sql_connector.cpp main.cpp)
 
 include(${wxWidgets_USE_FILE})
 
@@ -31,4 +47,4 @@ else()
     add_executable(main WIN32 ${SRCS} main.exe.manifest)
 endif()
 
-target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES})
+target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES})  

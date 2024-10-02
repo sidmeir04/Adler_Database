@@ -1,67 +1,51 @@
 #include <wx/wx.h>
 #include <wx/xml/xml.h>
+#include "sql_connector.h"
 
+// Define a custom wxFrame (window) class
+class MyFrame : public wxFrame
+{
+public:
+    MyFrame(const wxString &title);
+
+    // Function to be called when the button is clicked
+    void OnButtonClicked(wxCommandEvent &event);
+
+private:
+    wxButton *m_button; // Button widget
+};
+
+// Define a custom wxApp class
 class MyApp : public wxApp
 {
 public:
     virtual bool OnInit();
 };
 
-class MyFrame : public wxFrame
-{
-public:
-    MyFrame(const wxString &title);
-
-    void LoadXML();
-};
-
-IMPLEMENT_APP(MyApp)
+wxIMPLEMENT_APP(MyApp);
 
 bool MyApp::OnInit()
 {
-    MyFrame *frame = new MyFrame("wxWidgets XML Example");
-    frame->Show(true);
+    MyFrame *frame = new MyFrame("wxWidgets and MySQL Example");
+    frame->Show(true); // Show the window
     return true;
 }
 
 MyFrame::MyFrame(const wxString &title)
-    : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(400, 300))
+    : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(300, 200))
 {
-    LoadXML();
+    // Create a button widget
+    m_button = new wxButton(this, wxID_ANY, "Click to Query MySQL", wxPoint(100, 50), wxSize(150, 30));
+
+    // Bind the button click event to the function
+    Bind(wxEVT_BUTTON, &MyFrame::OnButtonClicked, this, m_button->GetId());
 }
 
-void MyFrame::LoadXML()
+// The function to be called when the button is clicked
+void MyFrame::OnButtonClicked(wxCommandEvent &event)
 {
-    wxXmlDocument xmlDoc;
-    if (xmlDoc.Load("example.xml"))
-    {
-        wxXmlNode *root = xmlDoc.GetRoot();
-        if (root)
-        {
-            wxLogMessage("Root node: %s", root->GetName());
+    int num = runQuery();
+    wxLogMessage("num");
 
-            wxXmlNode *child = root->GetChildren();
-            while (child)
-            {
-                wxLogMessage("Child node: %s", child->GetName());
-                child = child->GetNext();
-            }
-
-            // Modify some XML data
-            if (root->GetChildren())
-            {
-                root->GetChildren()->SetContent("Modified Content");
-            }
-
-            // Save the modified document
-            if (xmlDoc.Save("output.xml"))
-            {
-                wxLogMessage("XML file saved as 'output.xml'");
-            }
-        }
-    }
-    else
-    {
-        wxLogError("Failed to load the XML file.");
-    }
+    // Call the MySQL query function
 }
