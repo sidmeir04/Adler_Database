@@ -1,44 +1,61 @@
-#include <jdbc/mysql_driver.h>
-#include <jdbc/mysql_connection.h>
-#include <jdbc/cppconn/statement.h>
-#include <jdbc/cppconn/resultset.h>
-#include <jdbc/cppconn/exception.h>
+#include <mysql/jdbc.h>
 #include <iostream>
-#include "sql_connector.h"
+#include <vector>
+#include <string>
 
-int runQuery(void)
+// Function to get all entries from the specified table
+std::vector<std::string> getAllEntries(const std::string &tableName)
 {
+    std::string dbUrl = "tcp://127.0.0.1:3306"; // Change to your database URL
+    std::string user = "Admin";                 // Replace with your MySQL username
+    std::string password = "Aphasia_12";        // Replace with your MySQL password
+    std::vector<std::string> entries;           // To store the result entries
+
     try
     {
-        int num = 0;
-        // // Create a MySQL driver
-        // sql::mysql::MySQL_Driver *driver = sql::mysql::get_mysql_driver_instance();
+        // Get the driver instance
+        sql::mysql::MySQL_Driver *driver = sql::mysql::get_driver_instance();
 
-        // // Establish a connection to the database
-        // std::unique_ptr<sql::Connection> con(driver->connect("tcp://127.0.0.1:3306", "root", "Aphasia_12"));
+        // Create a connection
+        std::unique_ptr<sql::Connection> con(driver->connect("tcp://127.0.0.1:3306", user, password));
 
-        // // Connect to the specific database
-        // con->setSchema("adler_aphasia_center");
+        // Create a statement to execute the query
+        std::unique_ptr<sql::Statement> stmt(con->createStatement());
 
-        // // Create a statement
-        // std::unique_ptr<sql::PreparedStatement> pstmt(con->prepareStatement(query));
+        // Execute a query to get all entries from the specified table
+        std::unique_ptr<sql::ResultSet> res(stmt->executeQuery("SELECT temp_text FROM " + tableName));
 
-        // // Execute the query
-        // std::unique_ptr<sql::ResultSet> res(pstmt->executeQuery());
-
-        // // Process the results
-        // while (res->next())
-        // {
-        //     std::cout << "Column 1: " << res->getString(1) << std::endl; // Change the column index as needed
-        // }
+        // Process the result set
+        while (res->next())
+        {
+            // Assuming you want to fetch the first column's string value; adjust as needed
+            entries.push_back(res->getString("temp_text"));
+        }
     }
     catch (sql::SQLException &e)
     {
-        std::cerr << "SQL Error: " << e.what() << std::endl;
+        entries.push_back(e.what());
     }
-    catch (std::exception &e)
-    {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
-    return 0;
+
+    return entries; // Return the list of entries
 }
+
+// int main()
+// {
+//     // Example parameters
+//     std::string dbUrl = "tcp://127.0.0.1:3306"; // Change to your database URL
+//     std::string user = "username";              // Replace with your MySQL username
+//     std::string password = "password";          // Replace with your MySQL password
+//     std::string tableName = "your_table_name";  // Replace with your table name
+
+//     // Call the function and get all entries from the specified table
+//     std::vector<std::string> entries = getAllEntries(dbUrl, user, password, tableName);
+
+//     // Print the entries
+//     for (const auto &entry : entries)
+//     {
+//         std::cout << entry << std::endl; // Adjust as needed to display entries
+//     }
+
+//     return 0;
+// }

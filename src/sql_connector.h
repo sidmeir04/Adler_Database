@@ -1,6 +1,9 @@
-#ifndef MYSQL_CONNECTOR_H
-#define MYSQL_CONNECTOR_H
+#ifndef SQL_CONNECTOR_H
+#define SQL_CONNECTOR_H
 
-int runQuery();
+#include <vector>
+#include <string>
 
-#endif
+std::vector<std::string> getAllEntries(const std::string &tableName);
+
+#endif // SQL_CONNECTOR_H
