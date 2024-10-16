@@ -44,7 +44,7 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     wxPanel *panel = new wxPanel(this);
     // -----------------------------------------   Button Example ---------------------------------------- //
     std::string buttonText = "example button";
-    wxButton *button1 = new wxButton(panel, wxID_ANY, buttonText, wxPoint(150, 50), wxSize(100, 35));
+    wxButton *button1 = new wxButton(panel, wxID_ANY, buttonText, wxPoint(150, 50), wxSize(-1, 35));
     //                                                           Strat Pos        Size
     // -----------------------------------------   Button Example End ----------------------------------=- //
 

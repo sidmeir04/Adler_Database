@@ -28,6 +28,7 @@ set(MYSQL_DLL "${MYSQL_LIB_DIR}/mysqlcppconn-10-vs14.dll")
 include_directories("C:/Adler_Database/src")
 
 set(SRCS sql_connector.cpp main.cpp)
+# set(SRCS sql_connector.cpp)
 
 include(${wxWidgets_USE_FILE})
 
