@@ -6,15 +6,15 @@ SET foreign_key_checks = 1;
 USE adler_aphasia_center;
 CREATE TABLE Caller (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    staff_who_took_the_call VARCHAR(50) NOT NULL,
-    name_of_caller VARCHAR(50),
+    staff VARCHAR(50) NOT NULL,
+    caller_name VARCHAR(50),
     caller_email VARCHAR(50),
-    date_of_call DATE,
-    phone_number VARCHAR(20),
-    type_of_referral VARCHAR(50),
+    call_date DATE,
+    phone_number VARCHAR(15),  -- Assuming 15 characters to handle international formats, but you can adjust as needed.
+    referral_type VARCHAR(50),
     additional_notes TEXT,
     tour_scheduled BOOLEAN,
-    why_was_tour_not_scheduled TEXT,
+    tour_not_scheduled_reason TEXT,
     follow_up_date DATE
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE Tour (
     aep_deadline DATE,               -- Deadline to join AEP
     joined_after BOOLEAN,            -- Whether they joined after the tour
     likely_to_join BOOLEAN,          -- Likely to join after the tour
-    notes TEXT,                      -- Additional notes
+    additional_notes TEXT,
     canceled BOOLEAN,                -- Whether the tour was canceled
     cancel_reason TEXT               -- Reason for cancelation
 );
@@ -68,7 +68,7 @@ CREATE TABLE Membership_Enrollment_Form (
     hearing_loss BOOLEAN,
     hearing_aid BOOLEAN,
     aphasia_cause VARCHAR(50),
-    aphasia_onset VARCHAR(50),           -- Date of onset of aphasia
+    aphasia_onset DATE,                  -- Date of onset of aphasia
     brain_location VARCHAR(50),          -- Location in the brain affected
     allergies TEXT,
     medications TEXT,
@@ -188,8 +188,22 @@ CREATE TABLE Volunteer (
     video_watched_date DATE,          -- Date watched the orientation video
     emergency_contacts TEXT,          -- Emergency contacts
     media_release BOOLEAN,            -- Media release consent
-    confidentiality BOOLEAN,           -- Confidentiality agreement
-    training_level INT                 -- Training level (0-4)
+    confidentiality BOOLEAN,          -- Confidentiality agreement
+    training_level INT                -- Training level (0-4)
+);
+
+CREATE TABLE Applications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    birthday DATE,                    -- Applicant's birthday
+    occupation VARCHAR(50),           -- Applicant's occupation
+    is_slp BOOLEAN,                   -- Whether the applicant is a Speech-Language Pathologist (SLP)
+    relevant_experience TEXT,         -- Work or relevant experiences
+    education TEXT,                   -- Education details
+    interests_skills_hobbies TEXT,    -- Interests, skills, and hobbies
+    languages_spoken VARCHAR(100),    -- Languages spoken by the applicant
+    will_substitute BOOLEAN,          -- Willingness to substitute
+    convicted_of_crime BOOLEAN,      -- Whether the applicant has been convicted of a crime
+    application_date DATE             -- Date of application
 );
 
 CREATE TABLE Outreach (

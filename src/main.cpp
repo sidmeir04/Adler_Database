@@ -1,7 +1,9 @@
+#include <Python.h> // Include Python header
+
 #include <wx/wx.h>
 #include <wx/xml/xml.h>
 #include <string>
-#include "sql_connector.h"
+#include <vector>
 
 class App : public wxApp
 {
@@ -17,6 +19,7 @@ public:
 private:
     void OnButtonClicked(wxCommandEvent &evt);
     wxDECLARE_EVENT_TABLE();
+    wxString results; // Store results here
 };
 
 bool App::OnInit()
@@ -24,9 +27,9 @@ bool App::OnInit()
     MainFrame *mainFrame = new MainFrame("C++ GUI");
     mainFrame->Show();
     return true;
-};
+}
 
-// for event handling
+// For event handling
 enum IDs
 {
     BUTTON_ID = 2,
@@ -42,49 +45,91 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
 {
     std::cout << "Program running" << std::endl;
     wxPanel *panel = new wxPanel(this);
-    // -----------------------------------------   Button Example ---------------------------------------- //
-    std::string buttonText = "example button";
-    wxButton *button1 = new wxButton(panel, wxID_ANY, buttonText, wxPoint(150, 50), wxSize(-1, 35));
-    //                                                           Strat Pos        Size
-    // -----------------------------------------   Button Example End ----------------------------------=- //
 
-    // -----------------------------------------   CheckBox Example ---------------------------------------- //
-    wxCheckBox *checkBox = new wxCheckBox(panel, wxID_ANY, "CheckBox", wxPoint(550, 50));
-    //                                                                   Strat Pos        Size - If no size then default size is used
-    // -----------------------------------------   CheckBox Example End ----------------------------------=- //
-
-    wxStaticText *staticText = new wxStaticText(panel, wxID_ANY, "StaticText - NOT editable", wxPoint(120, 150));
-    wxTextCtrl *textCtrl = new wxTextCtrl(panel, wxID_ANY, "TextCTRL - editable", wxPoint(500, 145), wxSize(200, -1));
-    // Others
-    // wxSlider
-    // wxGauge
-    // wsChoice
-    // wxListBox
-    // wxRadioBox
-
-    // -----------------------------------------   Styles   ------------------------------------ //
-    // Similar to bootstrap classes
-    // www.wxwidgets.org/stable/class{{classname (wx_button)}}
-    // to combine styles use | (or operator)
-
-    // -----------------------------------------   Events   ------------------------------------ //
-    wxButton *button = new wxButton(panel, BUTTON_ID, "Button", wxPoint(300, 275), wxSize(200, 50));
+    // Button Example
+    wxButton *button = new wxButton(panel, BUTTON_ID, "Button", wxPoint(0, 0), wxSize(200, 50));
 
     CreateStatusBar();
-};
+}
+
+std::vector<std::string> CallPythonGetAllEntries(const std::string &arg)
+{
+    std::vector<std::string> resultEntries;
+
+    // Initialize the Python interpreter
+    Py_Initialize();
+
+    // Load the module
+    PyObject *pName = PyUnicode_DecodeFSDefault("example"); // Assuming your Python file is example.py
+    PyObject *pModule = PyImport_Import(pName);
+    Py_DECREF(pName);
+
+    if (pModule != nullptr)
+    {
+        // Get the function from the module
+        PyObject *pFunc = PyObject_GetAttrString(pModule, "getAllEntries");
+
+        if (PyCallable_Check(pFunc))
+        {
+            // Prepare the argument (assuming getAllEntries takes a string argument)
+            PyObject *pArgs = PyTuple_Pack(1, PyUnicode_FromString(arg.c_str()));
+
+            // Call the Python function
+            PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+            Py_DECREF(pArgs);
+
+            if (pValue != nullptr)
+            {
+                // Convert the result to C++ (assuming the Python function returns a list of strings)
+                PyObject *pIter = PyObject_GetIter(pValue);
+                PyObject *pItem;
+
+                while ((pItem = PyIter_Next(pIter)))
+                {
+                    resultEntries.push_back(PyUnicode_AsUTF8(pItem));
+                    Py_DECREF(pItem);
+                }
+
+                Py_DECREF(pIter);
+                Py_DECREF(pValue);
+            }
+            else
+            {
+                PyErr_Print();
+            }
+        }
+        else
+        {
+            PyErr_Print();
+        }
+
+        Py_XDECREF(pFunc);
+        Py_DECREF(pModule);
+    }
+    else
+    {
+        PyErr_Print();
+    }
+
+    // Finalize the Python interpreter
+    Py_Finalize();
+
+    return resultEntries;
+}
 
 void MainFrame::OnButtonClicked(wxCommandEvent &evt)
 {
-    std::vector<std::string> entries = getAllEntries("Testing");
+    // Call Python function getAllEntries()
+    std::vector<std::string> entries = CallPythonGetAllEntries("Testing");
 
-    wxString statusMessage;
+    results.Clear(); // Clear previous results
     for (const auto &entry : entries)
     {
-        statusMessage.Append(entry + "\n"); // Append each entry followed by a newline
+        results.Append(entry + "\n"); // Append each entry followed by a newline
     }
 
-    // Log the status
-    wxLogStatus(this, statusMessage);
-};
+    // Log the results (you can also use this in other parts of your application)
+    wxLogStatus(this, results);
+}
 
 wxIMPLEMENT_APP(App);

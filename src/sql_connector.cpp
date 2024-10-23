@@ -1,34 +1,30 @@
 #include <mysql/jdbc.h>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 
-// Function to get all entries from the specified table
 std::vector<std::string> getAllEntries(const std::string &tableName)
 {
-    std::string dbUrl = "tcp://localhost:3306"; // Change to your database URL
-    std::string user = "connector";             // Replace with your MySQL username
-    std::string password = "password";          // Replace with your MySQL password
-    std::vector<std::string> entries;           // To store the result entries
+    sql::mysql::MySQL_Driver *driver;
+    sql::Connection *con;
+    std::vector<std::string> entries;
     try
     {
-        // Get the driver instance
-        sql::mysql::MySQL_Driver *driver = sql::mysql::get_driver_instance();
-
-        // Create a connection
-        std::unique_ptr<sql::Connection> con(driver->connect(dbUrl, user, password));
-
-        // Create a statement to execute the query
-        std::unique_ptr<sql::Statement> stmt(con->createStatement());
-
-        // Execute a query to get all entries from the specified table
-        std::unique_ptr<sql::ResultSet> res(stmt->executeQuery("SELECT temp_text FROM " + tableName));
-
-        // Process the result set
+        driver = sql::mysql::get_mysql_driver_instance();
+        con = driver->connect("mysql://127.0.0.1:3306/?user=connector", "connector", "password");
+        entries.push_back("con created");
+        con->setSchema("adler_aphasia_center");
+        entries.push_back("schema set");
+        sql::Statement *stmt = con->createStatement();
+        entries.push_back("stmt got");
+        sql::ResultSet *res = stmt->executeQuery("select * from " + tableName);
         while (res->next())
         {
-            entries.push_back(res->getString("temp_text"));
+            entries.push_back(res->getString("name"));
         }
+        delete stmt;
+        delete con;
     }
     catch (sql::SQLException &e)
     {

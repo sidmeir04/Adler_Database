@@ -5,6 +5,12 @@ project(wx_cmake_template_core LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Prevent conflicts in Windows headers
+add_definitions(-DWIN32_LEAN_AND_MEAN -DNOMINMAX)
+
+# Set the Python installation directory
+set(Python3_ROOT_DIR "C:/Users/oscar/AppData/Local/Programs/Python/Python313")
+
 # hack for buggy CMake's FindwxWidgets script
 if(DEFINED ENV_WX_CONFIG)
     set(ENV{WX_CONFIG} ${ENV_WX_CONFIG})
@@ -12,7 +18,14 @@ endif()
 
 set(wxWidgets_USE_STATIC 1)
 
+# Find wxWidgets
 find_package(wxWidgets REQUIRED COMPONENTS core base xml)
+
+# Find Python3: Find the Python interpreter and development libraries
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
+
+# Force CMake to use the release version of the Python library in all configurations
+set(Python3_LIBRARIES Python3::Python)
 
 # MySQL Connector C++: Specify the MySQL include and library directories
 set(MYSQL_CONNECTOR_DIR "C:/libraries/MySQL/MySQL_Connector_C++_9.0")
@@ -24,29 +37,28 @@ link_directories(${MYSQL_LIB_DIR})
 set(MYSQL_LIBRARIES vs14/mysqlcppconn vs14/mysqlcppconn-static)
 set(MYSQL_DLL "${MYSQL_LIB_DIR}/mysqlcppconn-10-vs14.dll")
 
-
 include_directories("C:/Adler_Database/src")
 
-set(SRCS sql_connector.cpp main.cpp)
-# set(SRCS sql_connector.cpp)
+# Set source files - main.cpp only, remove sql_connector.cpp
+set(SRCS main.cpp)
 
 include(${wxWidgets_USE_FILE})
 
 if(APPLE)
-    # create bundle on apple compiles
+    # Create bundle on Apple compiles
     add_executable(main MACOSX_BUNDLE ${SRCS})
 
     # Set a custom plist file for the app bundle - needed for Mac OS Retina display
     set_target_properties(main PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist)
 else()
-    # the WIN32 is needed for Windows in order for it to look for WinMain
-    # instead of the main function. This is ignored on other systems,
-    # so it works on all platforms
+    # WIN32 is needed for Windows to look for WinMain instead of the main function
     add_executable(main WIN32 ${SRCS} main.exe.manifest)
 endif()
 
-target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES} ${MYSQL_LIBRARIES})
+# Link wxWidgets, MySQL, and Python3
+target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES} ${MYSQL_LIBRARIES} ${Python3_LIBRARIES})
 
+# Copy MySQL DLL after build
 add_custom_command(TARGET main POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
     "${MYSQL_DLL}" $<TARGET_FILE_DIR:main>
