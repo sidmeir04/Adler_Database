@@ -87,5 +87,16 @@
         "xtree": "cpp",
         "xutility": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "python.testing.unittestEnabled": true,
+    "python.testing.pytestEnabled": false,  // Set to true if using pytest
+    "python.testing.nosetestsEnabled": false,  // Set to true if using nose
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./",        // Root folder of your tests
+        "-p",
+        "*_test.py"  // Pattern to discover tests
+    ]
 }

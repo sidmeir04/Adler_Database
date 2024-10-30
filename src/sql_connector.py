@@ -1,32 +1,28 @@
 import mysql.connector
 from mysql.connector import Error
 
-def create_connection(host_name, user_name, user_password, db_name):
-    connection = None
+connection = None
+# Define your database connection parameters
+def create_connection():
+    host = "localhost"
+    user = "connector"
+    password = "password"
+    database = "adler_aphasia_center"
+
     try:
         connection = mysql.connector.connect(
-            host=host_name,
-            user=user_name,
-            password=user_password,
-            database=db_name
+            host=host,
+            user=user,
+            password=password,
+            database=database
         )
-        print("Connection to MySQL DB successful")
+        return connection
     except Error as e:
         print(f"The error '{e}' occurred")
-    return connection
-
-def fetch_members(connection):
-    cursor = connection.cursor()
-    try:
-        cursor.execute("SELECT * FROM member")  # Adjust the query as needed
-        rows = cursor.fetchall()  # Fetch all rows from the result set
-        return rows
-    except Error as e:
-        print(f"The error '{e}' occurred")
-        return None
 
 
 def get_caller(staff_name='', caller_name='', caller_email = '', call_date=None, phone='', referral_type='', tour_scheduled=None, follow_up_date=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -71,13 +67,15 @@ def get_caller(staff_name='', caller_name='', caller_email = '', call_date=None,
     
     # Fetch all results
     results = cursor.fetchall()
-
+    if connection:
+        connection.close()
     return results
 
 def get_tour(tour_date=None, attended=None, clinicians='', 
              strategies_used=None, aep_deadline=None, 
              joined_after=None, likely_to_join=None, 
              canceled=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -128,6 +126,7 @@ def get_member(name='', age=None, dob=None, email='',
                schedule=None, phone='', address='', 
                county='', gender='', veteran=None, 
                joined=None, caregiver_needed=None, alder_program=''):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -209,6 +208,7 @@ def get_membership_enrollment_form(sexual_orientation='', race='', income=None,
                                     aphasia_cause='', aphasia_onset=None, 
                                     brain_location='', filled_by='', 
                                     completed_date=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -282,6 +282,7 @@ def get_medical_history_form(physician_name='', specialty='',
                               swallowing_strategies=None, 
                               other_visual_impairments='',
                               completion_date=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -366,6 +367,7 @@ def get_medical_history_form(physician_name='', specialty='',
     return results
 
 def get_incident_report(incident_date=None, incident_location=''):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -390,6 +392,7 @@ def get_incident_report(incident_date=None, incident_location=''):
     return results
 
 def get_evaluation(completed=None, administerer='', date_administered=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -421,6 +424,7 @@ def get_transportation_information(bus_transport=None, bus_company='',
                                     bus_contact_phone='', picked_up=None, 
                                     pickup_person='', relationship_to_member='', 
                                     primary_phone='', secondary_phone=''):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -468,9 +472,10 @@ def get_transportation_information(bus_transport=None, bus_company='',
     
     return results
 
-def get_caregiver(name='', phone='', email='', relationship='', 
+def get_caregiver(name='', phone='', email='', 
                   date_contacted=None, group_attending='', 
                   attending=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -489,10 +494,6 @@ def get_caregiver(name='', phone='', email='', relationship='',
     if email:
         query += " AND email LIKE %s"
         filters.append(f'%{email}%')
-    
-    if relationship:
-        query += " AND relationship LIKE %s"
-        filters.append(f'%{relationship}%')
     
     if date_contacted is not None:
         query += " AND date_contacted = %s"
@@ -519,6 +520,7 @@ def get_attending_caregiver(caregiver_type='', sex='', race='',
                              covid_vaccine_date=None, allergies='', 
                              media_release=None, start_date=None, 
                              end_date=None, robly=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -581,6 +583,7 @@ def get_attending_caregiver(caregiver_type='', sex='', race='',
 def get_emergency_contact(name='', relationship='', day_phone='', 
                           evening_phone='', cell_phone='', 
                           address='', completion_date=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -597,16 +600,16 @@ def get_emergency_contact(name='', relationship='', day_phone='',
         filters.append(f'%{relationship}%')
     
     if day_phone:
-        query += " AND day_phone LIKE %s"
-        filters.append(f'%{day_phone}%')
+        query += " AND day_phone = %s"
+        filters.append(f'{day_phone}')
     
     if evening_phone:
-        query += " AND evening_phone LIKE %s"
-        filters.append(f'%{evening_phone}%')
+        query += " AND evening_phone = %s"
+        filters.append(f'{evening_phone}')
     
     if cell_phone:
-        query += " AND cell_phone LIKE %s"
-        filters.append(f'%{cell_phone}%')
+        query += " AND cell_phone = %s"
+        filters.append(f'{cell_phone}')
     
     if address:
         query += " AND address LIKE %s"
@@ -628,6 +631,7 @@ def get_volunteer(name='', phone='', address='', email='',
                   background_check_date=None, video_watched_date=None, 
                   media_release=None, confidentiality=None, 
                   training_level=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -640,8 +644,8 @@ def get_volunteer(name='', phone='', address='', email='',
         filters.append(f'%{name}%')
     
     if phone:
-        query += " AND phone LIKE %s"
-        filters.append(f'%{phone}%')
+        query += " AND phone = %s"
+        filters.append(f'{phone}')
     
     if address:
         query += " AND address LIKE %s"
@@ -682,6 +686,7 @@ def get_volunteer(name='', phone='', address='', email='',
 def get_applications(birthday=None, occupation='', is_slp=None, 
                      languages_spoken='', will_substitute=None, 
                      convicted_of_crime=None, application_date=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -728,6 +733,7 @@ def get_applications(birthday=None, occupation='', is_slp=None,
 def get_outreach(contacted_date=None, staff_contacted='', 
                  organization='', org_type='', outreach_type='', 
                  target_location='', num_people=None, robly=None):
+    connection = create_connection()
     cursor = connection.cursor()
     
     # Start building the base query
@@ -776,6 +782,7 @@ def get_outreach(contacted_date=None, staff_contacted='',
     return results
 
 def update_record(model_name, record_id, updates):
+    connection = create_connection()
     cursor = connection.cursor()
 
     # Prepare the base query
@@ -805,24 +812,39 @@ def update_record(model_name, record_id, updates):
     
     cursor.close()
 
+def create_record(model_name, data):
+    connection = create_connection()
+    cursor = connection.cursor()
 
-# Define your database connection parameters
-host = "localhost"
-user = "connector"
-password = "password"
-database = "adler_aphasia_center"
+    # Prepare the base query for insertion
+    columns = ', '.join(data.keys())
+    placeholders = ', '.join(['%s'] * len(data))
+    query = f"INSERT INTO {model_name} ({columns}) VALUES ({placeholders})"
+    
+    # Extract values from the data dictionary
+    values = tuple(data.values())
 
-# Establish a connection
-connection = create_connection(host, user, password, database)
+    # Execute the query
+    cursor.execute(query, values)
+
+    # Commit the changes to the database
+    connection.commit()
+    
+    # Get the ID of the newly created record
+    new_record_id = cursor.lastrowid
+    cursor.close()
+
+    return new_record_id
 
 # Fetch members
-members = get_caller(staff_name='Alice')
+from datetime import date
+members = get_outreach(
+            contacted_date=date(2024,1,13), staff_contacted='Sarah Connor', 
+            organization='Health Services', org_type='Non-Profit', outreach_type='Informational Session', 
+            target_location='Community Center', num_people=25, robly=True
+        )
 
 # Print the fetched data
 if members:
     for member in members:
         print(member)
-
-# Close the connection
-if connection:
-    connection.close()
