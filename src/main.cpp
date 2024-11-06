@@ -1,4 +1,5 @@
-#include <Python.h> // Include Python header
+#include <pybind11/pybind11.h>
+#include <pybind11/embed.h>
 
 #include <wx/wx.h>
 #include <wx/xml/xml.h>
@@ -55,64 +56,6 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
 std::vector<std::string> CallPythonGetAllEntries(const std::string &arg)
 {
     std::vector<std::string> resultEntries;
-
-    // Initialize the Python interpreter
-    Py_Initialize();
-
-    // Load the module
-    PyObject *pName = PyUnicode_DecodeFSDefault("example"); // Assuming your Python file is example.py
-    PyObject *pModule = PyImport_Import(pName);
-    Py_DECREF(pName);
-
-    if (pModule != nullptr)
-    {
-        // Get the function from the module
-        PyObject *pFunc = PyObject_GetAttrString(pModule, "getAllEntries");
-
-        if (PyCallable_Check(pFunc))
-        {
-            // Prepare the argument (assuming getAllEntries takes a string argument)
-            PyObject *pArgs = PyTuple_Pack(1, PyUnicode_FromString(arg.c_str()));
-
-            // Call the Python function
-            PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
-            Py_DECREF(pArgs);
-
-            if (pValue != nullptr)
-            {
-                // Convert the result to C++ (assuming the Python function returns a list of strings)
-                PyObject *pIter = PyObject_GetIter(pValue);
-                PyObject *pItem;
-
-                while ((pItem = PyIter_Next(pIter)))
-                {
-                    resultEntries.push_back(PyUnicode_AsUTF8(pItem));
-                    Py_DECREF(pItem);
-                }
-
-                Py_DECREF(pIter);
-                Py_DECREF(pValue);
-            }
-            else
-            {
-                PyErr_Print();
-            }
-        }
-        else
-        {
-            PyErr_Print();
-        }
-
-        Py_XDECREF(pFunc);
-        Py_DECREF(pModule);
-    }
-    else
-    {
-        PyErr_Print();
-    }
-
-    // Finalize the Python interpreter
-    Py_Finalize();
 
     return resultEntries;
 }

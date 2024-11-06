@@ -27,6 +27,23 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 # Force CMake to use the release version of the Python library in all configurations
 set(Python3_LIBRARIES Python3::Python)
 
+# Find Python and set up include directories and libraries
+find_package(Python3 COMPONENTS Development REQUIRED)
+
+# Manually specify the Python library path
+set(PYTHON_LIB_PATH "C:/Users/oscar/AppData/Local/Programs/Python/Python313/libs/python313.lib")
+
+# Set the path to your Pybind11 directory
+set(PYBIND11_DIR "C:/libraries/pybind11")
+
+# Add the Pybind11 project
+add_subdirectory(${PYBIND11_DIR} pybind11_build)
+include_directories(${PYBIND11_DIR}/include)
+
+# Include Python headers
+include_directories(${Python3_INCLUDE_DIRS})
+
+
 # MySQL Connector C++: Specify the MySQL include and library directories
 set(MYSQL_CONNECTOR_DIR "C:/libraries/MySQL/MySQL_Connector_C++_9.0")
 set(MYSQL_INCLUDE_DIR ${MYSQL_CONNECTOR_DIR}/include)
@@ -55,8 +72,10 @@ else()
     add_executable(main WIN32 ${SRCS} main.exe.manifest)
 endif()
 
-# Link wxWidgets, MySQL, and Python3
-target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES} ${MYSQL_LIBRARIES} ${Python3_LIBRARIES})
+# Link wxWidgets, MySQL, and PyBind11
+target_link_libraries(main PRIVATE ${PYTHON_LIB_PATH})
+target_link_libraries(main PRIVATE pybind11::module)
+target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES} ${MYSQL_LIBRARIES} ${PYTHON_LIB_PATH})
 
 # Copy MySQL DLL after build
 add_custom_command(TARGET main POST_BUILD

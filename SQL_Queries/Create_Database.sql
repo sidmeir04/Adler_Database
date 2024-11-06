@@ -10,7 +10,7 @@ CREATE TABLE Caller (
     caller_name VARCHAR(50),
     caller_email VARCHAR(50),
     call_date DATE,
-    phone_number VARCHAR(15),  -- Assuming 15 characters to handle international formats, but you can adjust as needed.
+    phone_number VARCHAR(15),
     referral_type VARCHAR(50),
     additional_notes TEXT,
     tour_scheduled BOOLEAN,
