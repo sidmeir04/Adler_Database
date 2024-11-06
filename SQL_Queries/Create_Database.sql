@@ -70,7 +70,6 @@ CREATE TABLE Membership_Enrollment_Form (
     aphasia_cause VARCHAR(50),
     aphasia_onset DATE,                  -- Date of onset of aphasia
     brain_location VARCHAR(50),          -- Location in the brain affected
-    allergies TEXT,
     medications TEXT,
     filled_by VARCHAR(50),               -- Filled out by
     completed_date DATE,                 -- Date completed

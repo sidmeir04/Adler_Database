@@ -1666,6 +1666,373 @@ class update_functions():
             connection.close()
         return id
 
+class insert_functions():
+    @staticmethod
+    def insert_caller(
+        staff, caller_name, caller_email, call_date, phone_number,
+        referral_type, additional_notes, tour_scheduled, 
+        tour_not_scheduled_reason, follow_up_date
+    ):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Caller (
+            staff, caller_name, caller_email, call_date, phone_number, 
+            referral_type, additional_notes, tour_scheduled, 
+            tour_not_scheduled_reason, follow_up_date
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        
+        data = (
+            staff, caller_name, caller_email, call_date, phone_number, 
+            referral_type, additional_notes, tour_scheduled, 
+            tour_not_scheduled_reason, follow_up_date
+        )
+        
+        cursor.execute(insert_query, data)
+        connection.commit()
+        if connection:
+            connection.close()
+
+        return cursor.lastrowid
+
+    def insert_tour(
+        tour_date, attended, no_join_reason, clinicians, attendees, 
+        interactions, strategies_used, aep_deadline, joined_after, 
+        likely_to_join, additional_notes, canceled, cancel_reason
+    ):
+        connection = create_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute("""
+        INSERT INTO Tour (
+            tour_date, attended, no_join_reason, clinicians, attendees, 
+            interactions, strategies_used, aep_deadline, joined_after, 
+            likely_to_join, additional_notes, canceled, cancel_reason
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            tour_date, attended, no_join_reason, clinicians, attendees, 
+            interactions, strategies_used, aep_deadline, joined_after, 
+            likely_to_join, additional_notes, canceled, cancel_reason
+        ))
+
+        connection.commit()
+        if connection:
+            connection.close()
+
+        return cursor.lastrowid
+
+    def insert_member(name, age, dob, email, aep_completion_date, join_date, schedule, 
+                  phone, address, county, gender, veteran, joined, caregiver_needed, 
+                  alder_program):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Member (
+            name, age, dob, email, aep_completion_date, join_date, schedule, 
+            phone, address, county, gender, veteran, joined, caregiver_needed, 
+            alder_program, member_info
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            name, age, dob, email, aep_completion_date, join_date, schedule, 
+            phone, address, county, gender, veteran, joined, caregiver_needed, 
+            alder_program, None
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_membership_enrollment_form(sexual_orientation, race, income, living_status, 
+                                        grew_up, occupations, prev_speech_therapy, 
+                                        other_therapy, hearing_loss, hearing_aid, aphasia_cause, 
+                                        aphasia_onset, brain_location, medications, filled_by, 
+                                        completed_date):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Membership_Enrollment_Form (
+            sexual_orientation, race, income, living_status, grew_up, occupations, 
+            prev_speech_therapy, other_therapy, hearing_loss, hearing_aid, aphasia_cause, 
+            aphasia_onset, brain_location, medications, filled_by, completed_date, patient_info
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            sexual_orientation, race, income, living_status, grew_up, occupations, 
+            prev_speech_therapy, other_therapy, hearing_loss, hearing_aid, aphasia_cause, 
+            aphasia_onset, brain_location, medications, filled_by, completed_date, None
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+    
+    def insert_medical_history_form(physician_name, specialty, physician_address, physician_phone, 
+                                    aphasia_cause, aphasia_onset, stroke_location, lesion_location, 
+                                    primary_diagnosis, secondary_diagnosis, seizure_history, last_seizure_date, 
+                                    anti_seizure_med, allergies, medications, hearing_aid, hearing_impairment, 
+                                    swallowing_impairments, current_diet, swallowing_strategies, visual_impairments, 
+                                    visual_field_cut, other_visual_impairments, completion_date):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Medical_History_Form (
+            physician_name, specialty, physician_address, physician_phone, aphasia_cause, aphasia_onset, 
+            stroke_location, lesion_location, primary_diagnosis, secondary_diagnosis, seizure_history, 
+            last_seizure_date, anti_seizure_med, allergies, medications, hearing_aid, hearing_impairment, 
+            swallowing_impairments, current_diet, swallowing_strategies, visual_impairments, 
+            visual_field_cut, other_visual_impairments, completion_date, other_conditions
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            physician_name, specialty, physician_address, physician_phone, aphasia_cause, aphasia_onset, 
+            stroke_location, lesion_location, primary_diagnosis, secondary_diagnosis, seizure_history, 
+            last_seizure_date, anti_seizure_med, allergies, medications, hearing_aid, hearing_impairment, 
+            swallowing_impairments, current_diet, swallowing_strategies, visual_impairments, 
+            visual_field_cut, other_visual_impairments, completion_date, None
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_incident_report(incident_date, incident_location, persons_involved, description, action_taken):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Incident_Report (
+            incident_date, incident_location, persons_involved, description, action_taken
+        ) 
+        VALUES (%s, %s, %s, %s, %s)
+        """
+
+        data = (
+            incident_date, incident_location, persons_involved, description, action_taken
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_evaluation(completed, administerer, test_type, date_administered):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Evaluation (
+            completed, administerer, test_type, date_administered
+        ) 
+        VALUES (%s, %s, %s, %s)
+        """
+
+        data = (
+            completed, administerer, test_type, date_administered
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_transportation_information(bus_transport, bus_company, bus_contact_phone, picked_up,
+                                        pickup_person, relationship_to_member, primary_phone, secondary_phone):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Transportation_Information (
+            bus_transport, bus_company, bus_contact_phone, picked_up, pickup_person, 
+            relationship_to_member, primary_phone, secondary_phone
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            bus_transport, bus_company, bus_contact_phone, picked_up, pickup_person, 
+            relationship_to_member, primary_phone, secondary_phone
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_caregiver(name, phone, email, relationship, date_contacted, notes, group_attending, attending):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Caregiver (
+            name, phone, email, relationship, date_contacted, notes, group_attending, attending
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            name, phone, email, relationship, date_contacted, notes, group_attending, attending
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_attending_caregiver(caregiver_type, sex, race, occupations, support_group, covid_vaccine_date, 
+                                allergies, medications, media_release, start_date, end_date, 
+                                general_notes, participation, robly):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Attending_Caregiver (
+            caregiver_type, sex, race, occupations, support_group, covid_vaccine_date, allergies, medications,
+            media_release, start_date, end_date, general_notes, participation, robly
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            caregiver_type, sex, race, occupations, support_group, covid_vaccine_date, allergies, medications,
+            media_release, start_date, end_date, general_notes, participation, robly
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_emergency_contact(name, relationship, day_phone, evening_phone, cell_phone, email, address, completion_date):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Emergency_Contact (
+            name, relationship, day_phone, evening_phone, cell_phone, email, address, completion_date
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            name, relationship, day_phone, evening_phone, cell_phone, email, address, completion_date
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_volunteer(name, phone, address, email, referral_source, background_check_date, 
+                        video_watched_date, emergency_contacts, media_release, confidentiality, training_level):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Volunteer (
+            name, phone, address, email, referral_source, background_check_date, 
+            video_watched_date, emergency_contacts, media_release, confidentiality, training_level
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            name, phone, address, email, referral_source, background_check_date, 
+            video_watched_date, emergency_contacts, media_release, confidentiality, training_level
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_application(birthday, occupation, is_slp, relevant_experience, education, interests_skills_hobbies, 
+                        languages_spoken, will_substitute, convicted_of_crime, application_date):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Applications (
+            birthday, occupation, is_slp, relevant_experience, education, interests_skills_hobbies, 
+            languages_spoken, will_substitute, convicted_of_crime, application_date
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            birthday, occupation, is_slp, relevant_experience, education, interests_skills_hobbies, 
+            languages_spoken, will_substitute, convicted_of_crime, application_date
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+    def insert_outreach(contacted_date, staff_contacted, organization, org_type, outreach_type, target_location, 
+                        num_people, robly, notes):
+        connection = create_connection()
+        cursor = connection.cursor()
+
+        insert_query = """
+        INSERT INTO Outreach (
+            contacted_date, staff_contacted, organization, org_type, outreach_type, target_location, 
+            num_people, robly, notes
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            contacted_date, staff_contacted, organization, org_type, outreach_type, target_location, 
+            num_people, robly, notes
+        )
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+
+        connection.close()
+
+        return cursor.lastrowid
+
+
 def update_record(model_name, record_id, updates):
     connection = create_connection()
     cursor = connection.cursor()
