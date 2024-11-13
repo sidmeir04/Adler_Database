@@ -53,17 +53,34 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     CreateStatusBar();
 }
 
-std::vector<std::string> CallPythonGetAllEntries(const std::string &arg)
+std::tuple<std::string, std::string, std::string, std::string, std::string, std::string, std::string, std::string> call_get_caller(
+    const std::string &staff_name = "",
+    const std::string &caller_name = "",
+    const std::string &caller_email = "",
+    const std::string &call_date = "",
+    const std::string &phone = "",
+    const std::string &referral_type = "",
+    const bool tour_scheduled = false,
+    const std::string &follow_up_date = "")
 {
-    std::vector<std::string> resultEntries;
+    py::object get_functions = py::module_::import("get_functions").attr("get_functions");
+    py::object result = get_functions.attr("get_caller")(
+        staff_name,
+        caller_name,
+        caller_email,
+        call_date.empty() ? py::none() : py::str(call_date),
+        phone,
+        referral_type,
+        tour_scheduled ? py::bool_(true) : py::none(),
+        follow_up_date.empty() ? py::none() : py::str(follow_up_date));
 
-    return resultEntries;
+    return result.cast<std::tuple<std::string, std::string, std::string, std::string, std::string, std::string, std::string, std::string>>();
 }
 
 void MainFrame::OnButtonClicked(wxCommandEvent &evt)
 {
     // Call Python function getAllEntries()
-    std::vector<std::string> entries = CallPythonGetAllEntries("Testing");
+    std::vector<std::string> entries = call_get_caller();
 
     results.Clear(); // Clear previous results
     for (const auto &entry : entries)

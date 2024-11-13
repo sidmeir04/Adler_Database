@@ -70,7 +70,11 @@ class get_functions():
         results = cursor.fetchall()
         if connection:
             connection.close()
-        return results
+        
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_tour(tour_date=None, attended=None, clinicians='', 
@@ -121,7 +125,10 @@ class get_functions():
         cursor.execute(query, tuple(filters))
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_member(name='', age=None, dob=None, email='', 
@@ -203,7 +210,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_membership_enrollment_form(sexual_orientation='', race='', income=None, 
@@ -274,7 +284,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_medical_history_form(physician_name='', specialty='', 
@@ -369,7 +382,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_incident_report(incident_date=None, incident_location=''):
@@ -395,7 +411,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_evaluation(completed=None, administerer='', date_administered=None):
@@ -425,7 +444,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_transportation_information(bus_transport=None, bus_company='', 
@@ -478,7 +500,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_caregiver(name='', phone='', email='', 
@@ -522,7 +547,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_attending_caregiver(caregiver_type='', sex='', race='', 
@@ -588,7 +616,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_emergency_contact(name='', relationship='', day_phone='', 
@@ -636,7 +667,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_volunteer(name='', phone='', address='', email='', 
@@ -693,7 +727,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_applications(birthday=None, occupation='', is_slp=None, 
@@ -741,7 +778,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
     
     @staticmethod
     def get_outreach(contacted_date=None, staff_contacted='', 
@@ -793,7 +833,10 @@ class get_functions():
         # Fetch all results
         results = cursor.fetchall()
         
-        return results
+        modified_results = []
+        for result in results:
+            modified_results.append(tuple(map(str,result)))
+        return modified_results
 
 class update_functions():
     @staticmethod
@@ -2032,71 +2075,19 @@ class insert_functions():
 
         return cursor.lastrowid
 
-
-def update_record(model_name, record_id, updates):
-    connection = create_connection()
-    cursor = connection.cursor()
-
-    # Prepare the base query
-    query = f"UPDATE {model_name} SET "
-    set_clause = []
-    values = []
-
-    # Construct the SET clause from the updates dictionary
-    for column, value in updates.items():
-        set_clause.append(f"{column} = %s")
-        values.append(value)
-
-    # Join the set_clause with commas
-    query += ', '.join(set_clause)
-    query += " WHERE id = %s"
-    values.append(record_id)
-
-    # Execute the query
-    cursor.execute(query, tuple(values))
-
-    # Commit the changes to the database
-    connection.commit()
-    
-    # Check if any rows were updated
-    if cursor.rowcount == 0:
-        print("No record found with the specified ID.")
-    
-    cursor.close()
-
-def create_record(model_name, data):
-    connection = create_connection()
-    cursor = connection.cursor()
-
-    # Prepare the base query for insertion
-    columns = ', '.join(data.keys())
-    placeholders = ', '.join(['%s'] * len(data))
-    query = f"INSERT INTO {model_name} ({columns}) VALUES ({placeholders})"
-    
-    # Extract values from the data dictionary
-    values = tuple(data.values())
-
-    # Execute the query
-    cursor.execute(query, values)
-
-    # Commit the changes to the database
-    connection.commit()
-    
-    # Get the ID of the newly created record
-    new_record_id = cursor.lastrowid
-    cursor.close()
-
-    return new_record_id
-
 # Fetch members
 from datetime import date
-members = get_functions.get_outreach(
-            contacted_date=date(2024,1,13), staff_contacted='Sarah Connor', 
-            organization='Health Services', org_type='Non-Profit', outreach_type='Informational Session', 
-            target_location='Community Center', num_people=25, robly=True
+result = get_functions.get_caller(
+            staff_name='Alice Johnson',
+            caller_name='Jane Doe',
+            caller_email='jane.doe@example.com',
+            call_date=date(2024, 1, 15),
+            phone='555-1234',
+            referral_type='Referral',
+            tour_scheduled=1,
+            follow_up_date=date(2024, 1, 20)
         )
 
 # Print the fetched data
-if members:
-    for member in members:
-        print(member)
+if result:
+    print(result)

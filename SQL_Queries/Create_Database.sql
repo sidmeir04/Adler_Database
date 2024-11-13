@@ -35,26 +35,6 @@ CREATE TABLE Tour (
     cancel_reason TEXT               -- Reason for cancelation
 );
 
-CREATE TABLE Member (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),
-    age INT,
-    dob DATE,                          -- Date of birth
-    email VARCHAR(50),
-    aep_completion_date DATE,          -- Date completed AEP
-    join_date DATE,                    -- Date joined
-    schedule INT,                      -- Schedule in weeks or other interval
-    phone VARCHAR(20),
-    address VARCHAR(50),
-    county VARCHAR(50),
-    gender CHAR(1),                    -- 'M' or 'F'
-    veteran BOOLEAN,                   -- Veteran status
-    joined BOOLEAN,                    -- Whether the member joined
-    caregiver_needed BOOLEAN,          -- Whether a caregiver is needed
-    alder_program VARCHAR(50),         -- Alder program info
-    member_info JSON                   -- Detailed member information
-);
-
 CREATE TABLE Membership_Enrollment_Form (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sexual_orientation VARCHAR(20),
@@ -161,7 +141,10 @@ CREATE TABLE Attending_Caregiver (
     end_date DATE,                   -- End date of caregiving
     general_notes TEXT,              -- General notes about the caregiver
     participation TEXT,              -- Participation details
-    robly BOOLEAN                    -- If Robly is used for communication
+    robly BOOLEAN,                   -- If Robly is used for communication
+
+    caregiver INT,
+    FOREIGN KEY (caregiver) REFERENCES Caregiver(id)
 );
 
 CREATE TABLE Emergency_Contact (
@@ -176,19 +159,33 @@ CREATE TABLE Emergency_Contact (
     completion_date DATE             -- Date the form was completed
 );
 
-CREATE TABLE Volunteer (
+CREATE TABLE Member (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),                 -- Volunteer name
-    phone VARCHAR(20),                -- Phone number
-    address VARCHAR(50),              -- Volunteer address
-    email VARCHAR(50),                -- Volunteer email
-    referral_source TEXT,             -- Source of referral
-    background_check_date DATE,       -- Date background check was completed
-    video_watched_date DATE,          -- Date watched the orientation video
-    emergency_contacts TEXT,          -- Emergency contacts
-    media_release BOOLEAN,            -- Media release consent
-    confidentiality BOOLEAN,          -- Confidentiality agreement
-    training_level INT                -- Training level (0-4)
+    name VARCHAR(50),
+    age INT,
+    dob DATE,                          -- Date of birth
+    email VARCHAR(50),
+    aep_completion_date DATE,          -- Date completed AEP
+    join_date DATE,                    -- Date joined
+    schedule INT,                      -- Schedule in weeks or other interval
+    phone VARCHAR(20),
+    address VARCHAR(50),
+    county VARCHAR(50),
+    gender CHAR(1),                    -- 'M' or 'F'
+    veteran BOOLEAN,                   -- Veteran status
+    joined BOOLEAN,                    -- Whether the member joined
+    caregiver_needed BOOLEAN,          -- Whether a caregiver is needed
+    alder_program VARCHAR(50),         -- Alder program info
+    member_info JSON,                  -- Detailed member information
+
+    enrollment_form INT,
+    FOREIGN KEY (enrollment_form) REFERENCES Membership_Enrollment_Form(id),
+    medical_history INT,
+    FOREIGN KEY (medical_history) REFERENCES Medical_History_Form(id),
+    emergency_contact_one INT,
+    emergency_contact_two INT,
+    FOREIGN KEY (emergency_contact_one) REFERENCES Emergency_Contact(id),
+    FOREIGN KEY (emergency_contact_two) REFERENCES Emergency_Contact(id)
 );
 
 CREATE TABLE Applications (
@@ -204,6 +201,25 @@ CREATE TABLE Applications (
     convicted_of_crime BOOLEAN,      -- Whether the applicant has been convicted of a crime
     application_date DATE             -- Date of application
 );
+
+CREATE TABLE Volunteer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),                 -- Volunteer name
+    phone VARCHAR(20),                -- Phone number
+    address VARCHAR(50),              -- Volunteer address
+    email VARCHAR(50),                -- Volunteer email
+    referral_source TEXT,             -- Source of referral
+    background_check_date DATE,       -- Date background check was completed
+    video_watched_date DATE,          -- Date watched the orientation video
+    emergency_contacts TEXT,          -- Emergency contacts
+    media_release BOOLEAN,            -- Media release consent
+    confidentiality BOOLEAN,          -- Confidentiality agreement
+    training_level INT,               -- Training level (0-4)
+
+    resumue int,
+    FOREIGN KEY (resumue) REFERENCES Applications(id)
+);
+
 
 CREATE TABLE Outreach (
     id INT AUTO_INCREMENT PRIMARY KEY,
