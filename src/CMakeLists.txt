@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
 project(wx_cmake_template_core LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Prevent conflicts in Windows headers
@@ -23,11 +23,7 @@ find_package(wxWidgets REQUIRED COMPONENTS core base xml)
 
 # Find Python3: Find the Python interpreter and development libraries
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
-
-# Force CMake to use the release version of the Python library in all configurations
 set(Python3_LIBRARIES Python3::Python)
-
-# Find Python and set up include directories and libraries
 find_package(Python3 COMPONENTS Development REQUIRED)
 
 # Manually specify the Python library path
@@ -35,14 +31,9 @@ set(PYTHON_LIB_PATH "C:/Users/oscar/AppData/Local/Programs/Python/Python313/libs
 
 # Set the path to your Pybind11 directory
 set(PYBIND11_DIR "C:/libraries/pybind11")
-
-# Add the Pybind11 project
 add_subdirectory(${PYBIND11_DIR} pybind11_build)
 include_directories(${PYBIND11_DIR}/include)
-
-# Include Python headers
 include_directories(${Python3_INCLUDE_DIRS})
-
 
 # MySQL Connector C++: Specify the MySQL include and library directories
 set(MYSQL_CONNECTOR_DIR "C:/libraries/MySQL/MySQL_Connector_C++_9.0")
@@ -56,9 +47,13 @@ set(MYSQL_DLL "${MYSQL_LIB_DIR}/mysqlcppconn-10-vs14.dll")
 
 include_directories("C:/Adler_Database/src")
 
-# Set source files - main.cpp only, remove sql_connector.cpp
-set(SRCS main.cpp)
+# Ensure the current source directory is included
+include_directories(${CMAKE_SOURCE_DIR})
 
+# Set source files - include both main.cpp and logger.cpp
+set(SRCS main.cpp logger.cpp)
+
+# Include wxWidgets configuration
 include(${wxWidgets_USE_FILE})
 
 if(APPLE)
@@ -72,10 +67,13 @@ else()
     add_executable(main WIN32 ${SRCS} main.exe.manifest)
 endif()
 
-# Link wxWidgets, MySQL, and PyBind11
+# Link wxWidgets, MySQL, PyBind11, and Python libraries
 target_link_libraries(main PRIVATE ${PYTHON_LIB_PATH})
 target_link_libraries(main PRIVATE pybind11::module)
 target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES} ${MYSQL_LIBRARIES} ${PYTHON_LIB_PATH})
+
+# Copy XML file after build
+file(COPY ${CMAKE_SOURCE_DIR}/example.xml DESTINATION ${CMAKE_BINARY_DIR})
 
 # Copy MySQL DLL after build
 add_custom_command(TARGET main POST_BUILD

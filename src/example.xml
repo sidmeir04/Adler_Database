@@ -1,36 +1,123 @@
-<?xml version="1.0" ?>
-<resource version="2.3.0.1">
-  <object class="wxDialog" name="SimpleDialog">
-    <title>Simple dialog</title>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <object class="sizeritem">
-        <object class="wxTextCtrl" name="text"/>
-        <option>1</option>
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-      </object>
-      <object class="sizeritem">
-        <object class="wxBoxSizer">
-          <object class="sizeritem">
-            <object class="wxButton" name="clickme_btn">
-              <label>Click</label>
-            </object>
-            <flag>wxRIGHT</flag>
-            <border>10</border>
-          </object>
-          <object class="sizeritem">
-            <object class="wxButton" name="wxID_OK">
-              <label>OK</label>
-            </object>
-            <flag>wxLEFT</flag>
-            <border>10</border>
-          </object>
-          <orient>wxHORIZONTAL</orient>
-        </object>
-        <flag>wxALL|wxALIGN_CENTRE</flag>
-        <border>10</border>
-      </object>
-    </object>
-  </object>
-</resource>
+<?xml version="1.0" encoding="UTF-8"?>
+<Library>
+    <Book id="1">
+        <Title>The Great Gatsby</Title>
+        <Author>F. Scott Fitzgerald</Author>
+        <Year>1925</Year>
+    </Book>
+
+    <Book id="2">
+        <Title>1984</Title>
+        <Author>George Orwell</Author>
+        <Year>1949</Year>
+    </Book>
+
+    <Book id="3">
+        <Title>To Kill a Mockingbird</Title>
+        <Author>Harper Lee</Author>
+        <Year>1960</Year>
+    </Book>
+
+    <Book id="4">
+        <Title>Moby-Dick</Title>
+        <Author>Herman Melville</Author>
+        <Year>1851</Year>
+    </Book>
+
+    <Book id="5">
+        <Title>War and Peace</Title>
+        <Author>Leo Tolstoy</Author>
+        <Year>1869</Year>
+    </Book>
+
+    <Book id="6">
+        <Title>Pride and Prejudice</Title>
+        <Author>Jane Austen</Author>
+        <Year>1813</Year>
+    </Book>
+
+    <Book id="7">
+        <Title>The Catcher in the Rye</Title>
+        <Author>J.D. Salinger</Author>
+        <Year>1951</Year>
+    </Book>
+
+    <Book id="8">
+        <Title>The Hobbit</Title>
+        <Author>J.R.R. Tolkien</Author>
+        <Year>1937</Year>
+    </Book>
+
+    <Book id="9">
+        <Title>Fahrenheit 451</Title>
+        <Author>Ray Bradbury</Author>
+        <Year>1953</Year>
+    </Book>
+
+    <Book id="10">
+        <Title>Crime and Punishment</Title>
+        <Author>Fyodor Dostoevsky</Author>
+        <Year>1866</Year>
+    </Book>
+
+    <Book id="11">
+        <Title>The Odyssey</Title>
+        <Author>Homer</Author>
+        <Year>8th Century BC</Year>
+    </Book>
+
+    <Book id="12">
+        <Title>Brave New World</Title>
+        <Author>Aldous Huxley</Author>
+        <Year>1932</Year>
+    </Book>
+
+    <Book id="13">
+        <Title>Anna Karenina</Title>
+        <Author>Leo Tolstoy</Author>
+        <Year>1878</Year>
+    </Book>
+
+    <Book id="14">
+        <Title>Don Quixote</Title>
+        <Author>Miguel de Cervantes</Author>
+        <Year>1605</Year>
+    </Book>
+
+    <Book id="15">
+        <Title>The Lord of the Rings: The Fellowship of the Ring</Title>
+        <Author>J.R.R. Tolkien</Author>
+        <Year>1954</Year>
+    </Book>
+
+    <Book id="16">
+        <Title>Catch-22</Title>
+        <Author>Joseph Heller</Author>
+        <Year>1961</Year>
+    </Book>
+
+    <Book id="17">
+        <Title>Slaughterhouse-Five</Title>
+        <Author>Kurt Vonnegut</Author>
+        <Year>1969</Year>
+    </Book>
+
+    <Book id="18">
+        <Title>Les Misérables</Title>
+        <Author>Victor Hugo</Author>
+        <Year>1862</Year>
+    </Book>
+
+    <Book id="19">
+        <Title>The Brothers Karamazov</Title>
+        <Author>Fyodor Dostoevsky</Author>
+        <Year>1880</Year>
+    </Book>
+
+    <Book id="20">
+        <Title>Frankenstein</Title>
+        <Author>Mary Shelley</Author>
+        <Year>1818</Year>
+    </Book>
+
+</Library>

@@ -1,5 +1,16 @@
 import mysql.connector
 from mysql.connector import Error
+from datetime import date
+from datetime import datetime
+
+def string_to_date(date_string: str) -> datetime.date:
+    if date_string:
+        try:
+            return datetime.strptime(date_string, "%Y-%m-%d").date()
+        except ValueError:
+            raise ValueError(f"Invalid date format. Expected 'yyyy-mm-dd', got {date_string}")
+    else: 
+        return ''
 
 connection = None
 # Define your database connection parameters
@@ -25,7 +36,8 @@ class get_functions():
     def get_caller(staff_name='', caller_name='', caller_email = '', call_date=None, phone='', referral_type='', tour_scheduled=None, follow_up_date=None):
         connection = create_connection()
         cursor = connection.cursor()
-        
+        call_date = string_to_date(call_date)
+        follow_up_date = string_to_date(follow_up_date)
         # Start building the base query
         query = "SELECT * FROM caller WHERE 1=1"
         filters = []
@@ -2076,16 +2088,15 @@ class insert_functions():
         return cursor.lastrowid
 
 # Fetch members
-from datetime import date
 result = get_functions.get_caller(
             staff_name='Alice Johnson',
             caller_name='Jane Doe',
             caller_email='jane.doe@example.com',
-            call_date=date(2024, 1, 15),
+            call_date='2024-01-15',
             phone='555-1234',
             referral_type='Referral',
             tour_scheduled=1,
-            follow_up_date=date(2024, 1, 20)
+            follow_up_date='2024-01-20'
         )
 
 # Print the fetched data
