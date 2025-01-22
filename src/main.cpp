@@ -1,7 +1,13 @@
 #include <wx/wx.h>
 #include <wx/xml/xml.h>
 #include <wx/listctrl.h>
+
 #include "logger.h"
+
+typedef std::tuple<std::string, std::string, std::string, std::string, std::string,
+                   std::string, std::string, std::string, std::string, std::string,
+                   std::string>
+    ResultTuple;
 
 void resizeObject(wxWindow *object, double percentage)
 {
@@ -69,11 +75,27 @@ public:
                 LogToFile("Error: Could not load the XML file.");
             }
 
+            wxString choices[] = {"Sort By", "Title", "Author", "Year"};
+            comboBox = new wxComboBox(panel, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 4, choices, wxCB_READONLY);
+
+            // Bind the event for the combo box selection change
+            comboBox->Bind(wxEVT_COMBOBOX, &MyFrame::OnComboBoxChanged, this);
+
+            // Add a button to trigger the Python function call
+            wxButton *btnCallPython = new wxButton(this, wxID_ANY, "Call Python getCaller()", wxPoint(10, 10), wxSize(200, 50));
+
             // Layout
-            wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-            sizer->Add(searchBar, 0, wxALIGN_CENTER | wxALL, 10); // Add search bar, centered
-            sizer->Add(resultList, 1, wxEXPAND | wxALL, 10);      // Add the list box for results
-            panel->SetSizer(sizer);
+            wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL); // Main vertical sizer
+
+            wxBoxSizer *horizSizer = new wxBoxSizer(wxHORIZONTAL);
+            horizSizer->Add(searchBar, 0, wxALIGN_CENTER_VERTICAL | wxALL, 10); // Add search bar to the left
+            horizSizer->Add(comboBox, 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);  // Add combo box to the right
+
+            mainSizer->Add(horizSizer, 0, wxALIGN_CENTER | wxALL, 10); // Centered horizontally with padding
+
+            mainSizer->Add(resultList, 1, wxALIGN_CENTER | wxALL, 10); // Add result list, centered
+
+            panel->SetSizer(mainSizer); // Set the sizer for the panel
         }
         catch (const std::exception &e)
         {
@@ -83,6 +105,14 @@ public:
 
 private:
     wxListCtrl *resultList;
+    wxComboBox *comboBox;  // The combo box widget
+    wxString selectedItem; // Private variable to store selected value
+
+    // Event handler for ComboBox selection change
+    void OnComboBoxChanged(wxCommandEvent &event)
+    {
+        selectedItem = comboBox->GetStringSelection(); // Store the selected value in the private variable
+    }
 
     // Method to handle search event
     void OnSearch(wxCommandEvent &event)
@@ -113,9 +143,38 @@ private:
 
                     // Construct a display string and add it to the list if it matches the search term
                     wxString displayString = title + " - " + author + " (" + year + ")";
-                    if (title.Lower().Contains(searchTerm) ||
-                        author.Lower().Contains(searchTerm) ||
-                        year.Lower().Contains(searchTerm))
+                    std::string searchFilter = std::string(selectedItem.mb_str());
+                    bool contained = false;
+
+                    if (searchFilter == "Title")
+                    {
+                        if (title.Lower().Contains(searchTerm))
+                        {
+                            contained = true;
+                        }
+                    }
+                    else if (searchFilter == "Author")
+                    {
+                        if (author.Lower().Contains(searchTerm))
+                        {
+                            contained = true;
+                        }
+                    }
+                    else if (searchFilter == "Year")
+                    {
+                        if (year.Lower().Contains(searchTerm))
+                        {
+                            contained = true;
+                        }
+                    }
+                    else if (title.Lower().Contains(searchTerm) ||
+                             author.Lower().Contains(searchTerm) ||
+                             year.Lower().Contains(searchTerm))
+                    {
+                        contained = true;
+                    }
+
+                    if (contained)
                     {
                         // Add matching result to the list
                         long index = resultList->InsertItem(resultList->GetItemCount(), title);
