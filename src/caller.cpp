@@ -4,18 +4,17 @@
 #include "httplib.h"         // HTTP client library
 #include "nlohmann/json.hpp" // JSON parsing library
 
-using namespace std::chrono;
-
 using json = nlohmann::json;
 
 class APIClient
 {
 private:
     // Static HTTP client connection
+    // Should be changed to a function that creates the connection
+    // Start each function with a check of the connection and call the function if not found
     static inline httplib::Client client{"localhost", 5000};
 
 public:
-    // Static function to fetch a list of lists of strings with a JSON body
     static std::vector<std::vector<std::string>> get_caller(const json &jsonPayload)
     {
         std::vector<std::vector<std::string>> results;
@@ -379,26 +378,200 @@ public:
 
         return results;
     }
-};
 
-int main()
-{
-    // Create a JSON variable to hold the payload
-    json jsonPayload = {{"name", "john"}};
-
-    // Call the static method from the APIClient class
-
-    std::vector<std::vector<std::string>> data = APIClient::get_caller(jsonPayload);
-
-    // Print the results
-    for (const auto &list : data)
+    static int update_caller(const json &jsonPayload)
     {
-        for (const auto &str : list)
-        {
-            std::cout << str << " ";
-        }
-        std::cout << std::endl;
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_caller", jsonBody, "application/json");
+        return 1;
     }
 
-    return 0;
-}
+    static int update_tour(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_tour", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_member(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_member", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_membership_enrollment_form(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_membership_enrollment_form", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_medical_history_form(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_medical_history_form", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_incident_report(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_incident_report", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_evaluation(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_evaluation", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_transport_information(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_transport_information", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_caregiver(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_caregiver", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_attending_caregiver(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_attending_caregiver", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_emergency_contact(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_emergency_contact", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_volunteer(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_volunteer", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_applications(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_applications", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int update_outreach(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/update_outreach", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_caller(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_caller", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_tour(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_tour", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_member(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_member", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_membership_enrollment_form(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_membership_enrollment_form", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_medical_history_form(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_medical_history_form", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_incident_report(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_incident_report", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_evaluation(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_evaluation", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_transport_information(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_transport_information", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_caregiver(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_caregiver", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_attending_caregiver(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_attending_caregiver", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_emergency_contact(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_emergency_contact", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_volunteer(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_volunteer", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_applications(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_applications", jsonBody, "application/json");
+        return 1;
+    }
+
+    static int create_outreach(const json &jsonPayload)
+    {
+        std::string jsonBody = jsonPayload.dump();
+        auto post_response = client.Post("/create_outreach", jsonBody, "application/json");
+        return 1;
+    }
+};
