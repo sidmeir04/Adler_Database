@@ -45,5 +45,14 @@ else()
     add_executable(main WIN32 ${SRCS} main.exe.manifest)
 endif()
 
+# Set the HTML source directory (relative to the project root)
+set(HTML_SOURCE_DIR "${CMAKE_SOURCE_DIR}/../web")
+
+# Set the destination directory (where the .exe will be)
+set(HTML_DEST_DIR "${CMAKE_BINARY_DIR}/web")
+
+# Copy HTML files to the build folder
+file(COPY ${HTML_SOURCE_DIR} DESTINATION ${CMAKE_BINARY_DIR})
+
 # Link wxWidgets, MySQL, PyBind11, and Python libraries
 target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES})
