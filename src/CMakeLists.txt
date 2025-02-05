@@ -20,7 +20,10 @@ set(wxWidgets_USE_STATIC 1)
 find_package(wxWidgets REQUIRED COMPONENTS core base xml)
 
 include_directories("C:/Adler_Database/src")
+include_directories("C:/Adler_Database/headers")
 include_directories("C:/libraries/json/include")
+include_directories("C:/libraries/webview/core/include")
+include_directories("C:/libraries/WebView2/build/native/include")
 
 # Ensure the current source directory is included
 include_directories(${CMAKE_SOURCE_DIR})

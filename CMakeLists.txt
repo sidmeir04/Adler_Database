@@ -10,10 +10,6 @@ set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
 
 set(STAGED_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/stage)
 
-set(MYSQL_CONNECTOR_DIR "C:/libraries/MySQL/MySQL_Connector_C++_9.0")
-set(MYSQL_INCLUDE_DIR ${MYSQL_CONNECTOR_DIR}/include)
-set(MYSQL_LIB_DIR ${MYSQL_CONNECTOR_DIR}/lib64)
-
 add_subdirectory(thirdparty)
 
 include(ExternalProject)
