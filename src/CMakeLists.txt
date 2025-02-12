@@ -29,7 +29,7 @@ include_directories("C:/libraries/WebView2/build/native/include")
 include_directories(${CMAKE_SOURCE_DIR})
 
 # Set source files - include both main.cpp and logger.cpp
-set(SRCS main.cpp logger.cpp caller.cpp)
+set(SRCS logger.cpp APIClient.cpp main.cpp)
 
 # Include wxWidgets configuration
 include(${wxWidgets_USE_FILE})
@@ -55,4 +55,6 @@ set(HTML_DEST_DIR "${CMAKE_BINARY_DIR}/web")
 file(COPY ${HTML_SOURCE_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 
 # Link wxWidgets, MySQL, PyBind11, and Python libraries
+target_sources(main PRIVATE APIClient.cpp)
+
 target_link_libraries(main PRIVATE ${wxWidgets_LIBRARIES})

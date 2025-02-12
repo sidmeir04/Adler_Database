@@ -102,7 +102,18 @@
         </tbody>
     </table>
 
+    <h1 id="message">Waiting for C++...</h1>
+    <button onclick="sendMessageToCpp()">Request Message from C++</button>
+
     <script>
+        function updateMessageFromCpp(data) {
+            document.getElementById("message").innerText = data;
+        }
+
+        function sendMessageToCpp() {
+            window.requestMessageFromCpp(); // Call C++ function
+        }
+        
         document.querySelector('.search-bar input').addEventListener('input', function() {
             const searchText = this.value.toLowerCase();
             const rows = document.querySelectorAll('#data-table tbody tr');

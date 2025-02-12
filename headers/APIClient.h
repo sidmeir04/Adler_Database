@@ -10,6 +10,9 @@ using json = nlohmann::json;
 
 class APIClient
 {
+private:
+    static inline httplib::Client client{"localhost", 5000};
+
 public:
     static std::vector<std::vector<std::string>> get_caller(const json &jsonPayload);
     static std::vector<std::vector<std::string>> get_tour(const json &jsonPayload);
