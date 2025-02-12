@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webview - Page 2</title>
+</head>
+<body>
+    <h1>You are now on Page 2</h1>
+    <button id="goBack">Go Back to Page 1</button>
+
+    <script>
+        document.getElementById("goBack").addEventListener("click", function() {
+            window.goBack();  // Call the C++ function
+        });
+    </script>
+</body>
+</html>
