@@ -14,20 +14,20 @@ private:
     static inline httplib::Client client{"localhost", 5000};
 
 public:
-    static std::vector<std::vector<std::string>> get_caller(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_tour(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_member(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_membership_enrollment_form(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_medical_history_form(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_incident_report(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_evaluation(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_transport_information(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_caregiver(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_attending_caregiver(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_emergency_contact(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_volunteer(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_applications(const json &jsonPayload);
-    static std::vector<std::vector<std::string>> get_outreach(const json &jsonPayload);
+    static std::string get_caller(const json &jsonPayload);
+    static std::string get_tour(const json &jsonPayload);
+    static std::string get_member(const json &jsonPayload);
+    static std::string get_membership_enrollment_form(const json &jsonPayload);
+    static std::string get_medical_history_form(const json &jsonPayload);
+    static std::string get_incident_report(const json &jsonPayload);
+    static std::string get_evaluation(const json &jsonPayload);
+    static std::string get_transport_information(const json &jsonPayload);
+    static std::string get_caregiver(const json &jsonPayload);
+    static std::string get_attending_caregiver(const json &jsonPayload);
+    static std::string get_emergency_contact(const json &jsonPayload);
+    static std::string get_volunteer(const json &jsonPayload);
+    static std::string get_applications(const json &jsonPayload);
+    static std::string get_outreach(const json &jsonPayload);
 
     static int update_caller(const json &jsonPayload);
     static int update_tour(const json &jsonPayload);

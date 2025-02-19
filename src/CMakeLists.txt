@@ -1,3 +1,6 @@
+# cmake -S. build
+# cmake --build build
+
 cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
 project(wx_cmake_template_core LANGUAGES CXX)

@@ -24,6 +24,9 @@
         ul li a{
             margin-right: 20px;
         }
+        .hidden {
+            display: none;
+        }   
 
     </style>
 </head>
@@ -37,12 +40,12 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" id="goToPage2" href="#">Home</a>
+                        <a class="nav-link" id="goToCallers" href="#">Callers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" id="goToTours" href="#">Tours</a>
                     </li>
-                    <li class="nav-item dropdown dmenu">
+                    <li class="nav-item dropdown dmenu hidden">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             Our Service
                         </a>
@@ -62,57 +65,132 @@
             </div>
         </nav>
     </header>
-    <div class="search-bar">
-        <input type="text" placeholder="Search...">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="search-bar col-3">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="col-6"></div>
+            <div class="col-3">
+                <button onclick="getCallerData()" class="btn btn-outline-dark">Update Data</button>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Display
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li>
+                    <label class="dropdown-item d-flex align-items-center">
+                        <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="fname" checked>
+                        First Name
+                    </label>
+                </li>
+                <li>
+                    <label class="dropdown-item d-flex align-items-center">
+                        <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="lname" checked>
+                        Last Name
+                    </label>
+                </li>
+                <li>
+                    <label class="dropdown-item d-flex align-items-center">
+                        <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="phone" checked>
+                        Phone Number
+                    </label>
+                </li>
+                <li>
+                    <label class="dropdown-item d-flex align-items-center">
+                        <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="email" checked>
+                        Email
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <table id="data-table" class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="fname">First Name</th>
+                    <th class="lname">Last Name</th>
+                    <th class="phone">Phone Number</th>
+                    <th class="email">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john.doe@example.com</td>
+                </tr>
+                <tr>
+                    <td>Jane</td>
+                    <td>Smith</td>
+                    <td>jane.smith@example.com</td>
+                </tr>
+                <tr>
+                    <td>Michael</td>
+                    <td>Johnson</td>
+                    <td>michael.johnson@example.com</td>
+                </tr>
+                <tr>
+                    <td>Emily</td>
+                    <td>Davis</td>
+                    <td>emily.davis@example.com</td>
+                </tr>
+                <tr>
+                    <td>David</td>
+                    <td>Wilson</td>
+                    <td>david.wilson@example.com</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <table id="data-table" class="table table-hover">
-        <thead>
-            <tr>
-                <th style="width: 30%;">First Name</th>
-                <th style="width: 30%;">Last Name</th>
-                <th style="width: 40%;">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john.doe@example.com</td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>jane.smith@example.com</td>
-            </tr>
-            <tr>
-                <td>Michael</td>
-                <td>Johnson</td>
-                <td>michael.johnson@example.com</td>
-            </tr>
-            <tr>
-                <td>Emily</td>
-                <td>Davis</td>
-                <td>emily.davis@example.com</td>
-            </tr>
-            <tr>
-                <td>David</td>
-                <td>Wilson</td>
-                <td>david.wilson@example.com</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h1 id="message">Waiting for C++...</h1>
-    <button onclick="sendMessageToCpp()">Request Message from C++</button>
-
     <script>
-        function updateMessageFromCpp(data) {
-            document.getElementById("message").innerText = data;
+
+        function getCallerJSON() {
+            jsonString = window.getCallerData(); // Call C++ function
+            return JSON.parse(jsonString);
         }
 
-        function sendMessageToCpp() {
-            window.requestMessageFromCpp(); // Call C++ function
-        }
+        function updateCallerTable(JSONString) {
+            let jsonData;
+            try {
+                jsonData = JSON.parse(JSONString);
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+                return;
+            }
+            try {
+                const table = document.querySelector("#data-table");
+                const tbody = table.querySelector("tbody") || table.appendChild(document.createElement("tbody"));
+                tbody.innerHTML = ""; // Clear existing rows
+            } catch (error) {
+                console.error("Error clearing table:", error);
+                return;
+            }
+
+            // Determine number of rows
+            const numRows = jsonData.id.length;
+
+            // Populate table rows
+            try {
+                for (let i = 0; i < numRows; i++) {
+                    const row = document.createElement("tr");
+                    [firstName, lastName] = jsonData.caller_name[i].split(" ");
+                    row.innerHTML = `
+                        <td class="fname">${firstName}</td>
+                        <td class="lname">${lastName}</td>
+                        <td class="phone">${jsonData.phone_number[i]}</td>
+                        <td class="email">${jsonData.caller_email[i]}</td>
+                    `;
+                    document.querySelector("#data-table tbody").appendChild(row);
+                }
+            } catch (error) {
+                console.error("Error populating table:", error);
+                return;
+            }
+        };
+
         
         document.querySelector('.search-bar input').addEventListener('input', function() {
             const searchText = this.value.toLowerCase();
@@ -128,8 +206,48 @@
             });
         });
 
-        document.getElementById("goToPage2").addEventListener("click", function() {
-            window.loadNewPage();  // Call the C++ function
+        document.getElementById("goToTours").addEventListener("click", function() {
+            window.loadTours();  // Call the C++ function
+        });
+
+        document.getElementById("goToCallers").addEventListener("click", function() {
+            window.loadTours();  // Call the C++ function
+        });
+
+        function toggleVisibility() {
+            document.querySelectorAll('.toggle-visibility').forEach(checkbox => {
+                let targetClass = checkbox.getAttribute('data-target');
+                let targetElements = document.querySelectorAll(`.${targetClass}`);
+                
+                targetElements.forEach(element => {
+                    if (checkbox.checked) {
+                        element.classList.remove('hidden'); // Show elements
+                    } else {
+                        element.classList.add('hidden'); // Hide elements
+                    }
+                });
+            });
+        }
+
+        document.querySelectorAll('.toggle-visibility').forEach(checkbox => {
+            checkbox.addEventListener('change', toggleVisibility);
+        });
+
+        // Prevent dropdown from closing when clicking inside it
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.addEventListener('click', event => {
+                event.stopPropagation();
+            });
+        });
+
+        // Allow clicking anywhere on the item to toggle checkbox
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', event => {
+                let checkbox = item.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked; // Toggle the checkbox state
+                }
+            });
         });
     </script>
 </body>

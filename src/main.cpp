@@ -9,30 +9,12 @@ using json = nlohmann::json;
 
 namespace fs = std::filesystem;
 
-std::string vectorToString(const std::vector<std::vector<std::string>> &data, const std::string &rowDelimiter = "\n", const std::string &colDelimiter = ", ")
-{
-    std::string result;
-
-    for (const auto &row : data)
-    {
-        for (size_t i = 0; i < row.size(); ++i)
-        {
-            result += row[i];
-            if (i < row.size() - 1)
-            {
-                result += colDelimiter; // Add column delimiter if not last element
-            }
-        }
-        result += rowDelimiter; // Add row delimiter
-    }
-
-    return result;
-}
+const std::string BaseFilePath = "C:/Adler_Database/src";
 
 std::string escapeForJS(const std::string &input)
 {
     std::ostringstream escaped;
-    escaped << '"'; // Start with a double-quote for JavaScript
+    escaped << '"';
 
     for (char c : input)
     {
@@ -40,16 +22,16 @@ std::string escapeForJS(const std::string &input)
         {
         case '"':
             escaped << "\\\"";
-            break; // Escape double quotes
+            break;
         case '\'':
             escaped << "\\'";
-            break; // Escape single quotes
+            break;
         case '\\':
             escaped << "\\\\";
-            break; // Escape backslashes
+            break;
         case '\n':
             escaped << "\\n";
-            break; // Escape newlines
+            break;
         case '\r':
             escaped << "\\r";
             break;
@@ -67,34 +49,33 @@ std::string escapeForJS(const std::string &input)
 
 void createBindings(webview::webview &w)
 {
-    w.bind("loadNewPage", [&](const std::string &msg) -> std::string
+    // add is not called
+    w.bind("loadHTMLPage", [&](const std::string &msg) -> std::string
            {
-        w.navigate("C:/Adler_Database/web/tours.html"); // Replace with actual path
+        w.navigate(BaseFilePath + "../web/" + msg + ".html");
         return ""; });
 
-    // Function to switch back to Page 1
-    w.bind("goBack", [&](const std::string &msg) -> std::string
+    // check navigate goes to right place
+    w.bind("loadTours", [&](const std::string &msg) -> std::string
            {
-        w.navigate("C:/Adler_Database/web/index.html"); // Replace with actual path
+        w.navigate(BaseFilePath + "../web/tours.html");
         return ""; });
 
-    w.bind("requestMessageFromCpp", [&](const std::string &msg) -> std::string
+    w.bind("loadCallers", [&](const std::string &msg) -> std::string
            {
-        std::string message = "Hello from C++!";
+        w.navigate(BaseFilePath + "../web/index.html");
+        return ""; });
+
+    // changed name could be messed up
+    w.bind("getCallerData", [&](const std::string &msg) -> std::string
+           {
+        std::string message;
         
         json jsonPayload;
         jsonPayload["caller_name"] = "";
-        try
-        {
-            std::vector<std::vector<std::string>> result = APIClient::get_caller(jsonPayload);
-            w.eval("updateMessageFromCpp('" + escapeForJS(vectorToString(result)) + "');");
-        }
-        catch(const std::exception& e)
-        {
-            LogToFile(e.what());
-        }
-
-        return ""; });
+        std::string result = APIClient::get_caller(jsonPayload);
+        w.eval("updateCallerTable(`" + result + "`);");
+        return escapeForJS(result); });
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -105,7 +86,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     createBindings(w);
 
-    w.navigate("C:/Adler_Database/web/index.html");
+    w.navigate(BaseFilePath + "/../web/index.html");
 
     w.run();
     return 0;

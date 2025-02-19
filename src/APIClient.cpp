@@ -7,368 +7,130 @@
 
 using json = nlohmann::json;
 
-std::vector<std::vector<std::string>> APIClient::get_caller(const json &jsonPayload)
+std::string APIClient::get_caller(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_caller", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_tour(const json &jsonPayload)
+std::string APIClient::get_tour(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_tour", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_member(const json &jsonPayload)
+std::string APIClient::get_member(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_member", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_membership_enrollment_form(const json &jsonPayload)
+std::string APIClient::get_membership_enrollment_form(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_membership_enrollment_form", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_medical_history_form(const json &jsonPayload)
+std::string APIClient::get_medical_history_form(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_medical_history_form", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_incident_report(const json &jsonPayload)
+std::string APIClient::get_incident_report(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_incident_report", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_evaluation(const json &jsonPayload)
+std::string APIClient::get_evaluation(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_evaluation", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_transport_information(const json &jsonPayload)
+std::string APIClient::get_transport_information(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_transport_information", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_caregiver(const json &jsonPayload)
+std::string APIClient::get_caregiver(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_caregiver", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_attending_caregiver(const json &jsonPayload)
+std::string APIClient::get_attending_caregiver(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_attending_caregiver", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_emergency_contact(const json &jsonPayload)
+std::string APIClient::get_emergency_contact(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_emergency_contact", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_volunteer(const json &jsonPayload)
+std::string APIClient::get_volunteer(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_volunteer", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_applications(const json &jsonPayload)
+std::string APIClient::get_applications(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_applications", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
-std::vector<std::vector<std::string>> APIClient::get_outreach(const json &jsonPayload)
+std::string APIClient::get_outreach(const json &jsonPayload)
 {
-    std::vector<std::vector<std::string>> results;
-
     std::string jsonBody = jsonPayload.dump();
 
     auto post_response = client.Post("/get_outreach", jsonBody, "application/json");
 
-    if (post_response && post_response->status == 200)
-    {
-        json response_json = json::parse(post_response->body);
-
-        for (const auto &inner_list : response_json)
-        {
-            std::vector<std::string> temp_list;
-            for (const auto &str : inner_list)
-            {
-                temp_list.push_back(str.get<std::string>());
-            }
-            results.push_back(temp_list);
-        }
-    }
-
-    return results;
+    return post_response->body;
 }
 
 int APIClient::update_caller(const json &jsonPayload)
