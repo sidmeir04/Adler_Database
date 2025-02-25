@@ -3,24 +3,13 @@
 
 cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
-project(wx_cmake_template_core LANGUAGES CXX)
+project(Adler_Database LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Prevent conflicts in Windows headers
 add_definitions(-DWIN32_LEAN_AND_MEAN -DNOMINMAX)
-
-
-# hack for buggy CMake's FindwxWidgets script
-if(DEFINED ENV_WX_CONFIG)
-    set(ENV{WX_CONFIG} ${ENV_WX_CONFIG})
-endif()
-
-set(wxWidgets_USE_STATIC 1)
-
-# Find wxWidgets
-find_package(wxWidgets REQUIRED COMPONENTS core base xml)
 
 include_directories("C:/Adler_Database/src")
 include_directories("C:/Adler_Database/headers")
@@ -33,9 +22,6 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 # Set source files - include both main.cpp and logger.cpp
 set(SRCS logger.cpp APIClient.cpp main.cpp)
-
-# Include wxWidgets configuration
-include(${wxWidgets_USE_FILE})
 
 if(APPLE)
     # Create bundle on Apple compiles

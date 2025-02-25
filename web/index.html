@@ -73,39 +73,68 @@
             </div>
             <div class="col-6"></div>
             <div class="col-3">
-                <button onclick="getCallerData()" class="btn btn-outline-dark">Update Data</button>
+                <div class="dropdown">
+                    <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Display
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="fname" checked>
+                                First Name
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="lname" checked>
+                                Last Name
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="phone" checked>
+                                Phone Number
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="email" checked>
+                                Email
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="staff_name">
+                                Staff Name
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="call_date">
+                                Call Date
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="referral_type">
+                                Referral Type
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="tour_scheduled">
+                                Tour Scheduled
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="follow_up_date">
+                                Follow Up Date
+                            </label>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Display
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
-                    <label class="dropdown-item d-flex align-items-center">
-                        <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="fname" checked>
-                        First Name
-                    </label>
-                </li>
-                <li>
-                    <label class="dropdown-item d-flex align-items-center">
-                        <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="lname" checked>
-                        Last Name
-                    </label>
-                </li>
-                <li>
-                    <label class="dropdown-item d-flex align-items-center">
-                        <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="phone" checked>
-                        Phone Number
-                    </label>
-                </li>
-                <li>
-                    <label class="dropdown-item d-flex align-items-center">
-                        <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="email" checked>
-                        Email
-                    </label>
-                </li>
-            </ul>
         </div>
         <table id="data-table" class="table table-hover">
             <thead>
@@ -114,37 +143,19 @@
                     <th class="lname">Last Name</th>
                     <th class="phone">Phone Number</th>
                     <th class="email">Email</th>
+                    <th class="staff_name hidden">Staff Name</th>
+                    <th class="call_date hidden">Call Date</th>
+                    <th class="referral_type hidden">Referral Type</th>
+                    <th class="tour_scheduled hidden">Tour Scheduled</th>
+                    <th class="follow_up_date hidden">Follow Up Date</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john.doe@example.com</td>
-                </tr>
-                <tr>
-                    <td>Jane</td>
-                    <td>Smith</td>
-                    <td>jane.smith@example.com</td>
-                </tr>
-                <tr>
-                    <td>Michael</td>
-                    <td>Johnson</td>
-                    <td>michael.johnson@example.com</td>
-                </tr>
-                <tr>
-                    <td>Emily</td>
-                    <td>Davis</td>
-                    <td>emily.davis@example.com</td>
-                </tr>
-                <tr>
-                    <td>David</td>
-                    <td>Wilson</td>
-                    <td>david.wilson@example.com</td>
-                </tr>
             </tbody>
         </table>
+        <button onclick="getCallerData()" class="btn btn-outline-dark">Update Data</button>
     </div>
+    
     <script>
 
         function getCallerJSON() {
@@ -160,6 +171,7 @@
                 console.error("Error parsing JSON:", error);
                 return;
             }
+            console.log(jsonData);
             try {
                 const table = document.querySelector("#data-table");
                 const tbody = table.querySelector("tbody") || table.appendChild(document.createElement("tbody"));
@@ -182,6 +194,11 @@
                         <td class="lname">${lastName}</td>
                         <td class="phone">${jsonData.phone_number[i]}</td>
                         <td class="email">${jsonData.caller_email[i]}</td>
+                        <td class="staff_name">${jsonData.staff[i]}</td>
+                        <td class="call_date">${jsonData.call_date[i]}</td>
+                        <td class="referral_type">${jsonData.referral_type[i]}</td>
+                        <td class="tour_scheduled">${jsonData.tour_scheduled[i]}</td>
+                        <td class="follow_up_date">${jsonData.follow_up_date[i]}</td>
                     `;
                     document.querySelector("#data-table tbody").appendChild(row);
                 }
@@ -189,6 +206,7 @@
                 console.error("Error populating table:", error);
                 return;
             }
+            toggleVisibility();
         };
 
         
@@ -207,11 +225,11 @@
         });
 
         document.getElementById("goToTours").addEventListener("click", function() {
-            window.loadTours();  // Call the C++ function
+            window.loadTours();
         });
 
         document.getElementById("goToCallers").addEventListener("click", function() {
-            window.loadTours();  // Call the C++ function
+            window.loadCallers();
         });
 
         function toggleVisibility() {
@@ -248,6 +266,10 @@
                     checkbox.checked = !checkbox.checked; // Toggle the checkbox state
                 }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            getCallerJSON();
         });
     </script>
 </body>

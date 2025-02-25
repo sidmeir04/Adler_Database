@@ -2,7 +2,10 @@ USE adler_aphasia_center;
 
 INSERT INTO Caller (staff, caller_name, caller_email, call_date, phone_number, referral_type, additional_notes, tour_scheduled, tour_not_scheduled_reason, follow_up_date) VALUES
 ('Alice Johnson', 'Jane Doe', 'jane.doe@example.com', '2024-01-15', '555-1234', 'Referral', 'Follow-up on interest.', TRUE, NULL, '2024-01-20'),
-('Bob Smith', 'John Smith', 'john.smith@example.com', '2024-01-16', '555-5678', 'Self', 'Needs more information.', FALSE, 'No response', '2024-01-25');
+('Bob Smith', 'John Smith', 'john.smith@example.com', '2024-01-16', '555-5678', 'Self', 'Needs more information.', FALSE, 'No response', '2024-01-25'),
+('Alice Johnson', 'Emily Brown', 'emily.brown@example.com', '2024-01-17', '555-8765', 'Online Ad', 'Interested in pricing details.', TRUE, NULL, '2024-01-22'),
+('Bob Smith', 'Michael Green', 'michael.green@example.com', '2024-01-18', '555-4321', 'Word of Mouth', 'Asked about availability.', FALSE, 'Scheduling conflict', '2024-01-27'),
+('Alice Johnson', 'Sarah White', 'sarah.white@example.com', '2024-01-19', '555-9876', 'Social Media', 'Requested callback for more info.', FALSE, 'No answer', '2024-01-30');
 
 INSERT INTO Tour (tour_date, attended, no_join_reason, clinicians, attendees, interactions, strategies_used, aep_deadline, joined_after, likely_to_join, additional_notes, canceled, cancel_reason) VALUES
 ('2024-02-01', TRUE, NULL, 'Dr. Adams', 'Jane Doe', 'Discussed options.', TRUE, '2024-03-01', FALSE, TRUE, 'Very interested in joining.', FALSE, NULL),

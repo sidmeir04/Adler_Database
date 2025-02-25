@@ -7,45 +7,8 @@
 
 using json = nlohmann::json;
 
-namespace fs = std::filesystem;
-
-const std::string BaseFilePath = "C:/Adler_Database/src";
-
-std::string escapeForJS(const std::string &input)
-{
-    std::ostringstream escaped;
-    escaped << '"';
-
-    for (char c : input)
-    {
-        switch (c)
-        {
-        case '"':
-            escaped << "\\\"";
-            break;
-        case '\'':
-            escaped << "\\'";
-            break;
-        case '\\':
-            escaped << "\\\\";
-            break;
-        case '\n':
-            escaped << "\\n";
-            break;
-        case '\r':
-            escaped << "\\r";
-            break;
-        case '\t':
-            escaped << "\\t";
-            break;
-        default:
-            escaped << c;
-        }
-    }
-
-    escaped << '"'; // End with a double-quote
-    return escaped.str();
-}
+// const std::string BaseFilePath = std::filesystem::current_path().string();
+const std::string BaseFilePath = "C:/Adler_Database/src/";
 
 void createBindings(webview::webview &w)
 {
@@ -75,7 +38,7 @@ void createBindings(webview::webview &w)
         jsonPayload["caller_name"] = "";
         std::string result = APIClient::get_caller(jsonPayload);
         w.eval("updateCallerTable(`" + result + "`);");
-        return escapeForJS(result); });
+        return ""; });
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -86,7 +49,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     createBindings(w);
 
-    w.navigate(BaseFilePath + "/../web/index.html");
+    w.navigate(BaseFilePath + "../web/index.html");
 
     w.run();
     return 0;
