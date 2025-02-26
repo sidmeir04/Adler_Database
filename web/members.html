@@ -373,6 +373,15 @@
         });
         });
 
+        // will be used to populate the data in the userModal, could even have it create the modal
+        // jsonData = member
+        // enrollmentJSON = membership_enrollment_form
+        // medicalHistoryJSON = membership_medical_history_form
+        function memberPopUp(){
+            document.getElementById("userModal").style.display = "block";
+
+        }
+
         document.getElementById("searchInput").addEventListener("keyup", function(event) {
         if (event.key === "Enter") {
             document.getElementById("searchButton").click();

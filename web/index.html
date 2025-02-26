@@ -156,7 +156,7 @@
             <tbody>
             </tbody>
         </table>
-        <button onclick="getCallerData()" class="btn btn-outline-dark">Update Data</button>
+        <!-- <button onclick="getCallerData()" class="btn btn-outline-dark">Update Data</button> -->
     </div>
     
     <script>
@@ -185,10 +185,8 @@
                 return;
             }
 
-            // Determine number of rows
             const numRows = jsonData.id.length;
 
-            // Populate table rows
             try {
                 for (let i = 0; i < numRows; i++) {
                     const row = document.createElement("tr");
