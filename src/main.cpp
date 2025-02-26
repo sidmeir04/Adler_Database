@@ -24,6 +24,11 @@ void createBindings(webview::webview &w)
         w.navigate(BaseFilePath + "../web/tours.html");
         return ""; });
 
+    w.bind("loadMembers", [&](const std::string &msg) -> std::string
+           {
+        w.navigate(BaseFilePath + "../web/members.html");
+        return ""; });
+
     w.bind("loadCallers", [&](const std::string &msg) -> std::string
            {
         w.navigate(BaseFilePath + "../web/index.html");
