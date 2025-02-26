@@ -45,6 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="goToTours" href="#">Tours</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="goToMembers" href="#">Members</a>
+                    </li>
                     <li class="nav-item dropdown dmenu hidden">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             Our Service
@@ -67,7 +70,7 @@
     </header>
     <div class="container-fluid">
         <div class="container">
-            <h2 class="text-center mb-4">Upcoming Appointments</h2>
+            <h2 class="text-center mb-4">Upcoming Tours</h2>
             <div id="calendar"></div>
         </div>
 
@@ -88,6 +91,10 @@
 
         document.getElementById("goToCallers").addEventListener("click", function() {
             window.loadCallers();
+        });
+
+        document.getElementById("goToMembers").addEventListener("click", function() {
+            window.loadMembers();
         });
     </script>
 </body>

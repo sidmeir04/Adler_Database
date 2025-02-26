@@ -44,6 +44,16 @@ void createBindings(webview::webview &w)
         std::string result = APIClient::get_caller(jsonPayload);
         w.eval("updateCallerTable(`" + result + "`);");
         return ""; });
+
+    w.bind("getMemberData", [&](const std::string &msg) -> std::string
+           {
+        std::string message;
+        
+        json jsonPayload;
+        jsonPayload["name"] = "";
+        std::string result = APIClient::get_member(jsonPayload);
+        w.eval("updateMembers(`" + result + "`);");
+        return ""; });
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -54,7 +64,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     createBindings(w);
 
-    w.navigate(BaseFilePath + "../web/index.html");
+    w.navigate(BaseFilePath + "../web/members.html");
 
     w.run();
     return 0;

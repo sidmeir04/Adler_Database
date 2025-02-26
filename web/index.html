@@ -45,6 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="goToTours" href="#">Tours</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="goToMembers" href="#">Members</a>
+                    </li>
                     <li class="nav-item dropdown dmenu hidden">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             Our Service
@@ -73,7 +76,7 @@
             </div>
             <div class="col-6"></div>
             <div class="col-3">
-                <div class="dropdown">
+                <div class="dropdown"></div>
                     <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         Display
                     </button>
@@ -159,8 +162,10 @@
     <script>
 
         function getCallerJSON() {
+            const startTime = performance.now();
             jsonString = window.getCallerData(); // Call C++ function
-            return JSON.parse(jsonString);
+            const endTime = performance.now();
+            console.log(`getCallerJSON() took ${endTime - startTime} milliseconds to execute.`);
         }
 
         function updateCallerTable(JSONString) {
@@ -171,7 +176,6 @@
                 console.error("Error parsing JSON:", error);
                 return;
             }
-            console.log(jsonData);
             try {
                 const table = document.querySelector("#data-table");
                 const tbody = table.querySelector("tbody") || table.appendChild(document.createElement("tbody"));
@@ -197,7 +201,7 @@
                         <td class="staff_name">${jsonData.staff[i]}</td>
                         <td class="call_date">${jsonData.call_date[i]}</td>
                         <td class="referral_type">${jsonData.referral_type[i]}</td>
-                        <td class="tour_scheduled">${jsonData.tour_scheduled[i]}</td>
+                        <td class="tour_scheduled">${jsonData.tour_scheduled[i] === "0" ? "not scheduled" : "scheduled"}</td>
                         <td class="follow_up_date">${jsonData.follow_up_date[i]}</td>
                     `;
                     document.querySelector("#data-table tbody").appendChild(row);
@@ -230,6 +234,10 @@
 
         document.getElementById("goToCallers").addEventListener("click", function() {
             window.loadCallers();
+        });
+
+        document.getElementById("goToMembers").addEventListener("click", function() {
+            window.loadMembers();
         });
 
         function toggleVisibility() {
