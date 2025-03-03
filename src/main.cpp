@@ -12,13 +12,12 @@ const std::string BaseFilePath = "C:/Adler_Database/src/";
 
 void createBindings(webview::webview &w)
 {
-    // add is not called
+    // is not called
     w.bind("loadHTMLPage", [&](const std::string &msg) -> std::string
            {
         w.navigate(BaseFilePath + "../web/" + msg + ".html");
         return ""; });
 
-    // check navigate goes to right place
     w.bind("loadTours", [&](const std::string &msg) -> std::string
            {
         w.navigate(BaseFilePath + "../web/tours.html");
