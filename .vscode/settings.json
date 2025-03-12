@@ -92,7 +92,10 @@
         "mutex": "cpp",
         "regex": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "future": "cpp",
+        "coroutine": "cpp",
+        "resumable": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "python.testing.unittestEnabled": true,

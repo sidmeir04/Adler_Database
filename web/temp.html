@@ -78,7 +78,7 @@
                             </button>
                             <div id="dropdown2" class="collapse dropdown-content">
                                 <ul class="list-group">
-                                    <li class="list-group-item">Cause of Aphasia: {jsonData['member_info']['AphasiaHistory']['CauseOfAphasia']}</li>
+                                    <li class="list-group-item">Cause of Aphasia: ${jsonData['member_info']['AphasiaHistory']['CauseOfAphasia']}</li>
                                     <li class="list-group-item">Date of Aphasia: ${jsonData['member_info']['AphasiaHistory']['AphasiaOnset']}</li>
                                     <li class="list-group-item">Location of Stroke: ${medicalHistoryJSON['brain_location']}</li>
                                     <li class="list-group-item">Spelling Ability Pre-Stroke: ${enrollmentJSON['patient_info']['Education']['SpellingAbility']}</li>
@@ -94,8 +94,6 @@
                                     <li class="list-group-item">Allergies: ${medicalHistoryJSON['allergies']}</li>
                                     <li class="list-group-item">Medications: ${medicalHistoryJSON['medications']}</li>
                                     <li class="list-group-item">Other medical Conditions</li>
-                                    <li class="list-group-item">Emergency Contact 1</li>
-                                    <li class="list-group-item">Emergency Contact 2</li>
                                 </ul>
                             </div>
 

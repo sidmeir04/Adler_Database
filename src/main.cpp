@@ -1,6 +1,7 @@
 #include "webview.h"
 #include <windows.h>
 #include <filesystem>
+#include <future>
 
 #include "logger.h"
 #include "APIClient.h"
@@ -52,6 +53,50 @@ void createBindings(webview::webview &w)
         jsonPayload["name"] = "";
         std::string result = APIClient::get_member(jsonPayload);
         w.eval("updateMembers(`" + result + "`);");
+        return ""; });
+
+    w.bind("createMemberModal", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload;
+        jsonPayload["id"] = "1";
+        std::string userData = APIClient::get_member(jsonPayload);
+        json userJSON = json::parse(userData);
+        auto getEnrollmentData = std::async(std::launch::async, [=]() { // Capture by value
+            json localPayload = jsonPayload; // Make a local copy
+            localPayload["id"] = userJSON["enrollment_form"][0];
+            return APIClient::get_membership_enrollment_form(localPayload);
+        });
+        
+        auto getMedicalData = std::async(std::launch::async, [=]() {
+            json localPayload = jsonPayload;
+            localPayload["id"] = userJSON["medical_history"][0];
+            return APIClient::get_medical_history_form(localPayload);
+        });
+        
+        auto getEmergencyOne = std::async(std::launch::async, [=]() {
+            json localPayload = jsonPayload;
+            localPayload["id"] = userJSON["emergency_contact_one"][0];
+            return APIClient::get_emergency_contact(localPayload);
+        });
+        
+        auto getEmergencyTwo = std::async(std::launch::async, [=]() {
+            json localPayload = jsonPayload;
+            localPayload["id"] = userJSON["emergency_contact_two"][0];
+            return APIClient::get_emergency_contact(localPayload);
+        });
+        
+
+        std::string enrollmentData = getEnrollmentData.get();
+        std::string medicalData = getMedicalData.get();
+        std::string emergency_one = getEmergencyOne.get();
+        std::string emergency_two = getEmergencyTwo.get();
+        // jsonPayload["id"] = userJSON["enrollment_form"][0];
+        // std::string enrollmentData = APIClient::get_membership_enrollment_form(jsonPayload);
+        // jsonPayload["id"] = userJSON["medical_history"][0];
+        // std::string medicalData = APIClient::get_medical_history_form(jsonPayload);
+        // jsonPayload["id"] = userJSON["emergency_contact_one"][0];
+        // std::string emergency_one = APIClient::get_emergency_contact(jsonPayload);
+        w.eval("memberModal(`" + userData + "`,`" + enrollmentData + "`,`" + medicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`);");
         return ""; });
 }
 

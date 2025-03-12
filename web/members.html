@@ -27,9 +27,6 @@
         .hidden {
             display: none;
         }   
-
-    </style>
-    <style>
         .dropdown-btn {
             text-align: left;
             display: flex;
@@ -93,92 +90,7 @@
             </div>
         </nav>
     </header>
-
-    <div class="modalContainer" hidden>
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content h-100">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="userModalLabel${i}">${jsonData['name'][i]}'s Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="text-center col-md-4">
-                            <img src="resources/imgs/user_icon.png" width=150 height=150 class="img-fluid rounded-circle mb-3">
-                            <h4>${jsonData['name'][i]}</h4>
-                            <h6 class="text-muted">${jsonData['email'][i]}</h6>
-                        </div>
-                        <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
-                            <p><strong>Program:</strong> ${jsonData['adler_program'][i]}</p>
-                            <p><strong>Date Joined:</strong> ${jsonData['join_date'][i]}</p>
-                            <p><strong>Age:</strong> ${jsonData['age'][i]}</p>
-                            <p><strong>Date of Birth:</strong> ${jsonData['dob'][i]}</p>
-                            <p><strong>Address:</strong> ${jsonData['address'][i]}</p>
-                            <p><strong>County:</strong> ${jsonData['county'][i]}</p>
-                            <p><strong>Gender:</strong> ${jsonData['gender'][i] === 'F' ? 'Female' : 'Male'}</p>
-                            <p><strong>Phone:</strong> ${jsonData['phone'][i]}</p>
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown1" aria-expanded="false" onclick="closeOthers('dropdown1')">
-                                General information <span class="arrow">▼</span>
-                            </button>
-                            <div id="dropdown1" class="collapse dropdown-content">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Marital Status: ${enrollmentJSON['patient_info']['Marriage']['MaritalStatus']}</li>
-                                    <li class="list-group-item">Spouse Name: ${enrollmentJSON['patient_info']['Marriage']['SpouseName']}</li>    
-                                    <li class="list-group-item">Living Status: ${enrollmentJSON['living_status']}</li>
-                                    <li class="list-group-item">Languages Spoken: ${jsonData['member_info'][i]['GeneralInformation']['LaguageSpoken']}</li>
-                                    <li class="list-group-item">Occupation: ${jsonData['member_info'][i]['GeneralInformation']['work']}</li>
-                                    <li class="list-group-item">Highest Level of Education: ${enrollmentJSON['patient_info']['Education']['HighestLevelOfEducation']}</li>
-                                    <li class="list-group-item">Handedness: ${enrollmentJSON['patient_info']['Education']['HandednessPostStroke']}</li>
-                                </ul>
-                            </div>
-
-                            <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown2" aria-expanded="false" onclick="closeOthers('dropdown2')">
-                                Aphasia Information <span class="arrow">▼</span>
-                            </button>
-                            <div id="dropdown2" class="collapse dropdown-content">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Cause of Aphasia: {jsonData['member_info'][i]['AphasiaHistory']['CauseOfAphasia']}</li>
-                                    <li class="list-group-item">Date of Aphasia: ${jsonData['member_info'][i]['AphasiaHistory']['AphasiaOnset']}</li>
-                                    <li class="list-group-item">Location of Stroke: ${medicalHistoryJSON['brain_location']}</li>
-                                    <li class="list-group-item">Spelling Ability Pre-Stroke: ${enrollmentJSON['patient_info']['Education']['SpellingAbility']}</li>
-                                    <li class="list-group-item">Reading Ability Pre-Stroke: ${enrollmentJSON['patient_info']['Education']['ReadingAbility']}</li>
-                                </ul>
-                            </div>
-
-                            <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown3" aria-expanded="false" onclick="closeOthers('dropdown3')">
-                                Medical Information <span class="arrow">▼</span>
-                            </button>
-                            <div id="dropdown3" class="collapse dropdown-content">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Allergies - ${medicalHistoryJSON['allergies']}</li>
-                                    <li class="list-group-item">Medications - ${medicalHistoryJSON['medications']}</li>
-                                    <li class="list-group-item">Other medical Conditions</li>
-                                    <li class="list-group-item">Emergency Contact 1</li>
-                                    <li class="list-group-item">Emergency Contact 2</li>
-                                </ul>
-                            </div>
-
-                            <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown4" aria-expanded="false" onclick="closeOthers('dropdown4')">
-                                Transport Information <span class="arrow">▼</span>
-                            </button>
-                            <div id="dropdown4" class="collapse dropdown-content">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Bus Service - </li>
-                                    <li class="list-group-item">Bus Phone Number</li>
-                                    <li class="list-group-item">Who is Picking up</li>
-                                    <li class="list-group-item">Phone Number</li>
-                                    <li class="list-group-item">Relation to Member</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <div class="modalContainer" id="modalThing"></div>
     <div class="container-fluid">
         <h1>Members</h1>
         <div class="search-bar">
@@ -202,6 +114,7 @@
         });
 
         document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOM loaded");
             window.getMemberData();
         });
 
@@ -222,7 +135,7 @@
                 const memberCard = document.createElement("div");
                 memberCard.className = "member-card";
                 memberCard.innerHTML = `
-                    <div class="card user-card" style="padding: 15px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#userModal${i}">
+                    <div class="card user-card" id="member${i}" style="padding: 15px; cursor: pointer;" onclick=memberPopUp(${jsonData["id"][i]})>
                         <div class="card-block">
                             <div class="row">
                                 <div class="d-flex align-items-center">
@@ -239,91 +152,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="userModal${i}" tabindex="-1" aria-labelledby="userModalLabel${i}" aria-hidden="true">
-                        <div class="modal-dialog modal-fullscreen">
-                            <div class="modal-content h-100">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="userModalLabel${i}">${jsonData['name'][i]}'s Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="text-center col-md-4">
-                                            <img src="resources/imgs/user_icon.png" width=150 height=150 class="img-fluid rounded-circle mb-3">
-                                            <h4>${jsonData['name'][i]}</h4>
-                                            <h6 class="text-muted">${jsonData['email'][i]}</h6>
-                                        </div>
-                                        <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
-                                            <p><strong>Program:</strong> ${jsonData['adler_program'][i]}</p>
-                                            <p><strong>Date Joined:</strong> ${jsonData['join_date'][i]}</p>
-                                            <p><strong>Age:</strong> ${jsonData['age'][i]}</p>
-                                            <p><strong>Date of Birth:</strong> ${jsonData['dob'][i]}</p>
-                                            <p><strong>Address:</strong> ${jsonData['address'][i]}</p>
-                                            <p><strong>County:</strong> ${jsonData['county'][i]}</p>
-                                            <p><strong>Gender:</strong> ${jsonData['gender'][i] === 'F' ? 'Female' : 'Male'}</p>
-                                            <p><strong>Phone:</strong> ${jsonData['phone'][i]}</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown1" aria-expanded="false" onclick="closeOthers('dropdown1')">
-                                                General information <span class="arrow">▼</span>
-                                            </button>
-                                            <div id="dropdown1" class="collapse dropdown-content">
-                                                <ul class="list-group">
-                                                    <li class="list-group-item">Marital Status</li>
-                                                    <li class="list-group-item">Spouse Name</li>    
-                                                    <li class="list-group-item">Living Status</li>
-                                                    <li class="list-group-item">Languages Spoken</li>
-                                                    <li class="list-group-item">Occupation</li>
-                                                    <li class="list-group-item">Highest Level of Education</li>
-                                                    <li class="list-group-item">Handedness</li>
-                                                </ul>
-                                            </div>
-
-                                            <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown2" aria-expanded="false" onclick="closeOthers('dropdown2')">
-                                                Aphasia Information <span class="arrow">▼</span>
-                                            </button>
-                                            <div id="dropdown2" class="collapse dropdown-content">
-                                                <ul class="list-group">
-                                                    <li class="list-group-item">Cause of Aphasia</li>
-                                                    <li class="list-group-item">Date of Aphasia</li>
-                                                    <li class="list-group-item">Location of Stroke</li>
-                                                    <li class="list-group-item">Spelling Ability Pre-Stroke</li>
-                                                    <li class="list-group-item">Reading Ability Pre-Stroke</li>
-                                                </ul>
-                                            </div>
-
-                                            <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown3" aria-expanded="false" onclick="closeOthers('dropdown3')">
-                                                Medical Information <span class="arrow">▼</span>
-                                            </button>
-                                            <div id="dropdown3" class="collapse dropdown-content">
-                                                <ul class="list-group">
-                                                    <li class="list-group-item">Allergies</li>
-                                                    <li class="list-group-item">Medications</li>
-                                                    <li class="list-group-item">Other medical Conditions</li>
-                                                    <li class="list-group-item">Emergency Contact 1</li>
-                                                    <li class="list-group-item">Emergency Contact 2</li>
-                                                </ul>
-                                            </div>
-
-                                            <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown4" aria-expanded="false" onclick="closeOthers('dropdown4')">
-                                                Transport Information <span class="arrow">▼</span>
-                                            </button>
-                                            <div id="dropdown4" class="collapse dropdown-content">
-                                                <ul class="list-group">
-                                                    <li class="list-group-item">Bus Service</li>
-                                                    <li class="list-group-item">Bus Phone Number</li>
-                                                    <li class="list-group-item">Who is Picking up</li>
-                                                    <li class="list-group-item">Phone Number</li>
-                                                    <li class="list-group-item">Relation to Member</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
                 `;
                 membersList.appendChild(memberCard);
             }
@@ -335,28 +163,6 @@
                     let collapse = new bootstrap.Collapse(dropdown, { toggle: false });
                     collapse.hide();
                 }
-            });
-        }
-
-        function getMemberJSON() {
-            return new Promise(function(resolve, reject) {
-            // Placeholder JSON data
-            const data = [
-                {
-                "name": "User 1",
-                "email": "user1@example.com",
-                "photo": "../resources/imgs/user_icon.png",
-                "description": "Description for User 1"
-                },
-                {
-                "name": "User 2",
-                "email": "user2@example.com",
-                "photo": "../resources/imgs/user_icon.png",
-                "description": "Description for User 2"
-                }
-                // Add more users as needed
-            ];
-            resolve(data);
             });
         }
 
@@ -377,9 +183,129 @@
         // jsonData = member
         // enrollmentJSON = membership_enrollment_form
         // medicalHistoryJSON = membership_medical_history_form
-        function memberPopUp(){
-            document.getElementById("userModal").style.display = "block";
+        function memberPopUp(userID){
+            window.createMemberModal(userID);
+        }
 
+        function memberModal(userJSON, enrollmentJSON, medicalHistoryJSON, emergencyJSON, emergencyTwoJSON) {
+            jsonData = JSON.parse(userJSON);
+            enrollmentJSON = JSON.parse(enrollmentJSON);
+            medicalHistoryJSON = JSON.parse(medicalHistoryJSON);
+            emergencyOne = JSON.parse(emergencyJSON);
+            emergencyTwo = JSON.parse(emergencyTwoJSON);
+            console.log(jsonData);
+            console.log(enrollmentJSON);
+            console.log(medicalHistoryJSON);
+            console.log(emergencyOne);
+            console.log(emergencyTwo);
+            const modalContainer = document.querySelector(".modalContainer");
+            modalContainer.innerHTML = `
+<div class="modal fade show d-flex align-items-center justify-content-center" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true" style="display: block; background: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content h-100">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">${jsonData['name']}'s Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-4">
+                        <img src="resources/imgs/user_icon.png" width=150 height=150 class="img-fluid rounded-circle mb-3">
+                        <h4>${jsonData['name']}</h4>
+                        <h6 class="text-muted">${jsonData['email']}</h6>
+                    </div>
+                    <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
+                        <p><strong>Program:</strong> ${jsonData['adler_program']}</p>
+                        <p><strong>Date Joined:</strong> ${jsonData['join_date']}</p>
+                        <p><strong>Age:</strong> ${jsonData['age']}</p>
+                        <p><strong>Date of Birth:</strong> ${jsonData['dob']}</p>
+                        <p><strong>Address:</strong> ${jsonData['address']}</p>
+                        <p><strong>County:</strong> ${jsonData['county']}</p>
+                        <p><strong>Gender:</strong> ${jsonData['gender'] == 'F' ? 'Female' : 'Male'}</p>
+                        <p><strong>Phone:</strong> ${jsonData['phone']}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown1" aria-expanded="false" onclick="closeOthers('dropdown1')">
+                            General information <span class="arrow">▼</span>
+                        </button>
+                        <div id="dropdown1" class="collapse dropdown-content">
+                            <ul class="list-group">
+                                    <li class="list-group-item">Marital Status: ${enrollmentJSON['patient_info']}</li>
+                                    <li class="list-group-item">Spouse Name: ${enrollmentJSON['patient_info']}</li>    
+                                    <li class="list-group-item">Living Status: ${enrollmentJSON['living_status']}</li>
+                                    <li class="list-group-item">Languages Spoken: ${jsonData['member_info']}</li>
+                                    <li class="list-group-item">Occupation: ${jsonData['member_info']}</li>
+                                    <li class="list-group-item">Highest Level of Education: ${enrollmentJSON['patient_info']}</li>
+                                    <li class="list-group-item">Handedness: ${enrollmentJSON['patient_info']}</li>
+                            </ul>
+                        </div>
+                        <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown2" aria-expanded="false" onclick="closeOthers('dropdown2')">
+                            Aphasia Information <span class="arrow">▼</span>
+                        </button>
+                        <div id="dropdown2" class="collapse dropdown-content">
+                            <ul class="list-group">
+                                    <li class="list-group-item">Cause of Aphasia: ${jsonData['member_info'][0]['Aphasia History']['Cause of Aphasia']}</li>
+                                    <li class="list-group-item">Date of Aphasia: ${jsonData['member_info'][0]['Aphasia History']['Aphasia Onset']}</li>
+                                <li class="list-group-item">Location of Stroke: ${medicalHistoryJSON['brain_location']}</li>
+                                <li class="list-group-item">Spelling Ability Pre-Stroke: ${enrollmentJSON['patient_info']}</li>
+                                <li class="list-group-item">Reading Ability Pre-Stroke: ${enrollmentJSON['patient_info']}</li>
+                            </ul>
+                        </div>
+                        <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown3" aria-expanded="false" onclick="closeOthers('dropdown3')">
+                            Medical Information <span class="arrow">▼</span>
+                        </button>
+                        <div id="dropdown3" class="collapse dropdown-content">
+                            <ul class="list-group">
+                                <li class="list-group-item">Allergies: ${medicalHistoryJSON['allergies']}</li>
+                                <li class="list-group-item">Medications: ${medicalHistoryJSON['medications']}</li>
+                                <li class="list-group-item">Other medical Conditions</li>
+                            </ul>
+                        </div>
+                        <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown4" aria-expanded="false" onclick="closeOthers('dropdown4')">
+                            Transport Information <span class="arrow">▼</span>
+                        </button>
+                        <div id="dropdown4" class="collapse dropdown-content">
+                            <ul class="list-group">
+                                <li class="list-group-item">Bus Service - </li>
+                                <li class="list-group-item">Bus Phone Number</li>
+                                <li class="list-group-item">Who is Picking up</li>
+                                <li class="list-group-item">Phone Number</li>
+                                <li class="list-group-item">Relation to Member</li>
+                            </ul>
+                        </div>
+                        <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown5" aria-expanded="false" onclick="closeOthers('dropdown5')">
+                            Emergency Contact One <span class="arrow">▼</span>
+                        </button>
+                        <div id="dropdown5" class="collapse dropdown-content">
+                            <ul class="list-group">
+                                <li class="list-group-item">Name: ${emergencyOne['name']}</li>
+                                <li class="list-group-item">Relationship: ${emergencyOne['relationship']}</li>
+                                <li class="list-group-item">Email: ${emergencyOne['email']}</li>
+                                <li class="list-group-item">Day Phone: ${emergencyOne['day_phone']}</li>
+                                <li class="list-group-item">Evening Phone: ${emergencyOne['evening_phone']}</li>
+                                <li class="list-group-item">Cell Phone: ${emergencyOne['cell_phone']}</li>
+                            </ul>
+                        </div>
+                        <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown6" aria-expanded="false" onclick="closeOthers('dropdown6')">
+                            Emergency Contact Two <span class="arrow">▼</span>
+                        </button>
+                        <div id="dropdown6" class="collapse dropdown-content">
+                            <ul class="list-group">
+                                <li class="list-group-item">Name: ${emergencyTwo['name']}</li>
+                                <li class="list-group-item">Relationship: ${emergencyTwo['relationship']}</li>
+                                <li class="list-group-item">Email: ${emergencyTwo['email']}</li>
+                                <li class="list-group-item">Day Phone: ${emergencyTwo['day_phone']}</li>
+                                <li class="list-group-item">Evening Phone: ${emergencyTwo['evening_phone']}</li>
+                                <li class="list-group-item">Cell Phone: ${emergencyTwo['cell_phone']}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            `;
         }
 
         document.getElementById("searchInput").addEventListener("keyup", function(event) {
@@ -387,6 +313,10 @@
             document.getElementById("searchButton").click();
         }
         });
+
+        function closeModal() {
+            document.getElementById('modalThing').style.display = 'none';
+        }
     </script>
 </body>
 </html>
