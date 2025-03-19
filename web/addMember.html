@@ -14,6 +14,10 @@
 </head>
 <body>
     <div class="member_id" hidden value=""></div>
+    <div class="enrollment_form_id" hidden value=""></div>
+    <div class="medical_history_id" hidden value=""></div>
+    <div class="ec1_id" hidden value=""></div>
+    <div class="ec2_id" hidden value=""></div>
     <div class="container mt-5">
         <h2>Add Member</h2>
     
@@ -159,12 +163,6 @@
     </div>
 
     <script>
-        function updateMemberID(id) {
-            document.querySelector('.member_id').value = id;
-        }
-        function getMemberID() {
-            return document.querySelector('.member_id').value;
-        }
         document.getElementById('memberForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
@@ -180,6 +178,7 @@
                     console.log("Returned ID:", id);
                     updateMemberID(id);
                 }).catch(function(error) {
+                    console.log(id);
                     console.error("Error:", error);
                 });
             } else {
@@ -188,23 +187,68 @@
         });
         document.getElementById('EC1').addEventListener('submit', function(event) {
             event.preventDefault();
+            if(getMemberID() == undefined || getMemberID() == '') {
+                alert("Please save the member information first before adding emergency contact details.");
+                console.error("Member ID not set");
+                return;
+            }
             const formData = new FormData(event.target);
             const formObject = {};
             formData.forEach((value, key) => {
                 formObject[key] = value;
             });
+            formObject['id'] = getEC1ID();
             const jsonString = JSON.stringify(formObject, null, 2);
             console.log(jsonString);
+            // need to add code to also update the member's emergency contact ID
+            if(getEC1ID() == undefined || getEC1ID() == '') {
+                window.addEC(jsonString).then(function(id) {
+                    console.log("Returned ID:", id);
+                    updateEC1ID(id);
+                }).catch(function(error) {
+                    console.log(id);
+                    console.error("Error:", error);
+                });
+                const paylaod = {
+                    "id": getMemberID(),
+                    "emergency_contact_one": id
+                };
+                window.updateMember(payload);
+            } else {
+                window.updateEC(jsonString);
+            }
         });
         document.getElementById('EC2').addEventListener('submit', function(event) {
             event.preventDefault();
+            if(getMemberID() == undefined || getMemberID() == '') {
+                alert("Please save the member information first before adding emergency contact details.");
+                console.error("Member ID not set");
+                return;
+            }
             const formData = new FormData(event.target);
             const formObject = {};
             formData.forEach((value, key) => {
                 formObject[key] = value;
             });
+            formObject['id'] = getEC2ID();
             const jsonString = JSON.stringify(formObject, null, 2);
             console.log(jsonString);
+            if(getEC2ID() == undefined || getEC2ID() == '') {
+                window.addEC(jsonString).then(function(id) {
+                    console.log("Returned ID:", id);
+                    updateEC2ID(id);
+                }).catch(function(error) {
+                    console.log(id);
+                    console.error("Error:", error);
+                });
+                const paylaod = {
+                    "id": getMemberID(),
+                    "emergency_contact_two": id
+                };
+                window.updateMember(payload);
+            } else {
+                window.updateEC(jsonString);
+            }
         });
         document.addEventListener("DOMContentLoaded", function () {
             const steps = document.querySelectorAll(".form-step");
@@ -220,24 +264,6 @@
                 });
             }
 
-            document.querySelectorAll(".next-btn").forEach((button) => {
-                button.addEventListener("click", function () {
-                    if (currentStep < steps.length - 1) {
-                        currentStep++;
-                        showStep(currentStep);
-                    }
-                });
-            });
-
-            document.querySelectorAll(".prev-btn").forEach((button) => {
-                button.addEventListener("click", function () {
-                    if (currentStep > 0) {
-                        currentStep--;
-                        showStep(currentStep);
-                    }
-                });
-            });
-
             // Navigation Menu Click Handling
             navLinks.forEach((link) => {
                 link.addEventListener("click", function (e) {
@@ -250,6 +276,38 @@
 
             showStep(currentStep);
         });
+
+        
+        function updateMemberID(id) {
+            document.querySelector('.member_id').value = id;
+        }
+        function getMemberID() {
+            return document.querySelector('.member_id').value;
+        }
+        function updateEnrollmentFormID(id) {
+            document.querySelector('.enrollment_form_id').value = id;
+        }
+        function getEnrollmentFormID() {
+            return document.querySelector('.enrollment_form_id').value;
+        }
+        function updateMedicalHistoryID(id) {
+            document.querySelector('.medical_history_id').value = id;
+        }
+        function getMedicalHistoryID() {
+            return document.querySelector('.medical_history_id').value;
+        }
+        function updateEC1ID(id) {
+            document.querySelector('.ec1_id').value = id;
+        }
+        function getEC1ID() {
+            return document.querySelector('.ec1_id').value;
+        }
+        function updateEC2ID(id) {
+            document.querySelector('.ec2_id').value = id;
+        }
+        function getEC2ID() {
+            return document.querySelector('.ec2_id').value;
+        }
     </script>
 </body>
 </html>

@@ -222,6 +222,7 @@
                         <p><strong>County:</strong> ${jsonData['county']}</p>
                         <p><strong>Gender:</strong> ${jsonData['gender'] == 'F' ? 'Female' : 'Male'}</p>
                         <p><strong>Phone:</strong> ${jsonData['phone']}</p>
+                        <button onClick=updateMember(${jsonData['id']})>Update Member</button>
                     </div>
                     <div class="col-md-4">
                         <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown1" aria-expanded="false" onclick="closeOthers('dropdown1')">
@@ -316,6 +317,10 @@
 
         function closeModal() {
             document.getElementById('modalThing').style.display = 'none';
+        }
+
+        function updateMember(userID) {
+            window.loadMemberForm(userID);
         }
     </script>
 </body>

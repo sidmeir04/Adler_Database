@@ -100,13 +100,26 @@ void createBindings(webview::webview &w)
     w.bind("addMember", [&](const std::string &msg) -> std::string
            {
         json jsonPayload = json::parse(msg);
-        int result = APIClient::create_member(jsonPayload);
-        return std::to_string(result); });
+        std::string result = APIClient::create_member(jsonPayload);
+        LogToFile("Member created with ID: " + result);
+        return result; });
 
     w.bind("updateMember", [&](const std::string &msg) -> std::string
            {
         json jsonPayload = json::parse(msg);
         int result = APIClient::update_member(jsonPayload);
+        return ""; });
+
+    w.bind("addEC", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload = json::parse(msg);
+        std::string result = APIClient::create_emergency_contact(jsonPayload);
+        return result; });
+
+    w.bind("updateEC", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload = json::parse(msg);
+        int result = APIClient::update_emergency_contact(jsonPayload);
         return ""; });
 }
 
