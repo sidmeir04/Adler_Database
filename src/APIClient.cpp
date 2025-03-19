@@ -263,7 +263,7 @@ int APIClient::create_caller(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_caller", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_caller", jsonBody, "application/json");
     return 1;
 }
 
@@ -271,7 +271,7 @@ int APIClient::create_tour(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_tour", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_tour", jsonBody, "application/json");
     return 1;
 }
 
@@ -279,7 +279,7 @@ int APIClient::create_member(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_member", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_member", jsonBody, "application/json");
     return 1;
 }
 
@@ -287,7 +287,7 @@ int APIClient::create_membership_enrollment_form(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_membership_enrollment_form", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_membership_enrollment_form", jsonBody, "application/json");
     return 1;
 }
 
@@ -295,7 +295,7 @@ int APIClient::create_medical_history_form(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_medical_history_form", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_medical_history_form", jsonBody, "application/json");
     return 1;
 }
 
@@ -303,7 +303,7 @@ int APIClient::create_incident_report(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_incident_report", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_incident_report", jsonBody, "application/json");
     return 1;
 }
 
@@ -311,7 +311,7 @@ int APIClient::create_evaluation(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_evaluation", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_evaluation", jsonBody, "application/json");
     return 1;
 }
 
@@ -319,7 +319,7 @@ int APIClient::create_transport_information(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_transport_information", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_transport_information", jsonBody, "application/json");
     return 1;
 }
 
@@ -327,7 +327,7 @@ int APIClient::create_caregiver(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_caregiver", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_caregiver", jsonBody, "application/json");
     return 1;
 }
 
@@ -335,7 +335,7 @@ int APIClient::create_attending_caregiver(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_attending_caregiver", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_attending_caregiver", jsonBody, "application/json");
     return 1;
 }
 
@@ -343,7 +343,7 @@ int APIClient::create_emergency_contact(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_emergency_contact", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_emergency_contact", jsonBody, "application/json");
     return 1;
 }
 
@@ -351,7 +351,7 @@ int APIClient::create_volunteer(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_volunteer", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_volunteer", jsonBody, "application/json");
     return 1;
 }
 
@@ -359,7 +359,7 @@ int APIClient::create_applications(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_applications", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_applications", jsonBody, "application/json");
     return 1;
 }
 
@@ -367,6 +367,6 @@ int APIClient::create_outreach(const json &jsonPayload)
 {
     httplib::Client localClient("localhost", 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = localClient.Post("/create_outreach", jsonBody, "application/json");
+    auto post_response = localClient.Post("/insert_outreach", jsonBody, "application/json");
     return 1;
 }

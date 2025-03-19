@@ -185,7 +185,11 @@ CREATE TABLE Member (
     emergency_contact_one INT,
     emergency_contact_two INT,
     FOREIGN KEY (emergency_contact_one) REFERENCES Emergency_Contact(id),
-    FOREIGN KEY (emergency_contact_two) REFERENCES Emergency_Contact(id)
+    FOREIGN KEY (emergency_contact_two) REFERENCES Emergency_Contact(id),
+    transport_info INT,
+    FOREIGN KEY (transport_info) REFERENCES Transportation_Information(id),
+    caregiver INT,
+    FOREIGN KEY (caregiver) REFERENCES Caregiver(id)
 );
 
 CREATE TABLE Applications (

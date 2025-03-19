@@ -65,7 +65,7 @@
                         <a class="nav-link" id="goToCallers" href="#">Callers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="goToTours" href="#">Tours</a>
+                        <a class="nav-link" id="goToAddMember" href="#">Add Member</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="goToMembers" href="#">Members</a>
@@ -79,12 +79,6 @@
                             <a class="dropdown-item" href="#">service 2</a>
                             <a class="dropdown-item" href="#">service 3</a>
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Call</a>
                     </li>
                 </ul>
             </div>
@@ -101,8 +95,8 @@
     </div>
 
     <script>
-        document.getElementById("goToTours").addEventListener("click", function() {
-            window.loadTours(); 
+        document.getElementById("goToAddMember").addEventListener("click", function() {
+            window.loadMemberForm(); 
         });
 
         document.getElementById("goToCallers").addEventListener("click", function() {
@@ -114,11 +108,16 @@
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            console.log("DOM loaded");
+            const now = new Date();
+            const timeString = now.toISOString().split('T')[1];
+            console.log(`DOM loaded at ${timeString}`);
             window.getMemberData();
         });
 
         function updateMembers(JSONString){
+            const now = new Date();
+            const timeString = now.toISOString().split('T')[1];
+            console.log(`updateMembers called at ${timeString}`);
             let jsonData;
             try {
                 jsonData = JSON.parse(JSONString);
@@ -306,6 +305,7 @@
     </div>
 </div>
             `;
+            document.getElementById('modalThing').style.display = 'block';
         }
 
         document.getElementById("searchInput").addEventListener("keyup", function(event) {

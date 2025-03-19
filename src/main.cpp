@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <filesystem>
 #include <future>
+#include <string>
 
 #include "logger.h"
 #include "APIClient.h"
@@ -19,9 +20,12 @@ void createBindings(webview::webview &w)
         w.navigate(BaseFilePath + "../web/" + msg + ".html");
         return ""; });
 
-    w.bind("loadTours", [&](const std::string &msg) -> std::string
+    w.bind("loadMemberForm", [&](const std::string &msg) -> std::string
            {
-        w.navigate(BaseFilePath + "../web/tours.html");
+        w.navigate(BaseFilePath + "../web/addMember.html");
+        if (msg != ""){
+            w.eval("updateMemberID(`" + msg + "`);");
+        }
         return ""; });
 
     w.bind("loadMembers", [&](const std::string &msg) -> std::string
@@ -90,13 +94,19 @@ void createBindings(webview::webview &w)
         std::string medicalData = getMedicalData.get();
         std::string emergency_one = getEmergencyOne.get();
         std::string emergency_two = getEmergencyTwo.get();
-        // jsonPayload["id"] = userJSON["enrollment_form"][0];
-        // std::string enrollmentData = APIClient::get_membership_enrollment_form(jsonPayload);
-        // jsonPayload["id"] = userJSON["medical_history"][0];
-        // std::string medicalData = APIClient::get_medical_history_form(jsonPayload);
-        // jsonPayload["id"] = userJSON["emergency_contact_one"][0];
-        // std::string emergency_one = APIClient::get_emergency_contact(jsonPayload);
         w.eval("memberModal(`" + userData + "`,`" + enrollmentData + "`,`" + medicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`);");
+        return ""; });
+
+    w.bind("addMember", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload = json::parse(msg);
+        int result = APIClient::create_member(jsonPayload);
+        return std::to_string(result); });
+
+    w.bind("updateMember", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload = json::parse(msg);
+        int result = APIClient::update_member(jsonPayload);
         return ""; });
 }
 
