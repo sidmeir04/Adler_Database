@@ -71,13 +71,6 @@ CREATE TABLE Medical_History_Form (
     seizure_history BOOLEAN,               -- History of seizures
     last_seizure_date DATE,                -- Date of last seizure
     anti_seizure_med BOOLEAN,              -- On anti-seizure medication
-    allergies TEXT,
-    medications TEXT,
-    hearing_aid BOOLEAN,
-    hearing_impairment TEXT,               -- Hearing impairments
-    swallowing_impairments TEXT,           -- Swallowing impairments
-    current_diet TEXT,                     -- Current diet
-    swallowing_strategies BOOLEAN,         -- Compensatory strategies
     visual_impairments TEXT,               -- Visual impairments
     visual_field_cut BOOLEAN,              -- Visual field cut present
     other_visual_impairments VARCHAR(50),  -- Additional visual impairments

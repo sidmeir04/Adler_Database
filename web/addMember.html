@@ -83,6 +83,78 @@
 
         <form id="MedicalHistoryForm">
             <div class="form-step d-none">
+                <div class="mb-3">
+                    <label for="anti_seizure_med" class="form-label">Anti-Seizure Medication</label>
+                    <textarea class="form-control" id="anti_seizure_med" name="anti_seizure_med" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="aphasia_cause" class="form-label">Aphasia Cause</label>
+                    <input type="text" class="form-control" id="aphasia_cause" name="aphasia_cause" required>
+                </div>
+                <div class="mb-3">
+                    <label for="aphasia_onset" class="form-label">Aphasia Onset</label>
+                    <input type="date" class="form-control" id="aphasia_onset" name="aphasia_onset" required>
+                </div>
+                <div class="mb-3">
+                    <label for="completion_date" class="form-label">Completion Date</label>
+                    <input type="date" class="form-control" id="completion_date" name="completion_date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="hearing_aid" class="form-label">Hearing Aid</label>
+                    <select class="form-select" id="hearing_aid" name="hearing_aid" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="last_seizure_date" class="form-label">Last Seizure Date</label>
+                    <input type="date" class="form-control" id="last_seizure_date" name="last_seizure_date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lesion_location" class="form-label">Lesion Location</label>
+                    <input type="text" class="form-control" id="lesion_location" name="lesion_location" required>
+                </div>
+                <div class="mb-3">
+                    <label for="other_visual_impairments" class="form-label">Other Visual Impairments</label>
+                    <textarea class="form-control" id="other_visual_impairments" name="other_visual_impairments" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="physician_address" class="form-label">Physician Address</label>
+                    <input type="text" class="form-control" id="physician_address" name="physician_address" required>
+                </div>
+                <div class="mb-3">
+                    <label for="physician_phone" class="form-label">Physician Phone</label>
+                    <input type="tel" class="form-control" id="physician_phone" name="physician_phone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="physicion_name" class="form-label">Physician Name</label>
+                    <input type="text" class="form-control" id="physicion_name" name="physicion_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="primary_diagnosis" class="form-label">Primary Diagnosis</label>
+                    <textarea class="form-control" id="primary_diagnosis" name="primary_diagnosis" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="secondary_diagnosis" class="form-label">Secondary Diagnosis</label>
+                    <textarea class="form-control" id="secondary_diagnosis" name="secondary_diagnosis" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="seizure_history" class="form-label">Seizure History</label>
+                    <textarea class="form-control" id="seizure_history" name="seizure_history" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="specialty" class="form-label">Specialty</label>
+                    <input type="text" class="form-control" id="specialty" name="specialty" required>
+                </div>
+                <div class="mb-3">
+                    <label for="stroke_location" class="form-label">Stroke Location</label>
+                    <input type="text" class="form-control" id="stroke_location" name="stroke_location" required>
+                </div>
+                <div class="mb-3">
+                    <label for="swallowing_strategies" class="form-label">Swallowing Strategies</label>
+                    <textarea class="form-control" id="swallowing_strategies" name="swallowing_strategies" rows="3" required></textarea>
+                </div>
                 <button type="submit" class="btn btn-success">Add new member</button>
             </div>
         </form>
@@ -299,6 +371,40 @@
                 window.updateEnrollmentForm(jsonString);
             }
         });
+        document.getElementById('MedicalHistoryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            if(getMemberID() == undefined || getMemberID() == '') {
+                alert("Please save the member information first before adding emergency contact details.");
+                console.error("Member ID not set");
+                return;
+            }
+            const formData = new FormData(event.target);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            formObject['id'] = getMedicalHistoryID();
+            const jsonString = JSON.stringify(formObject, null, 2);
+            console.log(jsonString);
+            // need to add code to also update the member's emergency contact ID
+            if(getMedicalHistoryID() == undefined || getMedicalHistoryID() == '') {
+                window.addMedicalHistory(jsonString).then(function(id) {
+                    console.log("Returned ID:", id);
+                    updateMedicalHistoryID(id);
+                    const payload = JSON.stringify({
+                        "id": getMemberID()[0],
+                        "medical_history": id
+                    });
+
+                    console.log("Payload:", payload);
+                    window.updateMember(payload);
+                }).catch(function(error) {
+                    console.error("Error:", error);
+                });
+            } else {
+                window.updateMedicalHistory(jsonString);
+            }
+        });
         document.getElementById('EC1').addEventListener('submit', function(event) {
             event.preventDefault();
             if(getMemberID() == undefined || getMemberID() == '') {
@@ -420,6 +526,73 @@
                     break;
                 }
             }
+
+            const medicalHistoryData = data.medicalHistoryData;
+            const medicalHistoryForm = document.getElementById('MedicalHistoryForm');
+            document.querySelector('.medical_history_id').value = medicalHistoryData.id;
+            medicalHistoryForm.querySelector('#anti_seizure_med').value = medicalHistoryData.anti_seizure_med;
+            medicalHistoryForm.querySelector('#aphasia_cause').value = medicalHistoryData.aphasia_cause;
+            medicalHistoryForm.querySelector('#aphasia_onset').value = medicalHistoryData.aphasia_onset;
+            medicalHistoryForm.querySelector('#completion_date').value = medicalHistoryData.completion_date;
+            const hearingAidSelectMH = medicalHistoryForm.querySelector("#hearing_aid");
+            for (let option of hearingAidSelectMH.options) {
+                if (option.value == medicalHistoryData.hearing_aid) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            medicalHistoryForm.querySelector('#last_seizure_date').value = medicalHistoryData.last_seizure_date;
+            medicalHistoryForm.querySelector('#lesion_location').value = medicalHistoryData.lesion_location;
+            medicalHistoryForm.querySelector('#other_visual_impairments').value = medicalHistoryData.other_visual_impairments;
+            medicalHistoryForm.querySelector('#physician_address').value = medicalHistoryData.physician_address;
+            medicalHistoryForm.querySelector('#physician_phone').value = medicalHistoryData.physician_phone;
+            medicalHistoryForm.querySelector('#physicion_name').value = medicalHistoryData.physicion_name;
+            medicalHistoryForm.querySelector('#primary_diagnosis').value = medicalHistoryData.primary_diagnosis;
+            medicalHistoryForm.querySelector('#secondary_diagnosis').value = medicalHistoryData.secondary_diagnosis;
+            medicalHistoryForm.querySelector('#seizure_history').value = medicalHistoryData.seizure_history;
+            medicalHistoryForm.querySelector('#specialty').value = medicalHistoryData.specialty;
+            medicalHistoryForm.querySelector('#stroke_location').value = medicalHistoryData.stroke_location;
+            medicalHistoryForm.querySelector('#swallowing_strategies').value = medicalHistoryData.swallowing_strategies;
+
+            const enrollmentData = data.enrollmentData;
+            const enrollmentForm = document.getElementById('EnrollmentForm');
+            document.querySelector('.enrollment_form_id').value = enrollmentData.id;
+            enrollmentForm.querySelector('#aphasia_cause').value = enrollmentData.aphasia_cause;
+            enrollmentForm.querySelector('#aphasia_onset').value = enrollmentData.aphasia_onset;
+            enrollmentForm.querySelector('#brain_location').value = enrollmentData.brain_location;
+            enrollmentForm.querySelector('#completed_date').value = enrollmentData.completed_date;
+            enrollmentForm.querySelector('#filled_by').value = enrollmentData.filled_by;
+            enrollmentForm.querySelector('#grew_up').value = enrollmentData.grew_up;
+            const hearingAidSelect = enrollmentForm.querySelector("#hearing_aid");
+            for (let option of hearingAidSelect.options) {
+                if (option.value == enrollmentData.hearing_aid) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            const hearingLossSelect = enrollmentForm.querySelector("#hearing_loss");
+            for (let option of hearingLossSelect.options) {
+                if (option.value == enrollmentData.hearing_loss) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            enrollmentForm.querySelector('#income').value = enrollmentData.income;
+            enrollmentForm.querySelector('#living_status').value = enrollmentData.living_status;
+            enrollmentForm.querySelector('#medications').value = enrollmentData.medications;
+            enrollmentForm.querySelector('#occupations').value = enrollmentData.occupations;
+            enrollmentForm.querySelector('#other_therapy').value = enrollmentData.other_therapy;
+            enrollmentForm.querySelector('#patient_info').value = enrollmentData.patient_info;
+            const prevSpeechTherapySelect = enrollmentForm.querySelector("#prev_speech_therapy");
+            for (let option of prevSpeechTherapySelect.options) {
+                if (option.value == enrollmentData.prev_speech_therapy) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            enrollmentForm.querySelector('#race').value = enrollmentData.race;
+            enrollmentForm.querySelector('#sexual_orientation').value = enrollmentData.sexual_orientation;
+
             const ec1Data = data.emergencyContactOne;
             const ec1Form = document.getElementById('EC1');
             document.querySelector('.ec1_id').value = ec1Data.id;

@@ -75,21 +75,11 @@ void createBindings(webview::webview &w)
             if (getEmergencyTwo.valid()) ec2Data = getEmergencyTwo.get();
 
             json combinedData;
-            if (!userData.empty() && userData != "None") {
-                combinedData["userData"] = json::parse(userData);
-            }
-            if (!enrollmentData.empty() && enrollmentData != "None") {
-                combinedData["enrollmentData"] = json::parse(enrollmentData);
-            }
-            if (!medicalData.empty() && medicalData != "None") {
-                combinedData["medicalData"] = json::parse(medicalData);
-            }
-            if (!ec1Data.empty() && ec1Data != "None") {
-                combinedData["emergencyContactOne"] = json::parse(ec1Data);
-            }
-            if (!ec2Data.empty() && ec2Data != "None") {
-                combinedData["emergencyContactTwo"] = json::parse(ec2Data);
-            }
+            combinedData["userData"] = json::parse(userData);
+            combinedData["enrollmentData"] = json::parse(enrollmentData);
+            combinedData["medicalData"] = json::parse(medicalData);
+            combinedData["emergencyContactOne"] = json::parse(ec1Data);
+            combinedData["emergencyContactTwo"] = json::parse(ec2Data);
 
             std::string combinedDataString = combinedData.dump();
             LogToFile(combinedDataString);
@@ -107,7 +97,6 @@ void createBindings(webview::webview &w)
         w.navigate(BaseFilePath + "../web/index.html");
         return ""; });
 
-    // changed name could be messed up
     w.bind("getCallerData", [&](const std::string &msg) -> std::string
            {
         std::string message;
@@ -177,6 +166,18 @@ void createBindings(webview::webview &w)
            {
         json jsonPayload = json::parse(msg);
         int result = APIClient::update_member(jsonPayload);
+        return ""; });
+
+    w.bind("addMedicalHistory", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload = json::parse(msg);
+        std::string result = APIClient::create_medical_history_form(jsonPayload);
+        return result; });
+
+    w.bind("updateMedicalHistory", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload = json::parse(msg);
+        int result = APIClient::update_medical_history_form(jsonPayload);
         return ""; });
 
     w.bind("addEnrollmentForm", [&](const std::string &msg) -> std::string
