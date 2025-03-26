@@ -65,7 +65,7 @@
                         <a class="nav-link" id="goToCallers" href="#">Callers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="goToAddMember" href="#">Add Member</a>
+                        <a class="nav-link" onclick="updateMember('1')" href="#">Add Member</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="goToMembers" href="#">Members</a>
@@ -95,10 +95,6 @@
     </div>
 
     <script>
-        document.getElementById("goToAddMember").addEventListener("click", function() {
-            window.loadMemberForm(); 
-        });
-
         document.getElementById("goToCallers").addEventListener("click", function() {
             window.loadCallers();
         });
@@ -320,7 +316,7 @@
         }
 
         function updateMember(userID) {
-            window.loadMemberForm(userID);
+            window.loadMemberForm(userID.toString());
         }
     </script>
 </body>

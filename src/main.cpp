@@ -23,8 +23,77 @@ void createBindings(webview::webview &w)
     w.bind("loadMemberForm", [&](const std::string &msg) -> std::string
            {
         w.navigate(BaseFilePath + "../web/addMember.html");
+        LogToFile(msg);
         if (msg != ""){
-            w.eval("updateMemberID(`" + msg + "`);");
+            LogToFile("Getting member data");
+            json jsonPayload;
+            jsonPayload["id"] = msg.substr(2, msg.size() - 4);;
+            std::string userData = APIClient::get_member(jsonPayload);
+            json userJSON = json::parse(userData);
+
+            std::future<std::string> getEnrollmentData;
+            std::future<std::string> getMedicalData;
+            std::future<std::string> getEmergencyOne;
+            std::future<std::string> getEmergencyTwo;
+
+            if(userJSON["enrollment_form"] != "None"){
+                getEnrollmentData = std::async(std::launch::async, [=]() { 
+                    json localPayload = jsonPayload;
+                    localPayload["id"] = userJSON["enrollment_form"][0];
+                    return APIClient::get_membership_enrollment_form(localPayload);
+                });
+            }
+            if(userJSON["medical_history"] != "None"){
+                getMedicalData = std::async(std::launch::async, [=]() {
+                    json localPayload = jsonPayload;
+                    localPayload["id"] = userJSON["medical_history"][0];
+                    return APIClient::get_medical_history_form(localPayload);
+                });
+            }
+            if(userJSON["emergency_contact_one"] != "None"){
+                getEmergencyOne = std::async(std::launch::async, [=]() {
+                    json localPayload = jsonPayload;
+                    localPayload["id"] = userJSON["emergency_contact_one"][0];
+                    return APIClient::get_emergency_contact(localPayload);
+                });
+            }
+            if(userJSON["emergency_contact_two"] != "None"){
+                getEmergencyTwo = std::async(std::launch::async, [=]() {
+                    json localPayload = jsonPayload;
+                    localPayload["id"] = userJSON["emergency_contact_two"][0];
+                    return APIClient::get_emergency_contact(localPayload);
+                });
+            }
+            std::string enrollmentData = "None";
+            std::string medicalData = "None";
+            std::string ec1Data = "None";
+            std::string ec2Data = "None";
+            // Now wait for all the futures to complete
+            if (getEnrollmentData.valid()) enrollmentData = getEnrollmentData.get();
+            if (getMedicalData.valid()) medicalData = getMedicalData.get();
+            if (getEmergencyOne.valid()) ec1Data = getEmergencyOne.get();
+            if (getEmergencyTwo.valid()) ec2Data = getEmergencyTwo.get();
+
+            json combinedData;
+            if (!userData.empty() && userData != "None") {
+                combinedData["userData"] = json::parse(userData);
+            }
+            if (!enrollmentData.empty() && enrollmentData != "None") {
+                combinedData["enrollmentData"] = json::parse(enrollmentData);
+            }
+            if (!medicalData.empty() && medicalData != "None") {
+                combinedData["medicalData"] = json::parse(medicalData);
+            }
+            if (!ec1Data.empty() && ec1Data != "None") {
+                combinedData["emergencyContactOne"] = json::parse(ec1Data);
+            }
+            if (!ec2Data.empty() && ec2Data != "None") {
+                combinedData["emergencyContactTwo"] = json::parse(ec2Data);
+            }
+
+            std::string combinedDataString = combinedData.dump();
+            LogToFile(combinedDataString);
+            w.eval("document.addEventListener('DOMContentLoaded', function() { initializeFormData(`" + combinedDataString + "`); });");
         }
         return ""; });
 
@@ -108,6 +177,18 @@ void createBindings(webview::webview &w)
            {
         json jsonPayload = json::parse(msg);
         int result = APIClient::update_member(jsonPayload);
+        return ""; });
+
+    w.bind("addEnrollmentForm", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload = json::parse(msg);
+        std::string result = APIClient::create_membership_enrollment_form(jsonPayload);
+        return result; });
+
+    w.bind("updateEnrollmentForm", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload = json::parse(msg);
+        int result = APIClient::update_membership_enrollment_form(jsonPayload);
         return ""; });
 
     w.bind("addEC", [&](const std::string &msg) -> std::string

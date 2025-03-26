@@ -40,7 +40,7 @@ CREATE TABLE Membership_Enrollment_Form (
     sexual_orientation VARCHAR(20),
     race VARCHAR(50),
     income INT,
-    living_status INT,                   -- Living status code
+    living_status VARCHAR(50),                   -- Living status code
     grew_up VARCHAR(50),
     occupations TEXT,                    -- List of occupations
     prev_speech_therapy TEXT,            -- Previous speech therapy

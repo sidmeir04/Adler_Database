@@ -24,8 +24,8 @@
         <!-- Navigation Menu -->
         <ul class="nav nav-pills mb-3" id="form-nav">
             <li class="nav-item"><a class="nav-link active" href="#" data-step="0">Member Info</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" data-step="1">Contact Info</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" data-step="2">Address</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-step="1">Medical History Form</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-step="2">Enrollment Form</a></li>
             <li class="nav-item"><a class="nav-link" href="#" data-step="3">Emergency Contact One</a></li>
             <li class="nav-item"><a class="nav-link" href="#" data-step="4">Emergency Contact Two</a></li>
         </ul>
@@ -89,75 +89,155 @@
 
         <form id="EnrollmentForm">
             <div class="form-step d-none">
-                <button type="submit" class="btn btn-success">Add new member</button>
+                <div class="mb-3">
+                    <label for="aphasia_cause" class="form-label">Aphasia Cause</label>
+                    <input type="text" class="form-control" id="aphasia_cause" name="aphasia_cause" required>
+                </div>
+                <div class="mb-3">
+                    <label for="aphasia_onset" class="form-label">Aphasia Onset</label>
+                    <input type="date" class="form-control" id="aphasia_onset" name="aphasia_onset" required>
+                </div>
+                <div class="mb-3">
+                    <label for="brain_location" class="form-label">Brain Location</label>
+                    <input type="text" class="form-control" id="brain_location" name="brain_location" required>
+                </div>
+                <div class="mb-3">
+                    <label for="completed_date" class="form-label">Completed Date</label>
+                    <input type="date" class="form-control" id="completed_date" name="completed_date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="filled_by" class="form-label">Filled By</label>
+                    <input type="text" class="form-control" id="filled_by" name="filled_by" required>
+                </div>
+                <div class="mb-3">
+                    <label for="grew_up" class="form-label">Grew Up</label>
+                    <input type="text" class="form-control" id="grew_up" name="grew_up" required>
+                </div>
+                <div class="mb-3">
+                    <label for="hearing_aid" class="form-label">Hearing Aid</label>
+                    <select class="form-select" id="hearing_aid" name="hearing_aid" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="hearing_loss" class="form-label">Hearing Loss</label>
+                    <select class="form-select" id="hearing_loss" name="hearing_loss" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="income" class="form-label">Income</label>
+                    <input type="number" class="form-control" id="income" name="income" required>
+                </div>
+                <div class="mb-3">
+                    <label for="living_status" class="form-label">Living Status</label>
+                    <input type="text" class="form-control" id="living_status" name="living_status" required>
+                </div>
+                <div class="mb-3">
+                    <label for="medications" class="form-label">Medications</label>
+                    <textarea class="form-control" id="medications" name="medications" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="occupations" class="form-label">Occupations</label>
+                    <textarea class="form-control" id="occupations" name="occupations" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="other_therapy" class="form-label">Other Therapy</label>
+                    <textarea class="form-control" id="other_therapy" name="other_therapy" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="patient_info" class="form-label">Patient Info</label>
+                    <textarea class="form-control" id="patient_info" name="patient_info" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="prev_speech_therapy" class="form-label">Previous Speech Therapy</label>
+                    <select class="form-select" id="prev_speech_therapy" name="prev_speech_therapy" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="race" class="form-label">Race</label>
+                    <input type="text" class="form-control" id="race" name="race" required>
+                </div>
+                <div class="mb-3">
+                    <label for="sexual_orientation" class="form-label">Sexual Orientation</label>
+                    <input type="text" class="form-control" id="sexual_orientation" name="sexual_orientation" required>
+                </div>
+                <button type="submit" class="btn btn-success">Add Enrollemnt Form</button>
             </div>
         </form>
 
         <form id="EC1">
             <div class="form-step d-none">
                 <div class="mb-3">
-                    <label for="Name" class="form-label">Contact Name</label>
-                    <input type="text" class="form-control" id="Name" name="Name" required>
+                    <label for="name" class="form-label">Contact Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="Relation" class="form-label">Relation to Member</label>
-                    <input type="text" class="form-control" id="Relation" name="Relation" required>
+                    <label for="relationship" class="form-label">Relation to Member</label>
+                    <input type="text" class="form-control" id="relationship" name="relationship" required>
                 </div>
                 <div class="mb-3">
-                    <label for="PhoneNumber" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" required>
+                    <label for="cell_phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="cell_phone" name="cell_phone" required>
                 </div>
                 <div class="mb-3">
-                    <label for="DayPhone" class="form-label">Day Phone</label>
-                    <input type="tel" class="form-control" id="DayPhone" name="DayPhone" required>
+                    <label for="day_phone" class="form-label">Day Phone</label>
+                    <input type="tel" class="form-control" id="day_phone" name="day_phone" required>
                 </div>
                 <div class="mb-3">
-                    <label for="EveningPhone" class="form-label">Evening Phone</label>
-                    <input type="tel" class="form-control" id="EveningPhone" name="EveningPhone" required>
+                    <label for="evening_phone" class="form-label">Evening Phone</label>
+                    <input type="tel" class="form-control" id="evening_phone" name="evening_phone" required>
                 </div>
                 <div class="mb-3">
-                    <label for="Email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="Email" name="Email" required>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="Address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="Address" name="Address" required>
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" required>
                 </div>
-                <button type="submit" class="btn btn-success">Add new member</button>
+                <button type="submit" class="btn btn-success">Create Emergency Contact One</button>
             </div>
         </form>
 
         <form id="EC2">
             <div class="form-step d-none">
                 <div class="mb-3">
-                    <label for="Name" class="form-label">Contact Name</label>
-                    <input type="text" class="form-control" id="Name" name="Name" required>
+                    <label for="name" class="form-label">Contact Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="Relation" class="form-label">Relation to Member</label>
-                    <input type="text" class="form-control" id="Relation" name="Relation" required>
+                    <label for="relationship" class="form-label">Relation to Member</label>
+                    <input type="text" class="form-control" id="relationship" name="relationship" required>
                 </div>
                 <div class="mb-3">
-                    <label for="PhoneNumber" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" required>
+                    <label for="cell_phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="cell_phone" name="cell_phone" required>
                 </div>
                 <div class="mb-3">
-                    <label for="DayPhone" class="form-label">Day Phone</label>
-                    <input type="tel" class="form-control" id="DayPhone" name="DayPhone" required>
+                    <label for="day_phone" class="form-label">Day Phone</label>
+                    <input type="tel" class="form-control" id="day_phone" name="day_phone" required>
                 </div>
                 <div class="mb-3">
-                    <label for="EveningPhone" class="form-label">Evening Phone</label>
-                    <input type="tel" class="form-control" id="EveningPhone" name="EveningPhone" required>
+                    <label for="evening_phone" class="form-label">Evening Phone</label>
+                    <input type="tel" class="form-control" id="evening_phone" name="evening_phone" required>
                 </div>
                 <div class="mb-3">
-                    <label for="Email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="Email" name="Email" required>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="Address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="Address" name="Address" required>
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" required>
                 </div>
-                <button type="submit" class="btn btn-success">Add new member</button>
+                <button type="submit" class="btn btn-success">Create Emergency Contact Two</button>
             </div>
         </form>
     </div>
@@ -185,6 +265,40 @@
                 window.updateMember(jsonString);
             }
         });
+        document.getElementById('EnrollmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            if(getMemberID() == undefined || getMemberID() == '') {
+                alert("Please save the member information first before adding emergency contact details.");
+                console.error("Member ID not set");
+                return;
+            }
+            const formData = new FormData(event.target);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            formObject['id'] = getEnrollmentFormID();
+            const jsonString = JSON.stringify(formObject, null, 2);
+            console.log(jsonString);
+            // need to add code to also update the member's emergency contact ID
+            if(getEnrollmentFormID() == undefined || getEnrollmentFormID() == '') {
+                window.addEnrollmentForm(jsonString).then(function(id) {
+                    console.log("Returned ID:", id);
+                    updateEnrollmentFormID(id);
+                    const payload = JSON.stringify({
+                        "id": getMemberID()[0],
+                        "enrollment_form": id
+                    });
+
+                    console.log("Payload:", payload);
+                    window.updateMember(payload);
+                }).catch(function(error) {
+                    console.error("Error:", error);
+                });
+            } else {
+                window.updateEnrollmentForm(jsonString);
+            }
+        });
         document.getElementById('EC1').addEventListener('submit', function(event) {
             event.preventDefault();
             if(getMemberID() == undefined || getMemberID() == '') {
@@ -205,15 +319,16 @@
                 window.addEC(jsonString).then(function(id) {
                     console.log("Returned ID:", id);
                     updateEC1ID(id);
+                    const payload = JSON.stringify({
+                        "id": getMemberID()[0],
+                        "emergency_contact_one": id
+                    });
+
+                    console.log("Payload:", payload);
+                    window.updateMember(payload);
                 }).catch(function(error) {
-                    console.log(id);
                     console.error("Error:", error);
                 });
-                const paylaod = {
-                    "id": getMemberID(),
-                    "emergency_contact_one": id
-                };
-                window.updateMember(payload);
             } else {
                 window.updateEC(jsonString);
             }
@@ -237,15 +352,16 @@
                 window.addEC(jsonString).then(function(id) {
                     console.log("Returned ID:", id);
                     updateEC2ID(id);
+                    const payload = JSON.stringify({
+                        "id": getMemberID()[0],
+                        "emergency_contact_two": id
+                    });
+
+                    window.updateMember(payload);
                 }).catch(function(error) {
                     console.log(id);
                     console.error("Error:", error);
                 });
-                const paylaod = {
-                    "id": getMemberID(),
-                    "emergency_contact_two": id
-                };
-                window.updateMember(payload);
             } else {
                 window.updateEC(jsonString);
             }
@@ -276,6 +392,56 @@
 
             showStep(currentStep);
         });
+
+        function initializeFormData(jsonString){
+            console.log(jsonString);
+            const data = JSON.parse(jsonString);
+            const userData = data.userData;
+            const memberForm = document.getElementById('memberForm');
+            document.querySelector('.member_id').value = userData.id;
+            memberForm.querySelector('#name').value = userData.name;
+            memberForm.querySelector('#age').value = userData.age;
+            memberForm.querySelector('#dob').value = userData.dob;
+            memberForm.querySelector('#email').value = userData.email;
+            memberForm.querySelector('#phoneNumber').value = userData.phone;
+            memberForm.querySelector('#address').value = userData.address;
+            memberForm.querySelector('#county').value = userData.county;
+            const genderSelect = memberForm.querySelector("#gender");
+            for (let option of genderSelect.options) {
+                if (option.value == userData.gender) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            const veteranSelect = memberForm.querySelector("#veteran");
+            for (let option of veteranSelect.options) {
+                if (option.value == userData.veteran) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            const ec1Data = data.emergencyContactOne;
+            const ec1Form = document.getElementById('EC1');
+            document.querySelector('.ec1_id').value = ec1Data.id;
+            ec1Form.querySelector('#name').value = ec1Data.name;
+            ec1Form.querySelector('#relationship').value = ec1Data.relationship;
+            ec1Form.querySelector('#cell_phone').value = ec1Data.cell_phone;
+            ec1Form.querySelector('#day_phone').value = ec1Data.day_phone;
+            ec1Form.querySelector('#evening_phone').value = ec1Data.evening_phone;
+            ec1Form.querySelector('#email').value = ec1Data.email;
+            ec1Form.querySelector('#address').value = ec1Data.address;
+
+            const ec2Data = data.emergencyContactTwo;
+            const ec2Form = document.getElementById('EC2');
+            document.querySelector('.ec2_id').value = ec2Data.id;
+            ec2Form.querySelector('#name').value = ec2Data.name;
+            ec2Form.querySelector('#relationship').value = ec2Data.relationship;
+            ec2Form.querySelector('#cell_phone').value = ec2Data.cell_phone;
+            ec2Form.querySelector('#day_phone').value = ec2Data.day_phone;
+            ec2Form.querySelector('#evening_phone').value = ec2Data.evening_phone;
+            ec2Form.querySelector('#email').value = ec2Data.email;
+            ec2Form.querySelector('#address').value = ec2Data.address;
+        }
 
         
         function updateMemberID(id) {
