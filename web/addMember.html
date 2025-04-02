@@ -10,6 +10,9 @@
         .nav-pills .nav-link {
             cursor: pointer;
         }
+        .form-section {
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -19,6 +22,7 @@
     <div class="ec1_id" hidden value=""></div>
     <div class="ec2_id" hidden value=""></div>
     <div class="container mt-5">
+        <button><a class="nav-link" id="goToMembers" href="#">Members</a></button>
         <h2>Add Member</h2>
     
         <!-- Navigation Menu -->
@@ -84,8 +88,12 @@
         <form id="MedicalHistoryForm">
             <div class="form-step d-none">
                 <div class="mb-3">
-                    <label for="anti_seizure_med" class="form-label">Anti-Seizure Medication</label>
-                    <textarea class="form-control" id="anti_seizure_med" name="anti_seizure_med" rows="3" required></textarea>
+                    <label for="anti_seizure_med" class="form-label">Anti Seizure Medication</label>
+                    <select class="form-select" id="anti_seizure_med" name="anti_seizure_med" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="aphasia_cause" class="form-label">Aphasia Cause</label>
@@ -98,14 +106,6 @@
                 <div class="mb-3">
                     <label for="completion_date" class="form-label">Completion Date</label>
                     <input type="date" class="form-control" id="completion_date" name="completion_date" required>
-                </div>
-                <div class="mb-3">
-                    <label for="hearing_aid" class="form-label">Hearing Aid</label>
-                    <select class="form-select" id="hearing_aid" name="hearing_aid" required>
-                        <option value="" selected disabled>Select Option</option>
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
-                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="last_seizure_date" class="form-label">Last Seizure Date</label>
@@ -141,7 +141,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="seizure_history" class="form-label">Seizure History</label>
-                    <textarea class="form-control" id="seizure_history" name="seizure_history" rows="3" required></textarea>
+                    <select class="form-select" id="seizure_history" name="seizure_history" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="specialty" class="form-label">Specialty</label>
@@ -151,9 +155,126 @@
                     <label for="stroke_location" class="form-label">Stroke Location</label>
                     <input type="text" class="form-control" id="stroke_location" name="stroke_location" required>
                 </div>
-                <div class="mb-3">
-                    <label for="swallowing_strategies" class="form-label">Swallowing Strategies</label>
-                    <textarea class="form-control" id="swallowing_strategies" name="swallowing_strategies" rows="3" required></textarea>
+                <label for="" class="form-label">Other Medical Conditions</label>
+                <div class="other-condions">
+                    <div class="mb-3">
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="diabetesCheckbox" name="diabetesCheckbox">
+                            <label for="diabetesCheckbox">Diabetes</label>
+                            <div id="diabetesDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="diabetesDetailsText" name="diabetesDetailsText" rows="3" placeholder="Provide details about diabetes"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="heartDiseaseCheckbox" name="heartDiseaseCheckbox">
+                            <label for="heartDiseaseCheckbox">Heart Disease</label>
+                            <div id="heartDiseaseDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="heartDiseaseDetailsText" name="heartDiseaseDetailsText" rows="3" placeholder="Provide details about heart disease"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="hypertensionCheckbox" name="hypertensionCheckbox">
+                            <label for="hypertensionCheckbox">Hypertension</label>
+                            <div id="hypertensionDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="hypertensionDetailsText" name="hypertensionDetailsText" rows="3" placeholder="Provide details about hypertension"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="brainSurgeryCheckbox" name="brainSurgeryCheckbox">
+                            <label for="brainSurgeryCheckbox">Brain Surgery</label>
+                            <div id="brainSurgeryDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="brainSurgeryDetailsText" name="brainSurgeryDetailsText" rows="3" placeholder="Provide details about brain surgery"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="memoryImpairmentCheckbox" name="memoryImpairmentCheckbox">
+                            <label for="memoryImpairmentCheckbox">Memory Impairment</label>
+                            <div id="memoryImpairmentDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="memoryImpairmentDetailsText" name="memoryImpairmentDetailsText" rows="3" placeholder="Provide details about memory impairment"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="clinicalDepressionCheckbox" name="clinicalDepressionCheckbox">
+                            <label for="clinicalDepressionCheckbox">Clinical Depression</label>
+                            <div id="clinicalDepressionDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="clinicalDepressionDetailsText" name="clinicalDepressionDetailsText" rows="3" placeholder="Provide details about clinical depression"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="psychiatricProblemsCheckbox" name="psychiatricProblemsCheckbox">
+                            <label for="psychiatricProblemsCheckbox">Psychiatric Problems</label>
+                            <div id="psychiatricProblemsDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="psychiatricProblemsDetailsText" name="psychiatricProblemsDetailsText" rows="3" placeholder="Provide details about psychiatric problems"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="alcoholAbuseCheckbox" name="alcoholAbuseCheckbox">
+                            <label for="alcoholAbuseCheckbox">Alcohol Abuse/Problems</label>
+                            <div id="alcoholAbuseDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="alcoholAbuseDetailsText" name="alcoholAbuseDetailsText" rows="3" placeholder="Provide details about alcohol abuse/problems"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="substanceAbuseCheckbox" name="substanceAbuseCheckbox">
+                            <label for="substanceAbuseCheckbox">Substance Abuse</label>
+                            <div id="substanceAbuseDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="substanceAbuseDetailsText" name="substanceAbuseDetailsText" rows="3" placeholder="Provide details about substance abuse"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="dementia2Checkbox" name="dementia2Checkbox">
+                            <label for="dementia2Checkbox">Dementia</label>
+                            <div id="dementia2Details" class="mt-2 d-none">
+                                <textarea class="form-control" id="dementia2DetailsText" name="dementia2DetailsText" rows="3" placeholder="Provide details about dementia"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="parkinsonsCheckbox" name="parkinsonsCheckbox">
+                            <label for="parkinsonsCheckbox">Parkinson's Disease</label>
+                            <div id="parkinsonsDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="parkinsonsDetailsText" name="parkinsonsDetailsText" rows="3" placeholder="Provide details about Parkinson's disease"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="epilepsy2Checkbox" name="epilepsy2Checkbox">
+                            <label for="epilepsy2Checkbox">Epilepsy/Seizure Disorder</label>
+                            <div id="epilepsy2Details" class="mt-2 d-none">
+                                <textarea class="form-control" id="epilepsy2DetailsText" name="epilepsy2DetailsText" rows="3" placeholder="Provide details about epilepsy/seizure disorder"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="neurologicalDiseaseCheckbox" name="neurologicalDiseaseCheckbox">
+                            <label for="neurologicalDiseaseCheckbox">Other Neurological Disease</label>
+                            <div id="neurologicalDiseaseDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="neurologicalDiseaseDetailsText" name="neurologicalDiseaseDetailsText" rows="3" placeholder="Provide details about other neurological disease"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="majorIllnessCheckbox" name="majorIllnessCheckbox">
+                            <label for="majorIllnessCheckbox">Other Major Illness</label>
+                            <div id="majorIllnessDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="majorIllnessDetailsText" name="majorIllnessDetailsText" rows="3" placeholder="Provide details about other major illness"></textarea>
+                            </div>
+                        </div>
+                        <script>
+                            const checkboxes = [
+                                'diabetes', 'heartDisease', 'hypertension', 'brainSurgery', 'memoryImpairment', 
+                                'clinicalDepression', 'psychiatricProblems', 'alcoholAbuse', 
+                                'substanceAbuse', 'dementia2', 'parkinsons', 'epilepsy2', 
+                                'neurologicalDisease', 'majorIllness'
+                            ];
+                            checkboxes.forEach(id => {
+                                document.getElementById(`${id}Checkbox`).addEventListener('change', function() {
+                                    const detailsDiv = document.getElementById(`${id}Details`);
+                                    if (this.checked) {
+                                        detailsDiv.classList.remove('d-none');
+                                    } else {
+                                        detailsDiv.classList.add('d-none');
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-success">Add new member</button>
             </div>
@@ -240,6 +361,226 @@
                 <div class="mb-3">
                     <label for="sexual_orientation" class="form-label">Sexual Orientation</label>
                     <input type="text" class="form-control" id="sexual_orientation" name="sexual_orientation" required>
+                </div>
+                <label for="" class="form-label">Education</label>
+                <div class="form-section">
+                    <div class="mb-3">
+                        <label for="highestLevelOfEducation" class="form-label">Highest Level ef Education</label>
+                        <input type="text" class="form-control" id="highestLevelOfEducation" name="highestLevelOfEducation" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="specialEducation" class="form-label">Special Education</label>
+                        <select class="form-select" id="specialEducation" name="specialEducation" required>
+                            <option value="" selected disabled>Select Option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 d-none" id="specialEducationTypeContainer">
+                        <label for="specialEducationType" class="form-label">Special Education Type</label>
+                        <input type="text" class="form-control" id="specialEducationType" name="specialEducationType">
+                    </div>
+                    <div class="mb-3">
+                        <label for="spellingAbility" class="form-label">Spelling Ability</label>
+                        <input type="range" class="form-range" id="spellingAbility" name="spellingAbility" min="1" max="5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="readingAbility" class="form-label">Reading Ability</label>
+                        <input type="range" class="form-range" id="readingAbility" name="readingAbility" min="1" max="5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="handedness" class="form-label">Handedness</label>
+                        <select class="form-select" id="handedness" name="handedness" required>
+                            <option value="" selected disabled>Select Option</option>
+                            <option value="Right">Right</option>
+                            <option value="Left">Left</option>
+                            <option value="Ambidextrous">Ambidextrous</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="handednessPostStroke" class="form-label">Handedness Post-Stroke</label>
+                        <select class="form-select" id="handednessPostStroke" name="handednessPostStroke" required>
+                            <option value="" selected disabled>Select Option</option>
+                            <option value="Right">Right</option>
+                            <option value="Left">Left</option>
+                            <option value="Ambidextrous">Ambidextrous</option>
+                        </select>
+                    </div>
+                    <script>
+                        document.getElementById('specialEducation').addEventListener('change', function() {
+                            const specialEducationTypeContainer = document.getElementById('specialEducationTypeContainer');
+                            if (this.value === '1') {
+                                specialEducationTypeContainer.classList.remove('d-none');
+                            } else {
+                                specialEducationTypeContainer.classList.add('d-none');
+                                document.getElementById('specialEducationType').value = '';
+                            }
+                        });
+                    </script>
+                </div>
+                <div class="mb-3">
+                    <label for="maritalStatus" class="form-label">Marital Status</label>
+                    <select class="form-select" id="maritalStatus" name="maritalStatus" required>
+                        <option value="" selected disabled>Select Marital Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                    </select>
+                </div>
+                <div class="mb-3 d-none" id="spouseDetails">
+                    <label for="spouseName" class="form-label">Spouse Name</label>
+                    <input type="text" class="form-control" id="spouseName" name="spouseName">
+                    <label for="spouseOccupation" class="form-label mt-3">Spouse Occupation</label>
+                    <input type="text" class="form-control" id="spouseOccupation" name="spouseOccupation">
+                </div>
+                <script>
+                    document.getElementById('maritalStatus').addEventListener('change', function() {
+                        const spouseDetails = document.getElementById('spouseDetails');
+                        if (this.value === 'Married') {
+                            spouseDetails.classList.remove('d-none');
+                        } else {
+                            spouseDetails.classList.add('d-none');
+                            document.getElementById('spouseName').value = '';
+                            document.getElementById('spouseOccupation').value = '';
+                        }
+                    });
+                </script>
+                <label for="" class="form-label">Language</label>
+                <div class="form-section">
+                    <div class="mb-3">
+                        <label for="primaryLanguage" class="form-label">Primary Language</label>
+                        <input type="text" class="form-control" id="primaryLanguage" name="primaryLanguage" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstLanguageLearned" class="form-label">First Language Learned</label>
+                        <input type="text" class="form-control" id="firstLanguageLearned" name="firstLanguageLearned" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="otherLanguagesSpoken" class="form-label">Other Languages Spoken</label>
+                        <textarea class="form-control" id="otherLanguagesSpoken" name="otherLanguagesSpoken" rows="3" placeholder="List other languages spoken"></textarea>
+                    </div>
+                </div>
+                <label for="" class="form-label">Other Conditions</label>
+                <div class="form-section">
+                    <div class="mb-3">
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="headInjuryCheckbox" name="headInjuryCheckbox">
+                            <label for="headInjuryCheckbox">Head Injury</label>
+                            <div id="headInjuryDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="headInjuryDetailsText" name="headInjuryDetailsText" rows="3" placeholder="Provide details about head injury"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="strokeCheckbox" name="strokeCheckbox">
+                            <label for="strokeCheckbox">Stroke</label>
+                            <div id="strokeDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="strokeDetailsText" name="strokeDetailsText" rows="3" placeholder="Provide details about stroke"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="aphasiaCheckbox" name="aphasiaCheckbox">
+                            <label for="aphasiaCheckbox">Aphasia</label>
+                            <div id="aphasiaDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="aphasiaDetailsText" name="aphasiaDetailsText" rows="3" placeholder="Provide details about aphasia"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="brainSurgery2Checkbox" name="brainSurgery2Checkbox">
+                            <label for="brainSurgery2Checkbox">Brain Surgery</label>
+                            <div id="brainSurgery2Details" class="mt-2 d-none">
+                                <textarea class="form-control" id="brainSurgery2DetailsText" name="brainSurgery2DetailsText" rows="3" placeholder="Provide details about brain surgery"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="communicationDisorderCheckbox" name="communicationDisorderCheckbox">
+                            <label for="communicationDisorderCheckbox">Communication Disorder</label>
+                            <div id="communicationDisorderDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="communicationDisorderDetailsText" name="communicationDisorderDetailsText" rows="3" placeholder="Provide details about communication disorder"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="memoryImpairment2Checkbox" name="memoryImpairment2Checkbox">
+                            <label for="memoryImpairment2Checkbox">Memory Impairment</label>
+                            <div id="memoryImpairment2Details" class="mt-2 d-none">
+                                <textarea class="form-control" id="memoryImpairment2DetailsText" name="memoryImpairment2DetailsText" rows="3" placeholder="Provide details about memory impairment"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="clinicalDepression2Checkbox" name="clinicalDepression2Checkbox">
+                            <label for="clinicalDepression2Checkbox">Clinical Depression</label>
+                            <div id="clinicalDepression2Details" class="mt-2 d-none">
+                                <textarea class="form-control" id="clinicalDepression2DetailsText" name="clinicalDepression2DetailsText" rows="3" placeholder="Provide details about clinical depression"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="psychiatricProblems2Checkbox" name="psychiatricProblems2Checkbox">
+                            <label for="psychiatricProblems2Checkbox">Psychiatric Problems</label>
+                            <div id="psychiatricProblems2Details" class="mt-2 d-none">
+                                <textarea class="form-control" id="psychiatricProblems2DetailsText" name="psychiatricProblems2DetailsText" rows="3" placeholder="Provide details about psychiatric problems"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="substanceAbuse2Checkbox" name="substanceAbuse2Checkbox">
+                            <label for="substanceAbuse2Checkbox">Substance Abuse</label>
+                            <div id="substanceAbuse2Details" class="mt-2 d-none">
+                                <textarea class="form-control" id="substanceAbuse2DetailsText" name="substanceAbuse2DetailsText" rows="3" placeholder="Provide details about substance abuse"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="dementiaCheckbox" name="dementiaCheckbox">
+                            <label for="dementiaCheckbox">Dementia</label>
+                            <div id="dementiaDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="dementiaDetailsText" name="dementiaDetailsText" rows="3" placeholder="Provide details about dementia"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="parkinsonsDiseaseCheckbox" name="parkinsonsDiseaseCheckbox">
+                            <label for="parkinsonsDiseaseCheckbox">Parkinson's Disease</label>
+                            <div id="parkinsonsDiseaseDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="parkinsonsDiseaseDetailsText" name="parkinsonsDiseaseDetailsText" rows="3" placeholder="Provide details about Parkinson's disease"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="epilepsyCheckbox" name="epilepsyCheckbox">
+                            <label for="epilepsyCheckbox">Epilepsy</label>
+                            <div id="epilepsyDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="epilepsyDetailsText" name="epilepsyDetailsText" rows="3" placeholder="Provide details about epilepsy"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="otherNeurologicalDiseaseCheckbox" name="otherNeurologicalDiseaseCheckbox">
+                            <label for="otherNeurologicalDiseaseCheckbox">Other Neurological Disease</label>
+                            <div id="otherNeurologicalDiseaseDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="otherNeurologicalDiseaseDetailsText" name="otherNeurologicalDiseaseDetailsText" rows="3" placeholder="Provide details about other neurological disease"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="margin-bottom: 2px;">
+                            <input type="checkbox" id="otherMajorIllnessCheckbox" name="otherMajorIllnessCheckbox">
+                            <label for="otherMajorIllnessCheckbox">Other Major Illness</label>
+                            <div id="otherMajorIllnessDetails" class="mt-2 d-none">
+                                <textarea class="form-control" id="otherMajorIllnessDetailsText" name="otherMajorIllnessDetailsText" rows="3" placeholder="Provide details about other major illness"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        const conditionCheckboxes = [
+                            'headInjury', 'stroke', 'aphasia', 'brainSurgery2', 'communicationDisorder', 
+                            'memoryImpairment2', 'clinicalDepression2', 'psychiatricProblems2', 
+                            'substanceAbuse2', 'dementia', 'parkinsonsDisease', 'epilepsy', 
+                            'otherNeurologicalDisease', 'otherMajorIllness'
+                        ];
+                        conditionCheckboxes.forEach(id => {
+                            document.getElementById(`${id}Checkbox`).addEventListener('change', function() {
+                                const detailsDiv = document.getElementById(`${id}Details`);
+                                if (this.checked) {
+                                    detailsDiv.classList.remove('d-none');
+                                } else {
+                                    detailsDiv.classList.add('d-none');
+                                }
+                            });
+                        });
+                    </script>
                 </div>
                 <button type="submit" class="btn btn-success">Add Enrollemnt Form</button>
             </div>
@@ -344,6 +685,7 @@
                 console.error("Member ID not set");
                 return;
             }
+            
             const formData = new FormData(event.target);
             const formObject = {};
             formData.forEach((value, key) => {
@@ -381,8 +723,19 @@
             const formData = new FormData(event.target);
             const formObject = {};
             formData.forEach((value, key) => {
-                formObject[key] = value;
+                if (!checkboxes.some(id => key.startsWith(id))) {
+                    formObject[key] = value;
+                }
             });
+            const otherMedicalConditions = {};
+            checkboxes.forEach(id => {
+                const checkbox = document.getElementById(`${id}Checkbox`);
+                const detailsText = document.getElementById(`${id}DetailsText`);
+                if (checkbox.checked) {
+                    otherMedicalConditions[id] = detailsText.value || null;
+                }
+            });
+            formObject['other_medical_conditions'] = otherMedicalConditions;
             formObject['id'] = getMedicalHistoryID();
             const jsonString = JSON.stringify(formObject, null, 2);
             console.log(jsonString);
@@ -399,7 +752,7 @@
                     console.log("Payload:", payload);
                     window.updateMember(payload);
                 }).catch(function(error) {
-                    console.error("Error:", error);
+                    console.error("Error:", error, "at line:", error.lineNumber || "unknown");
                 });
             } else {
                 window.updateMedicalHistory(jsonString);
@@ -527,20 +880,13 @@
                 }
             }
 
-            const medicalHistoryData = data.medicalHistoryData;
+            const medicalHistoryData = data.medicalData;
             const medicalHistoryForm = document.getElementById('MedicalHistoryForm');
             document.querySelector('.medical_history_id').value = medicalHistoryData.id;
             medicalHistoryForm.querySelector('#anti_seizure_med').value = medicalHistoryData.anti_seizure_med;
             medicalHistoryForm.querySelector('#aphasia_cause').value = medicalHistoryData.aphasia_cause;
             medicalHistoryForm.querySelector('#aphasia_onset').value = medicalHistoryData.aphasia_onset;
             medicalHistoryForm.querySelector('#completion_date').value = medicalHistoryData.completion_date;
-            const hearingAidSelectMH = medicalHistoryForm.querySelector("#hearing_aid");
-            for (let option of hearingAidSelectMH.options) {
-                if (option.value == medicalHistoryData.hearing_aid) {
-                    option.selected = true;
-                    break;
-                }
-            }
             medicalHistoryForm.querySelector('#last_seizure_date').value = medicalHistoryData.last_seizure_date;
             medicalHistoryForm.querySelector('#lesion_location').value = medicalHistoryData.lesion_location;
             medicalHistoryForm.querySelector('#other_visual_impairments').value = medicalHistoryData.other_visual_impairments;
@@ -552,7 +898,20 @@
             medicalHistoryForm.querySelector('#seizure_history').value = medicalHistoryData.seizure_history;
             medicalHistoryForm.querySelector('#specialty').value = medicalHistoryData.specialty;
             medicalHistoryForm.querySelector('#stroke_location').value = medicalHistoryData.stroke_location;
-            medicalHistoryForm.querySelector('#swallowing_strategies').value = medicalHistoryData.swallowing_strategies;
+            const otherMedicalConditions = JSON.parse(medicalHistoryData.other_medical_conditions) || {};
+            checkboxes.forEach(id => {
+                const checkbox = document.getElementById(`${id}Checkbox`);
+                const detailsText = document.getElementById(`${id}DetailsText`);
+                if (otherMedicalConditions[id]) {
+                    checkbox.checked = true;
+                    detailsText.value = otherMedicalConditions[id];
+                    detailsText.parentElement.classList.remove('d-none');
+                } else {
+                    checkbox.checked = false;
+                    detailsText.value = '';
+                    detailsText.parentElement.classList.add('d-none');
+                }
+            });
 
             const enrollmentData = data.enrollmentData;
             const enrollmentForm = document.getElementById('EnrollmentForm');
@@ -647,6 +1006,9 @@
         function getEC2ID() {
             return document.querySelector('.ec2_id').value;
         }
+        document.getElementById("goToMembers").addEventListener("click", function() {
+            window.loadMembers();
+        });
     </script>
 </body>
 </html>

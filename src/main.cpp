@@ -3,6 +3,8 @@
 #include <filesystem>
 #include <future>
 #include <string>
+#include <iostream>
+#include <iomanip>
 
 #include "logger.h"
 #include "APIClient.h"
@@ -11,6 +13,13 @@ using json = nlohmann::json;
 
 // const std::string BaseFilePath = std::filesystem::current_path().string();
 const std::string BaseFilePath = "C:/Adler_Database/src/";
+
+std::string escape_json_for_js(const std::string &json)
+{
+    std::ostringstream escaped;
+    escaped << std::quoted(json);
+    return escaped.str();
+}
 
 void createBindings(webview::webview &w)
 {
@@ -82,8 +91,9 @@ void createBindings(webview::webview &w)
             combinedData["emergencyContactTwo"] = json::parse(ec2Data);
 
             std::string combinedDataString = combinedData.dump();
-            LogToFile(combinedDataString);
-            w.eval("document.addEventListener('DOMContentLoaded', function() { initializeFormData(`" + combinedDataString + "`); });");
+            std::string safeJson = escape_json_for_js(combinedDataString);
+            LogToFile(safeJson);
+            w.eval("document.addEventListener('DOMContentLoaded', function() { initializeFormData(" + safeJson + "); });");
         }
         return ""; });
 
@@ -152,7 +162,9 @@ void createBindings(webview::webview &w)
         std::string medicalData = getMedicalData.get();
         std::string emergency_one = getEmergencyOne.get();
         std::string emergency_two = getEmergencyTwo.get();
-        w.eval("memberModal(`" + userData + "`,`" + enrollmentData + "`,`" + medicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`);");
+        std::string safeMedicalData = escape_json_for_js(medicalData);
+        safeMedicalData = safeMedicalData.substr(1, safeMedicalData.length() - 2);
+        w.eval("memberModal(`" + userData + "`,`" + enrollmentData + "`,`" + safeMedicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`);");
         return ""; });
 
     w.bind("addMember", [&](const std::string &msg) -> std::string

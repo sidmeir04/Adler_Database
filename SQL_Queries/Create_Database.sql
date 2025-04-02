@@ -64,7 +64,7 @@ CREATE TABLE Medical_History_Form (
     physician_phone VARCHAR(20),
     aphasia_cause VARCHAR(50),
     aphasia_onset DATE,                    -- Date of onset of aphasia
-    stroke_location CHAR(1),               -- 'r' for right, 'l' for left
+    stroke_location VARCHAR(50),
     lesion_location VARCHAR(50),
     primary_diagnosis VARCHAR(50),         -- Primary medical diagnosis
     secondary_diagnosis VARCHAR(50),       -- Secondary medical diagnosis
