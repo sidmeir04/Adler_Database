@@ -1,0 +1,40 @@
+{
+    "Education": {
+        "HighestLevelOfEducation": "",
+        "SpecialEducation": false,
+        "SpecialEducationType": "",
+        "SpellingAbility": "",
+        "ReadingAbility": "",
+        "SpellingAbilityPostStroke": "",
+        "ReadingAbilityPostStroke": "",
+        "Handedness": "",
+        "HandednessPostStroke": ""
+    },
+    "Marriage": {
+        "MaritalStatus": "",
+        "SpouseName": "",
+        "SpouseOccupation": ""
+    },
+    "Language": {
+        "PrimaryLanguage": "",
+        "FirstLanguageLearned": "",
+        "OtherLanguages": ""
+    },
+    "PreviousConditions": {
+        "HeadInjury": "",
+        "Stroke": "",
+        "Aphasia": "",
+        "BrainSurgery": "",
+        "CommunicationDisorder": "",
+        "MemoryImpairment": "",
+        "ClinicalDepression": "",
+        "PsychiatricProblems": "",
+        "SubstanceAbuse": "",
+        "Dementia": "",
+        "ParkinsonsDisease": "",
+        "Epilepsy": "",
+        "OtherNeurologicalDisease": "",
+        "OtherMajorIllness": ""
+    }
+  }
+  
