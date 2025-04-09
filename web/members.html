@@ -189,6 +189,7 @@
                 medicalHistoryJSON = JSON.parse(medicalHistoryJSON);
                 emergencyOne = JSON.parse(emergencyJSON);
                 emergencyTwo = JSON.parse(emergencyTwoJSON);
+                console.log(jsonData);
             } catch (error) {
                 console.error("Error parsing JSON:", error);
                 return;
@@ -207,12 +208,6 @@
                 }
                 return value;
             }
-
-            console.log(jsonData);
-            console.log(enrollmentJSON);
-            console.log(medicalHistoryJSON);
-            console.log(emergencyOne);
-            console.log(emergencyTwo);
 
             const modalContainer = document.querySelector(".modalContainer");
             modalContainer.innerHTML = `
@@ -237,7 +232,7 @@
                                 <p><strong>Date of Birth:</strong> ${safeAccess(jsonData, 'dob', 'N/A')}</p>
                                 <p><strong>Address:</strong> ${safeAccess(jsonData, 'address', 'N/A')}</p>
                                 <p><strong>County:</strong> ${safeAccess(jsonData, 'county', 'N/A')}</p>
-                                <p><strong>Gender:</strong> ${safeAccess(jsonData, 'gender', 'N/A') === 'F' ? 'Female' : 'Male'}</p>
+                                <p><strong>Gender:</strong> ${safeAccess(jsonData, 'gender', 'N/A') == 'F' ? 'Female' : 'Male'}</p>
                                 <p><strong>Phone:</strong> ${safeAccess(jsonData, 'phone', 'N/A')}</p>
                                 <button onClick=updateMember(${safeAccess(jsonData, 'id', 'N/A')})>Update Member</button>
                                 </div>
@@ -250,8 +245,8 @@
                                         <li class="list-group-item">Marital Status: ${safeAccess(enrollmentJSON, 'patient_info', 'N/A')}</li>
                                         <li class="list-group-item">Spouse Name: ${safeAccess(enrollmentJSON, 'patient_info', 'N/A')}</li>    
                                         <li class="list-group-item">Living Status: ${safeAccess(enrollmentJSON, 'living_status', 'N/A')}</li>
-                                        <li class="list-group-item">Languages Spoken: ${safeAccess(jsonData, 'member_info', 'N/A')}</li>
-                                        <li class="list-group-item">Occupation: ${safeAccess(jsonData, 'member_info', 'N/A')}</li>
+                                        <li class="list-group-item">Languages Spoken: ${safeAccessNested(jsonData, ['member_info', 'language', 'primaryLanguage'], 'N/A')}</li>
+                                        <li class="list-group-item">Occupation: ${safeAccess(jsonData, 'occupations', 'N/A')}</li>
                                         <li class="list-group-item">Highest Level of Education: ${safeAccess(enrollmentJSON, 'patient_info', 'N/A')}</li>
                                         <li class="list-group-item">Handedness: ${safeAccess(enrollmentJSON, 'patient_info', 'N/A')}</li>
                                         </ul>
@@ -264,8 +259,11 @@
                                         <li class="list-group-item">Cause of Aphasia: ${safeAccessNested(jsonData, ['member_info', 0, 'Aphasia History', 'Cause of Aphasia'], 'N/A')}</li>
                                         <li class="list-group-item">Date of Aphasia: ${safeAccessNested(jsonData, ['member_info', 0, 'Aphasia History', 'Aphasia Onset'], 'N/A')}</li>
                                         <li class="list-group-item">Location of Stroke: ${safeAccess(medicalHistoryJSON, 'brain_location', 'N/A')}</li>
-                                        <li class="list-group-item">Spelling Ability Pre-Stroke: ${safeAccess(enrollmentJSON, 'patient_info', 'N/A')}</li>
-                                        <li class="list-group-item">Reading Ability Pre-Stroke: ${safeAccess(enrollmentJSON, 'patient_info', 'N/A')}</li>
+                                        <li class="list-group-item">Spelling Ability Pre-Stroke: ${safeAccessNested(enrollmentJSON, ['patient_info', 'education', 'spellingAbility'], 'N/A')}</li>
+                                        <li class="list-group-item">Reading Ability Pre-Stroke: ${safeAccessNested(enrollmentJSON, ['patient_info', 'education', 'readingAbility'], 'N/A')}</li>
+                                        <li class="list-group-item">Aphasia Cause: ${safeAccess(medicalHistoryJSON, 'aphasia_cause', 'N/A')}</li>
+                                        <li class="list-group-item">Aphasia Onset: ${safeAccess(medicalHistoryJSON, 'aphasia_onset', 'N/A')}</li>
+                                        <li class="list-group-item">Stroke Location: ${safeAccess(medicalHistoryJSON, 'stroke_location', 'N/A')}</li>
                                     </ul>
                                 </div>
                                 <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown3" aria-expanded="false" onclick="closeOthers('dropdown3')">
@@ -274,7 +272,14 @@
                                 <div id="dropdown3" class="collapse dropdown-content">
                                     <ul class="list-group">
                                         <li class="list-group-item">Allergies: ${safeAccess(medicalHistoryJSON, 'allergies', 'N/A')}</li>
-                                        <li class="list-group-item">Medications: ${safeAccess(medicalHistoryJSON, 'medications', 'N/A')}</li>
+                                        <li class="list-group-item">Medications: ${safeAccess(enrollmentJSON, 'medications', 'N/A')}</li>
+                                        <li class="list-group-item">Last Seizure: ${safeAccess(medicalHistoryJSON, 'last_seizure_data', 'N/A')}</li>
+                                        <li class="list-group-item">Lesion Location: ${safeAccess(medicalHistoryJSON, 'lesion_location', 'N/A')}</li>
+                                        <li class="list-group-item">Visual Impairments: ${safeAccess(medicalHistoryJSON, 'visual_impairments', 'N/A')}</li>
+                                        <li class="list-group-item">Visual Feild Cut: ${safeAccess(medicalHistoryJSON, 'visual_field_cut', 'N/A')}</li>
+                                        <li class="list-group-item">Other Visual Impairments: ${safeAccess(medicalHistoryJSON, 'other_visual_impairments', 'N/A')}</li>
+                                        <li class="list-group-item">Primary Diagnosis: ${safeAccess(medicalHistoryJSON, 'primary_diagnosis', 'N/A')}</li>
+                                        <li class="list-group-item">Secondary Diagnosis: ${safeAccess(medicalHistoryJSON, 'secondary_diagnosis', 'N/A')}</li>
                                         <li class="list-group-item">Other medical Conditions</li>
                                     </ul>
                                 </div>
@@ -301,6 +306,7 @@
                                         <li class="list-group-item">Day Phone: ${safeAccess(emergencyOne, 'day_phone', 'N/A')}</li>
                                         <li class="list-group-item">Evening Phone: ${safeAccess(emergencyOne, 'evening_phone', 'N/A')}</li>
                                         <li class="list-group-item">Cell Phone: ${safeAccess(emergencyOne, 'cell_phone', 'N/A')}</li>
+                                        <li class="list-group-item">Address: ${safeAccess(emergencyOne, 'address', 'N/A')}</li>
                                     </ul>
                                 </div>
                                 <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown6" aria-expanded="false" onclick="closeOthers('dropdown6')">
@@ -314,6 +320,7 @@
                                         <li class="list-group-item">Day Phone: ${safeAccess(emergencyTwo, 'day_phone', 'N/A')}</li>
                                         <li class="list-group-item">Evening Phone: ${safeAccess(emergencyTwo, 'evening_phone', 'N/A')}</li>
                                         <li class="list-group-item">Cell Phone: ${safeAccess(emergencyTwo, 'cell_phone', 'N/A')}</li>
+                                        <li class="list-group-item">Address: ${safeAccess(emergencyTwo, 'address', 'N/A')}</li>
                                     </ul>
                                 </div>
                                 </div>

@@ -11,10 +11,14 @@
 
 using json = nlohmann::json;
 
-// const std::string BaseFilePath = std::filesystem::current_path().string();
-const std::string BaseFilePath = "C:/Adler_Database/src/";
+char buffer[MAX_PATH];
+DWORD length = GetModuleFileNameA(NULL, buffer, MAX_PATH);
+std::string fullPath(buffer);
+size_t pos = fullPath.find_last_of("\\/");
+std::string BaseFilePath = fullPath.substr(0, pos) + '/';
 
-std::string escape_json_for_js(const std::string &json)
+std::string
+escape_json_for_js(const std::string &json)
 {
     std::ostringstream escaped;
     escaped << std::quoted(json);
@@ -162,9 +166,11 @@ void createBindings(webview::webview &w)
         std::string medicalData = getMedicalData.get();
         std::string emergency_one = getEmergencyOne.get();
         std::string emergency_two = getEmergencyTwo.get();
+        std::string safeEnrollmentData = escape_json_for_js(enrollmentData);
+        safeEnrollmentData = safeEnrollmentData.substr(1, safeEnrollmentData.length() - 2);
         std::string safeMedicalData = escape_json_for_js(medicalData);
         safeMedicalData = safeMedicalData.substr(1, safeMedicalData.length() - 2);
-        w.eval("memberModal(`" + userData + "`,`" + enrollmentData + "`,`" + safeMedicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`);");
+        w.eval("memberModal(`" + userData + "`,`" + safeEnrollmentData + "`,`" + safeMedicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`);");
         return ""; });
 
     w.bind("addMember", [&](const std::string &msg) -> std::string

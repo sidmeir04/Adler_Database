@@ -343,10 +343,6 @@
                     <textarea class="form-control" id="other_therapy" name="other_therapy" rows="3" required></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="patient_info" class="form-label">Patient Info</label>
-                    <textarea class="form-control" id="patient_info" name="patient_info" rows="3" required></textarea>
-                </div>
-                <div class="mb-3">
                     <label for="prev_speech_therapy" class="form-label">Previous Speech Therapy</label>
                     <select class="form-select" id="prev_speech_therapy" name="prev_speech_therapy" required>
                         <option value="" selected disabled>Select Option</option>
@@ -382,11 +378,25 @@
                     </div>
                     <div class="mb-3">
                         <label for="spellingAbility" class="form-label">Spelling Ability</label>
-                        <input type="range" class="form-range" id="spellingAbility" name="spellingAbility" min="1" max="5" required>
+                        <select class="form-select" id="spellingAbility" name="spellingAbility" required>
+                            <option value="" selected disabled>Select Option</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="readingAbility" class="form-label">Reading Ability</label>
-                        <input type="range" class="form-range" id="readingAbility" name="readingAbility" min="1" max="5" required>
+                        <select class="form-select" id="readingAbility" name="readingAbility" required>
+                            <option value="" selected disabled>Select Option</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="handedness" class="form-label">Handedness</label>
@@ -586,6 +596,49 @@
             </div>
         </form>
 
+        <!-- <form id="transport">
+            <div class="form-step d-no">
+                <div class="mb-3"></div>
+                    <label for="using_bus_transport" class="form-label">Using Bus Transport</label>
+                    <select class="form-select" id="using_bus_transport" name="using_bus_transport" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="bus_company" class="form-label">Which Company</label>
+                    <select class="form-select" id="bus_company" name="bus_company" required>
+                        <option value="" selected disabled>Select Company</option>
+                        <option value="Bergen County Transport">Bergen County Transport</option>
+                        <option value="Access Link">Access Link</option>
+                        <option value="Modivcare">Modivcare</option>
+                        <option value="Other">Other (Provide Name Below)</option>
+                    </select>
+                </div>
+                <div class="mb-3 d-none" id="other_bus_company_container">
+                    <label for="other_bus_company" class="form-label">Other Company Name</label>
+                    <input type="text" class="form-control" id="other_bus_company" name="other_bus_company">
+                </div>
+                <div class="mb-3">
+                    <label for="bus_contact_phone" class="form-label">Bus Contact Phone Number</label>
+                    <input type="tel" class="form-control" id="bus_contact_phone" name="bus_contact_phone" required>
+                </div>
+                <button type="submit" class="btn btn-success">Add Transport Details</button>
+                <script>
+                    document.getElementById('bus_company').addEventListener('change', function() {
+                        const otherBusCompanyContainer = document.getElementById('other_bus_company_container');
+                        if (this.value === 'Other') {
+                            otherBusCompanyContainer.classList.remove('d-none');
+                        } else {
+                            otherBusCompanyContainer.classList.add('d-none');
+                            document.getElementById('other_bus_company').value = '';
+                        }
+                    });
+                </script>
+            </div>
+        </form> -->
+
         <form id="EC1">
             <div class="form-step d-none">
                 <div class="mb-3">
@@ -688,13 +741,39 @@
             
             const formData = new FormData(event.target);
             const formObject = {};
+            const patient_info = {};
             formData.forEach((value, key) => {
                 formObject[key] = value;
             });
             formObject['id'] = getEnrollmentFormID();
+            // Education
+            patient_info['education'] = {
+                highestLevelOfEducation: formData.get('highestLevelOfEducation'),
+                specialEducation: formData.get('specialEducation'),
+                specialEducationType: formData.get('specialEducationType'),
+                spellingAbility: formData.get('spellingAbility'),
+                readingAbility: formData.get('readingAbility'),
+                handedness: formData.get('handedness'),
+                handednessPostStroke: formData.get('handednessPostStroke')
+            };
+
+            // Language
+            patient_info['language'] = {
+                primaryLanguage: formData.get('primaryLanguage'),
+                firstLanguageLearned: formData.get('firstLanguageLearned'),
+                otherLanguagesSpoken: formData.get('otherLanguagesSpoken')
+            };
+
+            // Marriage
+            patient_info['marriage'] = {
+                maritalStatus: formData.get('maritalStatus'),
+                spouseName: formData.get('spouseName'),
+                spouseOccupation: formData.get('spouseOccupation')
+            };
+            formObject['patient_info'] = patient_info;
             const jsonString = JSON.stringify(formObject, null, 2);
             console.log(jsonString);
-            // need to add code to also update the member's emergency contact ID
+            
             if(getEnrollmentFormID() == undefined || getEnrollmentFormID() == '') {
                 window.addEnrollmentForm(jsonString).then(function(id) {
                     console.log("Returned ID:", id);
@@ -941,7 +1020,6 @@
             enrollmentForm.querySelector('#medications').value = enrollmentData.medications;
             enrollmentForm.querySelector('#occupations').value = enrollmentData.occupations;
             enrollmentForm.querySelector('#other_therapy').value = enrollmentData.other_therapy;
-            enrollmentForm.querySelector('#patient_info').value = enrollmentData.patient_info;
             const prevSpeechTherapySelect = enrollmentForm.querySelector("#prev_speech_therapy");
             for (let option of prevSpeechTherapySelect.options) {
                 if (option.value == enrollmentData.prev_speech_therapy) {
@@ -951,6 +1029,26 @@
             }
             enrollmentForm.querySelector('#race').value = enrollmentData.race;
             enrollmentForm.querySelector('#sexual_orientation').value = enrollmentData.sexual_orientation;
+
+            const patient_info = JSON.parse(enrollmentData.patient_info);
+            const educationData = patient_info.education;
+            enrollmentForm.querySelector('#highestLevelOfEducation').value = educationData.highestLevelOfEducation;
+            enrollmentForm.querySelector('#specialEducation').value = educationData.specialEducation;
+            enrollmentForm.querySelector('#specialEducationType').value = educationData.specialEducationType;
+            enrollmentForm.querySelector('#spellingAbility').value = educationData.spellingAbility;
+            enrollmentForm.querySelector('#readingAbility').value = educationData.readingAbility;
+            enrollmentForm.querySelector('#handedness').value = educationData.handedness;
+            enrollmentForm.querySelector('#handednessPostStroke').value = educationData.handednessPostStroke;
+
+            const languageData = patient_info.language;
+            enrollmentForm.querySelector('#primaryLanguage').value = languageData.primaryLanguage;
+            enrollmentForm.querySelector('#firstLanguageLearned').value = languageData.firstLanguageLearned;
+            enrollmentForm.querySelector('#otherLanguagesSpoken').value = languageData.otherLanguagesSpoken;
+
+            const marriageData = patient_info.marriage;
+            enrollmentForm.querySelector('#maritalStatus').value = marriageData.maritalStatus;
+            enrollmentForm.querySelector('#spouseName').value = marriageData.spouseName;
+            enrollmentForm.querySelector('#spouseOccupation').value = marriageData.spouseOccupation;
 
             const ec1Data = data.emergencyContactOne;
             const ec1Form = document.getElementById('EC1');
