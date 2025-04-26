@@ -183,6 +183,7 @@
         }
 
         function memberModal(userJSON, enrollmentJSON, medicalHistoryJSON, emergencyJSON, emergencyTwoJSON) {
+            console.log("memberModal called");
             try {
                 jsonData = JSON.parse(userJSON);
                 enrollmentJSON = JSON.parse(enrollmentJSON);
@@ -194,21 +195,39 @@
                 console.error("Error parsing JSON:", error);
                 return;
             }
+            console.log("jsonData");
 
             function safeAccess(obj, key, defaultValue = "") {
-                return obj && obj[key] !== undefined ? obj[key] : defaultValue;
+                try{
+                    return obj && obj[key] !== undefined ? obj[key] : defaultValue;
+                } catch (error) {
+                    console.error("Error accessing key:", error);
+                    return defaultValue;
+                }
             }
+            console.log("jsonData");
 
             function safeAccessNested(obj, keys, defaultValue = "") {
-                if (!obj || typeof obj !== 'object') return defaultValue;
-                let value = obj;
-                for (const key of keys) {
-                    if (value[key] === undefined) return defaultValue;
-                    value = value[key];
+                try {
+                    if (!Array.isArray(keys)) keys = [keys];
+                } catch (error) {
+                    console.error("Error accessing nested keys:", error);
+                    return defaultValue;
                 }
-                return value;
+                try{
+                    if (!obj || typeof obj !== 'object') return defaultValue;
+                    let value = obj;
+                    for (const key of keys) {
+                        if (value[key] === undefined) return defaultValue;
+                        value = value[key];
+                    }
+                    return value;
+                } catch (error) {
+                        console.error("Error accessing nested keys:", error);
+                        return defaultValue;
+                    }
             }
-
+            console.log("jsonData");
             const modalContainer = document.querySelector(".modalContainer");
             modalContainer.innerHTML = `
             <div class="modal fade show d-flex align-items-center justify-content-center" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true" style="display: block; background: rgba(0, 0, 0, 0.5);">
@@ -330,7 +349,10 @@
                 </div>
             </div>
             `;
-            document.getElementById('modalThing').style.display = 'block';
+            const myModal = new bootstrap.Modal(document.getElementById('userModal'), {
+                keyboard: true
+            });
+            myModal.show();
         }
 
         document.getElementById("searchInput").addEventListener("keyup", function(event) {

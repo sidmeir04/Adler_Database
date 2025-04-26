@@ -746,7 +746,7 @@
                 formObject[key] = value;
             });
             formObject['id'] = getEnrollmentFormID();
-            // Education
+
             patient_info['education'] = {
                 highestLevelOfEducation: formData.get('highestLevelOfEducation'),
                 specialEducation: formData.get('specialEducation'),
@@ -757,19 +757,27 @@
                 handednessPostStroke: formData.get('handednessPostStroke')
             };
 
-            // Language
             patient_info['language'] = {
                 primaryLanguage: formData.get('primaryLanguage'),
                 firstLanguageLearned: formData.get('firstLanguageLearned'),
                 otherLanguagesSpoken: formData.get('otherLanguagesSpoken')
             };
 
-            // Marriage
             patient_info['marriage'] = {
                 maritalStatus: formData.get('maritalStatus'),
                 spouseName: formData.get('spouseName'),
                 spouseOccupation: formData.get('spouseOccupation')
             };
+            const otherMedicalConditions = {};
+            conditionCheckboxes.forEach(id => {
+                const checkbox = document.getElementById(`${id}Checkbox`);
+                const detailsText = document.getElementById(`${id}DetailsText`);
+                if (checkbox.checked) {
+                    otherMedicalConditions[id] = detailsText.value || null;
+                }
+            });
+            patient_info['other_medical_conditions'] = otherMedicalConditions;
+
             formObject['patient_info'] = patient_info;
             const jsonString = JSON.stringify(formObject, null, 2);
             console.log(jsonString);
@@ -1049,6 +1057,17 @@
             enrollmentForm.querySelector('#maritalStatus').value = marriageData.maritalStatus;
             enrollmentForm.querySelector('#spouseName').value = marriageData.spouseName;
             enrollmentForm.querySelector('#spouseOccupation').value = marriageData.spouseOccupation;
+
+            // const other_medical_conditions = patient_info.other_medical_conditions
+            // Object.keys(other_medical_conditions).forEach(condition => {
+            //     const checkbox = document.getElementById(`${condition}Checkbox`);
+            //     const detailsText = document.getElementById(`${condition}DetailsText`);
+            //     if (checkbox && detailsText) {
+            //         checkbox.checked = true;
+            //         detailsText.value = other_medical_conditions[condition];
+            //         detailsText.parentElement.classList.remove('d-none');
+            //     }
+            // });
 
             const ec1Data = data.emergencyContactOne;
             const ec1Form = document.getElementById('EC1');
