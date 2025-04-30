@@ -1,0 +1,27 @@
+{
+    "AphasiaHistory": {
+      "AphasiaOnset": "",
+      "CauseOfAphasia": "",
+      "CurrentlyInTherapy": "",
+      "ExpressiveLanguage": "",
+      "ReceptiveLanguage": "",
+      "CognitiveStatus": "",
+      "CurrentChallenges": "",
+      "MobilityIssues": "",
+      "AdditionalNotes": ""
+    },
+    "PPAInformation": {
+      "DateSymptomsStarted": "",
+      "DateOfDiagnosis": "",
+      "TakesCareOfDailyNeeds": false,
+      "AwareOfCondition": false,
+      "RemembersDailyRoutines": false,
+      "RemembersFamilyMembers": false,
+      "AggressiveOutbursts": false
+    },
+    "GeneralInformation": {
+      "LanguageSpoken": "",
+      "Work": "",
+      "Hobbies": ""
+    }
+}

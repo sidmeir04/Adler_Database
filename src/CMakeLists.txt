@@ -1,9 +1,9 @@
 # cmake -S. build
 # cmake --build build
 
-cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-project(Adler_Database LANGUAGES CXX)
+# project(Adler_Database LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

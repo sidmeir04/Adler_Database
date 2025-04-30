@@ -65,7 +65,10 @@
                         <a class="nav-link" id="goToCallers" href="#">Callers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="updateMember('1')" href="#">Add Member</a>
+                        <a class="nav-link" onclick="updateMember('')" href="#">Add Member</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="updateCaregiver('')" href="#">Add Caregiver</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="goToMembers" href="#">Members</a>
@@ -182,7 +185,7 @@
             window.createMemberModal(userID);
         }
 
-        function memberModal(userJSON, enrollmentJSON, medicalHistoryJSON, emergencyJSON, emergencyTwoJSON) {
+        function memberModal(userJSON, enrollmentJSON, medicalHistoryJSON, emergencyJSON, emergencyTwoJSON, careGiversJSON) {
             console.log("memberModal called");
             try {
                 jsonData = JSON.parse(userJSON);
@@ -190,6 +193,7 @@
                 medicalHistoryJSON = JSON.parse(medicalHistoryJSON);
                 emergencyOne = JSON.parse(emergencyJSON);
                 emergencyTwo = JSON.parse(emergencyTwoJSON);
+                careGivers = JSON.parse(careGiversJSON);
                 console.log(jsonData);
             } catch (error) {
                 console.error("Error parsing JSON:", error);
@@ -240,20 +244,20 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="text-center col-md-4">
-                                <img src="resources/imgs/user_icon.png" width=150 height=150 class="img-fluid rounded-circle mb-3">
-                                <h4>${safeAccess(jsonData, 'name', 'Unknown')}</h4>
-                                <h6 class="text-muted">${safeAccess(jsonData, 'email', 'N/A')}</h6>
-                                </div>
-                                <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
-                                <p><strong>Program:</strong> ${safeAccess(jsonData, 'adler_program', 'N/A')}</p>
-                                <p><strong>Date Joined:</strong> ${safeAccess(jsonData, 'join_date', 'N/A')}</p>
-                                <p><strong>Age:</strong> ${safeAccess(jsonData, 'age', 'N/A')}</p>
-                                <p><strong>Date of Birth:</strong> ${safeAccess(jsonData, 'dob', 'N/A')}</p>
-                                <p><strong>Address:</strong> ${safeAccess(jsonData, 'address', 'N/A')}</p>
-                                <p><strong>County:</strong> ${safeAccess(jsonData, 'county', 'N/A')}</p>
-                                <p><strong>Gender:</strong> ${safeAccess(jsonData, 'gender', 'N/A') == 'F' ? 'Female' : 'Male'}</p>
-                                <p><strong>Phone:</strong> ${safeAccess(jsonData, 'phone', 'N/A')}</p>
-                                <button onClick=updateMember(${safeAccess(jsonData, 'id', 'N/A')})>Update Member</button>
+                                    <img src="resources/imgs/user_icon.png" width=150 height=150 class="img-fluid rounded-circle mb-3">
+                                    <h4>${safeAccess(jsonData, 'name', 'Unknown')}</h4>
+                                    <h6 class="text-muted">${safeAccess(jsonData, 'email', 'N/A')}</h6>
+                                    </div>
+                                    <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
+                                    <p><strong>Program:</strong> ${safeAccess(jsonData, 'adler_program', 'N/A')}</p>
+                                    <p><strong>Date Joined:</strong> ${safeAccess(jsonData, 'join_date', 'N/A')}</p>
+                                    <p><strong>Age:</strong> ${safeAccess(jsonData, 'age', 'N/A')}</p>
+                                    <p><strong>Date of Birth:</strong> ${safeAccess(jsonData, 'dob', 'N/A')}</p>
+                                    <p><strong>Address:</strong> ${safeAccess(jsonData, 'address', 'N/A')}</p>
+                                    <p><strong>County:</strong> ${safeAccess(jsonData, 'county', 'N/A')}</p>
+                                    <p><strong>Gender:</strong> ${safeAccess(jsonData, 'gender', 'N/A') == 'F' ? 'Female' : 'Male'}</p>
+                                    <p><strong>Phone:</strong> ${safeAccess(jsonData, 'phone', 'N/A')}</p>
+                                    <button onClick=updateMember(${safeAccess(jsonData, 'id', 'N/A')})>Update Member</button>
                                 </div>
                                 <div class="col-md-4">
                                     <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown1" aria-expanded="false" onclick="closeOthers('dropdown1')">
@@ -344,15 +348,34 @@
                                 </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <h3>Caregivers</h3>
+                                <ul class="list-group caregiverList">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             `;
-            const myModal = new bootstrap.Modal(document.getElementById('userModal'), {
-                keyboard: true
-            });
+
+            const myModal = document.getElementById('userModal');
+            caregiver_num = careGivers["id"].length;
+            for (let i = 0; i < caregiver_num; i++) {
+                const caregiver = document.createElement("li");
+                caregiver.className = "list-group-item";
+                caregiver.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>${safeAccess(careGivers, 'name', 'Unknown')}</h5>
+                            <p>${safeAccess(careGivers, 'email', 'N/A')}</p>
+                        </div>
+                        <button onClick=updateCaregiver(${safeAccess(careGivers, 'id', 'N/A')})>Update Caregiver</button>
+                    </div>
+                `;
+                caregiverList.appendChild(caregiver);
+            }
             myModal.show();
+            const caregiverList = document.querySelector(".caregiverList");
         }
 
         document.getElementById("searchInput").addEventListener("keyup", function(event) {
@@ -367,6 +390,10 @@
 
         function updateMember(userID) {
             window.loadMemberForm(userID.toString());
+        }
+
+        function updateCaregiver(userID) {
+            window.loadCaregiverForm(userID.toString());
         }
     </script>
 </body>

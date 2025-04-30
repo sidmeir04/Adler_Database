@@ -11,7 +11,7 @@ using json = nlohmann::json;
 class APIClient
 {
 private:
-    static inline httplib::Client client{"localhost", 5000};
+    static std::string url;
 
 public:
     static std::string get_caller(const json &jsonPayload);

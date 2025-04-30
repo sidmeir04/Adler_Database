@@ -3,7 +3,13 @@
 # cmake --build build --config Release
 # cpack --config build/CPackConfig.cmake
 
-cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+# To compile with G++
+# mkdir build
+# cd build
+# cmake -G "MinGW Makefiles" ..
+# mingw32-make
+
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(AdlerDatabase LANGUAGES CXX)
 
@@ -38,6 +44,11 @@ if(APPLE)
 else()
     add_executable(${PROJECT_NAME} WIN32 ${SRCS} src/main.exe.manifest)
 endif()
+
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ws2_32 version shlwapi)
+endif()
+
 
 # Define the HTML source and destination directories
 set(HTML_SOURCE_DIR "${CMAKE_SOURCE_DIR}/web")

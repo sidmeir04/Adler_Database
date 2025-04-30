@@ -108,21 +108,5 @@
         "./",        // Root folder of your tests
         "-p",
         "*_test.py"  // Pattern to discover tests
-    ],
-    "sqltools.connections": [
-        {
-            "mysqlOptions": {
-                "authProtocol": "default",
-                "enableSsl": "Disabled"
-            },
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 3306,
-            "driver": "MySQL",
-            "name": "localhost_connection",
-            "username": "connector",
-            "database": "Adler_Aphasia_Center",
-            "askForPassword": true
-        }
     ]
 }

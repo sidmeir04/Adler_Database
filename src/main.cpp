@@ -38,66 +38,164 @@ void createBindings(webview::webview &w)
         w.navigate(BaseFilePath + "../web/addMember.html");
         LogToFile(msg);
         if (msg != ""){
-            LogToFile("Getting member data");
-            json jsonPayload;
-            jsonPayload["id"] = msg.substr(2, msg.size() - 4);;
-            std::string userData = APIClient::get_member(jsonPayload);
-            json userJSON = json::parse(userData);
+            try {
+                LogToFile("Getting member data");
+            
+                json jsonPayload;
+                jsonPayload["id"] = msg.substr(2, msg.size() - 4);
+                std::string userData = APIClient::get_member(jsonPayload);
+                json userJSON = json::parse(userData);
+            
+                std::future<std::string> getEnrollmentData;
+                std::future<std::string> getMedicalData;
+                std::future<std::string> getEmergencyOne;
+                std::future<std::string> getEmergencyTwo;
 
-            std::future<std::string> getEnrollmentData;
-            std::future<std::string> getMedicalData;
-            std::future<std::string> getEmergencyOne;
-            std::future<std::string> getEmergencyTwo;
+                LogToFile("Member data retrieved successfully");
+                LogToFile("User JSON: " + userJSON.dump(4));
+            
+                if ((userJSON["enrollment_form"] != "None") && (userJSON["enrollment_form"].size() > 0)) {
+                    getEnrollmentData = std::async(std::launch::async, [=]() {
+                        json localPayload = jsonPayload;
+                        localPayload["id"] = userJSON["enrollment_form"][0];
+                        return APIClient::get_membership_enrollment_form(localPayload);
+                    });
+                }
+            
+                if ((userJSON["medical_history"] != "None") && (userJSON["medical_history"].size() > 0)) {
+                    getMedicalData = std::async(std::launch::async, [=]() {
+                        json localPayload = jsonPayload;
+                        localPayload["id"] = userJSON["medical_history"][0];
+                        return APIClient::get_medical_history_form(localPayload);
+                    });
+                }
+            
+                if ((userJSON["emergency_contact_one"] != "None") && (userJSON["emergency_contact_one"].size() > 0)) {
+                    getEmergencyOne = std::async(std::launch::async, [=]() {
+                        json localPayload = jsonPayload;
+                        localPayload["id"] = userJSON["emergency_contact_one"][0];
+                        return APIClient::get_emergency_contact(localPayload);
+                    });
+                }
+            
+                if ((userJSON["emergency_contact_two"] != "None") && (userJSON["emergency_contact_two"].size() > 0)) {
+                    getEmergencyTwo = std::async(std::launch::async, [=]() {
+                        json localPayload = jsonPayload;
+                        localPayload["id"] = userJSON["emergency_contact_two"][0];
+                        return APIClient::get_emergency_contact(localPayload);
+                    });
+                }
+            
+                std::string enrollmentData = "None";
+                std::string medicalData = "None";
+                std::string ec1Data = "None";
+                std::string ec2Data = "None";
+            
+                if (getEnrollmentData.valid()) enrollmentData = getEnrollmentData.get();
+                if (getMedicalData.valid()) medicalData = getMedicalData.get();
+                if (getEmergencyOne.valid()) ec1Data = getEmergencyOne.get();
+                if (getEmergencyTwo.valid()) ec2Data = getEmergencyTwo.get();
+            
+                json combinedData;
+                combinedData["userData"] = json::parse(userData);
+                combinedData["enrollmentData"] = json::parse(enrollmentData);
+                combinedData["medicalData"] = json::parse(medicalData);
+                combinedData["emergencyContactOne"] = json::parse(ec1Data);
+                combinedData["emergencyContactTwo"] = json::parse(ec2Data);
+            
+                std::string combinedDataString = combinedData.dump();
+                std::string safeJson = escape_json_for_js(combinedDataString);
+                LogToFile(safeJson);
+                w.eval("document.addEventListener('DOMContentLoaded', function() { initializeFormData(" + safeJson + "); });");
+            
+            } catch (const std::exception& e) {
+                LogToFile(std::string("Exception: ") + e.what());
+            } catch (...) {
+                LogToFile("Unknown error occurred while getting and processing member data.");
+            }
+        }
+        return ""; });
 
-            if(userJSON["enrollment_form"] != "None"){
-                getEnrollmentData = std::async(std::launch::async, [=]() { 
-                    json localPayload = jsonPayload;
-                    localPayload["id"] = userJSON["enrollment_form"][0];
-                    return APIClient::get_membership_enrollment_form(localPayload);
-                });
-            }
-            if(userJSON["medical_history"] != "None"){
-                getMedicalData = std::async(std::launch::async, [=]() {
-                    json localPayload = jsonPayload;
-                    localPayload["id"] = userJSON["medical_history"][0];
-                    return APIClient::get_medical_history_form(localPayload);
-                });
-            }
-            if(userJSON["emergency_contact_one"] != "None"){
-                getEmergencyOne = std::async(std::launch::async, [=]() {
-                    json localPayload = jsonPayload;
-                    localPayload["id"] = userJSON["emergency_contact_one"][0];
-                    return APIClient::get_emergency_contact(localPayload);
-                });
-            }
-            if(userJSON["emergency_contact_two"] != "None"){
-                getEmergencyTwo = std::async(std::launch::async, [=]() {
-                    json localPayload = jsonPayload;
-                    localPayload["id"] = userJSON["emergency_contact_two"][0];
-                    return APIClient::get_emergency_contact(localPayload);
-                });
-            }
-            std::string enrollmentData = "None";
-            std::string medicalData = "None";
-            std::string ec1Data = "None";
-            std::string ec2Data = "None";
-            // Now wait for all the futures to complete
-            if (getEnrollmentData.valid()) enrollmentData = getEnrollmentData.get();
-            if (getMedicalData.valid()) medicalData = getMedicalData.get();
-            if (getEmergencyOne.valid()) ec1Data = getEmergencyOne.get();
-            if (getEmergencyTwo.valid()) ec2Data = getEmergencyTwo.get();
+    w.bind("loadCaregiverForm", [&](const std::string &msg) -> std::string
+           {
+        w.navigate(BaseFilePath + "../web/addCaregiver.html");
+        LogToFile(msg);
+        if (msg != ""){
+            try {
+                LogToFile("Getting caregiver data");
+            
+                json jsonPayload;
+                jsonPayload["id"] = msg.substr(2, msg.size() - 4);
+                std::string userData = APIClient::get_caregiver(jsonPayload);
+                json userJSON = json::parse(userData);
+            
+                std::future<std::string> getEnrollmentData;
+                std::future<std::string> getMedicalData;
+                std::future<std::string> getEmergencyOne;
+                std::future<std::string> getEmergencyTwo;
 
-            json combinedData;
-            combinedData["userData"] = json::parse(userData);
-            combinedData["enrollmentData"] = json::parse(enrollmentData);
-            combinedData["medicalData"] = json::parse(medicalData);
-            combinedData["emergencyContactOne"] = json::parse(ec1Data);
-            combinedData["emergencyContactTwo"] = json::parse(ec2Data);
-
-            std::string combinedDataString = combinedData.dump();
-            std::string safeJson = escape_json_for_js(combinedDataString);
-            LogToFile(safeJson);
-            w.eval("document.addEventListener('DOMContentLoaded', function() { initializeFormData(" + safeJson + "); });");
+                LogToFile("Caregiver data retrieved successfully");
+                LogToFile("User JSON: " + userJSON.dump(4));
+            
+                if ((userJSON["enrollment_form"] != "None") && (userJSON["enrollment_form"].size() > 0)) {
+                    getEnrollmentData = std::async(std::launch::async, [=]() {
+                        json localPayload = jsonPayload;
+                        localPayload["id"] = userJSON["enrollment_form"][0];
+                        return APIClient::get_membership_enrollment_form(localPayload);
+                    });
+                }
+            
+                if ((userJSON["medical_history"] != "None") && (userJSON["medical_history"].size() > 0)) {
+                    getMedicalData = std::async(std::launch::async, [=]() {
+                        json localPayload = jsonPayload;
+                        localPayload["id"] = userJSON["medical_history"][0];
+                        return APIClient::get_medical_history_form(localPayload);
+                    });
+                }
+            
+                if ((userJSON["emergency_contact_one"] != "None") && (userJSON["emergency_contact_one"].size() > 0)) {
+                    getEmergencyOne = std::async(std::launch::async, [=]() {
+                        json localPayload = jsonPayload;
+                        localPayload["id"] = userJSON["emergency_contact_one"][0];
+                        return APIClient::get_emergency_contact(localPayload);
+                    });
+                }
+            
+                if ((userJSON["emergency_contact_two"] != "None") && (userJSON["emergency_contact_two"].size() > 0)) {
+                    getEmergencyTwo = std::async(std::launch::async, [=]() {
+                        json localPayload = jsonPayload;
+                        localPayload["id"] = userJSON["emergency_contact_two"][0];
+                        return APIClient::get_emergency_contact(localPayload);
+                    });
+                }
+            
+                std::string enrollmentData = "None";
+                std::string medicalData = "None";
+                std::string ec1Data = "None";
+                std::string ec2Data = "None";
+            
+                if (getEnrollmentData.valid()) enrollmentData = getEnrollmentData.get();
+                if (getMedicalData.valid()) medicalData = getMedicalData.get();
+                if (getEmergencyOne.valid()) ec1Data = getEmergencyOne.get();
+                if (getEmergencyTwo.valid()) ec2Data = getEmergencyTwo.get();
+            
+                json combinedData;
+                combinedData["userData"] = json::parse(userData);
+                combinedData["enrollmentData"] = json::parse(enrollmentData);
+                combinedData["medicalData"] = json::parse(medicalData);
+                combinedData["emergencyContactOne"] = json::parse(ec1Data);
+                combinedData["emergencyContactTwo"] = json::parse(ec2Data);
+            
+                std::string combinedDataString = combinedData.dump();
+                std::string safeJson = escape_json_for_js(combinedDataString);
+                LogToFile(safeJson);
+                w.eval("document.addEventListener('DOMContentLoaded', function() { initializeFormData(" + safeJson + "); });");
+            
+            } catch (const std::exception& e) {
+                LogToFile(std::string("Exception: ") + e.what());
+            } catch (...) {
+                LogToFile("Unknown error occurred while getting and processing member data.");
+            }
         }
         return ""; });
 
@@ -161,16 +259,22 @@ void createBindings(webview::webview &w)
             return APIClient::get_emergency_contact(localPayload);
         });
         
-
+        auto getCaregivers = std::async(std::launch::async, [=]() {
+            json localPayload = jsonPayload;
+            localPayload["member_id"] = userJSON["id"][0];
+            return APIClient::get_caregiver(localPayload);
+        });
+        
         std::string enrollmentData = getEnrollmentData.get();
         std::string medicalData = getMedicalData.get();
         std::string emergency_one = getEmergencyOne.get();
         std::string emergency_two = getEmergencyTwo.get();
+        std::string caregivers = getCaregivers.get();
         std::string safeEnrollmentData = escape_json_for_js(enrollmentData);
         safeEnrollmentData = safeEnrollmentData.substr(1, safeEnrollmentData.length() - 2);
         std::string safeMedicalData = escape_json_for_js(medicalData);
         safeMedicalData = safeMedicalData.substr(1, safeMedicalData.length() - 2);
-        w.eval("memberModal(`" + userData + "`,`" + safeEnrollmentData + "`,`" + safeMedicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`);");
+        w.eval("memberModal(`" + userData + "`,`" + safeEnrollmentData + "`,`" + safeMedicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`,`" + caregivers + "`);");
         return ""; });
 
     w.bind("addMember", [&](const std::string &msg) -> std::string
@@ -185,6 +289,19 @@ void createBindings(webview::webview &w)
         json jsonPayload = json::parse(msg);
         int result = APIClient::update_member(jsonPayload);
         return ""; });
+
+    w.bind("addCaregiver", [&](const std::string &msg) -> std::string
+           {
+            json jsonPayload = json::parse(msg);
+            std::string result = APIClient::create_caregiver(jsonPayload);
+            LogToFile("Caregiver created with ID: " + result);
+            return result; });
+
+    w.bind("updateCaregiver", [&](const std::string &msg) -> std::string
+           {
+            json jsonPayload = json::parse(msg);
+            int result = APIClient::update_caregiver(jsonPayload);
+            return ""; });
 
     w.bind("addMedicalHistory", [&](const std::string &msg) -> std::string
            {
