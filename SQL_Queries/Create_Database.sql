@@ -107,39 +107,6 @@ CREATE TABLE Transportation_Information (
     secondary_phone VARCHAR(20)           -- Secondary contact phone number
 );
 
-CREATE TABLE Caregiver (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),                -- Caregiver's name
-    phone VARCHAR(20),               -- Phone number
-    email VARCHAR(50),               -- Caregiver's email
-    relationship VARCHAR(50),        -- Relationship to person with aphasia -
-    date_contacted DATE,             -- Date contacted
-    notes TEXT,                      -- Additional notes
-    group_attending VARCHAR(50),     -- Group attending
-    attending BOOLEAN                -- Whether attending or not
-);
-
-CREATE TABLE Attending_Caregiver (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    caregiver_type VARCHAR(50),      -- Type of caregiver
-    sex CHAR(1),                     -- Sex of caregiver ('M' or 'F')
-    race VARCHAR(50),                -- Race of caregiver
-    occupations VARCHAR(150),        -- Caregiver's occupations
-    support_group BOOLEAN,           -- Whether attending a support group
-    covid_vaccine_date DATE,         -- Date of COVID vaccine
-    allergies VARCHAR(100),          -- Allergies
-    medications TEXT,                -- Medications
-    media_release BOOLEAN,           -- Media release consent
-    start_date DATE,                 -- Start date of caregiving
-    end_date DATE,                   -- End date of caregiving
-    general_notes TEXT,              -- General notes about the caregiver
-    participation TEXT,              -- Participation details
-    robly BOOLEAN,                   -- If Robly is used for communication
-
-    caregiver INT,
-    FOREIGN KEY (caregiver) REFERENCES Caregiver(id)
-);
-
 CREATE TABLE Emergency_Contact (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),               -- Emergency contact's name
@@ -180,9 +147,7 @@ CREATE TABLE Member (
     FOREIGN KEY (emergency_contact_one) REFERENCES Emergency_Contact(id),
     FOREIGN KEY (emergency_contact_two) REFERENCES Emergency_Contact(id),
     transport_info INT,
-    FOREIGN KEY (transport_info) REFERENCES Transportation_Information(id),
-    caregiver INT,
-    FOREIGN KEY (caregiver) REFERENCES Caregiver(id)
+    FOREIGN KEY (transport_info) REFERENCES Transportation_Information(id)
 );
 
 CREATE TABLE Applications (
@@ -217,6 +182,40 @@ CREATE TABLE Volunteer (
     FOREIGN KEY (resumue) REFERENCES Applications(id)
 );
 
+CREATE TABLE Caregiver (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),                -- Caregiver's name
+    phone VARCHAR(20),               -- Phone number
+    email VARCHAR(50),               -- Caregiver's email
+    relationship VARCHAR(50),        -- Relationship to person with aphasia -
+    date_contacted DATE,             -- Date contacted
+    notes TEXT,                      -- Additional notes
+    group_attending VARCHAR(50),     -- Group attending
+    attending BOOLEAN,                -- Whether attending or not
+	caregiver_type VARCHAR(50),      -- Type of caregiver
+    sex CHAR(1),                     -- Sex of caregiver ('M' or 'F')
+    race VARCHAR(50),                -- Race of caregiver
+    occupations VARCHAR(150),        -- Caregiver's occupations
+    support_group BOOLEAN,           -- Whether attending a support group
+    covid_vaccine_date DATE,         -- Date of COVID vaccine
+    allergies VARCHAR(100),          -- Allergies
+    medications TEXT,                -- Medications
+    participation TEXT,              -- Participation details
+    robly BOOLEAN,                   -- If Robly is used for communication
+    
+    enrollment_form INT,
+    FOREIGN KEY (enrollment_form) REFERENCES Membership_Enrollment_Form(id),
+    medical_history INT,
+    FOREIGN KEY (medical_history) REFERENCES Medical_History_Form(id),
+    emergency_contact_one INT,
+    emergency_contact_two INT,
+    FOREIGN KEY (emergency_contact_one) REFERENCES Emergency_Contact(id),
+    FOREIGN KEY (emergency_contact_two) REFERENCES Emergency_Contact(id),
+    transport_info INT,
+    FOREIGN KEY (transport_info) REFERENCES Transportation_Information(id),
+    member_id INT,
+    FOREIGN KEY (member_id) REFERENCES Member(id)
+);
 
 CREATE TABLE Outreach (
     id INT AUTO_INCREMENT PRIMARY KEY,

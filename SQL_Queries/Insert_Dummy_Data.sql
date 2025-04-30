@@ -36,13 +36,9 @@ INSERT INTO Transportation_Information (bus_transport, bus_company, bus_contact_
 (TRUE, 'City Bus Co.', '555-0000', TRUE, 'Alice Johnson', 'Sister', '555-1234', '555-5678'),
 (FALSE, NULL, NULL, TRUE, 'John Smith', 'Friend', '555-5678', '555-8765');
 
-INSERT INTO Caregiver (name, phone, email, relationship, date_contacted, notes, group_attending, attending) VALUES
-('Alice Johnson', '555-1234', 'alice.johnson@example.com', 'Sister', '2024-01-15', 'Interested in support groups.', 'Group A', TRUE),
-('Bob Smith', '555-5678', 'bob.smith@example.com', 'Friend', '2024-01-16', 'Looking for more information.', 'Group B', FALSE);
-
-INSERT INTO Attending_Caregiver (caregiver_type, sex, race, occupations, support_group, covid_vaccine_date, allergies, medications, media_release, start_date, end_date, general_notes, participation, robly) VALUES
-('Professional Caregiver', 'F', 'Asian', 'Nurse', TRUE, '2024-01-10', 'None', 'None', TRUE, '2024-01-01', '2024-12-31', 'Very attentive.', 'Active participant in group activities.', TRUE),
-('Family Caregiver', 'M', 'Caucasian', 'Retired Teacher', FALSE, '2024-01-12', 'Peanuts', 'Aspirin', FALSE, '2024-01-02', '2024-12-30', 'Available most days.', 'Helps with daily activities.', FALSE);
+INSERT INTO Caregiver (name, phone, email, relationship, date_contacted, notes, group_attending, attending, robly) VALUES
+('Alice Johnson', '555-1234', 'alice.johnson@example.com', 'Sister', '2024-01-15', 'Interested in support groups.', 'Group A', TRUE, TRUE),
+('Bob Smith', '555-5678', 'bob.smith@example.com', 'Friend', '2024-01-16', 'Looking for more information.', 'Group B', FALSE, FALSE);
 
 INSERT INTO Emergency_Contact (name, relationship, day_phone, evening_phone, cell_phone, email, address, completion_date) VALUES
 ('John Doe', 'Father', '555-1111', '555-2222', '555-3333', 'john.doe@example.com', '123 Main St, Anytown, USA', '2024-01-10'),
