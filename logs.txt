@@ -1,237 +1,88 @@
-[""]
+Loading members data
+Getting member data
+Member data retrieved successfully
+{
+    "member_id": "1"
+}
+["1"]
 Getting member data
 Member data retrieved successfully
 User JSON: {
-    "address": [],
-    "adler_program": [],
-    "aep_completion_date": [],
-    "age": [],
-    "caregiver_needed": [],
-    "county": [],
-    "dob": [],
-    "email": [],
-    "emergency_contact_one": [],
-    "emergency_contact_two": [],
-    "enrollment_form": [],
-    "gender": [],
-    "id": [],
-    "join_date": [],
-    "joined": [],
-    "medical_history": [],
-    "member_info": [],
-    "name": [],
-    "phone": [],
-    "schedule": [],
-    "veteran": []
+    "address": [
+        "123 Main St"
+    ],
+    "adler_program": [
+        "Adler Program A"
+    ],
+    "aep_completion_date": [
+        "2024-01-01"
+    ],
+    "age": [
+        "30"
+    ],
+    "caregiver_needed": [
+        "0"
+    ],
+    "county": [
+        "Sample County"
+    ],
+    "dob": [
+        "1993-05-10"
+    ],
+    "email": [
+        "alice.johnson@example.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "F"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "2023-12-15"
+    ],
+    "joined": [
+        "1"
+    ],
+    "medical_history": [
+        "1"
+    ],
+    "member_info": [
+        {
+            "Aphasia History": {
+                "Aphasia Onset": "2022-06-01",
+                "Cause of Aphasia": "Stroke",
+                "Currently in therapy": "Yes"
+            }
+        }
+    ],
+    "name": [
+        "Alice Johnson"
+    ],
+    "phone": [
+        "555-1234"
+    ],
+    "schedule": [
+        "2"
+    ],
+    "veteran": [
+        "1"
+    ]
 }
-Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
-[""]
-Getting caregiver data
-Caregiver data retrieved successfully
-User JSON: {
-    "attending": [],
-    "date_contacted": [],
-    "email": [],
-    "group_attending": [],
-    "id": [],
-    "name": [],
-    "notes": [],
-    "phone": [],
-    "relationship": []
-}
-Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
-[""]
-Getting caregiver data
-Caregiver data retrieved successfully
-User JSON: {
-    "allergies": [],
-    "attending": [],
-    "caregiver_type": [],
-    "date_contacted": [],
-    "email": [],
-    "emergency_contact_one": [],
-    "emergency_contact_two": [],
-    "enrollment_form": [],
-    "group_attending": [],
-    "id": [],
-    "medical_history": [],
-    "medications": [],
-    "member": [],
-    "name": [],
-    "notes": [],
-    "occupations": [],
-    "participation": [],
-    "phone": [],
-    "race": [],
-    "relationship": [],
-    "robly": [],
-    "sex": [],
-    "support_group": [],
-    "transport_info": []
-}
-Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
-[""]
-Getting caregiver data
-Caregiver data retrieved successfully
-User JSON: {
-    "allergies": [],
-    "attending": [],
-    "caregiver_type": [],
-    "covid_vaccine_date": [],
-    "date_contacted": [],
-    "email": [],
-    "emergency_contact_one": [],
-    "emergency_contact_two": [],
-    "enrollment_form": [],
-    "group_attending": [],
-    "id": [],
-    "medical_history": [],
-    "medications": [],
-    "member": [],
-    "name": [],
-    "notes": [],
-    "occupations": [],
-    "participation": [],
-    "phone": [],
-    "race": [],
-    "relationship": [],
-    "robly": [],
-    "sex": [],
-    "support_group": [],
-    "transport_info": []
-}
-Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
-Caregiver created with ID: <!doctype html>
-<html lang=en>
-<title>500 Internal Server Error</title>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
-
-Caregiver created with ID: <!doctype html>
-<html lang=en>
-<title>500 Internal Server Error</title>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
-
-Caregiver created with ID: 3
-[""]
-Getting caregiver data
-Caregiver data retrieved successfully
-User JSON: {
-    "allergies": [],
-    "attending": [],
-    "caregiver_type": [],
-    "covid_vaccine_date": [],
-    "date_contacted": [],
-    "email": [],
-    "emergency_contact_one": [],
-    "emergency_contact_two": [],
-    "enrollment_form": [],
-    "group_attending": [],
-    "id": [],
-    "medical_history": [],
-    "medications": [],
-    "member": [],
-    "name": [],
-    "notes": [],
-    "occupations": [],
-    "participation": [],
-    "phone": [],
-    "race": [],
-    "relationship": [],
-    "robly": [],
-    "sex": [],
-    "support_group": [],
-    "transport_info": []
-}
-Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
-Caregiver created with ID: 4
-[""]
-Getting caregiver data
-Caregiver data retrieved successfully
-User JSON: {
-    "allergies": [],
-    "attending": [],
-    "caregiver_type": [],
-    "covid_vaccine_date": [],
-    "date_contacted": [],
-    "email": [],
-    "emergency_contact_one": [],
-    "emergency_contact_two": [],
-    "enrollment_form": [],
-    "group_attending": [],
-    "id": [],
-    "medical_history": [],
-    "medications": [],
-    "member": [],
-    "name": [],
-    "notes": [],
-    "occupations": [],
-    "participation": [],
-    "phone": [],
-    "race": [],
-    "relationship": [],
-    "robly": [],
-    "sex": [],
-    "support_group": [],
-    "transport_info": []
-}
-Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
-Caregiver created with ID: <!doctype html>
-<html lang=en>
-<title>500 Internal Server Error</title>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
-
-Caregiver created with ID: <!doctype html>
-<html lang=en>
-<title>500 Internal Server Error</title>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
-
-[""]
-Getting caregiver data
-Caregiver data retrieved successfully
-User JSON: {
-    "allergies": [],
-    "attending": [],
-    "caregiver_type": [],
-    "covid_vaccine_date": [],
-    "date_contacted": [],
-    "email": [],
-    "emergency_contact_one": [],
-    "emergency_contact_two": [],
-    "enrollment_form": [],
-    "group_attending": [],
-    "id": [],
-    "medical_history": [],
-    "medications": [],
-    "member": [],
-    "name": [],
-    "notes": [],
-    "occupations": [],
-    "participation": [],
-    "phone": [],
-    "race": [],
-    "relationship": [],
-    "robly": [],
-    "sex": [],
-    "support_group": [],
-    "transport_info": []
-}
-Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
-Caregiver created with ID: <!doctype html>
-<html lang=en>
-<title>500 Internal Server Error</title>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
-
-Caregiver created with ID: <!doctype html>
-<html lang=en>
-<title>500 Internal Server Error</title>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
-
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[\"1\"],\"aphasia_cause\":[\"Stroke\"],\"aphasia_onset\":[\"2024-10-05\"],\"completion_date\":[\"2025-04-30\"],\"id\":[\"1\"],\"last_seizure_date\":[\"2025-04-10\"],\"lesion_location\":[\"Right\"],\"other_medical_conditions\":[\"{\\\"diabetes\\\": \\\"Has type 2\\\"}\"],\"other_visual_impairments\":[\"No Other Visual Impairments\"],\"physician_address\":[\"123 street\"],\"physician_phone\":[\"201-509\"],\"physicion_name\":[\"None\"],\"primary_diagnosis\":[\"Stroke\"],\"secondary_diagnosis\":[\"Aphasia\"],\"seizure_history\":[\"1\"],\"specialty\":[\"Brain\"],\"stroke_location\":[\"Right\"],\"visual_field_cut\":[\"None\"],\"visual_impairments\":[\"None\"]},\"userData\":{\"address\":[\"123 Main St\"],\"adler_program\":[\"Adler Program A\"],\"aep_completion_date\":[\"2024-01-01\"],\"age\":[\"30\"],\"caregiver_needed\":[\"0\"],\"county\":[\"Sample County\"],\"dob\":[\"1993-05-10\"],\"email\":[\"alice.johnson@example.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"F\"],\"id\":[\"1\"],\"join_date\":[\"2023-12-15\"],\"joined\":[\"1\"],\"medical_history\":[\"1\"],\"member_info\":[{\"Aphasia History\":{\"Aphasia Onset\":\"2022-06-01\",\"Cause of Aphasia\":\"Stroke\",\"Currently in therapy\":\"Yes\"}}],\"name\":[\"Alice Johnson\"],\"phone\":[\"555-1234\"],\"schedule\":[\"2\"],\"veteran\":[\"1\"]}}"
+Loading members page
+Loading members data
+Getting member data
+Member data retrieved successfully
 [""]
 Getting member data
 Member data retrieved successfully
@@ -287,34 +138,59 @@ User JSON: {
 }
 Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
 [""]
-Getting caregiver data
-Caregiver data retrieved successfully
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
 User JSON: {
-    "allergies": [],
-    "attending": [],
-    "caregiver_type": [],
-    "covid_vaccine_date": [],
-    "date_contacted": [],
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "age": [],
+    "caregiver_needed": [],
+    "county": [],
+    "dob": [],
     "email": [],
     "emergency_contact_one": [],
     "emergency_contact_two": [],
     "enrollment_form": [],
-    "group_attending": [],
+    "gender": [],
     "id": [],
+    "join_date": [],
+    "joined": [],
     "medical_history": [],
-    "medications": [],
-    "member_id": [],
+    "member_info": [],
     "name": [],
-    "notes": [],
-    "occupations": [],
-    "participation": [],
     "phone": [],
-    "race": [],
-    "relationship": [],
-    "robly": [],
-    "sex": [],
-    "support_group": [],
-    "transport_info": []
+    "schedule": [],
+    "veteran": []
 }
 Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
-Caregiver created with ID: 5
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "age": [],
+    "caregiver_needed": [],
+    "county": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "name": [],
+    "phone": [],
+    "schedule": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'

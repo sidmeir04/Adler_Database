@@ -19,6 +19,7 @@
     <div class="member_id" hidden value=""></div>
     <div class="enrollment_form_id" hidden value=""></div>
     <div class="medical_history_id" hidden value=""></div>
+    <div class="transport_information_id" hidden value=""></div>
     <div class="ec1_id" hidden value=""></div>
     <div class="ec2_id" hidden value=""></div>
     <div class="container mt-5">
@@ -30,8 +31,9 @@
             <li class="nav-item"><a class="nav-link active" href="#" data-step="0">Member Info</a></li>
             <li class="nav-item"><a class="nav-link" href="#" data-step="1">Medical History Form</a></li>
             <li class="nav-item"><a class="nav-link" href="#" data-step="2">Enrollment Form</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" data-step="3">Emergency Contact One</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" data-step="4">Emergency Contact Two</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-step="3">Transport Information</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-step="4">Emergency Contact One</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-step="5">Emergency Contact Two</a></li>
         </ul>
     
         <form id="memberForm">
@@ -80,6 +82,10 @@
                         <option value="1">Yes</option>
                         <option value="0">No</option>
                     </select>
+                </div>
+                <div class="mb-3">
+                    <label for="notes" class=""form-label>Notes</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Add new member</button>
             </div>
@@ -596,9 +602,9 @@
             </div>
         </form>
 
-        <!-- <form id="transport">
-            <div class="form-step d-no">
-                <div class="mb-3"></div>
+        <form id="transport">
+            <div class="form-step d-none">
+                <div class="mb-3">
                     <label for="using_bus_transport" class="form-label">Using Bus Transport</label>
                     <select class="form-select" id="using_bus_transport" name="using_bus_transport" required>
                         <option value="" selected disabled>Select Option</option>
@@ -637,7 +643,7 @@
                     });
                 </script>
             </div>
-        </form> -->
+        </form>
 
         <form id="EC1">
             <div class="form-step d-none">
@@ -985,20 +991,22 @@
             medicalHistoryForm.querySelector('#seizure_history').value = medicalHistoryData.seizure_history;
             medicalHistoryForm.querySelector('#specialty').value = medicalHistoryData.specialty;
             medicalHistoryForm.querySelector('#stroke_location').value = medicalHistoryData.stroke_location;
-            const otherMedicalConditions = JSON.parse(medicalHistoryData.other_medical_conditions) || {};
-            checkboxes.forEach(id => {
-                const checkbox = document.getElementById(`${id}Checkbox`);
-                const detailsText = document.getElementById(`${id}DetailsText`);
-                if (otherMedicalConditions[id]) {
-                    checkbox.checked = true;
-                    detailsText.value = otherMedicalConditions[id];
-                    detailsText.parentElement.classList.remove('d-none');
-                } else {
-                    checkbox.checked = false;
-                    detailsText.value = '';
-                    detailsText.parentElement.classList.add('d-none');
-                }
-            });
+            if(medicalHistoryData.other_medical_conditions.length > 0){
+                const otherMedicalConditions = JSON.parse(medicalHistoryData.other_medical_conditions) || {};
+                checkboxes.forEach(id => {
+                    const checkbox = document.getElementById(`${id}Checkbox`);
+                    const detailsText = document.getElementById(`${id}DetailsText`);
+                    if (otherMedicalConditions[id]) {
+                        checkbox.checked = true;
+                        detailsText.value = otherMedicalConditions[id];
+                        detailsText.parentElement.classList.remove('d-none');
+                    } else {
+                        checkbox.checked = false;
+                        detailsText.value = '';
+                        detailsText.parentElement.classList.add('d-none');
+                    }
+                });
+            }
 
             const enrollmentData = data.enrollmentData;
             const enrollmentForm = document.getElementById('EnrollmentForm');
@@ -1038,36 +1046,40 @@
             enrollmentForm.querySelector('#race').value = enrollmentData.race;
             enrollmentForm.querySelector('#sexual_orientation').value = enrollmentData.sexual_orientation;
 
-            const patient_info = JSON.parse(enrollmentData.patient_info);
-            const educationData = patient_info.education;
-            enrollmentForm.querySelector('#highestLevelOfEducation').value = educationData.highestLevelOfEducation;
-            enrollmentForm.querySelector('#specialEducation').value = educationData.specialEducation;
-            enrollmentForm.querySelector('#specialEducationType').value = educationData.specialEducationType;
-            enrollmentForm.querySelector('#spellingAbility').value = educationData.spellingAbility;
-            enrollmentForm.querySelector('#readingAbility').value = educationData.readingAbility;
-            enrollmentForm.querySelector('#handedness').value = educationData.handedness;
-            enrollmentForm.querySelector('#handednessPostStroke').value = educationData.handednessPostStroke;
+            if (enrollmentData.patient_info.length > 0) {
+                const patient_info = JSON.parse(enrollmentData.patient_info);
 
-            const languageData = patient_info.language;
-            enrollmentForm.querySelector('#primaryLanguage').value = languageData.primaryLanguage;
-            enrollmentForm.querySelector('#firstLanguageLearned').value = languageData.firstLanguageLearned;
-            enrollmentForm.querySelector('#otherLanguagesSpoken').value = languageData.otherLanguagesSpoken;
+                const other_medical_conditions = patient_info.other_medical_conditions
+                Object.keys(other_medical_conditions).forEach(condition => {
+                    const checkbox = document.getElementById(`${condition}Checkbox`);
+                    const detailsText = document.getElementById(`${condition}DetailsText`);
+                    if (checkbox && detailsText) {
+                        checkbox.checked = true;
+                        detailsText.value = other_medical_conditions[condition];
+                        detailsText.parentElement.classList.remove('d-none');
+                    }
+                });
 
-            const marriageData = patient_info.marriage;
-            enrollmentForm.querySelector('#maritalStatus').value = marriageData.maritalStatus;
-            enrollmentForm.querySelector('#spouseName').value = marriageData.spouseName;
-            enrollmentForm.querySelector('#spouseOccupation').value = marriageData.spouseOccupation;
+                const educationData = patient_info.education;
+                enrollmentForm.querySelector('#highestLevelOfEducation').value = educationData.highestLevelOfEducation;
+                enrollmentForm.querySelector('#specialEducation').value = educationData.specialEducation;
+                enrollmentForm.querySelector('#specialEducationType').value = educationData.specialEducationType;
+                enrollmentForm.querySelector('#spellingAbility').value = educationData.spellingAbility;
+                enrollmentForm.querySelector('#readingAbility').value = educationData.readingAbility;
+                enrollmentForm.querySelector('#handedness').value = educationData.handedness;
+                enrollmentForm.querySelector('#handednessPostStroke').value = educationData.handednessPostStroke;
 
-            // const other_medical_conditions = patient_info.other_medical_conditions
-            // Object.keys(other_medical_conditions).forEach(condition => {
-            //     const checkbox = document.getElementById(`${condition}Checkbox`);
-            //     const detailsText = document.getElementById(`${condition}DetailsText`);
-            //     if (checkbox && detailsText) {
-            //         checkbox.checked = true;
-            //         detailsText.value = other_medical_conditions[condition];
-            //         detailsText.parentElement.classList.remove('d-none');
-            //     }
-            // });
+                const languageData = patient_info.language;
+                enrollmentForm.querySelector('#primaryLanguage').value = languageData.primaryLanguage;
+                enrollmentForm.querySelector('#firstLanguageLearned').value = languageData.firstLanguageLearned;
+                enrollmentForm.querySelector('#otherLanguagesSpoken').value = languageData.otherLanguagesSpoken;
+
+                const marriageData = patient_info.marriage;
+                enrollmentForm.querySelector('#maritalStatus').value = marriageData.maritalStatus;
+                enrollmentForm.querySelector('#spouseName').value = marriageData.spouseName;
+                enrollmentForm.querySelector('#spouseOccupation').value = marriageData.spouseOccupation;
+                
+            }
 
             const ec1Data = data.emergencyContactOne;
             const ec1Form = document.getElementById('EC1');
@@ -1110,6 +1122,12 @@
         }
         function getMedicalHistoryID() {
             return document.querySelector('.medical_history_id').value;
+        }
+        function updateTransportID(id) {
+            document.querySelector('.transport_id').value = id;
+        }
+        function getTransportID() {
+            return document.querySelector('.transport_id').value;
         }
         function updateEC1ID(id) {
             document.querySelector('.ec1_id').value = id;

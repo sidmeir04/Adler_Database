@@ -48,10 +48,10 @@
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="dob" class="form-label">Date of Birth</label>
                     <input type="date" class="form-control" id="dob" name="dob" required>
-                </div>
+                </div> -->
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" required>
@@ -60,14 +60,14 @@
                     <label for="phone" class="form-label">Phone Number</label>
                     <input type="tel" class="form-control" id="phone" name="phone" required>
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="address" class="form-label">Address</label>
                     <input type="text" class="form-control" id="address" name="address" required>
                 </div>
                 <div class="mb-3">
                     <label for="county" class="form-label">County</label>
                     <input type="text" class="form-control" id="county" name="county" required>
-                </div>
+                </div> -->
                 <div class="mb-3">
                     <label for="occupations" class="form-label">Occupations</label>
                     <input type="text" class="form-control" id="occupations" name="occupations" required>
@@ -81,8 +81,8 @@
                     <input type="text" class="form-control" id="medications" name="medications" required>
                 </div>
                 <div class="mb-3">
-                    <label for="gender" class="form-label">Gender</label>
-                    <select class="form-select" id="gender" name="gender" required>
+                    <label for="sex" class="form-label">Gender</label>
+                    <select class="form-select" id="sex" name="sex" required>
                         <option value="" selected disabled>Select Gender</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
@@ -97,8 +97,8 @@
                         Options will be populated dynamically -->
                 </div>
                 <div class="mb-3">
-                    <label for="relation">Relation to Member</label>
-                    <input type="text" class="form-control" id="relation" name="relation" required>
+                    <label for="relationship">Relation to Member</label>
+                    <input type="text" class="form-control" id="relationship" name="relationship" required>
                 </div>
                 <button type="submit" class="btn btn-success">Add new Caregiver</button>
             </div>
@@ -534,22 +534,22 @@
             console.log(jsonString);
             const data = JSON.parse(jsonString);
 
-            const memberData = data.memberData;
+            const memberData = data.userData;
             const memberForm = document.getElementById('memberForm');
             document.querySelector('.caregiver_id').value = memberData.id;
             memberForm.querySelector('#caregiver_type').value = memberData.caregiver_type;
             memberForm.querySelector('#name').value = memberData.name;
-            memberForm.querySelector('#dob').value = memberData.dob;
+            // memberForm.querySelector('#dob').value = memberData.dob;
             memberForm.querySelector('#email').value = memberData.email;
             memberForm.querySelector('#phone').value = memberData.phone;
-            memberForm.querySelector('#address').value = memberData.address;
-            memberForm.querySelector('#county').value = memberData.county;
+            // memberForm.querySelector('#address').value = memberData.address;
+            // memberForm.querySelector('#county').value = memberData.county;
             memberForm.querySelector('#occupations').value = memberData.occupations;
             memberForm.querySelector('#allergies').value = memberData.allergies;
             memberForm.querySelector('#medications').value = memberData.medications;
-            memberForm.querySelector('#gender').value = memberData.gender;
+            memberForm.querySelector('#sex').value = memberData.sex;
             memberForm.querySelector('#member_id').value = memberData.member_id;
-            memberForm.querySelector('#relation').value = memberData.relation;
+            memberForm.querySelector('#relationship').value = memberData.relationship;
 
             const medicalHistoryData = data.medicalData;
             const medicalHistoryForm = document.getElementById('MedicalHistoryForm');
@@ -569,20 +569,23 @@
             medicalHistoryForm.querySelector('#seizure_history').value = medicalHistoryData.seizure_history;
             medicalHistoryForm.querySelector('#specialty').value = medicalHistoryData.specialty;
             medicalHistoryForm.querySelector('#stroke_location').value = medicalHistoryData.stroke_location;
-            const otherMedicalConditions = JSON.parse(medicalHistoryData.other_medical_conditions) || {};
-            checkboxes.forEach(id => {
-                const checkbox = document.getElementById(`${id}Checkbox`);
-                const detailsText = document.getElementById(`${id}DetailsText`);
-                if (otherMedicalConditions[id]) {
-                    checkbox.checked = true;
-                    detailsText.value = otherMedicalConditions[id];
-                    detailsText.parentElement.classList.remove('d-none');
-                } else {
-                    checkbox.checked = false;
-                    detailsText.value = '';
-                    detailsText.parentElement.classList.add('d-none');
-                }
-            });
+            if (medicalHistoryData.other_medical_conditions.length > 0) {
+                console.log(medicalHistoryData.other_medical_conditions);
+                const otherMedicalConditions = JSON.parse(medicalHistoryData.other_medical_conditions) || {};
+                checkboxes.forEach(id => {
+                    const checkbox = document.getElementById(`${id}Checkbox`);
+                    const detailsText = document.getElementById(`${id}DetailsText`);
+                    if (otherMedicalConditions[id]) {
+                        checkbox.checked = true;
+                        detailsText.value = otherMedicalConditions[id];
+                        detailsText.parentElement.classList.remove('d-none');
+                    } else {
+                        checkbox.checked = false;
+                        detailsText.value = '';
+                        detailsText.parentElement.classList.add('d-none');
+                    }
+                });
+            }
 
             const ec1Data = data.emergencyContactOne;
             const ec1Form = document.getElementById('EC1');

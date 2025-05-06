@@ -122,8 +122,6 @@ void createBindings(webview::webview &w)
         LogToFile(msg);
         if (msg != ""){
             try {
-                LogToFile("Getting caregiver data");
-            
                 json jsonPayload;
                 jsonPayload["id"] = msg.substr(2, msg.size() - 4);
                 std::string userData = APIClient::get_caregiver(jsonPayload);
@@ -133,9 +131,6 @@ void createBindings(webview::webview &w)
                 std::future<std::string> getMedicalData;
                 std::future<std::string> getEmergencyOne;
                 std::future<std::string> getEmergencyTwo;
-
-                LogToFile("Caregiver data retrieved successfully");
-                LogToFile("User JSON: " + userJSON.dump(4));
             
                 if ((userJSON["enrollment_form"] != "None") && (userJSON["enrollment_form"].size() > 0)) {
                     getEnrollmentData = std::async(std::launch::async, [=]() {
@@ -188,7 +183,6 @@ void createBindings(webview::webview &w)
             
                 std::string combinedDataString = combinedData.dump();
                 std::string safeJson = escape_json_for_js(combinedDataString);
-                LogToFile(safeJson);
                 w.eval("document.addEventListener('DOMContentLoaded', function() { initializeFormData(" + safeJson + "); });");
             
             } catch (const std::exception& e) {
@@ -201,6 +195,7 @@ void createBindings(webview::webview &w)
 
     w.bind("loadMembers", [&](const std::string &msg) -> std::string
            {
+        LogToFile("Loading members page");
         w.navigate(BaseFilePath + "../web/members.html");
         return ""; });
 
@@ -260,7 +255,7 @@ void createBindings(webview::webview &w)
         });
         
         auto getCaregivers = std::async(std::launch::async, [=]() {
-            json localPayload = jsonPayload;
+            json localPayload;
             localPayload["member_id"] = userJSON["id"][0];
             return APIClient::get_caregiver(localPayload);
         });
@@ -326,6 +321,18 @@ void createBindings(webview::webview &w)
         json jsonPayload = json::parse(msg);
         int result = APIClient::update_membership_enrollment_form(jsonPayload);
         return ""; });
+
+    w.bind("addTransportForm", [&](const std::string &msg) -> std::string
+           {
+            json jsonPayload = json::parse(msg);
+            std::string result = APIClient::create_transport_information(jsonPayload);
+            return result; });
+
+    w.bind("updateTransportForm", [&](const std::string &msg) -> std::string
+           {
+            json jsonPayload = json::parse(msg);
+            int result = APIClient::update_transport_information(jsonPayload);
+            return ""; });
 
     w.bind("addEC", [&](const std::string &msg) -> std::string
            {

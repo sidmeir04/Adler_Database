@@ -136,6 +136,7 @@ CREATE TABLE Member (
     joined BOOLEAN,                    -- Whether the member joined
     caregiver_needed BOOLEAN,          -- Whether a caregiver is needed
     alder_program VARCHAR(50),         -- Alder program info
+    notes TEXT,
     member_info JSON,                  -- Detailed member information
 
     enrollment_form INT,
