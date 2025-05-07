@@ -1,0 +1,9 @@
+C:/Adler_Database/build/CMakeFiles/AdlerDatabase.dir
+C:/Adler_Database/build/CMakeFiles/package.dir
+C:/Adler_Database/build/CMakeFiles/package_source.dir
+C:/Adler_Database/build/CMakeFiles/edit_cache.dir
+C:/Adler_Database/build/CMakeFiles/rebuild_cache.dir
+C:/Adler_Database/build/CMakeFiles/list_install_components.dir
+C:/Adler_Database/build/CMakeFiles/install.dir
+C:/Adler_Database/build/CMakeFiles/install/local.dir
+C:/Adler_Database/build/CMakeFiles/install/strip.dir

@@ -27,7 +27,6 @@ escape_json_for_js(const std::string &json)
 
 void createBindings(webview::webview &w)
 {
-    // is not called
     w.bind("loadHTMLPage", [&](const std::string &msg) -> std::string
            {
         w.navigate(BaseFilePath + "../web/" + msg + ".html");

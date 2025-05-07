@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adler Database</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .social-part .fa{
+            padding-right:20px;
+        }
+        ul li a{
+            margin-right: 20px;
+        }
+        .hidden {
+            display: none;
+        }   
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm   navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" id="goToCallers" href="#">Callers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="goToTours" href="#">Tours</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="goToMembers" href="#">Members</a>
+                    </li>
+                    <li class="nav-item dropdown dmenu hidden">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            Our Service
+                        </a>
+                        <div class="dropdown-menu sm-menu">
+                            <a class="dropdown-item" href="#">service2</a>
+                            <a class="dropdown-item" href="#">service 2</a>
+                            <a class="dropdown-item" href="#">service 3</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="search-bar col-3">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="col-6"></div>
+            <div class="col-3">
+                <div class="dropdown"></div>
+                    <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Display
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="fname" checked>
+                                First Name
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="lname" checked>
+                                Last Name
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="phone" checked>
+                                Phone Number
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="email" checked>
+                                Email
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="staff_name">
+                                Staff Name
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="call_date">
+                                Call Date
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="referral_type">
+                                Referral Type
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="tour_scheduled">
+                                Tour Scheduled
+                            </label>
+                        </li>
+                        <li>
+                            <label class="dropdown-item d-flex align-items-center">
+                                <input class="form-check-input me-2 toggle-visibility" type="checkbox" data-target="follow_up_date">
+                                Follow Up Date
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <table id="data-table" class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="fname">First Name</th>
+                    <th class="lname">Last Name</th>
+                    <th class="phone">Phone Number</th>
+                    <th class="email">Email</th>
+                    <th class="staff_name hidden">Staff Name</th>
+                    <th class="call_date hidden">Call Date</th>
+                    <th class="referral_type hidden">Referral Type</th>
+                    <th class="tour_scheduled hidden">Tour Scheduled</th>
+                    <th class="follow_up_date hidden">Follow Up Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!-- <button onclick="getCallerData()" class="btn btn-outline-dark">Update Data</button> -->
+    </div>
+    
+    <script>
+
+        function getCallerJSON() {
+            const startTime = performance.now();
+            jsonString = window.getCallerData(); // Call C++ function
+            const endTime = performance.now();
+            console.log(`getCallerJSON() took ${endTime - startTime} milliseconds to execute.`);
+        }
+
+        function updateCallerTable(JSONString) {
+            let jsonData;
+            try {
+                jsonData = JSON.parse(JSONString);
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+                return;
+            }
+            try {
+                const table = document.querySelector("#data-table");
+                const tbody = table.querySelector("tbody") || table.appendChild(document.createElement("tbody"));
+                tbody.innerHTML = ""; // Clear existing rows
+            } catch (error) {
+                console.error("Error clearing table:", error);
+                return;
+            }
+
+            const numRows = jsonData.id.length;
+
+            try {
+                for (let i = 0; i < numRows; i++) {
+                    const row = document.createElement("tr");
+                    [firstName, lastName] = jsonData.caller_name[i].split(" ");
+                    row.innerHTML = `
+                        <td class="fname">${firstName}</td>
+                        <td class="lname">${lastName}</td>
+                        <td class="phone">${jsonData.phone_number[i]}</td>
+                        <td class="email">${jsonData.caller_email[i]}</td>
+                        <td class="staff_name">${jsonData.staff[i]}</td>
+                        <td class="call_date">${jsonData.call_date[i]}</td>
+                        <td class="referral_type">${jsonData.referral_type[i]}</td>
+                        <td class="tour_scheduled">${jsonData.tour_scheduled[i] === "0" ? "not scheduled" : "scheduled"}</td>
+                        <td class="follow_up_date">${jsonData.follow_up_date[i]}</td>
+                    `;
+                    document.querySelector("#data-table tbody").appendChild(row);
+                }
+            } catch (error) {
+                console.error("Error populating table:", error);
+                return;
+            }
+            toggleVisibility();
+        };
+
+        
+        document.querySelector('.search-bar input').addEventListener('input', function() {
+            const searchText = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#data-table tbody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+                if (rowText.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById("goToTours").addEventListener("click", function() {
+            window.loadTours();
+        });
+
+        document.getElementById("goToCallers").addEventListener("click", function() {
+            window.loadCallers();
+        });
+
+        document.getElementById("goToMembers").addEventListener("click", function() {
+            window.loadMembers();
+        });
+
+        function toggleVisibility() {
+            document.querySelectorAll('.toggle-visibility').forEach(checkbox => {
+                let targetClass = checkbox.getAttribute('data-target');
+                let targetElements = document.querySelectorAll(`.${targetClass}`);
+                
+                targetElements.forEach(element => {
+                    if (checkbox.checked) {
+                        element.classList.remove('hidden'); // Show elements
+                    } else {
+                        element.classList.add('hidden'); // Hide elements
+                    }
+                });
+            });
+        }
+
+        document.querySelectorAll('.toggle-visibility').forEach(checkbox => {
+            checkbox.addEventListener('change', toggleVisibility);
+        });
+
+        // Prevent dropdown from closing when clicking inside it
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.addEventListener('click', event => {
+                event.stopPropagation();
+            });
+        });
+
+        // Allow clicking anywhere on the item to toggle checkbox
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', event => {
+                let checkbox = item.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked; // Toggle the checkbox state
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            getCallerJSON();
+        });
+    </script>
+</body>
+</html>
