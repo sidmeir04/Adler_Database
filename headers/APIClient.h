@@ -14,7 +14,7 @@ private:
     static std::string url;
 
 public:
-    static std::string get_caller(const json &jsonPayload);
+    static std::string get_contact(const json &jsonPayload);
     static std::string get_tour(const json &jsonPayload);
     static std::string get_member(const json &jsonPayload);
     static std::string get_membership_enrollment_form(const json &jsonPayload);
@@ -29,7 +29,7 @@ public:
     static std::string get_applications(const json &jsonPayload);
     static std::string get_outreach(const json &jsonPayload);
 
-    static int update_caller(const json &jsonPayload);
+    static int update_contact(const json &jsonPayload);
     static int update_tour(const json &jsonPayload);
     static int update_member(const json &jsonPayload);
     static int update_membership_enrollment_form(const json &jsonPayload);
@@ -44,7 +44,7 @@ public:
     static int update_applications(const json &jsonPayload);
     static int update_outreach(const json &jsonPayload);
 
-    static std::string create_caller(const json &jsonPayload);
+    static std::string create_contact(const json &jsonPayload);
     static std::string create_tour(const json &jsonPayload);
     static std::string create_member(const json &jsonPayload);
     static std::string create_membership_enrollment_form(const json &jsonPayload);

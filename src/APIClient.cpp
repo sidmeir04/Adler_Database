@@ -11,14 +11,14 @@ using json = nlohmann::json;
 // std::string APIClient::url = "192.168.1.156";
 
 // At work
-std::string APIClient::url = "192.168.120.13";
+std::string APIClient::url = "192.168.120.66";
 
-std::string APIClient::get_caller(const json &jsonPayload)
+std::string APIClient::get_contact(const json &jsonPayload)
 {
     httplib::Client Client(url, 5000);
     std::string jsonBody = jsonPayload.dump();
 
-    auto post_response = Client.Post("/get_caller", jsonBody, "application/json");
+    auto post_response = Client.Post("/get_contact", jsonBody, "application/json");
 
     return post_response->body;
 }
@@ -143,11 +143,11 @@ std::string APIClient::get_outreach(const json &jsonPayload)
     return post_response->body;
 }
 
-int APIClient::update_caller(const json &jsonPayload)
+int APIClient::update_contact(const json &jsonPayload)
 {
     httplib::Client Client(url, 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = Client.Post("/update_caller", jsonBody, "application/json");
+    auto post_response = Client.Post("/update_contact", jsonBody, "application/json");
     return 1;
 }
 
@@ -247,11 +247,11 @@ int APIClient::update_outreach(const json &jsonPayload)
     return 1;
 }
 
-std::string APIClient::create_caller(const json &jsonPayload)
+std::string APIClient::create_contact(const json &jsonPayload)
 {
     httplib::Client Client(url, 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = Client.Post("/insert_caller", jsonBody, "application/json");
+    auto post_response = Client.Post("/insert_contact", jsonBody, "application/json");
     return post_response->body;
 }
 

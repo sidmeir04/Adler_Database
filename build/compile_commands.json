@@ -1,19 +1,19 @@
 [
 {
   "directory": "C:/Adler_Database/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DNOMINMAX -DWIN32_LEAN_AND_MEAN @CMakeFiles/AdlerDatabase.dir/includes_CXX.rsp -std=gnu++17 -o CMakeFiles\\AdlerDatabase.dir\\src\\logger.cpp.obj -c C:\\Adler_Database\\src\\logger.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DNOMINMAX -DWIN32_LEAN_AND_MEAN @CMakeFiles/AdlerDatabase.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\AdlerDatabase.dir\\src\\logger.cpp.obj -c C:\\Adler_Database\\src\\logger.cpp",
   "file": "C:/Adler_Database/src/logger.cpp",
   "output": "CMakeFiles/AdlerDatabase.dir/src/logger.cpp.obj"
 },
 {
   "directory": "C:/Adler_Database/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DNOMINMAX -DWIN32_LEAN_AND_MEAN @CMakeFiles/AdlerDatabase.dir/includes_CXX.rsp -std=gnu++17 -o CMakeFiles\\AdlerDatabase.dir\\src\\APIClient.cpp.obj -c C:\\Adler_Database\\src\\APIClient.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DNOMINMAX -DWIN32_LEAN_AND_MEAN @CMakeFiles/AdlerDatabase.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\AdlerDatabase.dir\\src\\APIClient.cpp.obj -c C:\\Adler_Database\\src\\APIClient.cpp",
   "file": "C:/Adler_Database/src/APIClient.cpp",
   "output": "CMakeFiles/AdlerDatabase.dir/src/APIClient.cpp.obj"
 },
 {
   "directory": "C:/Adler_Database/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DNOMINMAX -DWIN32_LEAN_AND_MEAN @CMakeFiles/AdlerDatabase.dir/includes_CXX.rsp -std=gnu++17 -o CMakeFiles\\AdlerDatabase.dir\\src\\main.cpp.obj -c C:\\Adler_Database\\src\\main.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DNOMINMAX -DWIN32_LEAN_AND_MEAN @CMakeFiles/AdlerDatabase.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\AdlerDatabase.dir\\src\\main.cpp.obj -c C:\\Adler_Database\\src\\main.cpp",
   "file": "C:/Adler_Database/src/main.cpp",
   "output": "CMakeFiles/AdlerDatabase.dir/src/main.cpp.obj"
 }

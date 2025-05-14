@@ -100,6 +100,10 @@
                     <label for="relationship">Relation to Member</label>
                     <input type="text" class="form-control" id="relationship" name="relationship" required>
                 </div>
+                <div class="mb-3">
+                    <label for="notes">Notes</label>
+                    <input type="text" class="form-control" id="notes" name="notes" required>
+                </div>
                 <button type="submit" class="btn btn-success">Add new Caregiver</button>
             </div>
         </form>
@@ -539,17 +543,15 @@
             document.querySelector('.caregiver_id').value = memberData.id;
             memberForm.querySelector('#caregiver_type').value = memberData.caregiver_type;
             memberForm.querySelector('#name').value = memberData.name;
-            // memberForm.querySelector('#dob').value = memberData.dob;
             memberForm.querySelector('#email').value = memberData.email;
             memberForm.querySelector('#phone').value = memberData.phone;
-            // memberForm.querySelector('#address').value = memberData.address;
-            // memberForm.querySelector('#county').value = memberData.county;
             memberForm.querySelector('#occupations').value = memberData.occupations;
             memberForm.querySelector('#allergies').value = memberData.allergies;
             memberForm.querySelector('#medications').value = memberData.medications;
             memberForm.querySelector('#sex').value = memberData.sex;
             memberForm.querySelector('#member_id').value = memberData.member_id;
             memberForm.querySelector('#relationship').value = memberData.relationship;
+            memberForm.querySelector('#notes').value = memberData.notes;
 
             const medicalHistoryData = data.medicalData;
             const medicalHistoryForm = document.getElementById('MedicalHistoryForm');

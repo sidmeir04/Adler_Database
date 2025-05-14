@@ -71,7 +71,13 @@
                         <a class="nav-link" onclick="updateCaregiver('')" href="#">Add Caregiver</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" onclick="updateContact('')" href="#">Add Contact</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="goToMembers" href="#">Members</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="goToContacts" href="#">Contacts</a>
                     </li>
                     <li class="nav-item dropdown dmenu hidden">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -103,6 +109,10 @@
             window.loadMembers();
         });
 
+        document.getElementById("goToContacts").addEventListener("click", function() {
+            window.loadContacts();
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             const now = new Date();
             const timeString = now.toISOString().split('T')[1];
@@ -115,6 +125,7 @@
             const timeString = now.toISOString().split('T')[1];
             console.log(`updateMembers called at ${timeString}`);
             let jsonData;
+            console.log(JSONString);
             try {
                 jsonData = JSON.parse(JSONString);
             } catch (error) {
@@ -224,9 +235,9 @@
                     }
                     return value;
                 } catch (error) {
-                        console.error("Error accessing nested keys:", error);
-                        return defaultValue;
-                    }
+                    console.error("Error accessing nested keys:", error);
+                    return defaultValue;
+                }
             }
             console.log("jsonData");
             const modalContainer = document.querySelector(".modalContainer");
@@ -244,8 +255,9 @@
                                     <img src="resources/imgs/user_icon.png" width=150 height=150 class="img-fluid rounded-circle mb-3">
                                     <h4>${safeAccess(jsonData, 'name', 'Unknown')}</h4>
                                     <h6 class="text-muted">${safeAccess(jsonData, 'email', 'N/A')}</h6>
-                                    </div>
-                                    <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
+                                    <p>${safeAccess(jsonData, 'notes', '')}</p>
+                                </div>
+                                <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
                                     <p><strong>Program:</strong> ${safeAccess(jsonData, 'adler_program', 'N/A')}</p>
                                     <p><strong>Date Joined:</strong> ${safeAccess(jsonData, 'join_date', 'N/A')}</p>
                                     <p><strong>Age:</strong> ${safeAccess(jsonData, 'age', 'N/A')}</p>
@@ -354,7 +366,13 @@
                 </div>
             </div>
             `;
-            const myModal = document.getElementById('userModal');
+            const modalElement = document.getElementById("userModal");
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+            modalElement.addEventListener('hidden.bs.modal', () => {
+                modalElement.remove();
+            });
+            
             const caregiverList = document.querySelector(".caregiverList");
 
             if (careGivers && Array.isArray(careGivers.id)) {
@@ -383,7 +401,15 @@
         });
 
         function closeModal() {
-            document.getElementById('modalThing').style.display = 'none';
+            const modal = document.getElementById("userModal");
+            if (modal) {
+            modal.classList.remove("show");
+            modal.style.display = "none";
+
+            modal.addEventListener('transitionend', () => {
+                modal.remove();
+            }, { once: true });
+        }
         }
 
         function updateMember(userID) {
@@ -392,6 +418,10 @@
 
         function updateCaregiver(userID) {
             window.loadCaregiverForm(userID.toString());
+        }
+
+        function updateContact(userID) {
+            window.loadContactForm(userID.toString());
         }
     </script>
 </body>

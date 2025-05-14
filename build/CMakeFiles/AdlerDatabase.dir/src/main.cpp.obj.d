@@ -407,59 +407,53 @@ CMakeFiles/AdlerDatabase.dir/src/main.cpp.obj: \
  C:/libraries/webview/core/include/webview/json_deprecated.hh \
  C:/libraries/webview/core/include/webview/detail/json.hh \
  C:/libraries/webview/core/include/webview/version.h \
- C:/msys64/ucrt64/include/c++/14.1.0/filesystem \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/fs_fwd.h \
- C:/msys64/ucrt64/include/c++/14.1.0/system_error \
- C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/error_constants.h \
- C:/msys64/ucrt64/include/c++/14.1.0/stdexcept \
- C:/msys64/ucrt64/include/c++/14.1.0/cstdint \
+ C:/msys64/ucrt64/include/c++/14.1.0/future \
+ C:/msys64/ucrt64/include/c++/14.1.0/mutex \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/chrono.h \
  C:/msys64/ucrt64/include/c++/14.1.0/ratio \
+ C:/msys64/ucrt64/include/c++/14.1.0/cstdint \
  C:/msys64/ucrt64/include/c++/14.1.0/limits \
  C:/msys64/ucrt64/include/c++/14.1.0/ctime \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/parse_numbers.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/fs_path.h \
- C:/msys64/ucrt64/include/c++/14.1.0/locale \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/std_mutex.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/unique_lock.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/error_constants.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/condition_variable \
+ C:/msys64/ucrt64/include/c++/14.1.0/system_error \
+ C:/msys64/ucrt64/include/c++/14.1.0/stdexcept \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/atomic_futex.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/std_thread.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/iostream \
+ C:/msys64/ucrt64/include/c++/14.1.0/ostream \
+ C:/msys64/ucrt64/include/c++/14.1.0/ios \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ios_base.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/streambuf \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets.h \
  C:/msys64/ucrt64/include/c++/14.1.0/cwctype \
  C:/msys64/ucrt64/include/wctype.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/ctype_base.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/ios_base.h \
- C:/msys64/ucrt64/include/c++/14.1.0/streambuf \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf_iterator.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/ctype_inline.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/istream \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/istream.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/iomanip \
+ C:/msys64/ucrt64/include/c++/14.1.0/locale \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets_nonio.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/time_members.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/messages_members.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/codecvt.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets_nonio.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_conv.h \
- C:/msys64/ucrt64/include/c++/14.1.0/iomanip \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/quoted_string.h \
  C:/msys64/ucrt64/include/c++/14.1.0/sstream \
- C:/msys64/ucrt64/include/c++/14.1.0/istream \
- C:/msys64/ucrt64/include/c++/14.1.0/ios \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/ostream \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/istream.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/sstream.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/codecvt \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/fs_dir.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/fs_ops.h \
- C:/msys64/ucrt64/include/c++/14.1.0/future \
- C:/msys64/ucrt64/include/c++/14.1.0/mutex \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/std_mutex.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/unique_lock.h \
- C:/msys64/ucrt64/include/c++/14.1.0/condition_variable \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/atomic_futex.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/std_thread.h \
- C:/msys64/ucrt64/include/c++/14.1.0/iostream \
  C:/Adler_Database/headers/logger.h C:/Adler_Database/headers/APIClient.h \
  C:/Adler_Database/headers/httplib.h C:/msys64/ucrt64/include/io.h \
  C:/msys64/ucrt64/include/winsock2.h \
@@ -573,6 +567,12 @@ CMakeFiles/AdlerDatabase.dir/src/main.cpp.obj: \
  C:/libraries/json/include/nlohmann/detail/string_concat.hpp \
  C:/libraries/json/include/nlohmann/detail/meta/identity_tag.hpp \
  C:/libraries/json/include/nlohmann/detail/meta/std_fs.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/filesystem \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/fs_fwd.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/fs_path.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/codecvt \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/fs_dir.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/fs_ops.h \
  C:/libraries/json/include/nlohmann/detail/conversions/to_json.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/optional \
  C:/libraries/json/include/nlohmann/detail/iterators/iteration_proxy.hpp \

@@ -4,7 +4,7 @@ CREATE DATABASE adler_aphasia_center;
 SET foreign_key_checks = 1;
 
 USE adler_aphasia_center;
-CREATE TABLE Caller (
+CREATE TABLE Contact (
     id INT AUTO_INCREMENT PRIMARY KEY,
     staff VARCHAR(50) NOT NULL,
     caller_name VARCHAR(50),

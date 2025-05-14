@@ -958,6 +958,7 @@
             memberForm.querySelector('#phoneNumber').value = userData.phone;
             memberForm.querySelector('#address').value = userData.address;
             memberForm.querySelector('#county').value = userData.county;
+            memberForm.querySelector('#notes').value = userData.notes;
             const genderSelect = memberForm.querySelector("#gender");
             for (let option of genderSelect.options) {
                 if (option.value == userData.gender) {
