@@ -229,18 +229,19 @@ void createBindings(webview::webview &w)
         json jsonPayload;
         jsonPayload["name"] = "";
         std::string result = APIClient::get_member(jsonPayload);
-        w.eval("updateMembers(`" + result + "`);");
+        std::string caregivers = APIClient::get_caregiver(jsonPayload);
+        w.eval("updateMembers(`" + result + "`,`" + caregivers + "`);");
         return ""; });
 
-        w.bind("getContactData", [&](const std::string &msg) -> std::string
-                {
-            std::string message;
-            
-            json jsonPayload;
-            jsonPayload["name"] = "";
-            std::string result = APIClient::get_contact(jsonPayload);
-            w.eval("updateContact(`" + result + "`);");
-            return ""; });
+    w.bind("getContactData", [&](const std::string &msg) -> std::string
+            {
+        std::string message;
+        
+        json jsonPayload;
+        jsonPayload["name"] = "";
+        std::string result = APIClient::get_contact(jsonPayload);
+        w.eval("updateContact(`" + result + "`);");
+        return ""; });
 
     w.bind("createMemberModal", [&](const std::string &msg) -> std::string
            {
@@ -288,6 +289,35 @@ void createBindings(webview::webview &w)
         std::string safeMedicalData = escape_json_for_js(medicalData);
         safeMedicalData = safeMedicalData.substr(1, safeMedicalData.length() - 2);
         w.eval("memberModal(`" + userData + "`,`" + safeEnrollmentData + "`,`" + safeMedicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`,`" + caregivers + "`);");
+        return ""; });
+
+    w.bind("createCaregiverModal", [&](const std::string &msg) -> std::string
+           {
+        json jsonPayload;
+        jsonPayload["id"] = msg.substr(1, msg.size() - 2);
+        std::string userData = APIClient::get_caregiver(jsonPayload);
+        json userJSON = json::parse(userData);
+        auto getMedicalData = std::async(std::launch::async, [=]() {
+            json localPayload = jsonPayload;
+            localPayload["id"] = userJSON["medical_history"][0];
+            return APIClient::get_medical_history_form(localPayload);
+        });
+        auto getEmergencyOne = std::async(std::launch::async, [=]() {
+            json localPayload = jsonPayload;
+            localPayload["id"] = userJSON["emergency_contact_one"][0];
+            return APIClient::get_emergency_contact(localPayload);
+        });
+        auto getEmergencyTwo = std::async(std::launch::async, [=]() {
+            json localPayload = jsonPayload;
+            localPayload["id"] = userJSON["emergency_contact_two"][0];
+            return APIClient::get_emergency_contact(localPayload);
+        });
+        std::string medicalData = getMedicalData.get();
+        std::string emergency_one = getEmergencyOne.get();
+        std::string emergency_two = getEmergencyTwo.get();
+        std::string safeMedicalData = escape_json_for_js(medicalData);
+        safeMedicalData = safeMedicalData.substr(1, safeMedicalData.length() - 2);
+        w.eval("caregiverModal(`" + userData + "`,`" + safeMedicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`);");
         return ""; });
 
     w.bind("createContactModal", [&](const std::string &msg) -> std::string

@@ -806,6 +806,38 @@
                 window.updateEnrollmentForm(jsonString);
             }
         });
+        document.getElementById('transport').addEventListener('submit', function(event) {
+            event.preventDefault();
+            if(getMemberID() == undefined || getMemberID() == '') {
+                alert("Please save the member information first before adding emergency contact details.");
+                console.error("Member ID not set");
+                return;
+            }
+            const formData = new FormData(event.target);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            formObject['id'] = getTransportID();
+            const jsonString = JSON.stringify(formObject, null, 2);
+            console.log(jsonString);
+            if(getTransportID() == undefined || getTransportID() == '') {
+                window.addTransport(jsonString).then(function(id) {
+                    console.log("Returned ID:", id);
+                    updateTransportID(id);
+                    const payload = JSON.stringify({
+                        "id": getMemberID()[0],
+                        "transport": id
+                    });
+                    console.log("Payload:", payload);
+                    window.updateMember(payload);
+                }).catch(function(error) {
+                    console.error("Error:", error);
+                });
+            } else {
+                window.updateTransport(jsonString);
+            }
+        });
         document.getElementById('MedicalHistoryForm').addEventListener('submit', function(event) {
             event.preventDefault();
             if(getMemberID() == undefined || getMemberID() == '') {
@@ -1008,6 +1040,19 @@
                     }
                 });
             }
+
+            // const transportData = data.transportData;
+            // const transportForm = document.getElementById('Transport');
+            // document.querySelector('.transport_id').value = transportData.id;
+            // transportForm.querySelector('#using_bus_transport').value = transportData.using_bus_transport;
+            // const busCompanySelect = transportForm.querySelector("#bus_company");
+            // for (let option of busCompanySelect.options) {
+            //     if (option.value == transportData.bus_company) {
+            //         option.selected = true;
+            //         break;
+            //     }
+            // }
+            // transportForm.querySelector('#bus_contact_phone').value = transportData.bus_contact_phone;
 
             const enrollmentData = data.enrollmentData;
             const enrollmentForm = document.getElementById('EnrollmentForm');
