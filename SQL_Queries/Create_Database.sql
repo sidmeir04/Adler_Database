@@ -6,7 +6,7 @@ SET foreign_key_checks = 1;
 USE adler_aphasia_center;
 CREATE TABLE Contact (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    staff VARCHAR(50) NOT NULL,
+    staff text,
     caller_name VARCHAR(50),
     caller_email VARCHAR(50),
     call_date DATE,
@@ -97,14 +97,11 @@ CREATE TABLE Evaluation (
 
 CREATE TABLE Transportation_Information (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    bus_transport BOOLEAN,                -- Whether bus transport is used
-    bus_company VARCHAR(50),              -- Bus transport company name
-    bus_contact_phone VARCHAR(20),        -- Phone number for the bus company
-    picked_up BOOLEAN,
-    pickup_person VARCHAR(50),            -- Person picking up the member
-    relationship_to_member VARCHAR(50),
-    primary_phone VARCHAR(20),            -- Primary contact phone number
-    secondary_phone VARCHAR(20)           -- Secondary contact phone number
+    am_name VARCHAR(50),
+    am_phone VARCHAR(20),
+    pm_name VARCHAR(50),
+    pm_phone VARCHAR(20),
+    transportation_notes TEXT
 );
 
 CREATE TABLE Emergency_Contact (
@@ -122,7 +119,7 @@ CREATE TABLE Emergency_Contact (
 CREATE TABLE Member (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
-    age INT,
+    -- age INT,
     dob DATE,                          -- Date of birth
     email VARCHAR(50),
     aep_completion_date DATE,          -- Date completed AEP
@@ -136,6 +133,8 @@ CREATE TABLE Member (
     joined BOOLEAN,                    -- Whether the member joined
     caregiver_needed BOOLEAN,          -- Whether a caregiver is needed
     alder_program VARCHAR(50),         -- Alder program info
+    member_type VARCHAR(50),
+    date_changed DATE,
     notes TEXT,
     member_info JSON,                  -- Detailed member information
 
