@@ -387,12 +387,14 @@
                 window.addCaregiver(jsonString).then(function(id) {
                     console.log("Returned ID:", id);
                     updateMemberID(id);
+                    alert("Caregiver added successfully!");
                 }).catch(function(error) {
                     console.log(id);
                     console.error("Error:", error);
                 });
             } else {
                 window.updateCaregiver(jsonString);
+                alert("Caregiver updated successfully.");
             }
         });
         document.getElementById('MedicalHistoryForm').addEventListener('submit', function(event) {
@@ -433,11 +435,13 @@
 
                     console.log("Payload:", payload);
                     window.updateCaregiver(payload);
+                    alert("Medical History updated successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error, "at line:", error.lineNumber || "unknown");
                 });
             } else {
                 window.updateMedicalHistory(jsonString);
+                alert("Medical History updated successfully.");
             }
         });
         document.getElementById('EC1').addEventListener('submit', function(event) {
@@ -467,11 +471,13 @@
 
                     console.log("Payload:", payload);
                     window.updateCaregiver(payload);
+                    alert("Emergency Contact One updated successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error);
                 });
             } else {
                 window.updateEC(jsonString);
+                alert("Emergency Contact One updated successfully.");
             }
         });
         document.getElementById('EC2').addEventListener('submit', function(event) {
@@ -499,12 +505,14 @@
                     });
 
                     window.updateCaregiver(payload);
+                    alert("Emergency Contact Two updated successfully.");
                 }).catch(function(error) {
                     console.log(id);
                     console.error("Error:", error);
                 });
             } else {
                 window.updateEC(jsonString);
+                alert("Emergency Contact Two updated successfully.");
             }
         });
         document.addEventListener("DOMContentLoaded", function () {

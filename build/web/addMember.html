@@ -13,6 +13,9 @@
         .form-section {
             padding-left: 20px;
         }
+        #date_changed {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -39,12 +42,28 @@
         <form id="memberForm">
             <div class="form-step">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <label for="member_type" class="form-label">Member Type</label>
+                    <select class="form-select" id="member_type" name="member_type" required>
+                        <option value="" selected disabled>Select Member Type</option>
+                        <option value="Prospective">Prospective</option>
+                        <option value="Current">Current</option>
+                        <option value="No Longer">No Longer</option>
+                        <option value="Deceased">Deceased</option>
+                    </select>
+                </div>
+                <script>
+                    document.getElementById('member_type').addEventListener('change', function() {
+                        const dateChangedInput = document.getElementById('date_changed');
+                        const currentDate = new Date().toISOString().split('T')[0];
+                        dateChangedInput.value = currentDate;
+                    });
+                </script>
+                <div class="mb-3">
+                    <input type="date" class="form-control" id="date_changed" date_changed="date_changed" required>
                 </div>
                 <div class="mb-3">
-                    <label for="age" class="form-label">Age</label>
-                    <input type="number" class="form-control" id="age" name="age" required>
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="mb-3">
                     <label for="dob" class="form-label">Date of Birth</label>
@@ -709,6 +728,7 @@
                     <label for="address" class="form-label">Address</label>
                     <input type="text" class="form-control" id="address" name="address" required>
                 </div>
+                
                 <button type="submit" class="btn btn-success">Create Emergency Contact Two</button>
             </div>
         </form>
@@ -729,12 +749,14 @@
                 window.addMember(jsonString).then(function(id) {
                     console.log("Returned ID:", id);
                     updateMemberID(id);
+                    alert("Member information saved successfully.");
                 }).catch(function(error) {
                     console.log(id);
                     console.error("Error:", error);
                 });
             } else {
                 window.updateMember(jsonString);
+                alert("Member information updated successfully.");
             }
         });
         document.getElementById('EnrollmentForm').addEventListener('submit', function(event) {
@@ -799,11 +821,13 @@
 
                     console.log("Payload:", payload);
                     window.updateMember(payload);
+                    alert("Enrollment Form added successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error);
                 });
             } else {
                 window.updateEnrollmentForm(jsonString);
+                alert("Enrollment Form updated successfully.");
             }
         });
         document.getElementById('transport').addEventListener('submit', function(event) {
@@ -831,11 +855,13 @@
                     });
                     console.log("Payload:", payload);
                     window.updateMember(payload);
+                    alert("Transport details added successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error);
                 });
             } else {
                 window.updateTransport(jsonString);
+                alert("Transport details updated successfully.");
             }
         });
         document.getElementById('MedicalHistoryForm').addEventListener('submit', function(event) {
@@ -876,11 +902,13 @@
 
                     console.log("Payload:", payload);
                     window.updateMember(payload);
+                    alert("Medical History added successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error, "at line:", error.lineNumber || "unknown");
                 });
             } else {
                 window.updateMedicalHistory(jsonString);
+                alert("Medical History updated successfully.");
             }
         });
         document.getElementById('EC1').addEventListener('submit', function(event) {
@@ -910,11 +938,13 @@
 
                     console.log("Payload:", payload);
                     window.updateMember(payload);
+                    alert("Emergency Contact One added successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error);
                 });
             } else {
                 window.updateEC(jsonString);
+                alert("Emergency Contact One updated successfully.");
             }
         });
         document.getElementById('EC2').addEventListener('submit', function(event) {
@@ -942,12 +972,14 @@
                     });
 
                     window.updateMember(payload);
+                    alert("Emergency Contact Two added successfully.");
                 }).catch(function(error) {
                     console.log(id);
                     console.error("Error:", error);
                 });
             } else {
                 window.updateEC(jsonString);
+                alert("Emergency Contact Two updated successfully.");
             }
         });
         document.addEventListener("DOMContentLoaded", function () {
@@ -984,13 +1016,20 @@
             const memberForm = document.getElementById('memberForm');
             document.querySelector('.member_id').value = userData.id;
             memberForm.querySelector('#name').value = userData.name;
-            memberForm.querySelector('#age').value = userData.age;
             memberForm.querySelector('#dob').value = userData.dob;
             memberForm.querySelector('#email').value = userData.email;
             memberForm.querySelector('#phoneNumber').value = userData.phone;
             memberForm.querySelector('#address').value = userData.address;
             memberForm.querySelector('#county').value = userData.county;
             memberForm.querySelector('#notes').value = userData.notes;
+            memberForm.querySelector('#date_changed').value = userData.date_changed;
+            const member_type = memberForm.querySelector("#member_type");
+            for (let option of member_type.options) {
+                if (option.value == userData.member_type) {
+                    option.selected = true;
+                    break;
+                }
+            }
             const genderSelect = memberForm.querySelector("#gender");
             for (let option of genderSelect.options) {
                 if (option.value == userData.gender) {

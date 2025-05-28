@@ -63,16 +63,18 @@
                 window.addContact(jsonString).then(function(id) {
                     console.log("Returned ID:", id);
                     updateMemberID(id);
+                    alert("Contact added successfully!");
                 }).catch(function(error) {
                     console.log(id);
                     console.error("Error:", error);
                 });
             } else {
                 window.updateContact(jsonString);
+                alert("Contact updated successfully!");
             }
         });
 
-        function initializeFormData(jsonString){
+        function initializeContactData(jsonString){
             console.log(jsonString);
             const data = JSON.parse(jsonString);
             const memberForm = document.getElementById('memberForm');
