@@ -148,6 +148,7 @@
                                     <div class="ms-3">
                                         <h4 class="card-title">${jsonData['name'][i]}</h4>
                                         <h6 class="card-subtitle text-muted">${jsonData['email'][i]}</h6>
+                                        <h6 class="card-text">${jsonData['member_type'][i]} Member</p>
                                         <p class="card-text p-y-1">${jsonData['adler_program'][i]}</p>
                                         <p class="userID" style="display: none;">${jsonData['id'][i]}</p>
                                     </div>
@@ -285,12 +286,14 @@
                                 <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
                                     <p><strong>Program:</strong> ${safeAccess(jsonData, 'adler_program', 'N/A')}</p>
                                     <p><strong>Date Joined:</strong> ${safeAccess(jsonData, 'join_date', 'N/A')}</p>
-                                    <p><strong>Age:</strong> ${safeAccess(jsonData, 'age', 'N/A')}</p>
+                                    <p><strong>Age:</strong> ${new Date().getFullYear() - new Date(safeAccess(jsonData, 'dob', 'N/A')).getFullYear() - (new Date() < new Date(new Date(safeAccess(jsonData, 'dob', 'N/A')).setFullYear(new Date().getFullYear())) ? 1 : 0)}</p>
                                     <p><strong>Date of Birth:</strong> ${safeAccess(jsonData, 'dob', 'N/A')}</p>
                                     <p><strong>Address:</strong> ${safeAccess(jsonData, 'address', 'N/A')}</p>
                                     <p><strong>County:</strong> ${safeAccess(jsonData, 'county', 'N/A')}</p>
                                     <p><strong>Gender:</strong> ${safeAccess(jsonData, 'gender', 'N/A') == 'F' ? 'Female' : 'Male'}</p>
                                     <p><strong>Phone:</strong> ${safeAccess(jsonData, 'phone', 'N/A')}</p>
+                                    <p><strong>Member Type:</strong> ${safeAccess(jsonData, 'member_type', 'N/A')} Member</p>
+                                    <p><strong>Date Updated:</strong> ${safeAccess(jsonData, 'date_changed', 'N/A')}</p>
                                     <button onClick=updateMember(${safeAccess(jsonData, 'id', 'N/A')})>Update Member</button>
                                 </div>
                                 <div class="col-md-4">

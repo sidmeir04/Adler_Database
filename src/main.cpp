@@ -201,14 +201,14 @@ void createBindings(webview::webview &w)
                 jsonPayload["id"] = msg.substr(2, msg.size() - 4);
                 std::string contactData = APIClient::get_contact(jsonPayload);
                 json contactJSON = json::parse(contactData);
-                w.eval("document.addEventListener('DOMContentLoaded', function() { initializeContactData(" + contactData + "); });");
+                w.eval("document.addEventListener('DOMContentLoaded', function() { initializeContactData(`" + contactData + "`); });");
             } catch (const std::exception& e) {
                 LogToFile(std::string("Exception: ") + e.what());
             } catch (...) {
                 LogToFile("Unknown error occurred while getting and processing contact data.");
             }
         }
-        return "";});
+        return ""; });
 
     w.bind("loadMembers", [&](const std::string &msg) -> std::string
            {
@@ -217,7 +217,7 @@ void createBindings(webview::webview &w)
         return ""; });
 
     w.bind("loadContacts", [&](const std::string &msg) -> std::string
-            {
+           {
         LogToFile("Loading Contacts page");
         w.navigate(BaseFilePath + "../web/contacts.html");
         return ""; });
@@ -234,7 +234,7 @@ void createBindings(webview::webview &w)
         return ""; });
 
     w.bind("getContactData", [&](const std::string &msg) -> std::string
-            {
+           {
         std::string message;
         
         json jsonPayload;
@@ -260,6 +260,12 @@ void createBindings(webview::webview &w)
             localPayload["id"] = userJSON["medical_history"][0];
             return APIClient::get_medical_history_form(localPayload);
         });
+
+        auto getTransportData = std::async(std::launch::async, [=]() {
+            json localPayload = jsonPayload;
+            localPayload["id"] = userJSON["transport_info"][0];
+            return APIClient::get_transportation_information(localPayload);
+        });
         
         auto getEmergencyOne = std::async(std::launch::async, [=]() {
             json localPayload = jsonPayload;
@@ -281,6 +287,7 @@ void createBindings(webview::webview &w)
         
         std::string enrollmentData = getEnrollmentData.get();
         std::string medicalData = getMedicalData.get();
+        std::string transportData = getTransportData.get();
         std::string emergency_one = getEmergencyOne.get();
         std::string emergency_two = getEmergencyTwo.get();
         std::string caregivers = getCaregivers.get();
@@ -288,7 +295,7 @@ void createBindings(webview::webview &w)
         safeEnrollmentData = safeEnrollmentData.substr(1, safeEnrollmentData.length() - 2);
         std::string safeMedicalData = escape_json_for_js(medicalData);
         safeMedicalData = safeMedicalData.substr(1, safeMedicalData.length() - 2);
-        w.eval("memberModal(`" + userData + "`,`" + safeEnrollmentData + "`,`" + safeMedicalData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`,`" + caregivers + "`);");
+        w.eval("memberModal(`" + userData + "`,`" + safeEnrollmentData + "`,`" + safeMedicalData + "`,`" + transportData + "`,`" + emergency_one +  + "`,`" + emergency_two + "`,`" + caregivers + "`);");
         return ""; });
 
     w.bind("createCaregiverModal", [&](const std::string &msg) -> std::string
@@ -321,13 +328,12 @@ void createBindings(webview::webview &w)
         return ""; });
 
     w.bind("createContactModal", [&](const std::string &msg) -> std::string
-        {
+           {
             json jsonPayload;
             jsonPayload["id"] = msg.substr(1, msg.size() - 2);
             std::string userData = APIClient::get_contact(jsonPayload);
             w.eval("contactModal(`" + userData + "`);");
-            return "";
-        });
+            return ""; });
 
     w.bind("addMember", [&](const std::string &msg) -> std::string
            {
@@ -395,13 +401,13 @@ void createBindings(webview::webview &w)
     w.bind("addTransportForm", [&](const std::string &msg) -> std::string
            {
             json jsonPayload = json::parse(msg);
-            std::string result = APIClient::create_transport_information(jsonPayload);
+            std::string result = APIClient::create_transportation_information(jsonPayload);
             return result; });
 
     w.bind("updateTransportForm", [&](const std::string &msg) -> std::string
            {
             json jsonPayload = json::parse(msg);
-            int result = APIClient::update_transport_information(jsonPayload);
+            int result = APIClient::update_transportation_information(jsonPayload);
             return ""; });
 
     w.bind("addEC", [&](const std::string &msg) -> std::string

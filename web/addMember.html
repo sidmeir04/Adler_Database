@@ -13,6 +13,9 @@
         .form-section {
             padding-left: 20px;
         }
+        #date_changed {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -39,36 +42,52 @@
         <form id="memberForm">
             <div class="form-step">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <label for="member_type" class="form-label">Member Type</label>
+                    <select class="form-select" id="member_type" name="member_type" >
+                        <option value="" selected disabled>Select Member Type</option>
+                        <option value="Prospective">Prospective</option>
+                        <option value="Current">Current</option>
+                        <option value="No Longer">No Longer</option>
+                        <option value="Deceased">Deceased</option>
+                    </select>
+                </div>
+                <script>
+                    document.getElementById('member_type').addEventListener('change', function() {
+                        const dateChangedInput = document.getElementById('date_changed');
+                        const currentDate = new Date().toISOString().split('T')[0];
+                        dateChangedInput.value = currentDate;
+                    });
+                </script>
+                <div class="mb-3">
+                    <input type="date" class="form-control" id="date_changed" date_changed="date_changed" >
                 </div>
                 <div class="mb-3">
-                    <label for="age" class="form-label">Age</label>
-                    <input type="number" class="form-control" id="age" name="age" required>
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" >
                 </div>
                 <div class="mb-3">
                     <label for="dob" class="form-label">Date of Birth</label>
-                    <input type="date" class="form-control" id="dob" name="dob" required>
+                    <input type="date" class="form-control" id="dob" name="dob" >
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" >
                 </div>
                 <div class="mb-3">
                     <label for="phoneNumber" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" >
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" required>
+                    <input type="text" class="form-control" id="address" name="address" >
                 </div>
                 <div class="mb-3">
                     <label for="county" class="form-label">County</label>
-                    <input type="text" class="form-control" id="county" name="county" required>
+                    <input type="text" class="form-control" id="county" name="county" >
                 </div>
                 <div class="mb-3">
                     <label for="gender" class="form-label">Gender</label>
-                    <select class="form-select" id="gender" name="gender" required>
+                    <select class="form-select" id="gender" name="gender" >
                         <option value="" selected disabled>Select Gender</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
@@ -77,7 +96,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="veteran" class="form-label">Veteran</label>
-                    <select class="form-select" id="veteran" name="veteran" required>
+                    <select class="form-select" id="veteran" name="veteran" >
                         <option value="" selected disabled>Select Veteran Status</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -95,7 +114,7 @@
             <div class="form-step d-none">
                 <div class="mb-3">
                     <label for="anti_seizure_med" class="form-label">Anti Seizure Medication</label>
-                    <select class="form-select" id="anti_seizure_med" name="anti_seizure_med" required>
+                    <select class="form-select" id="anti_seizure_med" name="anti_seizure_med" >
                         <option value="" selected disabled>Select Option</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -103,51 +122,51 @@
                 </div>
                 <div class="mb-3">
                     <label for="aphasia_cause" class="form-label">Aphasia Cause</label>
-                    <input type="text" class="form-control" id="aphasia_cause" name="aphasia_cause" required>
+                    <input type="text" class="form-control" id="aphasia_cause" name="aphasia_cause" >
                 </div>
                 <div class="mb-3">
                     <label for="aphasia_onset" class="form-label">Aphasia Onset</label>
-                    <input type="date" class="form-control" id="aphasia_onset" name="aphasia_onset" required>
+                    <input type="date" class="form-control" id="aphasia_onset" name="aphasia_onset" >
                 </div>
                 <div class="mb-3">
                     <label for="completion_date" class="form-label">Completion Date</label>
-                    <input type="date" class="form-control" id="completion_date" name="completion_date" required>
+                    <input type="date" class="form-control" id="completion_date" name="completion_date" >
                 </div>
                 <div class="mb-3">
                     <label for="last_seizure_date" class="form-label">Last Seizure Date</label>
-                    <input type="date" class="form-control" id="last_seizure_date" name="last_seizure_date" required>
+                    <input type="date" class="form-control" id="last_seizure_date" name="last_seizure_date" >
                 </div>
                 <div class="mb-3">
                     <label for="lesion_location" class="form-label">Lesion Location</label>
-                    <input type="text" class="form-control" id="lesion_location" name="lesion_location" required>
+                    <input type="text" class="form-control" id="lesion_location" name="lesion_location" >
                 </div>
                 <div class="mb-3">
                     <label for="other_visual_impairments" class="form-label">Other Visual Impairments</label>
-                    <textarea class="form-control" id="other_visual_impairments" name="other_visual_impairments" rows="3" required></textarea>
+                    <textarea class="form-control" id="other_visual_impairments" name="other_visual_impairments" rows="3" ></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="physician_address" class="form-label">Physician Address</label>
-                    <input type="text" class="form-control" id="physician_address" name="physician_address" required>
+                    <input type="text" class="form-control" id="physician_address" name="physician_address" >
                 </div>
                 <div class="mb-3">
                     <label for="physician_phone" class="form-label">Physician Phone</label>
-                    <input type="tel" class="form-control" id="physician_phone" name="physician_phone" required>
+                    <input type="tel" class="form-control" id="physician_phone" name="physician_phone" >
                 </div>
                 <div class="mb-3">
                     <label for="physicion_name" class="form-label">Physician Name</label>
-                    <input type="text" class="form-control" id="physicion_name" name="physicion_name" required>
+                    <input type="text" class="form-control" id="physicion_name" name="physicion_name" >
                 </div>
                 <div class="mb-3">
                     <label for="primary_diagnosis" class="form-label">Primary Diagnosis</label>
-                    <textarea class="form-control" id="primary_diagnosis" name="primary_diagnosis" rows="3" required></textarea>
+                    <textarea class="form-control" id="primary_diagnosis" name="primary_diagnosis" rows="3" ></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="secondary_diagnosis" class="form-label">Secondary Diagnosis</label>
-                    <textarea class="form-control" id="secondary_diagnosis" name="secondary_diagnosis" rows="3" required></textarea>
+                    <textarea class="form-control" id="secondary_diagnosis" name="secondary_diagnosis" rows="3" ></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="seizure_history" class="form-label">Seizure History</label>
-                    <select class="form-select" id="seizure_history" name="seizure_history" required>
+                    <select class="form-select" id="seizure_history" name="seizure_history" >
                         <option value="" selected disabled>Select Option</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -155,11 +174,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="specialty" class="form-label">Specialty</label>
-                    <input type="text" class="form-control" id="specialty" name="specialty" required>
+                    <input type="text" class="form-control" id="specialty" name="specialty" >
                 </div>
                 <div class="mb-3">
                     <label for="stroke_location" class="form-label">Stroke Location</label>
-                    <input type="text" class="form-control" id="stroke_location" name="stroke_location" required>
+                    <input type="text" class="form-control" id="stroke_location" name="stroke_location" >
                 </div>
                 <label for="" class="form-label">Other Medical Conditions</label>
                 <div class="other-condions">
@@ -290,31 +309,31 @@
             <div class="form-step d-none">
                 <div class="mb-3">
                     <label for="aphasia_cause" class="form-label">Aphasia Cause</label>
-                    <input type="text" class="form-control" id="aphasia_cause" name="aphasia_cause" required>
+                    <input type="text" class="form-control" id="aphasia_cause" name="aphasia_cause" >
                 </div>
                 <div class="mb-3">
                     <label for="aphasia_onset" class="form-label">Aphasia Onset</label>
-                    <input type="date" class="form-control" id="aphasia_onset" name="aphasia_onset" required>
+                    <input type="date" class="form-control" id="aphasia_onset" name="aphasia_onset" >
                 </div>
                 <div class="mb-3">
                     <label for="brain_location" class="form-label">Brain Location</label>
-                    <input type="text" class="form-control" id="brain_location" name="brain_location" required>
+                    <input type="text" class="form-control" id="brain_location" name="brain_location" >
                 </div>
                 <div class="mb-3">
                     <label for="completed_date" class="form-label">Completed Date</label>
-                    <input type="date" class="form-control" id="completed_date" name="completed_date" required>
+                    <input type="date" class="form-control" id="completed_date" name="completed_date" >
                 </div>
                 <div class="mb-3">
                     <label for="filled_by" class="form-label">Filled By</label>
-                    <input type="text" class="form-control" id="filled_by" name="filled_by" required>
+                    <input type="text" class="form-control" id="filled_by" name="filled_by" >
                 </div>
                 <div class="mb-3">
                     <label for="grew_up" class="form-label">Grew Up</label>
-                    <input type="text" class="form-control" id="grew_up" name="grew_up" required>
+                    <input type="text" class="form-control" id="grew_up" name="grew_up" >
                 </div>
                 <div class="mb-3">
                     <label for="hearing_aid" class="form-label">Hearing Aid</label>
-                    <select class="form-select" id="hearing_aid" name="hearing_aid" required>
+                    <select class="form-select" id="hearing_aid" name="hearing_aid" >
                         <option value="" selected disabled>Select Option</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -322,7 +341,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="hearing_loss" class="form-label">Hearing Loss</label>
-                    <select class="form-select" id="hearing_loss" name="hearing_loss" required>
+                    <select class="form-select" id="hearing_loss" name="hearing_loss" >
                         <option value="" selected disabled>Select Option</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -330,27 +349,27 @@
                 </div>
                 <div class="mb-3">
                     <label for="income" class="form-label">Income</label>
-                    <input type="number" class="form-control" id="income" name="income" required>
+                    <input type="number" class="form-control" id="income" name="income" >
                 </div>
                 <div class="mb-3">
                     <label for="living_status" class="form-label">Living Status</label>
-                    <input type="text" class="form-control" id="living_status" name="living_status" required>
+                    <input type="text" class="form-control" id="living_status" name="living_status" >
                 </div>
                 <div class="mb-3">
                     <label for="medications" class="form-label">Medications</label>
-                    <textarea class="form-control" id="medications" name="medications" rows="3" required></textarea>
+                    <textarea class="form-control" id="medications" name="medications" rows="3" ></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="occupations" class="form-label">Occupations</label>
-                    <textarea class="form-control" id="occupations" name="occupations" rows="3" required></textarea>
+                    <textarea class="form-control" id="occupations" name="occupations" rows="3" ></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="other_therapy" class="form-label">Other Therapy</label>
-                    <textarea class="form-control" id="other_therapy" name="other_therapy" rows="3" required></textarea>
+                    <textarea class="form-control" id="other_therapy" name="other_therapy" rows="3" ></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="prev_speech_therapy" class="form-label">Previous Speech Therapy</label>
-                    <select class="form-select" id="prev_speech_therapy" name="prev_speech_therapy" required>
+                    <select class="form-select" id="prev_speech_therapy" name="prev_speech_therapy" >
                         <option value="" selected disabled>Select Option</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -358,21 +377,21 @@
                 </div>
                 <div class="mb-3">
                     <label for="race" class="form-label">Race</label>
-                    <input type="text" class="form-control" id="race" name="race" required>
+                    <input type="text" class="form-control" id="race" name="race" >
                 </div>
                 <div class="mb-3">
                     <label for="sexual_orientation" class="form-label">Sexual Orientation</label>
-                    <input type="text" class="form-control" id="sexual_orientation" name="sexual_orientation" required>
+                    <input type="text" class="form-control" id="sexual_orientation" name="sexual_orientation" >
                 </div>
                 <label for="" class="form-label">Education</label>
                 <div class="form-section">
                     <div class="mb-3">
                         <label for="highestLevelOfEducation" class="form-label">Highest Level ef Education</label>
-                        <input type="text" class="form-control" id="highestLevelOfEducation" name="highestLevelOfEducation" required>
+                        <input type="text" class="form-control" id="highestLevelOfEducation" name="highestLevelOfEducation" >
                     </div>
                     <div class="mb-3">
                         <label for="specialEducation" class="form-label">Special Education</label>
-                        <select class="form-select" id="specialEducation" name="specialEducation" required>
+                        <select class="form-select" id="specialEducation" name="specialEducation" >
                             <option value="" selected disabled>Select Option</option>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
@@ -384,7 +403,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="spellingAbility" class="form-label">Spelling Ability</label>
-                        <select class="form-select" id="spellingAbility" name="spellingAbility" required>
+                        <select class="form-select" id="spellingAbility" name="spellingAbility" >
                             <option value="" selected disabled>Select Option</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -395,7 +414,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="readingAbility" class="form-label">Reading Ability</label>
-                        <select class="form-select" id="readingAbility" name="readingAbility" required>
+                        <select class="form-select" id="readingAbility" name="readingAbility" >
                             <option value="" selected disabled>Select Option</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -406,7 +425,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="handedness" class="form-label">Handedness</label>
-                        <select class="form-select" id="handedness" name="handedness" required>
+                        <select class="form-select" id="handedness" name="handedness" >
                             <option value="" selected disabled>Select Option</option>
                             <option value="Right">Right</option>
                             <option value="Left">Left</option>
@@ -415,7 +434,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="handednessPostStroke" class="form-label">Handedness Post-Stroke</label>
-                        <select class="form-select" id="handednessPostStroke" name="handednessPostStroke" required>
+                        <select class="form-select" id="handednessPostStroke" name="handednessPostStroke" >
                             <option value="" selected disabled>Select Option</option>
                             <option value="Right">Right</option>
                             <option value="Left">Left</option>
@@ -436,7 +455,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="maritalStatus" class="form-label">Marital Status</label>
-                    <select class="form-select" id="maritalStatus" name="maritalStatus" required>
+                    <select class="form-select" id="maritalStatus" name="maritalStatus" >
                         <option value="" selected disabled>Select Marital Status</option>
                         <option value="Single">Single</option>
                         <option value="Married">Married</option>
@@ -466,11 +485,11 @@
                 <div class="form-section">
                     <div class="mb-3">
                         <label for="primaryLanguage" class="form-label">Primary Language</label>
-                        <input type="text" class="form-control" id="primaryLanguage" name="primaryLanguage" required>
+                        <input type="text" class="form-control" id="primaryLanguage" name="primaryLanguage" >
                     </div>
                     <div class="mb-3">
                         <label for="firstLanguageLearned" class="form-label">First Language Learned</label>
-                        <input type="text" class="form-control" id="firstLanguageLearned" name="firstLanguageLearned" required>
+                        <input type="text" class="form-control" id="firstLanguageLearned" name="firstLanguageLearned" >
                     </div>
                     <div class="mb-3">
                         <label for="otherLanguagesSpoken" class="form-label">Other Languages Spoken</label>
@@ -605,43 +624,26 @@
         <form id="transport">
             <div class="form-step d-none">
                 <div class="mb-3">
-                    <label for="using_bus_transport" class="form-label">Using Bus Transport</label>
-                    <select class="form-select" id="using_bus_transport" name="using_bus_transport" required>
-                        <option value="" selected disabled>Select Option</option>
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
-                    </select>
+                    <label for="am_transport_name" class="form-label">AM Transport Name</label>
+                    <input type="text" class="form-control" id="am_transport_name" name="am_transport_name">
                 </div>
                 <div class="mb-3">
-                    <label for="bus_company" class="form-label">Which Company</label>
-                    <select class="form-select" id="bus_company" name="bus_company" required>
-                        <option value="" selected disabled>Select Company</option>
-                        <option value="Bergen County Transport">Bergen County Transport</option>
-                        <option value="Access Link">Access Link</option>
-                        <option value="Modivcare">Modivcare</option>
-                        <option value="Other">Other (Provide Name Below)</option>
-                    </select>
-                </div>
-                <div class="mb-3 d-none" id="other_bus_company_container">
-                    <label for="other_bus_company" class="form-label">Other Company Name</label>
-                    <input type="text" class="form-control" id="other_bus_company" name="other_bus_company">
+                    <label for="am_transport_phone" class="form-label">AM Transport Phone</label>
+                    <input type="tel" class="form-control" id="am_transport_phone" name="am_transport_phone">
                 </div>
                 <div class="mb-3">
-                    <label for="bus_contact_phone" class="form-label">Bus Contact Phone Number</label>
-                    <input type="tel" class="form-control" id="bus_contact_phone" name="bus_contact_phone" required>
+                    <label for="pm_transport_name" class="form-label">PM Transport Name</label>
+                    <input type="text" class="form-control" id="pm_transport_name" name="pm_transport_name">
                 </div>
-                <button type="submit" class="btn btn-success">Add Transport Details</button>
-                <script>
-                    document.getElementById('bus_company').addEventListener('change', function() {
-                        const otherBusCompanyContainer = document.getElementById('other_bus_company_container');
-                        if (this.value === 'Other') {
-                            otherBusCompanyContainer.classList.remove('d-none');
-                        } else {
-                            otherBusCompanyContainer.classList.add('d-none');
-                            document.getElementById('other_bus_company').value = '';
-                        }
-                    });
-                </script>
+                <div class="mb-3">
+                    <label for="pm_transport_phone" class="form-label">PM Transport Phone</label>
+                    <input type="tel" class="form-control" id="pm_transport_phone" name="pm_transport_phone">
+                </div>
+                <div class="mb-3">
+                    <label for="transportation_notes" class="form-label">Transport Notes</label>
+                    <textarea class="form-control" id="transportation_notes" name="transportation_notes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Save Transport Information</button>
             </div>
         </form>
 
@@ -649,31 +651,31 @@
             <div class="form-step d-none">
                 <div class="mb-3">
                     <label for="name" class="form-label">Contact Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <div class="mb-3">
                     <label for="relationship" class="form-label">Relation to Member</label>
-                    <input type="text" class="form-control" id="relationship" name="relationship" required>
+                    <input type="text" class="form-control" id="relationship" name="relationship">
                 </div>
                 <div class="mb-3">
                     <label for="cell_phone" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="cell_phone" name="cell_phone" required>
+                    <input type="tel" class="form-control" id="cell_phone" name="cell_phone">
                 </div>
                 <div class="mb-3">
                     <label for="day_phone" class="form-label">Day Phone</label>
-                    <input type="tel" class="form-control" id="day_phone" name="day_phone" required>
+                    <input type="tel" class="form-control" id="day_phone" name="day_phone">
                 </div>
                 <div class="mb-3">
                     <label for="evening_phone" class="form-label">Evening Phone</label>
-                    <input type="tel" class="form-control" id="evening_phone" name="evening_phone" required>
+                    <input type="tel" class="form-control" id="evening_phone" name="evening_phone">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" required>
+                    <input type="text" class="form-control" id="address" name="address">
                 </div>
                 <button type="submit" class="btn btn-success">Create Emergency Contact One</button>
             </div>
@@ -683,32 +685,33 @@
             <div class="form-step d-none">
                 <div class="mb-3">
                     <label for="name" class="form-label">Contact Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <div class="mb-3">
                     <label for="relationship" class="form-label">Relation to Member</label>
-                    <input type="text" class="form-control" id="relationship" name="relationship" required>
+                    <input type="text" class="form-control" id="relationship" name="relationship">
                 </div>
                 <div class="mb-3">
                     <label for="cell_phone" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="cell_phone" name="cell_phone" required>
+                    <input type="tel" class="form-control" id="cell_phone" name="cell_phone">
                 </div>
                 <div class="mb-3">
                     <label for="day_phone" class="form-label">Day Phone</label>
-                    <input type="tel" class="form-control" id="day_phone" name="day_phone" required>
+                    <input type="tel" class="form-control" id="day_phone" name="day_phone">
                 </div>
                 <div class="mb-3">
                     <label for="evening_phone" class="form-label">Evening Phone</label>
-                    <input type="tel" class="form-control" id="evening_phone" name="evening_phone" required>
+                    <input type="tel" class="form-control" id="evening_phone" name="evening_phone">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" required>
+                    <input type="text" class="form-control" id="address" name="address">
                 </div>
+                
                 <button type="submit" class="btn btn-success">Create Emergency Contact Two</button>
             </div>
         </form>
@@ -729,12 +732,14 @@
                 window.addMember(jsonString).then(function(id) {
                     console.log("Returned ID:", id);
                     updateMemberID(id);
+                    alert("Member information saved successfully.");
                 }).catch(function(error) {
                     console.log(id);
                     console.error("Error:", error);
                 });
             } else {
                 window.updateMember(jsonString);
+                alert("Member information updated successfully.");
             }
         });
         document.getElementById('EnrollmentForm').addEventListener('submit', function(event) {
@@ -799,11 +804,13 @@
 
                     console.log("Payload:", payload);
                     window.updateMember(payload);
+                    alert("Enrollment Form added successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error);
                 });
             } else {
                 window.updateEnrollmentForm(jsonString);
+                alert("Enrollment Form updated successfully.");
             }
         });
         document.getElementById('transport').addEventListener('submit', function(event) {
@@ -822,7 +829,7 @@
             const jsonString = JSON.stringify(formObject, null, 2);
             console.log(jsonString);
             if(getTransportID() == undefined || getTransportID() == '') {
-                window.addTransport(jsonString).then(function(id) {
+                window.addTransportForm(jsonString).then(function(id) {
                     console.log("Returned ID:", id);
                     updateTransportID(id);
                     const payload = JSON.stringify({
@@ -831,11 +838,13 @@
                     });
                     console.log("Payload:", payload);
                     window.updateMember(payload);
+                    alert("Transport details added successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error);
                 });
             } else {
-                window.updateTransport(jsonString);
+                window.updateTransportForm(jsonString);
+                alert("Transport details updated successfully.");
             }
         });
         document.getElementById('MedicalHistoryForm').addEventListener('submit', function(event) {
@@ -876,11 +885,13 @@
 
                     console.log("Payload:", payload);
                     window.updateMember(payload);
+                    alert("Medical History added successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error, "at line:", error.lineNumber || "unknown");
                 });
             } else {
                 window.updateMedicalHistory(jsonString);
+                alert("Medical History updated successfully.");
             }
         });
         document.getElementById('EC1').addEventListener('submit', function(event) {
@@ -910,11 +921,13 @@
 
                     console.log("Payload:", payload);
                     window.updateMember(payload);
+                    alert("Emergency Contact One added successfully.");
                 }).catch(function(error) {
                     console.error("Error:", error);
                 });
             } else {
                 window.updateEC(jsonString);
+                alert("Emergency Contact One updated successfully.");
             }
         });
         document.getElementById('EC2').addEventListener('submit', function(event) {
@@ -942,12 +955,14 @@
                     });
 
                     window.updateMember(payload);
+                    alert("Emergency Contact Two added successfully.");
                 }).catch(function(error) {
                     console.log(id);
                     console.error("Error:", error);
                 });
             } else {
                 window.updateEC(jsonString);
+                alert("Emergency Contact Two updated successfully.");
             }
         });
         document.addEventListener("DOMContentLoaded", function () {
@@ -984,13 +999,20 @@
             const memberForm = document.getElementById('memberForm');
             document.querySelector('.member_id').value = userData.id;
             memberForm.querySelector('#name').value = userData.name;
-            memberForm.querySelector('#age').value = userData.age;
             memberForm.querySelector('#dob').value = userData.dob;
             memberForm.querySelector('#email').value = userData.email;
             memberForm.querySelector('#phoneNumber').value = userData.phone;
             memberForm.querySelector('#address').value = userData.address;
             memberForm.querySelector('#county').value = userData.county;
             memberForm.querySelector('#notes').value = userData.notes;
+            memberForm.querySelector('#date_changed').value = userData.date_changed;
+            const member_type = memberForm.querySelector("#member_type");
+            for (let option of member_type.options) {
+                if (option.value == userData.member_type) {
+                    option.selected = true;
+                    break;
+                }
+            }
             const genderSelect = memberForm.querySelector("#gender");
             for (let option of genderSelect.options) {
                 if (option.value == userData.gender) {
@@ -1041,18 +1063,14 @@
                 });
             }
 
-            // const transportData = data.transportData;
-            // const transportForm = document.getElementById('Transport');
-            // document.querySelector('.transport_id').value = transportData.id;
-            // transportForm.querySelector('#using_bus_transport').value = transportData.using_bus_transport;
-            // const busCompanySelect = transportForm.querySelector("#bus_company");
-            // for (let option of busCompanySelect.options) {
-            //     if (option.value == transportData.bus_company) {
-            //         option.selected = true;
-            //         break;
-            //     }
-            // }
-            // transportForm.querySelector('#bus_contact_phone').value = transportData.bus_contact_phone;
+            const transportData = data.transportData;
+            const transportForm = document.getElementById('Transport');
+            document.querySelector('.transport_information_id').value = transportData.id;
+            transportForm.querySelector('#am_transport_name').value = transportData.am_transport_name;
+            transportForm.querySelector('#am_transport_phone').value = transportData.am_transport_phone;
+            transportForm.querySelector('#pm_transport_name').value = transportData.pm_transport_name;
+            transportForm.querySelector('#pm_transport_phone').value = transportData.pm_transport_phone;
+            transportForm.querySelector('#transportation_notes').value = transportData.transportation_notes;
 
             const enrollmentData = data.enrollmentData;
             const enrollmentForm = document.getElementById('EnrollmentForm');
@@ -1170,10 +1188,10 @@
             return document.querySelector('.medical_history_id').value;
         }
         function updateTransportID(id) {
-            document.querySelector('.transport_id').value = id;
+            document.querySelector('.transport_information_id').value = id;
         }
         function getTransportID() {
-            return document.querySelector('.transport_id').value;
+            return document.querySelector('.transport_information_id').value;
         }
         function updateEC1ID(id) {
             document.querySelector('.ec1_id').value = id;

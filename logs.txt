@@ -131,3 +131,3205 @@ User JSON: {
     "veteran": []
 }
 Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Loading Contacts page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "caregiver_needed": [],
+    "county": [],
+    "date_changed": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "member_type": [],
+    "name": [],
+    "notes": [],
+    "phone": [],
+    "schedule": [],
+    "transport_info": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Member created with ID: <!doctype html>
+<html lang=en>
+  <head>
+    <title>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+ // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+      var CONSOLE_MODE = false,
+          EVALEX = false,
+          EVALEX_TRUSTED = false,
+          SECRET = "bjywagY6LIpS0aMHjESy";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>mysql.connector.errors.ProgrammingError</h1>
+<div class="detail">
+  <p class="errormsg">mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  <h3></h3>
+  <ul><li><div class="frame" id="frame-1920548811344">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">75</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, matchobj):</pre>
+<pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>return bytes(self.params[index])
+<span class="ws">            </span>             ^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line after"><span class="ws">            </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre></div>
+</div>
+
+<li><div class="exc-divider">During handling of the above exception, another exception occurred:</div>
+<li><div class="frame" id="frame-1920548731296">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1536</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">    </span>) -&gt; cabc.Iterable[bytes]:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app`, which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to apply middleware.</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548732448">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1514</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548732592">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1511</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error: BaseException | None = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548732736">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">919</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)
+<span class="ws">            </span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>rv: ft.ResponseReturnValue | HTTPException,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548798528">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">917</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line current"><span class="ws">                </span>rv = self.dispatch_request()
+<span class="ws">                </span>     ^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548798672">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">902</em>,
+      in <code class="function">dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>and req.method == &#34;OPTIONS&#34;</pre>
+<pre class="line before"><span class="ws">        </span>):</pre>
+<pre class="line before"><span class="ws">            </span>return self.make_default_options_response()</pre>
+<pre class="line before"><span class="ws">        </span># otherwise dispatch to the handler for that endpoint</pre>
+<pre class="line before"><span class="ws">        </span>view_args: dict[str, t.Any] = req.view_args  # type: ignore[assignment]</pre>
+<pre class="line current"><span class="ws">        </span>return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def full_dispatch_request(self) -&gt; Response:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Dispatches the request and on top of that performs request</pre>
+<pre class="line after"><span class="ws">        </span>pre and postprocessing as well as HTTP exception catching and</pre>
+<pre class="line after"><span class="ws">        </span>error handling.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548798816">
+  <h4>File <cite class="filename">"c:\python-API\MYSQL_api.py"</cite>,
+      line <em class="line">598</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>return str(id), 200</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>@app.route(&#39;/insert_member&#39;, methods=[&#39;POST&#39;])</pre>
+<pre class="line before"><span class="ws"></span>def insert_member():</pre>
+<pre class="line before"><span class="ws">    </span>member_data = json.loads(request.get_json()[0])</pre>
+<pre class="line current"><span class="ws">    </span>id = insert_functions.insert_member(
+<span class="ws">    </span>     </pre>
+<pre class="line after"><span class="ws">        </span>connection=get_connection(),</pre>
+<pre class="line after"><span class="ws">        </span>name=member_data.get(&#39;name&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>dob=member_data.get(&#39;dob&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>email=member_data.get(&#39;email&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>aep_completion_date=member_data.get(&#39;aep_completion_date&#39;, None),</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548800256">
+  <h4>File <cite class="filename">"c:\python-API\SQL_connecter.py"</cite>,
+      line <em class="line">1815</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>name, dob, email, aep_completion_date, join_date, schedule,</pre>
+<pre class="line before"><span class="ws">            </span>phone, address, county, gender, veteran, joined, caregiver_needed,</pre>
+<pre class="line before"><span class="ws">            </span>alder_program, notes, member_type, date_changed</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>cursor.execute(insert_query, data)
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>connection.commit()</pre>
+<pre class="line after"><span class="ws">        </span>if connection:</pre>
+<pre class="line after"><span class="ws">            </span>connection.close()</pre>
+<pre class="line after"><span class="ws">        </span>return cursor.lastrowid</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548811056">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">540</em>,
+      in <code class="function">execute</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>if isinstance(params, dict):</pre>
+<pre class="line before"><span class="ws">                </span>stmt = _bytestr_format_dict(</pre>
+<pre class="line before"><span class="ws">                    </span>stmt, self._process_params_dict(params))</pre>
+<pre class="line before"><span class="ws">            </span>elif isinstance(params, (list, tuple)):</pre>
+<pre class="line before"><span class="ws">                </span>psub = _ParamSubstitutor(self._process_params(params))</pre>
+<pre class="line current"><span class="ws">                </span>stmt = RE_PY_PARAM.sub(psub, stmt)
+<span class="ws">                </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>if psub.remaining != 0:</pre>
+<pre class="line after"><span class="ws">                    </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                        </span>&#34;Not all parameters were used in the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self._executed = stmt</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548811200">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">77</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>return bytes(self.params[index])</pre>
+<pre class="line before"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line current"><span class="ws">            </span>raise errors.ProgrammingError(
+<span class="ws">            </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre>
+<pre class="line after"><span class="ws">    </span>def remaining(self):</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Returns number of parameters remaining to be substituted&#34;&#34;&#34;</pre></div>
+</div>
+</ul>
+  <blockquote>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</blockquote>
+</div>
+
+<div class="plain">
+    <p>
+      This is the Copy/Paste friendly version of the traceback.
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File &#34;c:\python-API\MYSQL_api.py&#34;, line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File &#34;c:\python-API\SQL_connecter.py&#34;, line 1815, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</textarea>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\python-API\MYSQL_api.py", line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File "c:\python-API\SQL_connecter.py", line 1815, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+
+
+-->
+
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "caregiver_needed": [],
+    "county": [],
+    "date_changed": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "member_type": [],
+    "name": [],
+    "notes": [],
+    "phone": [],
+    "schedule": [],
+    "transport_info": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Member created with ID: <!doctype html>
+<html lang=en>
+  <head>
+    <title>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+ // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+      var CONSOLE_MODE = false,
+          EVALEX = false,
+          EVALEX_TRUSTED = false,
+          SECRET = "bjywagY6LIpS0aMHjESy";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>mysql.connector.errors.ProgrammingError</h1>
+<div class="detail">
+  <p class="errormsg">mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  <h3></h3>
+  <ul><li><div class="frame" id="frame-1920548813216">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">75</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, matchobj):</pre>
+<pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>return bytes(self.params[index])
+<span class="ws">            </span>             ^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line after"><span class="ws">            </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre></div>
+</div>
+
+<li><div class="exc-divider">During handling of the above exception, another exception occurred:</div>
+<li><div class="frame" id="frame-1920548811776">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1536</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">    </span>) -&gt; cabc.Iterable[bytes]:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app`, which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to apply middleware.</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548811920">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1514</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548812064">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1511</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error: BaseException | None = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548812208">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">919</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)
+<span class="ws">            </span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>rv: ft.ResponseReturnValue | HTTPException,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548812352">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">917</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line current"><span class="ws">                </span>rv = self.dispatch_request()
+<span class="ws">                </span>     ^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548812496">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">902</em>,
+      in <code class="function">dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>and req.method == &#34;OPTIONS&#34;</pre>
+<pre class="line before"><span class="ws">        </span>):</pre>
+<pre class="line before"><span class="ws">            </span>return self.make_default_options_response()</pre>
+<pre class="line before"><span class="ws">        </span># otherwise dispatch to the handler for that endpoint</pre>
+<pre class="line before"><span class="ws">        </span>view_args: dict[str, t.Any] = req.view_args  # type: ignore[assignment]</pre>
+<pre class="line current"><span class="ws">        </span>return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def full_dispatch_request(self) -&gt; Response:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Dispatches the request and on top of that performs request</pre>
+<pre class="line after"><span class="ws">        </span>pre and postprocessing as well as HTTP exception catching and</pre>
+<pre class="line after"><span class="ws">        </span>error handling.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548812640">
+  <h4>File <cite class="filename">"c:\python-API\MYSQL_api.py"</cite>,
+      line <em class="line">598</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>return str(id), 200</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>@app.route(&#39;/insert_member&#39;, methods=[&#39;POST&#39;])</pre>
+<pre class="line before"><span class="ws"></span>def insert_member():</pre>
+<pre class="line before"><span class="ws">    </span>member_data = json.loads(request.get_json()[0])</pre>
+<pre class="line current"><span class="ws">    </span>id = insert_functions.insert_member(
+<span class="ws">    </span>     </pre>
+<pre class="line after"><span class="ws">        </span>connection=get_connection(),</pre>
+<pre class="line after"><span class="ws">        </span>name=member_data.get(&#39;name&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>dob=member_data.get(&#39;dob&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>email=member_data.get(&#39;email&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>aep_completion_date=member_data.get(&#39;aep_completion_date&#39;, None),</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548812784">
+  <h4>File <cite class="filename">"c:\python-API\SQL_connecter.py"</cite>,
+      line <em class="line">1815</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>name, dob, email, aep_completion_date, join_date, schedule,</pre>
+<pre class="line before"><span class="ws">            </span>phone, address, county, gender, veteran, joined, caregiver_needed,</pre>
+<pre class="line before"><span class="ws">            </span>alder_program, notes, member_type, date_changed</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>cursor.execute(insert_query, data)
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>connection.commit()</pre>
+<pre class="line after"><span class="ws">        </span>if connection:</pre>
+<pre class="line after"><span class="ws">            </span>connection.close()</pre>
+<pre class="line after"><span class="ws">        </span>return cursor.lastrowid</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548812928">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">540</em>,
+      in <code class="function">execute</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>if isinstance(params, dict):</pre>
+<pre class="line before"><span class="ws">                </span>stmt = _bytestr_format_dict(</pre>
+<pre class="line before"><span class="ws">                    </span>stmt, self._process_params_dict(params))</pre>
+<pre class="line before"><span class="ws">            </span>elif isinstance(params, (list, tuple)):</pre>
+<pre class="line before"><span class="ws">                </span>psub = _ParamSubstitutor(self._process_params(params))</pre>
+<pre class="line current"><span class="ws">                </span>stmt = RE_PY_PARAM.sub(psub, stmt)
+<span class="ws">                </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>if psub.remaining != 0:</pre>
+<pre class="line after"><span class="ws">                    </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                        </span>&#34;Not all parameters were used in the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self._executed = stmt</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1920548813072">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">77</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>return bytes(self.params[index])</pre>
+<pre class="line before"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line current"><span class="ws">            </span>raise errors.ProgrammingError(
+<span class="ws">            </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre>
+<pre class="line after"><span class="ws">    </span>def remaining(self):</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Returns number of parameters remaining to be substituted&#34;&#34;&#34;</pre></div>
+</div>
+</ul>
+  <blockquote>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</blockquote>
+</div>
+
+<div class="plain">
+    <p>
+      This is the Copy/Paste friendly version of the traceback.
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File &#34;c:\python-API\MYSQL_api.py&#34;, line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File &#34;c:\python-API\SQL_connecter.py&#34;, line 1815, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</textarea>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\python-API\MYSQL_api.py", line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File "c:\python-API\SQL_connecter.py", line 1815, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+
+
+-->
+
+Member created with ID: <!doctype html>
+<html lang=en>
+  <head>
+    <title>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+ // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+      var CONSOLE_MODE = false,
+          EVALEX = false,
+          EVALEX_TRUSTED = false,
+          SECRET = "Oi9lzmYaR2iQuWgQbWrO";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>mysql.connector.errors.ProgrammingError</h1>
+<div class="detail">
+  <p class="errormsg">mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  <h3></h3>
+  <ul><li><div class="frame" id="frame-1551254549072">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">75</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, matchobj):</pre>
+<pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>return bytes(self.params[index])
+<span class="ws">            </span>             ^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line after"><span class="ws">            </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre></div>
+</div>
+
+<li><div class="exc-divider">During handling of the above exception, another exception occurred:</div>
+<li><div class="frame" id="frame-1551254419872">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1536</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">    </span>) -&gt; cabc.Iterable[bytes]:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app`, which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to apply middleware.</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254421024">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1514</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254421168">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1511</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error: BaseException | None = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254421312">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">919</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)
+<span class="ws">            </span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>rv: ft.ResponseReturnValue | HTTPException,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254536256">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">917</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line current"><span class="ws">                </span>rv = self.dispatch_request()
+<span class="ws">                </span>     ^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254536400">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">902</em>,
+      in <code class="function">dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>and req.method == &#34;OPTIONS&#34;</pre>
+<pre class="line before"><span class="ws">        </span>):</pre>
+<pre class="line before"><span class="ws">            </span>return self.make_default_options_response()</pre>
+<pre class="line before"><span class="ws">        </span># otherwise dispatch to the handler for that endpoint</pre>
+<pre class="line before"><span class="ws">        </span>view_args: dict[str, t.Any] = req.view_args  # type: ignore[assignment]</pre>
+<pre class="line current"><span class="ws">        </span>return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def full_dispatch_request(self) -&gt; Response:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Dispatches the request and on top of that performs request</pre>
+<pre class="line after"><span class="ws">        </span>pre and postprocessing as well as HTTP exception catching and</pre>
+<pre class="line after"><span class="ws">        </span>error handling.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254536544">
+  <h4>File <cite class="filename">"c:\python-API\MYSQL_api.py"</cite>,
+      line <em class="line">598</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>return str(id), 200</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>@app.route(&#39;/insert_member&#39;, methods=[&#39;POST&#39;])</pre>
+<pre class="line before"><span class="ws"></span>def insert_member():</pre>
+<pre class="line before"><span class="ws">    </span>member_data = json.loads(request.get_json()[0])</pre>
+<pre class="line current"><span class="ws">    </span>id = insert_functions.insert_member(
+<span class="ws">    </span>     </pre>
+<pre class="line after"><span class="ws">        </span>connection=get_connection(),</pre>
+<pre class="line after"><span class="ws">        </span>name=member_data.get(&#39;name&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>dob=member_data.get(&#39;dob&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>email=member_data.get(&#39;email&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>aep_completion_date=member_data.get(&#39;aep_completion_date&#39;, None),</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254537984">
+  <h4>File <cite class="filename">"c:\python-API\SQL_connecter.py"</cite>,
+      line <em class="line">1815</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>name, dob, email, aep_completion_date, join_date, schedule,</pre>
+<pre class="line before"><span class="ws">            </span>phone, address, county, gender, veteran, joined, caregiver_needed,</pre>
+<pre class="line before"><span class="ws">            </span>alder_program, notes, member_type, date_changed</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>cursor.execute(insert_query, data)
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>connection.commit()</pre>
+<pre class="line after"><span class="ws">        </span>if connection:</pre>
+<pre class="line after"><span class="ws">            </span>connection.close()</pre>
+<pre class="line after"><span class="ws">        </span>return cursor.lastrowid</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254548784">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">540</em>,
+      in <code class="function">execute</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>if isinstance(params, dict):</pre>
+<pre class="line before"><span class="ws">                </span>stmt = _bytestr_format_dict(</pre>
+<pre class="line before"><span class="ws">                    </span>stmt, self._process_params_dict(params))</pre>
+<pre class="line before"><span class="ws">            </span>elif isinstance(params, (list, tuple)):</pre>
+<pre class="line before"><span class="ws">                </span>psub = _ParamSubstitutor(self._process_params(params))</pre>
+<pre class="line current"><span class="ws">                </span>stmt = RE_PY_PARAM.sub(psub, stmt)
+<span class="ws">                </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>if psub.remaining != 0:</pre>
+<pre class="line after"><span class="ws">                    </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                        </span>&#34;Not all parameters were used in the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self._executed = stmt</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1551254548928">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">77</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>return bytes(self.params[index])</pre>
+<pre class="line before"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line current"><span class="ws">            </span>raise errors.ProgrammingError(
+<span class="ws">            </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre>
+<pre class="line after"><span class="ws">    </span>def remaining(self):</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Returns number of parameters remaining to be substituted&#34;&#34;&#34;</pre></div>
+</div>
+</ul>
+  <blockquote>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</blockquote>
+</div>
+
+<div class="plain">
+    <p>
+      This is the Copy/Paste friendly version of the traceback.
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File &#34;c:\python-API\MYSQL_api.py&#34;, line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File &#34;c:\python-API\SQL_connecter.py&#34;, line 1815, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</textarea>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\python-API\MYSQL_api.py", line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File "c:\python-API\SQL_connecter.py", line 1815, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+
+
+-->
+
+Member created with ID: <!doctype html>
+<html lang=en>
+  <head>
+    <title>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+ // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+      var CONSOLE_MODE = false,
+          EVALEX = false,
+          EVALEX_TRUSTED = false,
+          SECRET = "kEtX96e6J1BwwSh1lVbL";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>mysql.connector.errors.ProgrammingError</h1>
+<div class="detail">
+  <p class="errormsg">mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  <h3></h3>
+  <ul><li><div class="frame" id="frame-2771108491856">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">75</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, matchobj):</pre>
+<pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>return bytes(self.params[index])
+<span class="ws">            </span>             ^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line after"><span class="ws">            </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre></div>
+</div>
+
+<li><div class="exc-divider">During handling of the above exception, another exception occurred:</div>
+<li><div class="frame" id="frame-2771108362656">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1536</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">    </span>) -&gt; cabc.Iterable[bytes]:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app`, which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to apply middleware.</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108363808">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1514</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108363952">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1511</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error: BaseException | None = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108364096">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">919</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)
+<span class="ws">            </span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>rv: ft.ResponseReturnValue | HTTPException,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108479040">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">917</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line current"><span class="ws">                </span>rv = self.dispatch_request()
+<span class="ws">                </span>     ^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108479184">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">902</em>,
+      in <code class="function">dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>and req.method == &#34;OPTIONS&#34;</pre>
+<pre class="line before"><span class="ws">        </span>):</pre>
+<pre class="line before"><span class="ws">            </span>return self.make_default_options_response()</pre>
+<pre class="line before"><span class="ws">        </span># otherwise dispatch to the handler for that endpoint</pre>
+<pre class="line before"><span class="ws">        </span>view_args: dict[str, t.Any] = req.view_args  # type: ignore[assignment]</pre>
+<pre class="line current"><span class="ws">        </span>return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def full_dispatch_request(self) -&gt; Response:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Dispatches the request and on top of that performs request</pre>
+<pre class="line after"><span class="ws">        </span>pre and postprocessing as well as HTTP exception catching and</pre>
+<pre class="line after"><span class="ws">        </span>error handling.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108479328">
+  <h4>File <cite class="filename">"c:\python-API\MYSQL_api.py"</cite>,
+      line <em class="line">598</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>return str(id), 200</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>@app.route(&#39;/insert_member&#39;, methods=[&#39;POST&#39;])</pre>
+<pre class="line before"><span class="ws"></span>def insert_member():</pre>
+<pre class="line before"><span class="ws">    </span>member_data = json.loads(request.get_json()[0])</pre>
+<pre class="line current"><span class="ws">    </span>id = insert_functions.insert_member(
+<span class="ws">    </span>     </pre>
+<pre class="line after"><span class="ws">        </span>connection=get_connection(),</pre>
+<pre class="line after"><span class="ws">        </span>name=member_data.get(&#39;name&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>dob=member_data.get(&#39;dob&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>email=member_data.get(&#39;email&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>aep_completion_date=member_data.get(&#39;aep_completion_date&#39;, None),</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108480768">
+  <h4>File <cite class="filename">"c:\python-API\SQL_connecter.py"</cite>,
+      line <em class="line">1812</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>name, dob, email, aep_completion_date, join_date, schedule,</pre>
+<pre class="line before"><span class="ws">            </span>phone, address, county, gender, veteran, joined, caregiver_needed,</pre>
+<pre class="line before"><span class="ws">            </span>alder_program, notes, member_type, date_changed</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>cursor.execute(insert_query, data)
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>connection.commit()</pre>
+<pre class="line after"><span class="ws">        </span>if connection:</pre>
+<pre class="line after"><span class="ws">            </span>connection.close()</pre>
+<pre class="line after"><span class="ws">        </span>return cursor.lastrowid</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108491568">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">540</em>,
+      in <code class="function">execute</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>if isinstance(params, dict):</pre>
+<pre class="line before"><span class="ws">                </span>stmt = _bytestr_format_dict(</pre>
+<pre class="line before"><span class="ws">                    </span>stmt, self._process_params_dict(params))</pre>
+<pre class="line before"><span class="ws">            </span>elif isinstance(params, (list, tuple)):</pre>
+<pre class="line before"><span class="ws">                </span>psub = _ParamSubstitutor(self._process_params(params))</pre>
+<pre class="line current"><span class="ws">                </span>stmt = RE_PY_PARAM.sub(psub, stmt)
+<span class="ws">                </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>if psub.remaining != 0:</pre>
+<pre class="line after"><span class="ws">                    </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                        </span>&#34;Not all parameters were used in the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self._executed = stmt</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2771108491712">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">77</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>return bytes(self.params[index])</pre>
+<pre class="line before"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line current"><span class="ws">            </span>raise errors.ProgrammingError(
+<span class="ws">            </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre>
+<pre class="line after"><span class="ws">    </span>def remaining(self):</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Returns number of parameters remaining to be substituted&#34;&#34;&#34;</pre></div>
+</div>
+</ul>
+  <blockquote>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</blockquote>
+</div>
+
+<div class="plain">
+    <p>
+      This is the Copy/Paste friendly version of the traceback.
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File &#34;c:\python-API\MYSQL_api.py&#34;, line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File &#34;c:\python-API\SQL_connecter.py&#34;, line 1812, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</textarea>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\python-API\MYSQL_api.py", line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File "c:\python-API\SQL_connecter.py", line 1812, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+
+
+-->
+
+Member created with ID: <!doctype html>
+<html lang=en>
+  <head>
+    <title>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+ // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+      var CONSOLE_MODE = false,
+          EVALEX = false,
+          EVALEX_TRUSTED = false,
+          SECRET = "Kg2Xfs5PAFrCbAr0eApV";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>mysql.connector.errors.ProgrammingError</h1>
+<div class="detail">
+  <p class="errormsg">mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  <h3></h3>
+  <ul><li><div class="frame" id="frame-1953057075792">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">75</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, matchobj):</pre>
+<pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>return bytes(self.params[index])
+<span class="ws">            </span>             ^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line after"><span class="ws">            </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre></div>
+</div>
+
+<li><div class="exc-divider">During handling of the above exception, another exception occurred:</div>
+<li><div class="frame" id="frame-1953056946592">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1536</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">    </span>) -&gt; cabc.Iterable[bytes]:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app`, which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to apply middleware.</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953056947744">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1514</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953056947888">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1511</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error: BaseException | None = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953056948032">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">919</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)
+<span class="ws">            </span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>rv: ft.ResponseReturnValue | HTTPException,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953057062976">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">917</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line current"><span class="ws">                </span>rv = self.dispatch_request()
+<span class="ws">                </span>     ^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953057063120">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">902</em>,
+      in <code class="function">dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>and req.method == &#34;OPTIONS&#34;</pre>
+<pre class="line before"><span class="ws">        </span>):</pre>
+<pre class="line before"><span class="ws">            </span>return self.make_default_options_response()</pre>
+<pre class="line before"><span class="ws">        </span># otherwise dispatch to the handler for that endpoint</pre>
+<pre class="line before"><span class="ws">        </span>view_args: dict[str, t.Any] = req.view_args  # type: ignore[assignment]</pre>
+<pre class="line current"><span class="ws">        </span>return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def full_dispatch_request(self) -&gt; Response:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Dispatches the request and on top of that performs request</pre>
+<pre class="line after"><span class="ws">        </span>pre and postprocessing as well as HTTP exception catching and</pre>
+<pre class="line after"><span class="ws">        </span>error handling.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953057063264">
+  <h4>File <cite class="filename">"c:\python-API\MYSQL_api.py"</cite>,
+      line <em class="line">598</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>return str(id), 200</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>@app.route(&#39;/insert_member&#39;, methods=[&#39;POST&#39;])</pre>
+<pre class="line before"><span class="ws"></span>def insert_member():</pre>
+<pre class="line before"><span class="ws">    </span>member_data = json.loads(request.get_json()[0])</pre>
+<pre class="line current"><span class="ws">    </span>id = insert_functions.insert_member(
+<span class="ws">    </span>     </pre>
+<pre class="line after"><span class="ws">        </span>connection=get_connection(),</pre>
+<pre class="line after"><span class="ws">        </span>name=member_data.get(&#39;name&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>dob=member_data.get(&#39;dob&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>email=member_data.get(&#39;email&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>aep_completion_date=member_data.get(&#39;aep_completion_date&#39;, None),</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953057064704">
+  <h4>File <cite class="filename">"c:\python-API\SQL_connecter.py"</cite>,
+      line <em class="line">1812</em>,
+      in <code class="function">insert_member</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>name, dob, email, aep_completion_date, join_date, schedule,</pre>
+<pre class="line before"><span class="ws">            </span>phone, address, county, gender, veteran, joined, caregiver_needed,</pre>
+<pre class="line before"><span class="ws">            </span>alder_program, notes, member_type, date_changed</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>cursor.execute(insert_query, data)
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>connection.commit()</pre>
+<pre class="line after"><span class="ws">        </span>if connection:</pre>
+<pre class="line after"><span class="ws">            </span>connection.close()</pre>
+<pre class="line after"><span class="ws">        </span>return cursor.lastrowid</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953057075504">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">540</em>,
+      in <code class="function">execute</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>if isinstance(params, dict):</pre>
+<pre class="line before"><span class="ws">                </span>stmt = _bytestr_format_dict(</pre>
+<pre class="line before"><span class="ws">                    </span>stmt, self._process_params_dict(params))</pre>
+<pre class="line before"><span class="ws">            </span>elif isinstance(params, (list, tuple)):</pre>
+<pre class="line before"><span class="ws">                </span>psub = _ParamSubstitutor(self._process_params(params))</pre>
+<pre class="line current"><span class="ws">                </span>stmt = RE_PY_PARAM.sub(psub, stmt)
+<span class="ws">                </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>if psub.remaining != 0:</pre>
+<pre class="line after"><span class="ws">                    </span>raise errors.ProgrammingError(</pre>
+<pre class="line after"><span class="ws">                        </span>&#34;Not all parameters were used in the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self._executed = stmt</pre></div>
+</div>
+
+<li><div class="frame" id="frame-1953057075648">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">77</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>index = self.index</pre>
+<pre class="line before"><span class="ws">        </span>self.index += 1</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>return bytes(self.params[index])</pre>
+<pre class="line before"><span class="ws">        </span>except IndexError:</pre>
+<pre class="line current"><span class="ws">            </span>raise errors.ProgrammingError(
+<span class="ws">            </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                </span>&#34;Not enough parameters for the SQL statement&#34;)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre>
+<pre class="line after"><span class="ws">    </span>def remaining(self):</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Returns number of parameters remaining to be substituted&#34;&#34;&#34;</pre></div>
+</div>
+</ul>
+  <blockquote>mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</blockquote>
+</div>
+
+<div class="plain">
+    <p>
+      This is the Copy/Paste friendly version of the traceback.
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File &#34;c:\python-API\MYSQL_api.py&#34;, line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File &#34;c:\python-API\SQL_connecter.py&#34;, line 1812, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+</textarea>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 75, in __call__
+    return bytes(self.params[index])
+                 ~~~~~~~~~~~^^^^^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\python-API\MYSQL_api.py", line 598, in insert_member
+    id = insert_functions.insert_member(
+    
+  File "c:\python-API\SQL_connecter.py", line 1812, in insert_member
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 540, in execute
+    stmt = RE_PY_PARAM.sub(psub, stmt)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 77, in __call__
+    raise errors.ProgrammingError(
+mysql.connector.errors.ProgrammingError: Not enough parameters for the SQL statement
+
+
+-->
+
+Member created with ID: 1
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "caregiver_needed": [],
+    "county": [],
+    "date_changed": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "member_type": [],
+    "name": [],
+    "notes": [],
+    "phone": [],
+    "schedule": [],
+    "transport_info": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Member created with ID: 2
+Loading members page
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        "100 Street Ave."
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        "Bergen"
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "1980-05-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "F"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "None"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        "No"
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "1"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"100 Street Ave.\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"Bergen\"],\"date_changed\":[\"None\"],\"dob\":[\"1980-05-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"F\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"None\"],\"name\":[\"John\"],\"notes\":[\"No\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"1\"]}}"
+Loading members page
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        "100 Street Ave."
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        "Bergen"
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "1980-05-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "1"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "F"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "None"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        "No"
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "1"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[\"100 Street Ave.\"],\"cell_phone\":[\"2015678910\"],\"completion_date\":[\"None\"],\"day_phone\":[\"2015678910\"],\"email\":[\"john2@gmail.com\"],\"evening_phone\":[\"2015678910\"],\"id\":[\"1\"],\"name\":[\"John\"],\"relationship\":[\"Father\"]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"100 Street Ave.\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"Bergen\"],\"date_changed\":[\"None\"],\"dob\":[\"1980-05-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"1\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"F\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"None\"],\"name\":[\"John\"],\"notes\":[\"No\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"1\"]}}"
+Loading members page
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        "100 Street Ave."
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        "Bergen"
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2007-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "1"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "F"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "None"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        "No"
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "1"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[\"100 Street Ave.\"],\"cell_phone\":[\"2015678910\"],\"completion_date\":[\"None\"],\"day_phone\":[\"2015678910\"],\"email\":[\"john2@gmail.com\"],\"evening_phone\":[\"2015678910\"],\"id\":[\"1\"],\"name\":[\"John\"],\"relationship\":[\"Father\"]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"100 Street Ave.\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"Bergen\"],\"date_changed\":[\"None\"],\"dob\":[\"2007-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"1\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"F\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"None\"],\"name\":[\"John\"],\"notes\":[\"No\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"1\"]}}"
+Loading members page
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        "100 Street Ave."
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        "Bergen"
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2007-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "1"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "F"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Current"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        "No"
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "1"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[\"100 Street Ave.\"],\"cell_phone\":[\"2015678910\"],\"completion_date\":[\"None\"],\"day_phone\":[\"2015678910\"],\"email\":[\"john2@gmail.com\"],\"evening_phone\":[\"2015678910\"],\"id\":[\"1\"],\"name\":[\"John\"],\"relationship\":[\"Father\"]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"100 Street Ave.\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"Bergen\"],\"date_changed\":[\"None\"],\"dob\":[\"2007-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"1\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"F\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Current\"],\"name\":[\"John\"],\"notes\":[\"No\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"1\"]}}"
+Loading Contacts page
+Loading members page
+[""]
+Loading Contacts page
+Loading members page
+[""]
+Loading Contacts page
+[""]
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Caregiver created with ID: 1
+Loading members page
+Loading Contacts page
+Loading members page
+[""]
+Loading Contacts page
+Loading members page
+Loading Contacts page
+Loading members page
+[""]
+Loading Contacts page
+Loading Contacts page
+Loading Contacts page
+[""]
+Contact created with ID: <!doctype html>
+<html lang=en>
+  <head>
+    <title>mysql.connector.errors.IntegrityError: 1048 (23000): Column &#39;staff&#39; cannot be null
+ // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+      var CONSOLE_MODE = false,
+          EVALEX = false,
+          EVALEX_TRUSTED = false,
+          SECRET = "vFGul0SGYkVK1eMFnPss";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>mysql.connector.errors.IntegrityError</h1>
+<div class="detail">
+  <p class="errormsg">mysql.connector.errors.IntegrityError: 1048 (23000): Column &#39;staff&#39; cannot be null
+</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  <h3></h3>
+  <ul><li><div class="frame" id="frame-2116408999456">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1536</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">    </span>) -&gt; cabc.Iterable[bytes]:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app`, which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to apply middleware.</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413801088">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1514</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413801232">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1511</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error: BaseException | None = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413801376">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">919</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)
+<span class="ws">            </span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>rv: ft.ResponseReturnValue | HTTPException,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413801520">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">917</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line current"><span class="ws">                </span>rv = self.dispatch_request()
+<span class="ws">                </span>     ^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413801664">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">902</em>,
+      in <code class="function">dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>and req.method == &#34;OPTIONS&#34;</pre>
+<pre class="line before"><span class="ws">        </span>):</pre>
+<pre class="line before"><span class="ws">            </span>return self.make_default_options_response()</pre>
+<pre class="line before"><span class="ws">        </span># otherwise dispatch to the handler for that endpoint</pre>
+<pre class="line before"><span class="ws">        </span>view_args: dict[str, t.Any] = req.view_args  # type: ignore[assignment]</pre>
+<pre class="line current"><span class="ws">        </span>return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def full_dispatch_request(self) -&gt; Response:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Dispatches the request and on top of that performs request</pre>
+<pre class="line after"><span class="ws">        </span>pre and postprocessing as well as HTTP exception catching and</pre>
+<pre class="line after"><span class="ws">        </span>error handling.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413801808">
+  <h4>File <cite class="filename">"c:\python-API\MYSQL_api.py"</cite>,
+      line <em class="line">561</em>,
+      in <code class="function">insert_contact</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>return &#39;&#39;, 200</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>@app.route(&#39;/insert_contact&#39;, methods=[&#39;POST&#39;])</pre>
+<pre class="line before"><span class="ws"></span>def insert_contact():</pre>
+<pre class="line before"><span class="ws">    </span>caller_data = json.loads(request.get_json()[0])</pre>
+<pre class="line current"><span class="ws">    </span>id = insert_functions.insert_contact(
+<span class="ws">    </span>     </pre>
+<pre class="line after"><span class="ws">        </span>connection=get_connection(),</pre>
+<pre class="line after"><span class="ws">        </span>staff=caller_data.get(&#39;staff&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>caller_name=caller_data.get(&#39;caller_name&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>caller_email=caller_data.get(&#39;caller_email&#39;, None),</pre>
+<pre class="line after"><span class="ws">        </span>call_date=caller_data.get(&#39;call_date&#39;, None),</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413803248">
+  <h4>File <cite class="filename">"c:\python-API\SQL_connecter.py"</cite>,
+      line <em class="line">1762</em>,
+      in <code class="function">insert_contact</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>staff, caller_name, caller_email, call_date, phone_number,</pre>
+<pre class="line before"><span class="ws">            </span>referral_type, additional_notes, tour_scheduled,</pre>
+<pre class="line before"><span class="ws">            </span>tour_not_scheduled_reason, follow_up_date</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>cursor.execute(insert_query, data)
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>connection.commit()</pre>
+<pre class="line after"><span class="ws">        </span>if connection:</pre>
+<pre class="line after"><span class="ws">            </span>connection.close()</pre>
+<pre class="line after"><span class="ws">        </span>return cursor.lastrowid</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413814048">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py"</cite>,
+      line <em class="line">551</em>,
+      in <code class="function">execute</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>if multi:</pre>
+<pre class="line before"><span class="ws">            </span>self._executed_list = []</pre>
+<pre class="line before"><span class="ws">            </span>return self._execute_iter(self._connection.cmd_query_iter(stmt))</pre>
+<pre class="line before"><span class="ws">        </span>else:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line current"><span class="ws">                </span>self._handle_result(self._connection.cmd_query(stmt))
+<span class="ws">                </span>                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except errors.InterfaceError:</pre>
+<pre class="line after"><span class="ws">                </span>if self._connection._have_next_result:  # pylint: disable=W0212</pre>
+<pre class="line after"><span class="ws">                    </span>raise errors.InterfaceError(</pre>
+<pre class="line after"><span class="ws">                        </span>&#34;Use multi=True when executing multiple statements&#34;)</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413814192">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection.py"</cite>,
+      line <em class="line">490</em>,
+      in <code class="function">cmd_query</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>Returns a tuple()</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line before"><span class="ws">        </span>if not isinstance(query, bytes):</pre>
+<pre class="line before"><span class="ws">            </span>query = query.encode(&#39;utf-8&#39;)</pre>
+<pre class="line current"><span class="ws">        </span>result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+<span class="ws">        </span>         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>if self._have_next_result:</pre>
+<pre class="line after"><span class="ws">            </span>raise errors.InterfaceError(</pre>
+<pre class="line after"><span class="ws">                </span>&#39;Use cmd_query_iter for statements with multiple queries.&#39;)</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-2116413814336">
+  <h4>File <cite class="filename">"C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection.py"</cite>,
+      line <em class="line">395</em>,
+      in <code class="function">_handle_result</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">                </span>filename = packet[5:].decode()</pre>
+<pre class="line before"><span class="ws">            </span>return self._handle_load_data_infile(filename)</pre>
+<pre class="line before"><span class="ws">        </span>elif packet[4] == 254:</pre>
+<pre class="line before"><span class="ws">            </span>return self._handle_eof(packet)</pre>
+<pre class="line before"><span class="ws">        </span>elif packet[4] == 255:</pre>
+<pre class="line current"><span class="ws">            </span>raise errors.get_exception(packet)
+<span class="ws">            </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span># We have a text result set</pre>
+<pre class="line after"><span class="ws">        </span>column_count = self._protocol.parse_column_count(packet)</pre>
+<pre class="line after"><span class="ws">        </span>if not column_count or not isinstance(column_count, int):</pre>
+<pre class="line after"><span class="ws">            </span>raise errors.InterfaceError(&#39;Illegal result set.&#39;)</pre></div>
+</div>
+</ul>
+  <blockquote>mysql.connector.errors.IntegrityError: 1048 (23000): Column &#39;staff&#39; cannot be null
+</blockquote>
+</div>
+
+<div class="plain">
+    <p>
+      This is the Copy/Paste friendly version of the traceback.
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py&#34;, line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File &#34;c:\python-API\MYSQL_api.py&#34;, line 561, in insert_contact
+    id = insert_functions.insert_contact(
+    
+  File &#34;c:\python-API\SQL_connecter.py&#34;, line 1762, in insert_contact
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py&#34;, line 551, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection.py&#34;, line 490, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File &#34;C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection.py&#34;, line 395, in _handle_result
+    raise errors.get_exception(packet)
+mysql.connector.errors.IntegrityError: 1048 (23000): Column &#39;staff&#39; cannot be null
+</textarea>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\python-API\MYSQL_api.py", line 561, in insert_contact
+    id = insert_functions.insert_contact(
+    
+  File "c:\python-API\SQL_connecter.py", line 1762, in insert_contact
+    cursor.execute(insert_query, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor.py", line 551, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection.py", line 490, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "C:\Users\oscar\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection.py", line 395, in _handle_result
+    raise errors.get_exception(packet)
+mysql.connector.errors.IntegrityError: 1048 (23000): Column 'staff' cannot be null
+
+
+-->
+
+Loading Contacts page
+[""]
+Contact created with ID: 1
+Loading Contacts page
+Loading Contacts page
+["1"]
+Loading Contacts page
+["1"]
+Loading Contacts page
+["1"]
+Loading Contacts page
+Loading members page
+["1"]
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "caregiver_needed": [],
+    "county": [],
+    "date_changed": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "member_type": [],
+    "name": [],
+    "notes": [],
+    "phone": [],
+    "schedule": [],
+    "transport_info": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Loading members page
+[""]
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Loading members page
+[""]
+Loading Contacts page
+Loading members page
+Loading Contacts page
+Loading members page
+Loading Contacts page
+["1"]
+Loading Contacts page
+Loading Contacts page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "caregiver_needed": [],
+    "county": [],
+    "date_changed": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "member_type": [],
+    "name": [],
+    "notes": [],
+    "phone": [],
+    "schedule": [],
+    "transport_info": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "caregiver_needed": [],
+    "county": [],
+    "date_changed": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "member_type": [],
+    "name": [],
+    "notes": [],
+    "phone": [],
+    "schedule": [],
+    "transport_info": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "caregiver_needed": [],
+    "county": [],
+    "date_changed": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "member_type": [],
+    "name": [],
+    "notes": [],
+    "phone": [],
+    "schedule": [],
+    "transport_info": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Member created with ID: 1
+Loading members page
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        ""
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        ""
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2025-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "None"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Prospective"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        ""
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "None"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"\"],\"date_changed\":[\"None\"],\"dob\":[\"2025-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"None\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Prospective\"],\"name\":[\"John\"],\"notes\":[\"\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"None\"]}}"
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        ""
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        ""
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2025-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "None"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Prospective"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        ""
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "None"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"\"],\"date_changed\":[\"None\"],\"dob\":[\"2025-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"None\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Prospective\"],\"name\":[\"John\"],\"notes\":[\"\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"None\"]}}"
+Loading members page
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        ""
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        ""
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2025-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "None"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Prospective"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        ""
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "None"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"\"],\"date_changed\":[\"None\"],\"dob\":[\"2025-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"None\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Prospective\"],\"name\":[\"John\"],\"notes\":[\"\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"None\"]}}"
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        ""
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        ""
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2025-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "None"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Prospective"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        ""
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "None"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"\"],\"date_changed\":[\"None\"],\"dob\":[\"2025-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"None\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Prospective\"],\"name\":[\"John\"],\"notes\":[\"\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"None\"]}}"
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        ""
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        ""
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2025-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "None"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Prospective"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        ""
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "None"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"\"],\"date_changed\":[\"None\"],\"dob\":[\"2025-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"None\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Prospective\"],\"name\":[\"John\"],\"notes\":[\"\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"None\"]}}"
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        ""
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        ""
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2025-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "None"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Prospective"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        ""
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "None"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"\"],\"date_changed\":[\"None\"],\"dob\":[\"2025-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"None\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Prospective\"],\"name\":[\"John\"],\"notes\":[\"\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"None\"]}}"
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        ""
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        ""
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2025-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "None"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Prospective"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        ""
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "None"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"\"],\"date_changed\":[\"None\"],\"dob\":[\"2025-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"None\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Prospective\"],\"name\":[\"John\"],\"notes\":[\"\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"None\"]}}"
+Loading members page
+["1"]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [
+        ""
+    ],
+    "adler_program": [
+        "None"
+    ],
+    "aep_completion_date": [
+        "None"
+    ],
+    "caregiver_needed": [
+        "None"
+    ],
+    "county": [
+        ""
+    ],
+    "date_changed": [
+        "None"
+    ],
+    "dob": [
+        "2025-06-20"
+    ],
+    "email": [
+        "john@gmail.com"
+    ],
+    "emergency_contact_one": [
+        "None"
+    ],
+    "emergency_contact_two": [
+        "None"
+    ],
+    "enrollment_form": [
+        "None"
+    ],
+    "gender": [
+        "None"
+    ],
+    "id": [
+        "1"
+    ],
+    "join_date": [
+        "None"
+    ],
+    "joined": [
+        "None"
+    ],
+    "medical_history": [
+        "None"
+    ],
+    "member_info": [
+        null
+    ],
+    "member_type": [
+        "Prospective"
+    ],
+    "name": [
+        "John"
+    ],
+    "notes": [
+        ""
+    ],
+    "phone": [
+        "None"
+    ],
+    "schedule": [
+        "None"
+    ],
+    "transport_info": [
+        "None"
+    ],
+    "veteran": [
+        "None"
+    ]
+}
+"{\"emergencyContactOne\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"emergencyContactTwo\":{\"address\":[],\"cell_phone\":[],\"completion_date\":[],\"day_phone\":[],\"email\":[],\"evening_phone\":[],\"id\":[],\"name\":[],\"relationship\":[]},\"enrollmentData\":{\"aphasia_cause\":[],\"aphasia_onset\":[],\"brain_location\":[],\"completed_date\":[],\"filled_by\":[],\"grew_up\":[],\"hearing_aid\":[],\"hearing_loss\":[],\"id\":[],\"income\":[],\"living_status\":[],\"medications\":[],\"occupations\":[],\"other_therapy\":[],\"patient_info\":[],\"prev_speech_therapy\":[],\"race\":[],\"sexual_orientation\":[]},\"medicalData\":{\"anti_seizure_med\":[],\"aphasia_cause\":[],\"aphasia_onset\":[],\"completion_date\":[],\"id\":[],\"last_seizure_date\":[],\"lesion_location\":[],\"other_medical_conditions\":[],\"other_visual_impairments\":[],\"physician_address\":[],\"physician_phone\":[],\"physicion_name\":[],\"primary_diagnosis\":[],\"secondary_diagnosis\":[],\"seizure_history\":[],\"specialty\":[],\"stroke_location\":[],\"visual_field_cut\":[],\"visual_impairments\":[]},\"userData\":{\"address\":[\"\"],\"adler_program\":[\"None\"],\"aep_completion_date\":[\"None\"],\"caregiver_needed\":[\"None\"],\"county\":[\"\"],\"date_changed\":[\"None\"],\"dob\":[\"2025-06-20\"],\"email\":[\"john@gmail.com\"],\"emergency_contact_one\":[\"None\"],\"emergency_contact_two\":[\"None\"],\"enrollment_form\":[\"None\"],\"gender\":[\"None\"],\"id\":[\"1\"],\"join_date\":[\"None\"],\"joined\":[\"None\"],\"medical_history\":[\"None\"],\"member_info\":[null],\"member_type\":[\"Prospective\"],\"name\":[\"John\"],\"notes\":[\"\"],\"phone\":[\"None\"],\"schedule\":[\"None\"],\"transport_info\":[\"None\"],\"veteran\":[\"None\"]}}"

@@ -8,10 +8,10 @@
 using json = nlohmann::json;
 
 // At home
-// std::string APIClient::url = "192.168.1.156";
+std::string APIClient::url = "192.168.1.156";
 
 // At work
-std::string APIClient::url = "192.168.120.66";
+// std::string APIClient::url = "192.168.120.66";
 
 std::string APIClient::get_contact(const json &jsonPayload)
 {
@@ -83,12 +83,12 @@ std::string APIClient::get_evaluation(const json &jsonPayload)
     return post_response->body;
 }
 
-std::string APIClient::get_transport_information(const json &jsonPayload)
+std::string APIClient::get_transportation_information(const json &jsonPayload)
 {
     httplib::Client Client(url, 5000);
     std::string jsonBody = jsonPayload.dump();
 
-    auto post_response = Client.Post("/get_transport_information", jsonBody, "application/json");
+    auto post_response = Client.Post("/get_transportation_information", jsonBody, "application/json");
 
     return post_response->body;
 }
@@ -199,11 +199,11 @@ int APIClient::update_evaluation(const json &jsonPayload)
     return 1;
 }
 
-int APIClient::update_transport_information(const json &jsonPayload)
+int APIClient::update_transportation_information(const json &jsonPayload)
 {
     httplib::Client Client(url, 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = Client.Post("/update_transport_information", jsonBody, "application/json");
+    auto post_response = Client.Post("/update_transportation_information", jsonBody, "application/json");
     return 1;
 }
 
@@ -303,11 +303,11 @@ std::string APIClient::create_evaluation(const json &jsonPayload)
     return post_response->body;
 }
 
-std::string APIClient::create_transport_information(const json &jsonPayload)
+std::string APIClient::create_transportation_information(const json &jsonPayload)
 {
     httplib::Client Client(url, 5000);
     std::string jsonBody = jsonPayload.dump();
-    auto post_response = Client.Post("/insert_transport_information", jsonBody, "application/json");
+    auto post_response = Client.Post("/insert_transportation_information", jsonBody, "application/json");
     return post_response->body;
 }
 

@@ -21,7 +21,7 @@ public:
     static std::string get_medical_history_form(const json &jsonPayload);
     static std::string get_incident_report(const json &jsonPayload);
     static std::string get_evaluation(const json &jsonPayload);
-    static std::string get_transport_information(const json &jsonPayload);
+    static std::string get_transportation_information(const json &jsonPayload);
     static std::string get_caregiver(const json &jsonPayload);
     static std::string get_attending_caregiver(const json &jsonPayload);
     static std::string get_emergency_contact(const json &jsonPayload);
@@ -36,7 +36,7 @@ public:
     static int update_medical_history_form(const json &jsonPayload);
     static int update_incident_report(const json &jsonPayload);
     static int update_evaluation(const json &jsonPayload);
-    static int update_transport_information(const json &jsonPayload);
+    static int update_transportation_information(const json &jsonPayload);
     static int update_caregiver(const json &jsonPayload);
     static int update_attending_caregiver(const json &jsonPayload);
     static int update_emergency_contact(const json &jsonPayload);
@@ -51,7 +51,7 @@ public:
     static std::string create_medical_history_form(const json &jsonPayload);
     static std::string create_incident_report(const json &jsonPayload);
     static std::string create_evaluation(const json &jsonPayload);
-    static std::string create_transport_information(const json &jsonPayload);
+    static std::string create_transportation_information(const json &jsonPayload);
     static std::string create_caregiver(const json &jsonPayload);
     static std::string create_attending_caregiver(const json &jsonPayload);
     static std::string create_emergency_contact(const json &jsonPayload);

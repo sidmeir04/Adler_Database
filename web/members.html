@@ -148,6 +148,7 @@
                                     <div class="ms-3">
                                         <h4 class="card-title">${jsonData['name'][i]}</h4>
                                         <h6 class="card-subtitle text-muted">${jsonData['email'][i]}</h6>
+                                        <h6 class="card-text">${jsonData['member_type'][i]} Member</p>
                                         <p class="card-text p-y-1">${jsonData['adler_program'][i]}</p>
                                         <p class="userID" style="display: none;">${jsonData['id'][i]}</p>
                                     </div>
@@ -218,12 +219,13 @@
             window.createCaregiverModal(userID);
         }
 
-        function memberModal(userJSON, enrollmentJSON, medicalHistoryJSON, emergencyJSON, emergencyTwoJSON, careGiversJSON) {
+        function memberModal(userJSON, enrollmentJSON, medicalHistoryJSON, transportJSON, emergencyJSON, emergencyTwoJSON, careGiversJSON) {
             console.log("memberModal called");
             try {
                 jsonData = JSON.parse(userJSON);
                 enrollmentJSON = JSON.parse(enrollmentJSON);
                 medicalHistoryJSON = JSON.parse(medicalHistoryJSON);
+                transportJSON = JSON.parse(transportJSON);
                 emergencyOne = JSON.parse(emergencyJSON);
                 emergencyTwo = JSON.parse(emergencyTwoJSON);
                 careGivers = JSON.parse(careGiversJSON);
@@ -285,12 +287,14 @@
                                 <div class="col-md-4" style="border-right: 3px solid #ddd; border-left: 3px solid #ddd;">
                                     <p><strong>Program:</strong> ${safeAccess(jsonData, 'adler_program', 'N/A')}</p>
                                     <p><strong>Date Joined:</strong> ${safeAccess(jsonData, 'join_date', 'N/A')}</p>
-                                    <p><strong>Age:</strong> ${safeAccess(jsonData, 'age', 'N/A')}</p>
+                                    <p><strong>Age:</strong> ${new Date().getFullYear() - new Date(safeAccess(jsonData, 'dob', 'N/A')).getFullYear() - (new Date() < new Date(new Date(safeAccess(jsonData, 'dob', 'N/A')).setFullYear(new Date().getFullYear())) ? 1 : 0)}</p>
                                     <p><strong>Date of Birth:</strong> ${safeAccess(jsonData, 'dob', 'N/A')}</p>
                                     <p><strong>Address:</strong> ${safeAccess(jsonData, 'address', 'N/A')}</p>
                                     <p><strong>County:</strong> ${safeAccess(jsonData, 'county', 'N/A')}</p>
                                     <p><strong>Gender:</strong> ${safeAccess(jsonData, 'gender', 'N/A') == 'F' ? 'Female' : 'Male'}</p>
                                     <p><strong>Phone:</strong> ${safeAccess(jsonData, 'phone', 'N/A')}</p>
+                                    <p><strong>Member Type:</strong> ${safeAccess(jsonData, 'member_type', 'N/A')} Member</p>
+                                    <p><strong>Date Updated:</strong> ${safeAccess(jsonData, 'date_changed', 'N/A')}</p>
                                     <button onClick=updateMember(${safeAccess(jsonData, 'id', 'N/A')})>Update Member</button>
                                 </div>
                                 <div class="col-md-4">
@@ -345,11 +349,11 @@
                                 </button>
                                 <div id="dropdown4" class="collapse dropdown-content">
                                     <ul class="list-group">
-                                        <li class="list-group-item">Bus Service</li>
-                                        <li class="list-group-item">Bus Phone Number</li>
-                                        <li class="list-group-item">Who is Picking up</li>
-                                        <li class="list-group-item">Phone Number</li>
-                                        <li class="list-group-item">Relation to Member</li>
+                                        <li class="list-group-item">AM Transport Name: ${safeAccess(transportJSON, 'am_transport_name', 'N/A')}</li>
+                                        <li class="list-group-item">AM Transport Phone: ${safeAccess(transportJSON, 'am_transport_phone', 'N/A')}</li>
+                                        <li class="list-group-item">PM Transport Name: ${safeAccess(transportJSON, 'pm_transport_name', 'N/A')}</li>
+                                        <li class="list-group-item">PM Transport Phone: ${safeAccess(transportJSON, 'pm_transport_phone', 'N/A')}</li>
+                                        <li class="list-group-item">Transport Notes: ${safeAccess(transportJSON, 'transportation_notes', 'N/A')}</li>
                                     </ul>
                                 </div>
                                 <button class="btn w-100 dropdown-btn" data-bs-toggle="collapse" data-bs-target="#dropdown5" aria-expanded="false" onclick="closeOthers('dropdown5')">

@@ -68,7 +68,7 @@
                         <a class="nav-link" onclick="updateCaregiver('')" href="#">Add Caregiver</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="updateContact('')" href="#">Add Contact</a>
+                        <a class="nav-link" onclick="updateContacts('')" href="#">Add Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="goToMembers" href="#">Members</a>
@@ -216,22 +216,27 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                        <div class="row">
-                            <p class="col-sm-3">Name:</p>
-                            <p class="col-sm-9">${safeAccess(jsonData, 'caller_name', '')}</p>
+                            <div class="row">
+                                <p class="col-sm-3">Name:</p>
+                                <p class="col-sm-9">${safeAccess(jsonData, 'caller_name', '')}</p>
 
-                            <p class="col-sm-3">Phone:</p>
-                            <p class="col-sm-9">${safeAccess(jsonData, 'phone_number', '')}</p>
+                                <p class="col-sm-3">Phone:</p>
+                                <p class="col-sm-9">${safeAccess(jsonData, 'phone_number', '')}</p>
 
-                            <p class="col-sm-3">Email:</p>
-                            <p class="col-sm-9">${safeAccess(jsonData, 'caller_email', '')}</p>
+                                <p class="col-sm-3">Email:</p>
+                                <p class="col-sm-9">${safeAccess(jsonData, 'caller_email', '')}</p>
 
-                            <p class="col-sm-3">Notes:</p>
-                            <p class="col-sm-9">${safeAccess(jsonData, 'additional_notes', '')}</p>
+                                <p class="col-sm-3">Notes:</p>
+                                <p class="col-sm-9">${safeAccess(jsonData, 'additional_notes', '')}</p>
 
-                            <p class="col-sm-3">Date Contacted:</p>
-                            <p class="col-sm-9">${safeAccess(jsonData, 'call_date', '')}</p>
-                        </div>
+                                <p class="col-sm-3">Date Contacted:</p>
+                                <p class="col-sm-9">${safeAccess(jsonData, 'call_date', '')}</p>
+
+                                <p class="col-sm-3">Update Contact:</p>
+                                <p class="col-sm-9">
+                                    <button class="btn btn-primary" onclick="updateContacts(${safeAccess(jsonData, 'id', '')})">Update</button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -280,8 +285,8 @@
             window.loadCaregiverForm(userID.toString());
         }
 
-        function updatecontact(userID) {
-            window.loadcontactForm(userID.toString());
+        function updateContacts(userID) {
+            window.loadContactForm(userID.toString());
         }
     </script>
 </body>
