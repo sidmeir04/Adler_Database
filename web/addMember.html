@@ -624,20 +624,20 @@
         <form id="transport">
             <div class="form-step d-none">
                 <div class="mb-3">
-                    <label for="am_transport_name" class="form-label">AM Transport Name</label>
-                    <input type="text" class="form-control" id="am_transport_name" name="am_transport_name">
+                    <label for="am_name" class="form-label">AM Transport Name</label>
+                    <input type="text" class="form-control" id="am_name" name="am_name">
                 </div>
                 <div class="mb-3">
-                    <label for="am_transport_phone" class="form-label">AM Transport Phone</label>
-                    <input type="tel" class="form-control" id="am_transport_phone" name="am_transport_phone">
+                    <label for="am_phone" class="form-label">AM Transport Phone</label>
+                    <input type="tel" class="form-control" id="am_phone" name="am_phone">
                 </div>
                 <div class="mb-3">
-                    <label for="pm_transport_name" class="form-label">PM Transport Name</label>
-                    <input type="text" class="form-control" id="pm_transport_name" name="pm_transport_name">
+                    <label for="pm_name" class="form-label">PM Transport Name</label>
+                    <input type="text" class="form-control" id="pm_name" name="pm_name">
                 </div>
                 <div class="mb-3">
-                    <label for="pm_transport_phone" class="form-label">PM Transport Phone</label>
-                    <input type="tel" class="form-control" id="pm_transport_phone" name="pm_transport_phone">
+                    <label for="pm_phone" class="form-label">PM Transport Phone</label>
+                    <input type="tel" class="form-control" id="pm_phone" name="pm_phone">
                 </div>
                 <div class="mb-3">
                     <label for="transportation_notes" class="form-label">Transport Notes</label>
@@ -834,7 +834,7 @@
                     updateTransportID(id);
                     const payload = JSON.stringify({
                         "id": getMemberID()[0],
-                        "transport": id
+                        "transport_info": id
                     });
                     console.log("Payload:", payload);
                     window.updateMember(payload);
@@ -1064,12 +1064,12 @@
             }
 
             const transportData = data.transportData;
-            const transportForm = document.getElementById('Transport');
+            const transportForm = document.getElementById('transport');
             document.querySelector('.transport_information_id').value = transportData.id;
-            transportForm.querySelector('#am_transport_name').value = transportData.am_transport_name;
-            transportForm.querySelector('#am_transport_phone').value = transportData.am_transport_phone;
-            transportForm.querySelector('#pm_transport_name').value = transportData.pm_transport_name;
-            transportForm.querySelector('#pm_transport_phone').value = transportData.pm_transport_phone;
+            transportForm.querySelector('#am_name').value = transportData.am_name;
+            transportForm.querySelector('#am_phone').value = transportData.am_phone;
+            transportForm.querySelector('#pm_name').value = transportData.pm_name;
+            transportForm.querySelector('#pm_phone').value = transportData.pm_phone;
             transportForm.querySelector('#transportation_notes').value = transportData.transportation_notes;
 
             const enrollmentData = data.enrollmentData;

@@ -1,264 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Export to Excel</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-    }
-    .app-container {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-    .toolbar {
-      background-color: #ffffff;
-      padding: 16px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-      z-index: 1;
-    }
-    .toolbar select, .toolbar button, .toolbar label {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background-color: #fff;
-    }
-    .filter-section {
-      background-color: #ffffff;
-      padding: 16px;
-      border-top: 1px solid #ddd;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-    .filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .filter-bar select, .filter-bar input {
-      padding: 8px;
-      font-size: 14px;
-    }
-    .content {
-      flex: 1;
-      overflow: auto;
-      padding: 16px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-    th, td {
-      padding: 10px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-    th {
-      background-color: #f0f0f0;
-    }
-    .hidden {
-      display: none;
-    }
-    .checkbox-list {
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 8px;
-      background-color: #fff;
-      max-height: 150px;
-      overflow-y: auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="app-container">
-    <div class="toolbar">
-      <label for="dataType">Member Type:</label>
-      <select id="dataType">
-        <option value="">-- Choose --</option>
-        <option value="caregiver">Caregiver</option>
-        <option value="contact">Contact</option>
-        <option value="active_member">Active Member</option>
-        <option value="prospective_member">Prospective Member</option>
-      </select>
+    <header>
+        <nav class="navbar navbar-expand-sm   navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      <label>Data Selection:</label>
-      <div id="checkboxFields" class="checkbox-list"></div>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="updateMember('')" href="#">Add Member</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="updateCaregiver('')" href="#">Add Caregiver</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="updateContact('')" href="#">Add Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="goToMembers" href="#">Members</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="goToContacts" href="#">Contacts</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <script>
+        document.getElementById("goToMembers").addEventListener("click", function() {
+            window.loadMembers();
+        });
+        document.getElementById("goToMembers").addEventListener("click", function() {
+            window.loadMembers();
+        });
 
-      <button id="getDataBtn">Get Data Preview</button>
-      <button id="exportBtn" class="hidden">Export to XLSX</button>
-    </div>
-
-    <div class="filter-section">
-      <button id="addFilterBtn">+ Add Filter</button>
-      <div id="filtersContainer"></div>
-    </div>
-
-    <div class="content">
-      <table id="previewTable" class="hidden">
-        <thead>
-          <tr id="tableHeaders"></tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <script>
-    const dataTypeSelect = document.getElementById('dataType');
-    const checkboxFields = document.getElementById('checkboxFields');
-    const getDataBtn = document.getElementById('getDataBtn');
-    const exportBtn = document.getElementById('exportBtn');
-    const previewTable = document.getElementById('previewTable');
-    const tableHeaders = document.getElementById('tableHeaders');
-    const tableBody = document.getElementById('tableBody');
-    const addFilterBtn = document.getElementById('addFilterBtn');
-    const filtersContainer = document.getElementById('filtersContainer');
-
-    const fieldOptions = {
-      caregiver: [
-        { label: 'Name', value: 'name', type: 'string' },
-        { label: 'Email', value: 'email', type: 'string' },
-        { label: 'Phone', value: 'phone', type: 'string' },
-        { label: 'Relationship', value: 'relationship', type: 'string' },
-        { label: 'Availability', value: 'availability', type: 'string' },
-      ],
-      contact: [
-        { label: 'Name', value: 'name', type: 'string' },
-        { label: 'Email', value: 'email', type: 'string' },
-        { label: 'Phone', value: 'phone', type: 'string' },
-        { label: 'Contact Reason', value: 'contact_reason', type: 'string' },
-      ],
-      active_member: [
-        { label: 'Name', value: 'name', type: 'string' },
-        { label: 'Email', value: 'email', type: 'string' },
-        { label: 'Age', value: 'age', type: 'number' },
-        { label: 'Membership Date', value: 'membership_date', type: 'date' },
-        { label: 'Status', value: 'status', type: 'string' },
-      ],
-      prospective_member: [
-        { label: 'Name', value: 'name', type: 'string' },
-        { label: 'Email', value: 'email', type: 'string' },
-        { label: 'Phone', value: 'phone', type: 'string' },
-        { label: 'Interest Level', value: 'interest_level', type: 'string' },
-      ]
-    };
-
-    function createCheckboxField(field) {
-      const label = document.createElement('label');
-      label.style.display = 'block';
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.value = field.value;
-      label.appendChild(input);
-      label.append(' ' + field.label);
-      checkboxFields.appendChild(label);
-    }
-
-    function createFilterBar(fields) {
-      const filterBar = document.createElement('div');
-      filterBar.className = 'filter-bar';
-
-      const selectField = document.createElement('select');
-      fields.forEach(field => {
-        const opt = document.createElement('option');
-        opt.value = JSON.stringify(field);
-        opt.textContent = field.label;
-        selectField.appendChild(opt);
-      });
-
-      const inputStart = document.createElement('input');
-      const inputEnd = document.createElement('input');
-      inputStart.placeholder = 'Start';
-      inputEnd.placeholder = 'End';
-
-      function updateInputs() {
-        const selectedField = JSON.parse(selectField.value);
-        inputStart.type = inputEnd.type = 'text';
-
-        if (selectedField.type === 'number') {
-          inputStart.type = inputEnd.type = 'number';
-          inputStart.placeholder = 'Min';
-          inputEnd.placeholder = 'Max';
-          inputEnd.classList.remove('hidden');
-        } else if (selectedField.type === 'date') {
-          inputStart.type = inputEnd.type = 'date';
-          inputEnd.classList.remove('hidden');
-        } else {
-          inputStart.placeholder = 'Contains...';
-          inputEnd.classList.add('hidden');
+        document.getElementById("goToContacts").addEventListener("click", function() {
+            window.loadContacts();
+        });
+        function updateMember(userID) {
+            window.loadMemberForm(userID.toString());
         }
-      }
 
-      selectField.addEventListener('change', updateInputs);
-      updateInputs();
+        function updateCaregiver(userID) {
+            window.loadCaregiverForm(userID.toString());
+        }
 
-      filterBar.appendChild(selectField);
-      filterBar.appendChild(inputStart);
-      filterBar.appendChild(inputEnd);
-
-      filtersContainer.appendChild(filterBar);
-    }
-
-    dataTypeSelect.addEventListener('change', () => {
-      const selectedType = dataTypeSelect.value;
-      checkboxFields.innerHTML = '';
-      filtersContainer.innerHTML = '';
-
-      if (fieldOptions[selectedType]) {
-        fieldOptions[selectedType].forEach(field => {
-          createCheckboxField(field);
-        });
-      }
-
-      previewTable.classList.add('hidden');
-      exportBtn.classList.add('hidden');
-      tableHeaders.innerHTML = '';
-      tableBody.innerHTML = '';
-    });
-
-    getDataBtn.addEventListener('click', () => {
-      const selectedFields = Array.from(checkboxFields.querySelectorAll('input:checked')).map(input => input.value);
-
-      tableHeaders.innerHTML = selectedFields.map(field => `<th>${field}</th>`).join('');
-      tableBody.innerHTML = '';
-
-      for (let i = 0; i < 5; i++) {
-        const row = document.createElement('tr');
-        selectedFields.forEach(field => {
-          const td = document.createElement('td');
-          td.textContent = `${field} ${i + 1}`;
-          row.appendChild(td);
-        });
-        tableBody.appendChild(row);
-      }
-
-      previewTable.classList.remove('hidden');
-      exportBtn.classList.remove('hidden');
-    });
-
-    addFilterBtn.addEventListener('click', () => {
-      const selectedType = dataTypeSelect.value;
-      if (fieldOptions[selectedType]) {
-        createFilterBar(fieldOptions[selectedType]);
-      }
-    });
-  </script>
+        function updateContact(userID) {
+            window.loadContactForm(userID.toString());
+        }
+    </script>
 </body>
 </html>

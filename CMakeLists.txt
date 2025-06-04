@@ -1,15 +1,3 @@
-# To generate installer
-# cmake -S . -B build
-# cmake --build build --config Release
-# cpack --config build/CPackConfig.cmake
-
-# To compile with G++
-# mkdir build
-# cd build
-# cmake -G "MinGW Makefiles" ..
-# mingw32-make
-
-# Top-level CMake configuration
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 project(AdlerDatabase LANGUAGES CXX)
 
@@ -23,9 +11,9 @@ add_definitions(-DWIN32_LEAN_AND_MEAN -DNOMINMAX)
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/headers
-    C:/libraries/json/include
-    C:/libraries/webview/core/include
-    C:/libraries/WebView2/build/native/include
+    libraries/json/include
+    libraries/webview/core/include
+    libraries/WebView2/build/native/include
 )
 
 set(SRCS

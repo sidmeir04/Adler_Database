@@ -230,13 +230,14 @@
                 emergencyTwo = JSON.parse(emergencyTwoJSON);
                 careGivers = JSON.parse(careGiversJSON);
                 console.log(jsonData);
+                console.log(transportJSON);
             } catch (error) {
                 console.error("Error parsing JSON:", error);
                 return;
             }
             console.log("jsonData");
 
-            function safeAccess(obj, key, defaultValue = "") {
+            function safeAccess(obj, key, defaultValue = "N/A") {
                 try{
                     return obj && obj[key] !== undefined ? obj[key] : defaultValue;
                 } catch (error) {
@@ -246,7 +247,7 @@
             }
             console.log("jsonData");
 
-            function safeAccessNested(obj, keys, defaultValue = "") {
+            function safeAccessNested(obj, keys, defaultValue = "N/A") {
                 try {
                     if (!Array.isArray(keys)) keys = [keys];
                 } catch (error) {
@@ -349,10 +350,10 @@
                                 </button>
                                 <div id="dropdown4" class="collapse dropdown-content">
                                     <ul class="list-group">
-                                        <li class="list-group-item">AM Transport Name: ${safeAccess(transportJSON, 'am_transport_name', 'N/A')}</li>
-                                        <li class="list-group-item">AM Transport Phone: ${safeAccess(transportJSON, 'am_transport_phone', 'N/A')}</li>
-                                        <li class="list-group-item">PM Transport Name: ${safeAccess(transportJSON, 'pm_transport_name', 'N/A')}</li>
-                                        <li class="list-group-item">PM Transport Phone: ${safeAccess(transportJSON, 'pm_transport_phone', 'N/A')}</li>
+                                        <li class="list-group-item">AM Transport Name: ${safeAccess(transportJSON, 'am_name', 'N/A')}</li>
+                                        <li class="list-group-item">AM Transport Phone: ${safeAccess(transportJSON, 'am_phone', 'N/A')}</li>
+                                        <li class="list-group-item">PM Transport Name: ${safeAccess(transportJSON, 'pm_name', 'N/A')}</li>
+                                        <li class="list-group-item">PM Transport Phone: ${safeAccess(transportJSON, 'pm_phone', 'N/A')}</li>
                                         <li class="list-group-item">Transport Notes: ${safeAccess(transportJSON, 'transportation_notes', 'N/A')}</li>
                                     </ul>
                                 </div>

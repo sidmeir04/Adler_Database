@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif; /* Using Inter font */
+            background-color: #f8f9fa; /* Light gray background for the page */
+        }
+        header { 
+            font-size: 24px;
+        }
+        .filter-row {
+            display: flex;
+            gap: 0.5rem; 
+            align-items: flex-end; 
+            margin-bottom: 0.75rem; 
+            padding: 0.75rem;
+            background-color: #ffffff;
+            border-radius: 0.375rem; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .filter-row .form-control, .filter-row .form-select {
+            flex: 1; 
+        }
+        .filter-value-input { min-width: 150px; }
+        .filter-value-input-secondary { min-width: 150px; }
+
+        .card {
+            border-radius: 0.5rem; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.075); 
+        }
+        .card-header {
+            background-color: #e9ecef; 
+            font-weight: 600; 
+        }
+        .btn {
+             border-radius: 0.375rem; 
+        }
+        .btn-outline-primary {
+            --bs-btn-hover-bg: #0d6efd; 
+            --bs-btn-hover-color: #fff;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #e9ecef; 
+        }
+        .container {
+            padding-top: 1.5rem;
+            padding-bottom: 3rem;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 0.375rem; 
+            margin-bottom: 1.5rem; 
+        }
+        .navbar .nav-link {
+            border-radius: 0.25rem; 
+            margin-right: 0.25rem;
+        }
+        .navbar .nav-link:hover, .navbar .nav-link:focus {
+            background-color: rgba(0,0,0,0.05); 
+        }
+        #fieldsCheckboxesContainer .form-check {
+            background-color: #fff;
+            padding: 0.75rem 1rem 0.75rem 2.5rem; 
+            border-radius: 0.375rem;
+            margin-bottom: 0.5rem; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+         #fieldsCheckboxesContainer .form-check-input {
+            margin-top: 0.4em; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-light bg-light rounded shadow-sm">
+                <div class="container-fluid"> <a class="navbar-brand" href="#">DataTool</a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0"> <li class="nav-item">
+                                <a class="nav-link" onclick="updateMember('')" href="#">Add Member</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="updateCaregiver('')" href="#">Add Caregiver</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="updateContact('')" href="#">Add Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="goToMembers" href="#">Members</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="goToContacts" href="#">Contacts</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+
+    <div class="container"> <h2 class="mb-4 text-center">Export Data to Excel</h2>
+
+        <div class="row">
+            <div class="col-md-6"> <div class="card mb-4">
+                    <div class="card-header">
+                        <strong>Step 1: Select Data Type</strong>
+                    </div>
+                    <div class="card-body">
+                        <select class="form-select form-select-lg" id="dataTypeSelect"> <option selected disabled value="">Choose data type...</option>
+                            <option value="member">Member</option>
+                            <option value="caregiver">Caregiver</option>
+                            <option value="contact">Contact</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"> <div class="card mb-4">
+                    <div class="card-header">
+                        <strong>Step 4: Generate Report</strong>
+                    </div>
+                    <div class="card-body text-center">
+                        <button type="button" class="btn btn-info btn-lg me-2 mb-2 mb-md-0" id="previewButton" disabled> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill me-1" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                            </svg> Preview Data
+                        </button>
+                        <button type="button" class="btn btn-success btn-lg" id="exportButton" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet-fill me-1" viewBox="0 0 16 16">
+                                <path d="M6 12v-2h3v2z"/>
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M3 9h10v1h-3v2h3v1h-3v2H9v-2H6v2H5v-2H3z"/>
+                            </svg> Export to Excel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4" id="fieldsCard" style="display: none;">
+            <div class="card-header">
+                <strong>Step 2: Select Fields to Export</strong>
+            </div>
+            <div class="card-body">
+                <div id="fieldsCheckboxesContainer" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    </div>
+            </div>
+        </div>
+
+        <div class="card mb-4" id="filtersCard" style="display: none;">
+            <div class="card-header">
+                <strong>Step 3: Add Filters</strong> (Optional)
+            </div>
+            <div class="card-body">
+                <div id="filterRowsContainer">
+                    </div>
+                <button type="button" class="btn btn-outline-primary mt-2" id="addFilterButton" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill me-1" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+                    </svg> Add Filter
+                </button>
+            </div>
+        </div>
+
+        <div class="card" id="previewCard" style="display: none;">
+            <div class="card-header">
+                <strong>Data Preview</strong>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead id="previewTableHead" class="table-light">
+                            </thead>
+                        <tbody id="previewTableBody">
+                            </tbody>
+                    </table>
+                </div>
+                 <p id="noDataMessage" class="text-center text-muted mt-3" style="display:none;">No data matches your criteria.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // User's existing navbar scripts
+        document.getElementById("goToMembers")?.addEventListener("click", function() {
+            if (typeof window.loadMembers === 'function') window.loadMembers();
+            else console.warn('window.loadMembers function not found.');
+        });
+        document.getElementById("goToContacts")?.addEventListener("click", function() {
+             if (typeof window.loadContacts === 'function') window.loadContacts();
+            else console.warn('window.loadContacts function not found.');
+        });
+        function updateMember(userID) {
+            if (typeof window.loadMemberForm === 'function') window.loadMemberForm(userID.toString());
+            else console.warn('window.loadMemberForm function not found.');
+        }
+        function updateCaregiver(userID) {
+             if (typeof window.loadCaregiverForm === 'function') window.loadCaregiverForm(userID.toString());
+            else console.warn('window.loadCaregiverForm function not found.');
+        }
+        function updateContact(userID) {
+            if (typeof window.loadContactForm === 'function') window.loadContactForm(userID.toString());
+            else console.warn('window.loadContactForm function not found.');
+        }
+
+        // --- Data Export Page Specific JavaScript ---
+
+        const fieldDefinitions = {
+            member: [
+                { id: 'memberName', name: 'Name', type: 'String', placeholder: 'e.g., John Doe' },
+                { id: 'memberEmail', name: 'Email', type: 'String', placeholder: 'e.g., john.doe@example.com' }, // Was 'email', now 'String'
+                { id: 'memberDateJoined', name: 'Date Joined', type: 'Date' }, // Was 'date'
+                { id: 'memberStatus', name: 'Status', type: 'String', options: ['Active', 'Inactive', 'Pending Review', 'Expired'], placeholder: 'Select status' }, // Was 'select', now 'String' with options
+                { id: 'memberIsActive', name: 'Is Active', type: 'Boolean'}, // New Boolean field example
+                { id: 'memberNotes', name: 'Notes', type: 'LargeText', placeholder: 'Enter notes...'} // New LargeText field example
+            ],
+            caregiver: [
+                { id: 'caregiverName', name: 'Name', type: 'String', placeholder: 'e.g., Jane Smith' },
+                { id: 'caregiverEmail', name: 'Email', type: 'String', placeholder: 'e.g., jane.smith@example.com' },
+                { id: 'caregiverPhone', name: 'Phone', type: 'Phone', placeholder: 'e.g., 555-123-4567' }, // Was 'tel'
+                { id: 'caregiverServiceYears', name: 'Service Years', type: 'Num', placeholder: 'e.g., 5' }, // Was 'number'
+                { id: 'caregiverSpecialty', name: 'Specialty', type: 'String', placeholder: 'e.g., Pediatrics' } // Could be LargeText if very long
+            ],
+            contact: [
+                { id: 'contactName', name: 'Name', type: 'String', placeholder: 'e.g., Emergency Contact Person' },
+                { id: 'contactEmail', name: 'Email', type: 'String', placeholder: 'e.g., contact@example.com' },
+                { id: 'contactRelationship', name: 'Relationship', type: 'String', options: ['Family', 'Friend', 'Guardian', 'Other'], placeholder: 'Select relationship' }, // Was 'select'
+                { id: 'contactLastContacted', name: 'Last Contacted', type: 'Date' },
+                { id: 'contactCity', name: 'City', type: 'String', placeholder: 'e.g., New York'}
+            ]
+        };
+
+        const filterOperators = {
+            String: [
+                { value: 'contains', text: 'Contains' }, { value: 'equals', text: 'Equals' },
+                { value: 'not_equals', text: 'Not Equals' }, { value: 'startsWith', text: 'Starts With' },
+                { value: 'endsWith', text: 'Ends With' }, { value: 'is_empty', text: 'Is Empty' },
+                { value: 'is_not_empty', text: 'Is Not Empty' }
+            ],
+            Phone: [ // Using String operators for Phone as a base
+                { value: 'contains', text: 'Contains' }, { value: 'equals', text: 'Equals' },
+                { value: 'startsWith', text: 'Starts With' }, { value: 'endsWith', text: 'Ends With' },
+                { value: 'is_empty', text: 'Is Empty' }, { value: 'is_not_empty', text: 'Is Not Empty' }
+            ],
+            LargeText: [ // Using String operators, potentially a subset if needed (e.g., 'contains')
+                { value: 'contains', text: 'Contains' }, { value: 'equals', text: 'Equals' },
+                { value: 'not_equals', text: 'Not Equals' }, { value: 'is_empty', text: 'Is Empty' },
+                { value: 'is_not_empty', text: 'Is Not Empty' }
+            ],
+            Num: [
+                { value: 'equals', text: '=' }, { value: 'not_equals', text: '!=' },
+                { value: 'gt', text: '>' }, { value: 'lt', text: '<' },
+                { value: 'gte', text: '>=' }, { value: 'lte', text: '<=' },
+                { value: 'between', text: 'Between' }, { value: 'is_empty', text: 'Is Empty' },
+                { value: 'is_not_empty', text: 'Is Not Empty' }
+            ],
+            Date: [
+                { value: 'equals', text: 'On' }, { value: 'not_equals', text: 'Not On' },
+                { value: 'before', text: 'Before' }, { value: 'after', text: 'After' },
+                { value: 'between', text: 'Between' }, { value: 'is_empty', text: 'Is Empty' },
+                { value: 'is_not_empty', text: 'Is Not Empty' }
+            ],
+            Boolean: [
+                { value: 'equals', text: 'Is' } // Value input will be a True/False select
+            ]
+        };
+
+        const dataTypeSelect = document.getElementById('dataTypeSelect');
+        const fieldsCard = document.getElementById('fieldsCard');
+        const fieldsCheckboxesContainer = document.getElementById('fieldsCheckboxesContainer');
+        const filtersCard = document.getElementById('filtersCard');
+        const filterRowsContainer = document.getElementById('filterRowsContainer');
+        const addFilterButton = document.getElementById('addFilterButton');
+        const previewButton = document.getElementById('previewButton');
+        const exportButton = document.getElementById('exportButton');
+        const previewCard = document.getElementById('previewCard');
+        const previewTableHead = document.getElementById('previewTableHead');
+        const previewTableBody = document.getElementById('previewTableBody');
+        const noDataMessage = document.getElementById('noDataMessage');
+
+        let currentDataType = ''; 
+        let filterRowCount = 0; 
+
+        dataTypeSelect.addEventListener('change', function() {
+            currentDataType = this.value;
+            if (currentDataType) {
+                populateFieldCheckboxes(currentDataType);
+                fieldsCard.style.display = 'block';
+                filtersCard.style.display = 'block';
+                resetFiltersAndPreview();
+                updatePreviewButtonState();
+                updateAddFilterButtonState(); 
+            } else {
+                fieldsCard.style.display = 'none';
+                filtersCard.style.display = 'none';
+                resetFiltersAndPreview();
+            }
+        });
+
+        function populateFieldCheckboxes(dataType) {
+            fieldsCheckboxesContainer.innerHTML = ''; 
+            const fields = fieldDefinitions[dataType];
+            if (!fields) return;
+
+            fields.forEach(field => {
+                const colDiv = document.createElement('div');
+                colDiv.classList.add('col'); 
+
+                const div = document.createElement('div');
+                div.classList.add('form-check');
+
+                const input = document.createElement('input');
+                input.classList.add('form-check-input', 'export-field-checkbox');
+                input.type = 'checkbox';
+                input.value = field.id;
+                input.id = `field-${field.id}`;
+                input.dataset.fieldName = field.name;
+                input.dataset.fieldType = field.type; // Generic type
+                if (field.options) input.dataset.fieldOptions = JSON.stringify(field.options);
+                if (field.placeholder) input.dataset.fieldPlaceholder = field.placeholder;
+
+                const label = document.createElement('label');
+                label.classList.add('form-check-label');
+                label.htmlFor = `field-${field.id}`;
+                label.textContent = field.name;
+
+                div.appendChild(input);
+                div.appendChild(label);
+                colDiv.appendChild(div);
+                fieldsCheckboxesContainer.appendChild(colDiv);
+
+                input.addEventListener('change', () => {
+                    updateFilterFieldDropdowns(); 
+                    updatePreviewButtonState();   
+                    updateAddFilterButtonState(); 
+                });
+            });
+        }
+
+        function getSelectedFields() {
+            const selected = [];
+            document.querySelectorAll('.export-field-checkbox:checked').forEach(cb => {
+                selected.push({
+                    id: cb.value,
+                    name: cb.dataset.fieldName,
+                    type: cb.dataset.fieldType, // Generic type
+                    options: cb.dataset.fieldOptions ? JSON.parse(cb.dataset.fieldOptions) : undefined,
+                    placeholder: cb.dataset.fieldPlaceholder || ''
+                });
+            });
+            return selected;
+        }
+
+        function updatePreviewButtonState() {
+            previewButton.disabled = getSelectedFields().length === 0;
+        }
+
+        function updateAddFilterButtonState() {
+            addFilterButton.disabled = getSelectedFields().length === 0;
+        }
+
+        function resetFiltersAndPreview() {
+            filterRowsContainer.innerHTML = '';
+            filterRowCount = 0;
+            previewCard.style.display = 'none';
+            previewTableHead.innerHTML = '';
+            previewTableBody.innerHTML = '';
+            noDataMessage.style.display = 'none';
+            exportButton.disabled = true; 
+        }
+
+        addFilterButton.addEventListener('click', function() {
+            const selectedFields = getSelectedFields();
+            if (selectedFields.length === 0) {
+                console.warn('Please select at least one field to export before adding filters.');
+                return;
+            }
+            addFilterRow();
+        });
+
+        function addFilterRow(filterData = null) {
+            filterRowCount++;
+            const filterId = `filter-row-${filterRowCount}`;
+            const div = document.createElement('div');
+            div.classList.add('filter-row'); // Removed mb-2 as filter-row has its own margin
+            div.id = filterId;
+
+            const selectedFields = getSelectedFields();
+
+            const fieldSelect = document.createElement('select');
+            fieldSelect.classList.add('form-select', 'filter-field');
+            fieldSelect.innerHTML = `<option value="" selected disabled>Select field...</option>` +
+                                    selectedFields.map(f => `<option value="${f.id}" data-type="${f.type}" ${f.options ? `data-options='${JSON.stringify(f.options)}'` : ''} data-placeholder="${f.placeholder || ''}">${f.name}</option>`).join('');
+            
+            const operatorSelect = document.createElement('select');
+            operatorSelect.classList.add('form-select', 'filter-operator');
+            operatorSelect.innerHTML = `<option value="" selected disabled>Operator...</option>`;
+            
+            const valueContainer = document.createElement('div');
+            valueContainer.classList.add('filter-value-container', 'd-flex', 'gap-2', 'flex-grow-1');
+            
+            fieldSelect.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const fieldType = selectedOption.dataset.type; // Generic type
+                const fieldOptionsAttr = selectedOption.dataset.options;
+                const fieldOptions = fieldOptionsAttr ? JSON.parse(fieldOptionsAttr) : undefined;
+                const fieldPlaceholder = selectedOption.dataset.placeholder || '';
+
+                populateOperators(operatorSelect, fieldType);
+                updateValueInputs(valueContainer, fieldType, operatorSelect.value, [], fieldOptions, fieldPlaceholder);
+            });
+
+            operatorSelect.addEventListener('change', function() {
+                const selectedFieldOption = fieldSelect.options[fieldSelect.selectedIndex];
+                if (!selectedFieldOption || !selectedFieldOption.dataset.type) { 
+                    valueContainer.innerHTML = ''; 
+                    return;
+                }
+                const fieldType = selectedFieldOption.dataset.type; // Generic type
+                const fieldOptionsAttr = selectedFieldOption.dataset.options;
+                const fieldOptions = fieldOptionsAttr ? JSON.parse(fieldOptionsAttr) : undefined;
+                const fieldPlaceholder = selectedFieldOption.dataset.placeholder || '';
+                updateValueInputs(valueContainer, fieldType, this.value, [], fieldOptions, fieldPlaceholder);
+            });
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.classList.add('btn', 'btn-danger', 'btn-sm');
+            removeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                                    </svg>`;
+            removeBtn.setAttribute('aria-label', 'Remove filter');
+            removeBtn.onclick = () => div.remove();
+
+            div.appendChild(fieldSelect);
+            div.appendChild(operatorSelect);
+            div.appendChild(valueContainer);
+            div.appendChild(removeBtn);
+            filterRowsContainer.appendChild(div);
+
+            if (filterData) { // For potential future use (e.g., loading saved filters)
+                fieldSelect.value = filterData.field;
+                const fieldChangeEvent = new Event('change');
+                fieldSelect.dispatchEvent(fieldChangeEvent);
+                operatorSelect.value = filterData.operator;
+                const operatorChangeEvent = new Event('change');
+                operatorSelect.dispatchEvent(operatorChangeEvent);
+                const valueInputs = valueContainer.querySelectorAll('.filter-value-input, .filter-value-input-secondary');
+                if (valueInputs.length > 0 && filterData.values) {
+                    filterData.values.forEach((val, index) => {
+                        if (valueInputs[index]) valueInputs[index].value = val;
+                    });
+                }
+            }
+        }
+
+        function populateOperators(selectElement, fieldType, selectedOperator = null) {
+            let ops = filterOperators[fieldType] || filterOperators.String; // Default to String operators
+
+            selectElement.innerHTML = `<option value="" selected disabled>Operator...</option>` +
+                                      ops.map(op => `<option value="${op.value}" ${selectedOperator === op.value ? 'selected' : ''}>${op.text}</option>`).join('');
+        }
+
+        function updateValueInputs(container, fieldType, operator, values = [], fieldOptions = null, fieldPlaceholder = '') {
+            container.innerHTML = ''; 
+
+            const needsValue = !['is_empty', 'is_not_empty'].includes(operator);
+            if (!operator || !needsValue) { 
+                 container.innerHTML = (operator && !needsValue) ? '<span class="text-muted fst-italic small align-self-center">(No value required)</span>' : '';
+                return;
+            }
+
+            const createInput = (type, val = '', placeholder = '', inputClass = 'filter-value-input') => {
+                const input = document.createElement('input');
+                input.type = type;
+                input.classList.add('form-control', inputClass);
+                input.value = val;
+                input.placeholder = placeholder || (type === 'date' ? 'YYYY-MM-DD' : 'Enter value');
+                return input;
+            };
+
+            const createSelect = (options, val = '', isBoolean = false) => {
+                const select = document.createElement('select');
+                select.classList.add('form-select', 'filter-value-input');
+                let currentVal = val;
+                if (isBoolean) { // Standardize boolean value for selection
+                    currentVal = String(val).toLowerCase() === 'true' ? 'True' : 'False';
+                }
+                select.innerHTML = `<option value="" selected disabled>Select value...</option>` +
+                                   options.map(opt => `<option value="${opt}" ${opt === currentVal ? 'selected' : ''}>${opt}</option>`).join('');
+                return select;
+            };
+            
+            // Handle String fields with predefined options (like old 'select' type) for 'equals' or 'not_equals'
+            const isSelectLikeString = fieldType === 'String' && fieldOptions && (operator === 'equals' || operator === 'not_equals');
+
+            if (isSelectLikeString) {
+                container.appendChild(createSelect(fieldOptions, values[0]));
+            } else if (fieldType === 'Boolean' && operator === 'equals') { // For Boolean type with 'Is' operator
+                container.appendChild(createSelect(['True', 'False'], values[0] || 'True', true)); // Default to 'True' if no value
+            } else if (operator === 'between' && (fieldType === 'Date' || fieldType === 'Num')) {
+                const inputType = fieldType === 'Date' ? 'date' : 'number';
+                container.appendChild(createInput(inputType, values[0], fieldType === 'Date' ? 'Start Date' : 'Min Value'));
+                const span = document.createElement('span');
+                span.textContent = 'and';
+                span.classList.add('align-self-center', 'mx-1');
+                container.appendChild(span);
+                container.appendChild(createInput(inputType, values[1], fieldType === 'Date' ? 'End Date' : 'Max Value', 'filter-value-input-secondary'));
+            } else {
+                let inputType = 'text'; // Default for String, LargeText
+                if (fieldType === 'Date') inputType = 'date';
+                else if (fieldType === 'Num') inputType = 'number';
+                else if (fieldType === 'Phone') inputType = 'tel'; // Use 'tel' for Phone type
+                // For LargeText, a textarea might be better, but for filter input, 'text' is usually fine.
+                // If LargeText needs a textarea for filter value, this part would need adjustment.
+                container.appendChild(createInput(inputType, values[0], fieldPlaceholder));
+            }
+        }
+
+        function updateFilterFieldDropdowns() {
+            const selectedFields = getSelectedFields();
+            document.querySelectorAll('.filter-field').forEach(select => {
+                const currentValue = select.value; 
+                const currentFilterRow = select.closest('.filter-row');
+                const operatorSelect = currentFilterRow.querySelector('.filter-operator');
+                const valueContainer = currentFilterRow.querySelector('.filter-value-container');
+
+                select.innerHTML = `<option value="" selected disabled>Select field...</option>` +
+                                 selectedFields.map(f => `<option value="${f.id}" data-type="${f.type}" ${f.options ? `data-options='${JSON.stringify(f.options)}'` : ''} data-placeholder="${f.placeholder || ''}">${f.name}</option>`).join('');
+
+                if (selectedFields.some(f => f.id === currentValue)) {
+                    select.value = currentValue; 
+                } else {
+                    select.value = ""; 
+                    operatorSelect.innerHTML = '<option value="" selected disabled>Operator...</option>';
+                    valueContainer.innerHTML = '';
+                }
+            });
+        }
+
+        previewButton.addEventListener('click', function() {
+            const selectedFields = getSelectedFields();
+            if (selectedFields.length === 0) {
+                console.warn('Please select fields to export.');
+                return;
+            }
+
+            const filters = [];
+            document.querySelectorAll('.filter-row').forEach(row => {
+                const fieldSelect = row.querySelector('.filter-field');
+                const operatorSelect = row.querySelector('.filter-operator');
+                const valueInputs = row.querySelectorAll('.filter-value-input, .filter-value-input-secondary');
+
+                if (fieldSelect.value && operatorSelect.value) {
+                    const fieldType = fieldSelect.options[fieldSelect.selectedIndex].dataset.type;
+                    const operator = operatorSelect.value;
+                    let values = [];
+                    if (!['is_empty', 'is_not_empty'].includes(operator)) {
+                         valueInputs.forEach(input => values.push(input.value));
+                    }
+                    if (values.length > 0 || ['is_empty', 'is_not_empty'].includes(operator)) {
+                         filters.push({
+                            field: fieldSelect.value, 
+                            fieldName: fieldSelect.options[fieldSelect.selectedIndex].text, 
+                            fieldType: fieldType, // Generic type
+                            operator: operator,
+                            values: values 
+                        });
+                    }
+                }
+            });
+            
+            console.log("Previewing Data For:", currentDataType);
+            console.log("Selected Fields for Preview:", selectedFields.map(f => ({id: f.id, name: f.name, type: f.type})));
+            console.log("Filters Applied:", filters);
+
+            // Pass all field definitions for the current data type to applyFilters
+            const currentFieldDefinitions = fieldDefinitions[currentDataType] || [];
+            const dummyData = generateDummyData(currentDataType, 50); 
+            getMemberData();
+            const filteredData = applyFilters(dummyData, filters, currentFieldDefinitions);
+
+            previewTableHead.innerHTML = '';
+            previewTableBody.innerHTML = '';
+
+            const headerRow = previewTableHead.insertRow();
+            selectedFields.forEach(field => {
+                const th = document.createElement('th');
+                th.scope = 'col';
+                th.textContent = field.name;
+                headerRow.appendChild(th);
+            });
+
+            if (filteredData.length > 0) {
+                noDataMessage.style.display = 'none';
+                filteredData.forEach(item => {
+                    const row = previewTableBody.insertRow();
+                    selectedFields.forEach(field => {
+                        const cell = row.insertCell();
+                        cell.textContent = item[field.id] !== undefined && item[field.id] !== null ? String(item[field.id]) : 'N/A';
+                    });
+                });
+            } else {
+                noDataMessage.style.display = 'block';
+            }
+
+            previewCard.style.display = 'block';
+            exportButton.disabled = filteredData.length === 0; 
+        });
+
+        exportButton.addEventListener('click', function() {
+            const fieldsToExport = getSelectedFields().map(f => f.id); 
+            const filtersToApply = []; 
+             document.querySelectorAll('.filter-row').forEach(row => {
+                const fieldSelect = row.querySelector('.filter-field');
+                const operatorSelect = row.querySelector('.filter-operator');
+                const valueInputs = row.querySelectorAll('.filter-value-input, .filter-value-input-secondary');
+
+                if (fieldSelect.value && operatorSelect.value) {
+                    const operator = operatorSelect.value;
+                    let values = [];
+                     if (!['is_empty', 'is_not_empty'].includes(operator)) {
+                         valueInputs.forEach(input => values.push(input.value));
+                    }
+                     if (values.length > 0 || ['is_empty', 'is_not_empty'].includes(operator)) {
+                        filtersToApply.push({
+                            field: fieldSelect.value,
+                            operator: operator,
+                            values: values
+                        });
+                    }
+                }
+            });
+
+            console.log("--- EXPORTING DATA ---");
+            console.log("Data Type:", currentDataType);
+            console.log("Fields to Export (IDs):", fieldsToExport);
+            console.log("Filters to Apply:", filtersToApply);
+            
+            const exportMessage = `Data export initiated for: ${currentDataType}\nFields: ${fieldsToExport.join(', ')}\nFilters applied: ${filtersToApply.length}.\n\n(This is a simulation.)`;
+            alert(exportMessage); 
+        });
+
+        function generateDummyData(type, count) {
+            const data = [];
+            const fields = fieldDefinitions[type]; 
+            if (!fields) return data;
+
+            const firstNames = ["Alice", "Bob", "Charlie", "Diana", "Edward", "Fiona", "George", "Hannah", "Ian", "Julia", "Kevin", "Laura"];
+            const lastNames = ["Smith", "Jones", "Williams", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson"];
+            const domains = ["example.com", "mail.com", "test.org", "demo.net", "sample.co", "web.dev"];
+            const cities = ["New York", "London", "Paris", "Tokyo", "Berlin", "Madrid", "Rome", "Sydney", "Toronto"];
+            const notesSamples = ["Regular checkup needed.", "Follow up in 3 months.", "Important client.", "Needs new contract.", ""];
+
+            for (let i = 0; i < count; i++) {
+                let record = { _internalId: `record_${type}_${i+1}`}; 
+                fields.forEach(field => {
+                    const fieldId = field.id;
+                    switch (field.type) { // Using generic types now
+                        case 'String':
+                        case 'LargeText': // Treat LargeText like String for generation
+                            if (fieldId.toLowerCase().includes('name')) {
+                                record[fieldId] = `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${lastNames[Math.floor(Math.random() * lastNames.length)]}`;
+                            } else if (fieldId.toLowerCase().includes('email')) {
+                                record[fieldId] = `${firstNames[Math.floor(Math.random() * firstNames.length)].toLowerCase()}.${lastNames[Math.floor(Math.random() * lastNames.length)].toLowerCase()}${i%10}@${domains[Math.floor(Math.random() * domains.length)]}`;
+                            } else if (fieldId.toLowerCase().includes('city')) {
+                                record[fieldId] = cities[Math.floor(Math.random() * cities.length)];
+                            } else if (fieldId.toLowerCase().includes('notes')) {
+                                record[fieldId] = notesSamples[Math.floor(Math.random() * notesSamples.length)];
+                            } else if (field.options) { // For String fields with options (old select)
+                                record[fieldId] = field.options[Math.floor(Math.random() * field.options.length)];
+                            }
+                            else {
+                                record[fieldId] = `${field.name.split(' ')[0]} Sample ${i+1}`;
+                            }
+                            break;
+                        case 'Phone':
+                            record[fieldId] = `(${String(Math.floor(Math.random()*800)+200)}) ${String(Math.floor(Math.random()*900)+100)}-${String(Math.floor(Math.random()*9000)+1000)}`;
+                            break;
+                        case 'Date':
+                            const year = 2022 + Math.floor(Math.random() * 3); 
+                            const month = Math.floor(Math.random() * 12) + 1;
+                            const day = Math.floor(Math.random() * 28) + 1; 
+                            record[fieldId] = `${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`; 
+                            break;
+                        case 'Num':
+                            record[fieldId] = (fieldId.toLowerCase().includes('year')) ? Math.floor(Math.random() * 10) + 1 : Math.floor(Math.random() * 100) + 1;
+                            break;
+                        case 'Boolean':
+                            record[fieldId] = Math.random() < 0.5; // true or false
+                            break;
+                        default:
+                             record[fieldId] = `Unknown type for ${fieldId}`;
+                    }
+                });
+                data.push(record);
+            }
+            console.log(data);
+            return data;
+        }
+
+        function getMemberData(){
+            window.getMemberExportData().then(data => {
+                console.log("Member Data Loaded:", data);
+                // Process data as needed
+                console.log(data);
+                return data;
+            }).catch(error => {
+                console.error("Error loading member data:", error);
+            });
+        }
+
+        function applyFilters(data, filters, allFieldDefinitionsForType) { // Pass all definitions for current type
+            if (!filters || filters.length === 0) return data;
+
+            return data.filter(item => { 
+                return filters.every(filter => { 
+                    const itemValueOriginal = item[filter.field]; 
+                    const filterValues = filter.values; 
+
+                    // Get the actual generic type of the field being filtered
+                    const fieldDefinition = allFieldDefinitionsForType.find(fd => fd.id === filter.field);
+                    let fieldActualType = fieldDefinition ? fieldDefinition.type : 'String'; // Default to 'String'
+
+                    if (filter.operator === 'is_empty') {
+                        return itemValueOriginal === undefined || itemValueOriginal === null || String(itemValueOriginal).trim() === '';
+                    }
+                    if (filter.operator === 'is_not_empty') {
+                        return itemValueOriginal !== undefined && itemValueOriginal !== null && String(itemValueOriginal).trim() !== '';
+                    }
+
+                    if (!filterValues || filterValues.length === 0 || (filterValues[0] === undefined || filterValues[0] === null || String(filterValues[0]).trim() === '')) {
+                       if (filter.operator !== 'is_empty' && filter.operator !== 'is_not_empty') return false; 
+                    }
+                    
+                    let v1 = filterValues[0];
+                    let v2 = filterValues.length > 1 ? filterValues[1] : undefined; 
+
+                    let itemValueForComparison = itemValueOriginal;
+
+                    if (fieldActualType === 'Num') {
+                        itemValueForComparison = parseFloat(itemValueOriginal);
+                        v1 = parseFloat(v1);
+                        if (v2 !== undefined) v2 = parseFloat(v2);
+                         if (isNaN(itemValueForComparison) || isNaN(v1) || (v2 !== undefined && isNaN(v2))) return false; 
+                    } else if (fieldActualType === 'Date') {
+                        if (!itemValueOriginal || !v1 || (filter.operator === 'between' && !v2)) return false; 
+                    } else if (fieldActualType === 'Boolean') {
+                        itemValueForComparison = (String(itemValueOriginal).toLowerCase() === 'true' || itemValueOriginal === true);
+                        v1 = (String(v1).toLowerCase() === 'true'); // v1 from filter is 'True' or 'False' string
+                    }
+                     else if (fieldActualType === 'String' || fieldActualType === 'Phone' || fieldActualType === 'LargeText') { 
+                        itemValueForComparison = String(itemValueOriginal ?? '').toLowerCase(); // Handle null/undefined item values
+                        v1 = String(v1 ?? '').toLowerCase();
+                    } else if (itemValueOriginal === undefined || itemValueOriginal === null) {
+                        return false; 
+                    }
+
+                    switch (filter.operator) {
+                        case 'contains': return String(itemValueForComparison).includes(v1);
+                        case 'equals': 
+                            if (fieldActualType === 'Boolean') return itemValueForComparison === v1;
+                            return itemValueForComparison == v1; 
+                        case 'not_equals': return itemValueForComparison != v1;
+                        case 'startsWith': return String(itemValueForComparison).startsWith(v1);
+                        case 'endsWith': return String(itemValueForComparison).endsWith(v1);
+                        case 'before': return itemValueForComparison < v1;
+                        case 'after': return itemValueForComparison > v1;
+                        case 'between': return itemValueForComparison >= v1 && itemValueForComparison <= v2;
+                        case 'gt': return itemValueForComparison > v1;
+                        case 'lt': return itemValueForComparison < v1;
+                        case 'gte': return itemValueForComparison >= v1;
+                        case 'lte': return itemValueForComparison <= v1;
+                        default: return true; 
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
