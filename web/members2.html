@@ -138,7 +138,7 @@
                 const memberCard = document.createElement("div");
                 memberCard.className = "member-card";
                 memberCard.innerHTML = `
-                    <div class="card user-card" id="member${i}" style="padding: 15px; cursor: pointer;" onclick=memberPopUp(${jsonData["id"][i]})>
+                    <div class="card user-card" id="member${i}" style="padding: 15px; cursor: pointer;" onclick=memberPopUp('${jsonData["id"][i]}'')>
                         <div class="card-block">
                             <div class="row">
                                 <div class="d-flex align-items-center">

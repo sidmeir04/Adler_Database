@@ -11,12 +11,12 @@ INSERT INTO Tour (tour_date, attended, no_join_reason, clinicians, attendees, in
 ('2024-02-01', TRUE, NULL, 'Dr. Adams', 'Jane Doe', 'Discussed options.', TRUE, '2024-03-01', FALSE, TRUE, 'Very interested in joining.', FALSE, NULL),
 ('2024-02-05', FALSE, 'Scheduling conflict', 'Dr. Lee', 'John Smith', 'Requested follow-up.', FALSE, '2024-03-05', TRUE, FALSE, 'Needs more info.', TRUE, 'Personal issues.');
 
-INSERT INTO Member (name, age, dob, email, aep_completion_date, join_date, schedule, phone, address, county, gender, veteran, joined, caregiver_needed, alder_program) VALUES
-('Alice Johnson', 30, '1993-05-10', 'alice.johnson@example.com', '2024-01-01', '2023-12-15', 2, '555-1234', '123 Main St', 'Sample County', 'F', TRUE, TRUE, FALSE, 'Adler Program A'),
-('Bob Smith', 45, '1978-03-20', 'bob.smith@example.com', '2024-02-01', '2024-01-10', 1, '555-5678', '456 Elm St', 'Sample County', 'M', FALSE, FALSE, TRUE, 'Adler Program B'),
-('Emily Brown', 35, '1988-07-22', 'emily.brown@example.com', '2024-03-01', '2024-02-15', 3, '555-8765', '789 Pine St', 'Sample County', 'F', FALSE, TRUE, TRUE, 'Adler Program C'),
-('Michael Green', 50, '1973-11-30', 'michael.green@example.com', '2024-04-01', '2024-03-20', 2, '555-4321', '321 Oak St', 'Sample County', 'M', TRUE, TRUE, FALSE, 'Adler Program D'),
-('Sarah White', 40, '1983-02-14', 'sarah.white@example.com', '2024-05-01', '2024-04-10', 1, '555-9876', '654 Maple St', 'Sample County', 'F', FALSE, FALSE, TRUE, 'Adler Program E');
+INSERT INTO Member (name, dob, email, aep_completion_date, join_date, schedule, phone, address, county, gender, veteran, joined, caregiver_needed, adler_program) VALUES
+('Alice Johnson', '1993-05-10', 'alice.johnson@example.com', '2024-01-01', '2023-12-15', 2, '555-1234', '123 Main St', 'Sample County', 'F', TRUE, TRUE, FALSE, 'Adler Program A'),
+('Bob Smith', '1978-03-20', 'bob.smith@example.com', '2024-02-01', '2024-01-10', 1, '555-5678', '456 Elm St', 'Sample County', 'M', FALSE, FALSE, TRUE, 'Adler Program B'),
+('Emily Brown', '1988-07-22', 'emily.brown@example.com', '2024-03-01', '2024-02-15', 3, '555-8765', '789 Pine St', 'Sample County', 'F', FALSE, TRUE, TRUE, 'Adler Program C'),
+('Michael Green', '1973-11-30', 'michael.green@example.com', '2024-04-01', '2024-03-20', 2, '555-4321', '321 Oak St', 'Sample County', 'M', TRUE, TRUE, FALSE, 'Adler Program D'),
+('Sarah White', '1983-02-14', 'sarah.white@example.com', '2024-05-01', '2024-04-10', 1, '555-9876', '654 Maple St', 'Sample County', 'F', FALSE, FALSE, TRUE, 'Adler Program E');
 
 -- INSERT INTO Membership_Enrollment_Form (sexual_orientation, race, income, living_status, grew_up, occupations, prev_speech_therapy, other_therapy, hearing_loss, hearing_aid, aphasia_cause, aphasia_onset, brain_location, allergies, medications, filled_by, completed_date, patient_info) VALUES
 -- ('Straight', 'Caucasian', 50000, 1, 'City', 'Teacher', 'No', 'Physical Therapy', FALSE, TRUE, 'Stroke', '2021-06-01', 'Left Hemisphere', 'None', 'None', 'Alice Johnson', '2024-01-20', '{"Education": {"Highest Level of Education": 4, "Special Education": TRUE, "Special Education Type": "None", "Spelling Ability": 4, "Reading Ability": 4, "Spelling Ability Post-Stroke": 3, "Reading Ability Post-Stroke": 3, "Handedness": "R", "Handedness Post-Stroke": "R"}}');

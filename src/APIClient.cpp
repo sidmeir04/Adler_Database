@@ -7,7 +7,7 @@
 
 using json = nlohmann::json;
 
-std::string APIClient::url = "192.168.120.66";
+std::string APIClient::url = "127.0.0.1";
 
 std::string APIClient::get_contact(const json &jsonPayload)
 {

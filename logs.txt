@@ -1,5 +1,81 @@
+[""]
+Getting member data
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: '<'
 Loading members page
-["1"]
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: []
+Exception: [json.exception.type_error.305] cannot use operator[] with a string argument with array
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: []
+Exception: [json.exception.type_error.305] cannot use operator[] with a string argument with array
+Loading members page
 Loading members page
 Loading Contacts page
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: []
+Exception: [json.exception.type_error.305] cannot use operator[] with a string argument with array
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: []
+Exception: [json.exception.type_error.305] cannot use operator[] with a string argument with array
+Member created with ID: 6
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: []
+Exception: [json.exception.type_error.305] cannot use operator[] with a string argument with array
+Loading members page
+[""]
+Getting member data
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: '<'
+Loading members page
+[""]
+Getting member data
+Member data retrieved successfully
+User JSON: {
+    "address": [],
+    "adler_program": [],
+    "aep_completion_date": [],
+    "caregiver_needed": [],
+    "county": [],
+    "date_changed": [],
+    "dob": [],
+    "email": [],
+    "emergency_contact_one": [],
+    "emergency_contact_two": [],
+    "enrollment_form": [],
+    "gender": [],
+    "id": [],
+    "join_date": [],
+    "joined": [],
+    "medical_history": [],
+    "member_info": [],
+    "member_type": [],
+    "name": [],
+    "notes": [],
+    "phone": [],
+    "schedule": [],
+    "transport_info": [],
+    "veteran": []
+}
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: 'N'
+Loading members page
+[""]
+Getting member data
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: '<'
+Loading members page
+[""]
+Getting member data
+Exception: [json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - invalid literal; last read: '<'
 Loading members page

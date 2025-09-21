@@ -1,3 +1,12 @@
+# cmake -S . -B build
+# cmake --build build --config Release
+# cpack --config build/CPackConfig.cmake
+
+# mkdir build
+# cd build
+# cmake -G "MinGW Makefiles" ..
+# mingw32-make
+
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 project(AdlerDatabase LANGUAGES CXX)
 
